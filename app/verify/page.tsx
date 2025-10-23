@@ -8,6 +8,11 @@ export default function VerifyPage() {
     const router = useRouter();
 
     useEffect(() => {
+        // Only run Firebase operations on the client side
+        if (typeof window === 'undefined' || !auth) {
+            return;
+        }
+
         const email = window.localStorage.getItem('emailForSignIn');
 
         if (email && isSignInWithEmailLink(auth, window.location.href)) {
