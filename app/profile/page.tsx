@@ -943,7 +943,7 @@ const ProfilePage = () => {
                       options={goalOptions}
                       placeholder="Add goal"
                       onSelect={(value) => addItem(goals, setGoals, value)}
-                      variant="purple"
+                      variant="bits"
                     />
                   </div>
                 )}
@@ -1516,7 +1516,7 @@ const ProfilePage = () => {
                       options={skillOptions}
                       placeholder="Add skill"
                       onSelect={(value) => addItem(professionalSkills, setProfessionalSkills, value)}
-                      variant="purple"
+                      variant="bits"
                     />
                   </div>
                 )}
