@@ -688,7 +688,16 @@ export default function AnonymousFeedPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-bits-golden-yellow/20 via-bits-golden-yellow/10 to-bits-royal-blue/20 dark:from-slate-900 dark:to-slate-800">
+        <div className="min-h-screen bg-gradient-to-br from-bits-golden-yellow/20 via-bits-golden-yellow/10 to-bits-royal-blue/20 dark:from-slate-900 dark:to-slate-800 relative overflow-hidden">
+            {/* Vibrant Background Bubbles */}
+            <div className="fixed inset-0 z-0">
+                <div className="absolute top-20 left-10 w-96 h-96 bg-bits-royal-blue/30 rounded-full blur-3xl opacity-60 animate-pulse"></div>
+                <div className="absolute bottom-40 right-20 w-80 h-80 bg-bits-deep-purple/30 rounded-full blur-3xl opacity-60 animate-pulse delay-1000"></div>
+                <div className="absolute top-40 right-10 w-72 h-72 bg-bits-golden-yellow/40 rounded-full blur-3xl opacity-70 animate-pulse delay-2000"></div>
+                <div className="absolute bottom-20 left-1/3 w-64 h-64 bg-bits-bright-red/25 rounded-full blur-3xl opacity-50 animate-pulse delay-500"></div>
+                <div className="absolute top-1/2 left-1/4 w-88 h-88 bg-bits-golden-yellow/35 rounded-full blur-3xl opacity-65 animate-pulse delay-1500"></div>
+            </div>
+            
             {/* Common Navbar */}
             <CommonNavbar currentPage="/anonymous-feed" />
 

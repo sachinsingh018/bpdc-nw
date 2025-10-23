@@ -120,7 +120,16 @@ export default function CommunitiesPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-bits-golden-yellow/10 to-white dark:from-slate-900 dark:to-slate-950">
+        <div className="min-h-screen bg-gradient-to-br from-bits-golden-yellow/10 to-white dark:from-slate-900 dark:to-slate-950 relative overflow-hidden">
+            {/* Vibrant Background Bubbles */}
+            <div className="fixed inset-0 z-0">
+                <div className="absolute top-20 left-10 w-96 h-96 bg-bits-royal-blue/30 rounded-full blur-3xl opacity-60 animate-pulse"></div>
+                <div className="absolute bottom-40 right-20 w-80 h-80 bg-bits-deep-purple/30 rounded-full blur-3xl opacity-60 animate-pulse delay-1000"></div>
+                <div className="absolute top-40 right-10 w-72 h-72 bg-bits-golden-yellow/40 rounded-full blur-3xl opacity-70 animate-pulse delay-2000"></div>
+                <div className="absolute bottom-20 left-1/3 w-64 h-64 bg-bits-bright-red/25 rounded-full blur-3xl opacity-50 animate-pulse delay-500"></div>
+                <div className="absolute top-1/2 left-1/4 w-88 h-88 bg-bits-golden-yellow/35 rounded-full blur-3xl opacity-65 animate-pulse delay-1500"></div>
+            </div>
+            
             {/* Common Navbar */}
             <CommonNavbar currentPage="/communities" showSignOut={true} />
 
@@ -128,7 +137,7 @@ export default function CommunitiesPage() {
             <div className="max-w-3xl mx-auto text-center py-16 px-4">
                 <div className="flex justify-center mb-4">
                     <div className="bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue p-3 rounded-full shadow-lg">
-                        <Users className="w-8 h-8 text-bits-white" />
+                        <Users className="w-8 h-8 text-bits-royal-blue dark:text-bits-white" />
                     </div>
                 </div>
                 <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue bg-clip-text text-transparent mb-4">
@@ -166,7 +175,7 @@ export default function CommunitiesPage() {
                                 </p>
                                 <div className="flex gap-2 w-full mt-auto">
                                     <Button
-                                        className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-bits-white font-semibold shadow-md hover:from-bits-golden-yellow-600 hover:to-bits-royal-blue-600 rounded-lg flex items-center justify-center h-10"
+                                        className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-bits-royal-blue dark:text-bits-white font-semibold shadow-md hover:from-bits-golden-yellow-600 hover:to-bits-royal-blue-600 rounded-lg flex items-center justify-center h-10"
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             router.push(`/communities/${community.id}`);
@@ -176,7 +185,7 @@ export default function CommunitiesPage() {
                                     </Button>
                                     {!membershipStatus ? (
                                         <Button
-                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-white font-semibold shadow-md hover:from-green-700 hover:to-green-800 rounded-lg flex items-center justify-center h-10"
+                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue dark:text-bits-white font-semibold shadow-md hover:from-green-700 hover:to-green-800 rounded-lg flex items-center justify-center h-10"
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 handleJoinCommunity(community.id);
@@ -186,14 +195,14 @@ export default function CommunitiesPage() {
                                         </Button>
                                     ) : membershipStatus === 'approved' ? (
                                         <Button
-                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-white font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
+                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue dark:text-bits-white font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
                                             disabled
                                         >
                                             Member
                                         </Button>
                                     ) : (
                                         <Button
-                                            className="flex-1 bg-gradient-to-r from-yellow-600 to-yellow-700 text-bits-white font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
+                                            className="flex-1 bg-gradient-to-r from-yellow-600 to-yellow-700 text-bits-royal-blue dark:text-bits-white font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
                                             disabled
                                         >
                                             Pending
