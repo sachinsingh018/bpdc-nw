@@ -136,6 +136,13 @@
         --sidebar-accent-foreground: 222 84% 5%;
         --sidebar-border: 214 32% 91%;
         --sidebar-ring: 222 84% 5%;
+        
+        /* BITS Pilani Dubai Campus Brand Colors */
+        --bits-royal-blue: #002E6E;
+        --bits-golden-yellow: #F2B300;
+        --bits-bright-red: #C1121F;
+        --bits-deep-purple: #3B0A45;
+        --bits-white: #FFFFFF;
     }
 
     .dark {
@@ -180,7 +187,45 @@
     }
 
     body {
-        @apply bg-background text-foreground;
+        @apply text-foreground;
+        /* BITS Pilani Dubai Campus Gradient Background */
+        background: linear-gradient(135deg, 
+            var(--bits-royal-blue) 0%, 
+            #1a3a7a 25%, 
+            #2d1b69 50%, 
+            var(--bits-deep-purple) 75%, 
+            #2a0a3a 100%);
+        background-attachment: fixed;
+        min-height: 100vh;
+        position: relative;
+    }
+
+    /* Add subtle overlay for better text readability */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 20% 80%, rgba(242, 179, 0, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(193, 18, 31, 0.05) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    /* Ensure cards and components have proper contrast */
+    .card, .bg-card {
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .dark .card, .dark .bg-card {
+        background: rgba(0, 0, 0, 0.8) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 }
 

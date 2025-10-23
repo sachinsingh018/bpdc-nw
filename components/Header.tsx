@@ -32,7 +32,7 @@ export const Header = () => {
                 {/* BITS Pilani Dubai Campus Logo Link */}
                 <Link
                     href="/"
-                    className="text-2xl font-bold bg-gradient-to-r from-bits-blue-600 to-bits-gold-600 bg-clip-text text-transparent tracking-tight cursor-pointer"
+                    className="text-2xl font-bold bg-gradient-to-r from-bits-golden-yellow-500 to-bits-white bg-clip-text text-transparent tracking-tight cursor-pointer"
                 >
                     <motion.span whileHover={{ scale: 1.05 }}>BITS Pilani Dubai Campus</motion.span>
                 </Link>
@@ -46,7 +46,7 @@ export const Header = () => {
                             >
                                 {item}
                             </Link>
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-bits-blue-400 to-bits-gold-400 transition-all duration-200 group-hover:w-full"></span>
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-bits-golden-yellow-400 to-bits-white transition-all duration-200 group-hover:w-full"></span>
                         </motion.div>
                     ))}
                 </nav>
