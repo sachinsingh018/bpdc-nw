@@ -1,0 +1,1 @@
+ALTER TABLE "User" ALTER COLUMN "password" TYPE varchar(255); 

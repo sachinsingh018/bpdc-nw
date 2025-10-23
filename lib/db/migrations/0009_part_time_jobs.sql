@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS "part_time_jobs" (
+	"job_id" varchar(32) PRIMARY KEY NOT NULL,
+	"job_title" text,
+	"employer_name" text,
+	"employer_logo" text,
+	"job_city" text,
+	"job_state" text,
+	"job_country" text,
+	"job_posted_at_datetime_utc" timestamp,
+	"job_apply_link" text,
+	"job_employment_type" text DEFAULT 'Part-time',
+	"job_description" text,
+	"job_is_remote" boolean,
+	"job_min_salary" text,
+	"job_max_salary" text,
+	"job_salary_period" text,
+	"searchedat" timestamp,
+	"posted_by" varchar(50),
+	"posted_by_user_id" uuid,
+	"created_at" timestamp DEFAULT now() NOT NULL
+);

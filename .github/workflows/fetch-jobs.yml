@@ -1,0 +1,62 @@
+name: Fetch External Jobs
+
+on:
+  schedule:
+    # Run daily at 6:00 AM UTC (adjust timezone as needed)
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  fetch-jobs:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Fetch External Jobs
+        env:
+          JSEARCH_API_KEY: ${{ secrets.JSEARCH_API_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          # Add any other required environment variables
+        run: |
+          echo "Fetching external jobs..."
+          # Option 1: Run scripts directly
+          pnpm run fetch-jobs
+          
+          # Option 2: Call API endpoint (uncomment if using this approach)
+          # curl -X POST https://your-domain.com/api/jobs/fetch-external
+
+      - name: Notify on success
+        if: success()
+        run: echo "✅ Successfully fetched external jobs"
+
+      - name: Notify on failure
+        if: failure()
+        run: echo "❌ Failed to fetch external jobs"

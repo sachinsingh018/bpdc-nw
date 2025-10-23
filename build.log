@@ -1,0 +1,963 @@
+
+> ai-chatbot@0.1.0 build /Users/sharo2/Downloads/networkqy-clone
+> tsx lib/db/migrate && next build
+
+⏳ Running migrations...
+{
+  severity_local: 'NOTICE',
+  severity: 'NOTICE',
+  code: '42P06',
+  message: 'schema "drizzle" already exists, skipping',
+  file: 'schemacmds.c',
+  line: '131',
+  routine: 'CreateSchemaCommand'
+}
+{
+  severity_local: 'NOTICE',
+  severity: 'NOTICE',
+  code: '42P07',
+  message: 'relation "__drizzle_migrations" already exists, skipping',
+  file: 'parse_utilcmd.c',
+  line: '207',
+  routine: 'transformCreateStmt'
+}
+✅ Migrations completed in 2678 ms
+   ▲ Next.js 15.3.4
+   - Environments: .env.local, .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 7.0s
+   Linting and checking validity of types ...
+
+./app/(auth)/actions.ts
+5:37  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/db/queries.ts' imported multiple times.  import/no-duplicates
+11:32  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/db/queries.ts' imported multiple times.  import/no-duplicates
+
+./app/(auth)/login/page.tsx
+7:37  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@types+react@18.3.23/node_modules/@types/react/index.d.ts' imported multiple times.  import/no-duplicates
+11:32  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@types+react@18.3.23/node_modules/@types/react/index.d.ts' imported multiple times.  import/no-duplicates
+59:14  Warning: Classnames 'w-96, h-96' could be replaced by the 'size-96' shorthand!  tailwindcss/enforces-shorthand
+60:14  Warning: Classnames 'w-72, h-72' could be replaced by the 'size-72' shorthand!  tailwindcss/enforces-shorthand
+
+./app/(auth)/reset-password/page.tsx
+3:26  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@types+react@18.3.23/node_modules/@types/react/index.d.ts' imported multiple times.  import/no-duplicates
+6:26  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@types+react@18.3.23/node_modules/@types/react/index.d.ts' imported multiple times.  import/no-duplicates
+
+./app/about/page.tsx
+158:6  Warning: React Hook useCallback has a missing dependency: 'Star'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+189:7  Warning: Classnames 'w-full, h-full' could be replaced by the 'size-full' shorthand!  tailwindcss/enforces-shorthand
+239:19  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+245:21  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+251:18  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+293:21  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+298:18  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+303:19  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+308:16  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+317:20  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+322:22  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+327:19  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+332:26  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+360:16  Warning: Classnames 'w-64, h-64' could be replaced by the 'size-64' shorthand!  tailwindcss/enforces-shorthand
+361:16  Warning: Classnames 'w-80, h-80' could be replaced by the 'size-80' shorthand!  tailwindcss/enforces-shorthand
+362:16  Warning: Classnames 'w-56, h-56' could be replaced by the 'size-56' shorthand!  tailwindcss/enforces-shorthand
+373:27  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+412:31  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+424:14  Warning: The arbitrary class 'h-[1px]' could be replaced by 'h-px'  tailwindcss/no-unnecessary-arbitrary-value
+472:28  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+485:14  Warning: The arbitrary class 'h-[1px]' could be replaced by 'h-px'  tailwindcss/no-unnecessary-arbitrary-value
+519:26  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+531:24  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+542:14  Warning: The arbitrary class 'h-[1px]' could be replaced by 'h-px'  tailwindcss/no-unnecessary-arbitrary-value
+575:24  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+591:14  Warning: The arbitrary class 'h-[1px]' could be replaced by 'h-px'  tailwindcss/no-unnecessary-arbitrary-value
+640:14  Warning: The arbitrary class 'h-[1px]' could be replaced by 'h-px'  tailwindcss/no-unnecessary-arbitrary-value
+672:24  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+696:25  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+702:14  Warning: The arbitrary class 'h-[1px]' could be replaced by 'h-px'  tailwindcss/no-unnecessary-arbitrary-value
+736:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+739:23  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+753:14  Warning: The arbitrary class 'h-[1px]' could be replaced by 'h-px'  tailwindcss/no-unnecessary-arbitrary-value
+802:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+805:19  Warning: Classnames 'w-full, h-full' could be replaced by the 'size-full' shorthand!  tailwindcss/enforces-shorthand
+
+./app/anonymous-feed/page.tsx
+595:26  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+617:34  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+618:43  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+634:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+643:36  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+652:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+661:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+670:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+679:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+691:35  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+701:35  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+719:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+731:40  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+743:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+755:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+767:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+779:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+809:33  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+809:33  Warning: Classnames 'md:w-10, md:h-10' could be replaced by the 'md:size-10' shorthand!  tailwindcss/enforces-shorthand
+826:60  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+826:90  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+850:61  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+863:33  Warning: Classname 'placeholder-gray-500' should be updated to 'placeholder:text-gray-500' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+863:33  Warning: Classname 'dark:placeholder-gray-400' should be updated to 'dark:placeholder:text-gray-400' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+871:33  Warning: Classname 'placeholder-gray-500' should be updated to 'placeholder:text-gray-500' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+871:33  Warning: Classname 'dark:placeholder-gray-400' should be updated to 'dark:placeholder:text-gray-400' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+881:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+892:34  Warning: Classnames 'h-10, w-10' could be replaced by the 'size-10' shorthand!  tailwindcss/enforces-shorthand
+892:34  Warning: Classnames 'md:h-12, md:w-12' could be replaced by the 'md:size-12' shorthand!  tailwindcss/enforces-shorthand
+901:44  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+901:44  Warning: Classnames 'md:w-16, md:h-16' could be replaced by the 'md:size-16' shorthand!  tailwindcss/enforces-shorthand
+921:53  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+921:53  Warning: Classnames 'md:w-10, md:h-10' could be replaced by the 'md:size-10' shorthand!  tailwindcss/enforces-shorthand
+955:63  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+963:65  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+973:64  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+979:64  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1014:53  Warning: Classname 'placeholder-gray-500' should be updated to 'placeholder:text-gray-500' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+1014:53  Warning: Classname 'dark:placeholder-gray-400' should be updated to 'dark:placeholder:text-gray-400' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+1021:53  Warning: Classname 'placeholder-gray-500' should be updated to 'placeholder:text-gray-500' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+1021:53  Warning: Classname 'dark:placeholder-gray-400' should be updated to 'dark:placeholder:text-gray-400' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+1031:60  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1039:56  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1058:56  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1058:56  Warning: Classnames 'md:w-4, md:h-4' could be replaced by the 'md:size-4' shorthand!  tailwindcss/enforces-shorthand
+1067:64  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1067:64  Warning: Classnames 'md:w-4, md:h-4' could be replaced by the 'md:size-4' shorthand!  tailwindcss/enforces-shorthand
+1076:57  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1076:57  Warning: Classnames 'md:w-4, md:h-4' could be replaced by the 'md:size-4' shorthand!  tailwindcss/enforces-shorthand
+1093:61  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+1093:61  Warning: Classnames 'md:w-8, md:h-8' could be replaced by the 'md:size-8' shorthand!  tailwindcss/enforces-shorthand
+1113:88  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1113:118  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1122:71  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1133:69  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+1133:69  Warning: Classnames 'md:w-8, md:h-8' could be replaced by the 'md:size-8' shorthand!  tailwindcss/enforces-shorthand
+1164:80  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1193:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1196:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1199:38  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+
+./app/api/auth/forgot-password/route.ts
+3:25  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/db/queries.ts' imported multiple times.  import/no-duplicates
+4:42  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/db/queries.ts' imported multiple times.  import/no-duplicates
+
+./app/api/auth/reset-password/route.ts
+2:90  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/db/queries.ts' imported multiple times.  import/no-duplicates
+3:29  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/db/queries.ts' imported multiple times.  import/no-duplicates
+
+./app/api/connections/all/route.ts
+2:20  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/db/queries.ts' imported multiple times.  import/no-duplicates
+5:25  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/db/queries.ts' imported multiple times.  import/no-duplicates
+
+./app/chat/page.tsx
+62:26  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+89:42  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+89:42  Warning: Classnames 'md:w-8, md:h-8' could be replaced by the 'md:size-8' shorthand!  tailwindcss/enforces-shorthand
+90:51  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+90:51  Warning: Classnames 'md:w-5, md:h-5' could be replaced by the 'md:size-5' shorthand!  tailwindcss/enforces-shorthand
+106:43  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+115:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+124:52  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+133:43  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+142:52  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+151:52  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+167:43  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+185:47  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+197:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+209:56  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+221:47  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+233:56  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+245:56  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+
+./app/chat-group/api/chat/route.ts
+12:25  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/db/queries.ts' imported multiple times.  import/no-duplicates
+21:8  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/db/queries.ts' imported multiple times.  import/no-duplicates
+
+./app/comparor/page.tsx
+98:22  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+156:38  Warning: Classnames 'w-28, h-28' could be replaced by the 'size-28' shorthand!  tailwindcss/enforces-shorthand
+157:42  Warning: Classnames 'w-full, h-full' could be replaced by the 'size-full' shorthand!  tailwindcss/enforces-shorthand
+157:42  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+184:42  Warning: Classnames 'w-full, h-full' could be replaced by the 'size-full' shorthand!  tailwindcss/enforces-shorthand
+
+./app/connect-setup/page.tsx
+3:26  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@types+react@18.3.23/node_modules/@types/react/index.d.ts' imported multiple times.  import/no-duplicates
+8:27  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@types+react@18.3.23/node_modules/@types/react/index.d.ts' imported multiple times.  import/no-duplicates
+147:14  Warning: Classnames 'w-96, h-96' could be replaced by the 'size-96' shorthand!  tailwindcss/enforces-shorthand
+148:14  Warning: Classnames 'w-72, h-72' could be replaced by the 'size-72' shorthand!  tailwindcss/enforces-shorthand
+
+./app/connections/optimized-page.tsx
+187:26  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+233:47  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+271:56  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+306:62  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+324:66  Warning: Classnames 'w-2, h-2' could be replaced by the 'size-2' shorthand!  tailwindcss/enforces-shorthand
+337:73  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+365:54  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+393:66  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+417:74  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+427:74  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+456:47  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+476:58  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+
+./app/connections/page.tsx
+183:26  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+203:34  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+204:43  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+220:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+229:36  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+238:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+247:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+256:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+265:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+281:35  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+299:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+311:40  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+323:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+335:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+347:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+359:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+457:58  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+457:58  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+476:62  Warning: Classnames 'w-2, h-2' could be replaced by the 'size-2' shorthand!  tailwindcss/enforces-shorthand
+491:57  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+493:62  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+547:74  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+547:74  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+567:73  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+574:73  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+609:74  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+609:74  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+631:78  Warning: Classnames 'w-2, h-2' could be replaced by the 'size-2' shorthand!  tailwindcss/enforces-shorthand
+671:58  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+671:58  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+694:58  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+694:58  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+
+./app/dashboard/page.tsx
+148:28  Warning: Classnames 'w-20, h-20' could be replaced by the 'size-20' shorthand!  tailwindcss/enforces-shorthand
+148:28  Warning: Classnames 'sm:w-24, sm:h-24' could be replaced by the 'sm:size-24' shorthand!  tailwindcss/enforces-shorthand
+151:28  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+162:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+166:37  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+175:29  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+204:26  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+205:34  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+229:27  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+236:29  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+243:30  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+250:31  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+262:32  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+269:33  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+276:34  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+283:30  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+308:31  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+316:30  Warning: Classnames 'w-2, h-2' could be replaced by the 'size-2' shorthand!  tailwindcss/enforces-shorthand
+328:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+344:24  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+348:23  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+352:27  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+356:29  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+380:24  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+381:27  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+
+./app/expdashboard/page.tsx
+164:22  Warning: Classnames 'w-[800px], h-[800px]' could be replaced by the 'size-[800px]' shorthand!  tailwindcss/enforces-shorthand
+165:22  Warning: Classnames 'w-[600px], h-[600px]' could be replaced by the 'size-[600px]' shorthand!  tailwindcss/enforces-shorthand
+166:22  Warning: Classnames 'w-[400px], h-[400px]' could be replaced by the 'size-[400px]' shorthand!  tailwindcss/enforces-shorthand
+193:42  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+218:38  Warning: Classnames 'w-14, h-14' could be replaced by the 'size-14' shorthand!  tailwindcss/enforces-shorthand
+260:42  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+307:41  Warning: Classname 'placeholder-purple-400' should be updated to 'placeholder:text-purple-400' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+327:46  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+331:41  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+487:54  Warning: Classnames 'w-10, h-10' could be replaced by the 'size-10' shorthand!  tailwindcss/enforces-shorthand
+487:54  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+529:54  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+529:54  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+
+./app/exphome/page.tsx
+3:26  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@types+react@18.3.23/node_modules/@types/react/index.d.ts' imported multiple times.  import/no-duplicates
+5:36  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@types+react@18.3.23/node_modules/@types/react/index.d.ts' imported multiple times.  import/no-duplicates
+141:22  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+158:30  Warning: Classnames 'w-64, h-64' could be replaced by the 'size-64' shorthand!  tailwindcss/enforces-shorthand
+159:30  Warning: Classnames 'w-56, h-56' could be replaced by the 'size-56' shorthand!  tailwindcss/enforces-shorthand
+160:30  Warning: Classnames 'w-72, h-72' could be replaced by the 'size-72' shorthand!  tailwindcss/enforces-shorthand
+161:30  Warning: Classnames 'w-48, h-48' could be replaced by the 'size-48' shorthand!  tailwindcss/enforces-shorthand
+211:30  Warning: Classnames 'w-full, h-full' could be replaced by the 'size-full' shorthand!  tailwindcss/enforces-shorthand
+
+./app/faq/page.tsx
+155:18  Warning: Classnames 'w-72, h-72' could be replaced by the 'size-72' shorthand!  tailwindcss/enforces-shorthand
+156:18  Warning: Classnames 'w-96, h-96' could be replaced by the 'size-96' shorthand!  tailwindcss/enforces-shorthand
+157:18  Warning: Classnames 'w-80, h-80' could be replaced by the 'size-80' shorthand!  tailwindcss/enforces-shorthand
+196:33  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+202:29  Warning: Classname 'placeholder-gray-400' should be updated to 'placeholder:text-gray-400' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+
+./app/folder/page.tsx
+124:22  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+158:30  Warning: Classnames 'w-64, h-64' could be replaced by the 'size-64' shorthand!  tailwindcss/enforces-shorthand
+159:30  Warning: Classnames 'w-56, h-56' could be replaced by the 'size-56' shorthand!  tailwindcss/enforces-shorthand
+160:30  Warning: Classnames 'w-72, h-72' could be replaced by the 'size-72' shorthand!  tailwindcss/enforces-shorthand
+161:30  Warning: Classnames 'w-48, h-48' could be replaced by the 'size-48' shorthand!  tailwindcss/enforces-shorthand
+212:49  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+215:56  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+
+./app/friendprof/FriendProfClient.tsx
+2:43  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@types+react@18.3.23/node_modules/@types/react/index.d.ts' imported multiple times.  import/no-duplicates
+3:27  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@types+react@18.3.23/node_modules/@types/react/index.d.ts' imported multiple times.  import/no-duplicates
+5:51  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/react-icons@5.5.0_react@19.0.0-rc-45804af1-20241021/node_modules/react-icons/fa/index.d.ts' imported multiple times.  import/no-duplicates
+6:29  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/lucide-react@0.446.0_react@19.0.0-rc-45804af1-20241021/node_modules/lucide-react/dist/lucide-react.d.ts' imported multiple times.  import/no-duplicates
+7:29  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/react-icons@5.5.0_react@19.0.0-rc-45804af1-20241021/node_modules/react-icons/fa/index.d.ts' imported multiple times.  import/no-duplicates
+8:37  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/react-icons@5.5.0_react@19.0.0-rc-45804af1-20241021/node_modules/react-icons/fa/index.d.ts' imported multiple times.  import/no-duplicates
+13:27  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/next@15.3.4_@opentelemetry+api@1.9.0_@playwright+test@1.54.1_react-dom@19.0.0-rc-45804af1-202_6jcvys5yukdv7bcazrwashmwei/node_modules/next/navigation.d.ts' imported multiple times.  import/no-duplicates
+15:33  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/next@15.3.4_@opentelemetry+api@1.9.0_@playwright+test@1.54.1_react-dom@19.0.0-rc-45804af1-202_6jcvys5yukdv7bcazrwashmwei/node_modules/next/navigation.d.ts' imported multiple times.  import/no-duplicates
+19:66  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/react-icons@5.5.0_react@19.0.0-rc-45804af1-20241021/node_modules/react-icons/fa/index.d.ts' imported multiple times.  import/no-duplicates
+27:107  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/lucide-react@0.446.0_react@19.0.0-rc-45804af1-20241021/node_modules/lucide-react/dist/lucide-react.d.ts' imported multiple times.  import/no-duplicates
+31:57  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/lucide-react@0.446.0_react@19.0.0-rc-45804af1-20241021/node_modules/lucide-react/dist/lucide-react.d.ts' imported multiple times.  import/no-duplicates
+319:8  Warning: React Hook useEffect has a missing dependency: 'searchParams'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+487:21  Warning: Classnames 'w-10, h-10' could be replaced by the 'size-10' shorthand!  tailwindcss/enforces-shorthand
+544:21  Warning: Classnames 'w-10, h-10' could be replaced by the 'size-10' shorthand!  tailwindcss/enforces-shorthand
+600:21  Warning: Classnames 'w-10, h-10' could be replaced by the 'size-10' shorthand!  tailwindcss/enforces-shorthand
+639:26  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+689:34  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+690:43  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+705:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+714:36  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+723:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+732:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+741:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+755:35  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+999:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1011:36  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1023:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1035:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+
+./app/friends/enhanced-page/page.tsx
+80:8  Warning: React Hook useEffect has a missing dependency: 'applyFilters'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+196:49  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+197:53  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+198:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+199:42  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+200:38  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+235:43  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+250:50  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+250:50  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+356:48  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+395:66  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+395:66  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+403:61  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+403:61  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+417:62  Warning: Classnames 'w-1.5, h-1.5' could be replaced by the 'size-1.5' shorthand!  tailwindcss/enforces-shorthand
+436:66  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+441:66  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+
+./app/friends/page.tsx
+202:26  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+226:34  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+227:43  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+243:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+252:36  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+261:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+270:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+279:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+288:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+305:35  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+323:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+335:40  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+347:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+359:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+371:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+383:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+408:41  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+408:41  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+412:37  Warning: Classname 'placeholder-gray-500' should be updated to 'placeholder:text-gray-500' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+412:37  Warning: Classname 'dark:placeholder-gray-400' should be updated to 'dark:placeholder:text-gray-400' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+421:41  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+425:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+429:41  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+457:50  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+472:52  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+521:36  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+
+./app/graph/page.tsx
+154:22  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+183:46  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+230:54  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+
+./app/heatmap/page.tsx
+196:22  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+210:30  Warning: Classnames 'w-64, h-64' could be replaced by the 'size-64' shorthand!  tailwindcss/enforces-shorthand
+211:30  Warning: Classnames 'w-56, h-56' could be replaced by the 'size-56' shorthand!  tailwindcss/enforces-shorthand
+212:30  Warning: Classnames 'w-72, h-72' could be replaced by the 'size-72' shorthand!  tailwindcss/enforces-shorthand
+213:30  Warning: Classnames 'w-48, h-48' could be replaced by the 'size-48' shorthand!  tailwindcss/enforces-shorthand
+
+./app/join/page.tsx
+92:17  Warning: Classnames 'w-full, h-full' could be replaced by the 'size-full' shorthand!  tailwindcss/enforces-shorthand
+
+./app/landing-page/page.tsx
+5:65  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/lucide-react@0.446.0_react@19.0.0-rc-45804af1-20241021/node_modules/lucide-react/dist/lucide-react.d.ts' imported multiple times.  import/no-duplicates
+7:27  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/lucide-react@0.446.0_react@19.0.0-rc-45804af1-20241021/node_modules/lucide-react/dist/lucide-react.d.ts' imported multiple times.  import/no-duplicates
+141:26  Warning: Classnames 'w-96, h-96' could be replaced by the 'size-96' shorthand!  tailwindcss/enforces-shorthand
+142:26  Warning: Classnames 'w-64, h-64' could be replaced by the 'size-64' shorthand!  tailwindcss/enforces-shorthand
+143:26  Warning: Classnames 'w-80, h-80' could be replaced by the 'size-80' shorthand!  tailwindcss/enforces-shorthand
+174:30  Warning: Classnames 'pt-20, pb-20' could be replaced by the 'py-20' shorthand!  tailwindcss/enforces-shorthand
+194:37  Warning: The arbitrary class 'min-h-[4rem]' could be replaced by 'min-h-16'  tailwindcss/no-unnecessary-arbitrary-value
+287:58  Warning: Classnames 'w-14, h-14' could be replaced by the 'size-14' shorthand!  tailwindcss/enforces-shorthand
+378:41  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+381:45  Warning: Classnames 'w-full, h-full' could be replaced by the 'size-full' shorthand!  tailwindcss/enforces-shorthand
+
+./app/matches/page.tsx
+178:22  Warning: Classnames 'w-80, h-80' could be replaced by the 'size-80' shorthand!  tailwindcss/enforces-shorthand
+179:22  Warning: Classnames 'w-60, h-60' could be replaced by the 'size-60' shorthand!  tailwindcss/enforces-shorthand
+223:33  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+
+./app/messages/page.tsx
+292:22  Warning: Classname 'bg-opacity-40' should be replaced by an opacity suffix (eg. '/40')  tailwindcss/migration-from-tailwind-2
+369:22  Warning: Classname 'bg-opacity-40' should be replaced by an opacity suffix (eg. '/40')  tailwindcss/migration-from-tailwind-2
+389:37  Warning: Classname 'placeholder-gray-500' should be updated to 'placeholder:text-gray-500' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+389:37  Warning: Classname 'dark:placeholder-gray-400' should be updated to 'dark:placeholder:text-gray-400' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+495:22  Warning: Classname 'bg-opacity-40' should be replaced by an opacity suffix (eg. '/40')  tailwindcss/migration-from-tailwind-2
+506:34  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+507:38  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+1053:26  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+1112:34  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+1112:34  Warning: Classnames 'md:w-8, md:h-8' could be replaced by the 'md:size-8' shorthand!  tailwindcss/enforces-shorthand
+1113:43  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1113:43  Warning: Classnames 'md:w-5, md:h-5' could be replaced by the 'md:size-5' shorthand!  tailwindcss/enforces-shorthand
+1128:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1137:36  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1146:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1155:35  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1164:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1173:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1187:35  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+1204:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1216:40  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1228:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1240:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1252:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1264:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1275:30  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+1283:38  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1291:43  Warning: Classnames 'md:w-12, md:h-12' could be replaced by the 'md:size-12' shorthand!  tailwindcss/enforces-shorthand
+1325:58  Warning: Classnames 'w-10, h-10' could be replaced by the 'size-10' shorthand!  tailwindcss/enforces-shorthand
+1325:58  Warning: Classnames 'md:w-12, md:h-12' could be replaced by the 'md:size-12' shorthand!  tailwindcss/enforces-shorthand
+1326:63  Warning: Classnames 'md:w-[18px], md:h-[18px]' could be replaced by the 'md:size-[18px]' shorthand!  tailwindcss/enforces-shorthand
+1329:62  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1329:62  Warning: Classnames 'md:w-5, md:h-5' could be replaced by the 'md:size-5' shorthand!  tailwindcss/enforces-shorthand
+1351:66  Warning: Classnames 'w-1.5, h-1.5' could be replaced by the 'size-1.5' shorthand!  tailwindcss/enforces-shorthand
+1351:66  Warning: Classnames 'md:w-2, md:h-2' could be replaced by the 'md:size-2' shorthand!  tailwindcss/enforces-shorthand
+1358:58  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1373:38  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+1379:52  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1379:52  Warning: Classnames 'md:w-5, md:h-5' could be replaced by the 'md:size-5' shorthand!  tailwindcss/enforces-shorthand
+1381:42  Warning: Classnames 'w-10, h-10' could be replaced by the 'size-10' shorthand!  tailwindcss/enforces-shorthand
+1381:42  Warning: Classnames 'md:w-12, md:h-12' could be replaced by the 'md:size-12' shorthand!  tailwindcss/enforces-shorthand
+1382:47  Warning: Classnames 'md:w-[18px], md:h-[18px]' could be replaced by the 'md:size-[18px]' shorthand!  tailwindcss/enforces-shorthand
+1399:46  Warning: Classnames 'w-1.5, h-1.5' could be replaced by the 'size-1.5' shorthand!  tailwindcss/enforces-shorthand
+1399:46  Warning: Classnames 'md:w-2, md:h-2' could be replaced by the 'md:size-2' shorthand!  tailwindcss/enforces-shorthand
+1443:86  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1445:86  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1449:86  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+1488:74  Warning: Classnames 'w-2, h-2' could be replaced by the 'size-2' shorthand!  tailwindcss/enforces-shorthand
+1489:74  Warning: Classnames 'w-2, h-2' could be replaced by the 'size-2' shorthand!  tailwindcss/enforces-shorthand
+1490:74  Warning: Classnames 'w-2, h-2' could be replaced by the 'size-2' shorthand!  tailwindcss/enforces-shorthand
+1504:38  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+1512:49  Warning: Classname 'placeholder-gray-500' should be updated to 'placeholder:text-gray-500' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+1512:49  Warning: Classname 'dark:placeholder-gray-400' should be updated to 'dark:placeholder:text-gray-400' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+1518:58  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1523:58  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1532:45  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+1535:54  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1535:54  Warning: Classnames 'md:w-5, md:h-5' could be replaced by the 'md:size-5' shorthand!  tailwindcss/enforces-shorthand
+1537:55  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+1537:55  Warning: Classnames 'md:w-5, md:h-5' could be replaced by the 'md:size-5' shorthand!  tailwindcss/enforces-shorthand
+1546:42  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+1546:42  Warning: Classnames 'md:w-24, md:h-24' could be replaced by the 'md:size-24' shorthand!  tailwindcss/enforces-shorthand
+1547:47  Warning: Classnames 'md:w-8, md:h-8' could be replaced by the 'md:size-8' shorthand!  tailwindcss/enforces-shorthand
+1554:46  Warning: Classnames 'w-1.5, h-1.5' could be replaced by the 'size-1.5' shorthand!  tailwindcss/enforces-shorthand
+1554:46  Warning: Classnames 'md:w-2, md:h-2' could be replaced by the 'md:size-2' shorthand!  tailwindcss/enforces-shorthand
+
+./app/onboarding/page.tsx
+276:34  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+277:39  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+309:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+309:39  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+324:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+324:39  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+352:34  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+353:41  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+429:34  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+430:39  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+496:34  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+497:43  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+528:41  Warning: Classnames 'h-4, w-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+528:41  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+563:22  Warning: Classnames 'w-96, h-96' could be replaced by the 'size-96' shorthand!  tailwindcss/enforces-shorthand
+564:22  Warning: Classnames 'w-80, h-80' could be replaced by the 'size-80' shorthand!  tailwindcss/enforces-shorthand
+611:46  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+626:53  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+631:55  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+648:46  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+653:46  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+
+./app/profile/optimized-page.tsx
+232:26  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+264:34  Warning: Classname 'flex-shrink-0' should be updated to 'shrink-0' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+370:48  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+396:44  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+419:43  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+
+./app/profile/page.tsx
+79:9  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+81:27  Warning: Classnames 'md:w-3, md:h-3' could be replaced by the 'md:size-3' shorthand!  tailwindcss/enforces-shorthand
+85:11  Warning: Classnames 'md:w-3, md:h-3' could be replaced by the 'md:size-3' shorthand!  tailwindcss/enforces-shorthand
+96:13  Warning: Classnames 'left-0, right-0' could be replaced by the 'inset-x-0' shorthand!  tailwindcss/enforces-shorthand
+345:16  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+361:20  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+362:27  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+378:21  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+387:22  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+396:30  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+405:21  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+414:30  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+423:30  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+438:127  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+449:21  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+467:23  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+479:24  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+491:32  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+503:23  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+515:32  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+527:32  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+545:22  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+545:22  Warning: Classnames 'md:w-12, md:h-12' could be replaced by the 'md:size-12' shorthand!  tailwindcss/enforces-shorthand
+546:29  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+546:29  Warning: Classnames 'md:w-6, md:h-6' could be replaced by the 'md:size-6' shorthand!  tailwindcss/enforces-shorthand
+564:25  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+595:17  Warning: Classnames 'w-20, h-20' could be replaced by the 'size-20' shorthand!  tailwindcss/enforces-shorthand
+595:17  Warning: Classnames 'md:w-[120px], md:h-[120px]' could be replaced by the 'md:size-[120px]' shorthand!  tailwindcss/enforces-shorthand
+602:37  Warning: Classnames 'md:w-4, md:h-4' could be replaced by the 'md:size-4' shorthand!  tailwindcss/enforces-shorthand
+620:35  Warning: Classnames 'md:w-5, md:h-5' could be replaced by the 'md:size-5' shorthand!  tailwindcss/enforces-shorthand
+640:37  Warning: Classnames 'md:w-4, md:h-4' could be replaced by the 'md:size-4' shorthand!  tailwindcss/enforces-shorthand
+652:39  Warning: Classnames 'md:w-4, md:h-4' could be replaced by the 'md:size-4' shorthand!  tailwindcss/enforces-shorthand
+661:37  Warning: Classnames 'md:w-4, md:h-4' could be replaced by the 'md:size-4' shorthand!  tailwindcss/enforces-shorthand
+665:36  Warning: Classnames 'md:w-4, md:h-4' could be replaced by the 'md:size-4' shorthand!  tailwindcss/enforces-shorthand
+678:19  Warning: Classname 'placeholder-gray-500' should be updated to 'placeholder:text-gray-500' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+678:19  Warning: Classname 'dark:placeholder-gray-400' should be updated to 'dark:placeholder:text-gray-400' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+719:27  Warning: Classname 'placeholder-gray-500' should be updated to 'placeholder:text-gray-500' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+719:27  Warning: Classname 'dark:placeholder-gray-400' should be updated to 'dark:placeholder:text-gray-400' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+773:30  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+775:29  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+778:31  Warning: Classnames 'w-full, h-full' could be replaced by the 'size-full' shorthand!  tailwindcss/enforces-shorthand
+781:34  Warning: Classnames 'w-full, h-full' could be replaced by the 'size-full' shorthand!  tailwindcss/enforces-shorthand
+782:46  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+797:30  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+799:29  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+802:31  Warning: Classnames 'w-full, h-full' could be replaced by the 'size-full' shorthand!  tailwindcss/enforces-shorthand
+805:44  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+964:19  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+971:19  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+978:19  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+985:19  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+
+./app/reels/page.tsx
+154:25  Warning: Classnames 'w-2, h-2' could be replaced by the 'size-2' shorthand!  tailwindcss/enforces-shorthand
+226:25  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+240:26  Warning: Classnames 'left-4, right-4' could be replaced by the 'inset-x-4' shorthand!  tailwindcss/enforces-shorthand
+246:38  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+265:29  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+265:29  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+273:33  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+273:33  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+277:33  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+277:33  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+287:25  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+287:25  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+289:30  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+300:25  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+300:25  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+302:30  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+368:29  Warning: Classnames 'w-2, h-2' could be replaced by the 'size-2' shorthand!  tailwindcss/enforces-shorthand
+
+./app/register-for-api/page.tsx
+81:14  Warning: Classname 'bg-opacity-90' should be replaced by an opacity suffix (eg. '/90')  tailwindcss/migration-from-tailwind-2
+97:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+118:19  Warning: Classname 'placeholder-purple-300' should be updated to 'placeholder:text-purple-300' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+134:19  Warning: Classname 'placeholder-purple-300' should be updated to 'placeholder:text-purple-300' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+149:19  Warning: Classname 'placeholder-purple-300' should be updated to 'placeholder:text-purple-300' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+164:19  Warning: Classname 'placeholder-purple-300' should be updated to 'placeholder:text-purple-300' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+179:19  Warning: Classname 'placeholder-purple-300' should be updated to 'placeholder:text-purple-300' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+194:19  Warning: Classname 'placeholder-purple-300' should be updated to 'placeholder:text-purple-300' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+
+./app/register-for-premium/page.tsx
+64:14  Warning: Classname 'bg-opacity-90' should be replaced by an opacity suffix (eg. '/90')  tailwindcss/migration-from-tailwind-2
+83:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+102:19  Warning: Classname 'placeholder-purple-300' should be updated to 'placeholder:text-purple-300' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+118:19  Warning: Classname 'placeholder-purple-300' should be updated to 'placeholder:text-purple-300' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+134:19  Warning: Classname 'placeholder-purple-300' should be updated to 'placeholder:text-purple-300' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+150:19  Warning: Classname 'placeholder-purple-300' should be updated to 'placeholder:text-purple-300' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+173:15  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/university/page.tsx
+3:25  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/react-icons@5.5.0_react@19.0.0-rc-45804af1-20241021/node_modules/react-icons/fa6/index.d.ts' imported multiple times.  import/no-duplicates
+4:29  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/react-icons@5.5.0_react@19.0.0-rc-45804af1-20241021/node_modules/react-icons/fa6/index.d.ts' imported multiple times.  import/no-duplicates
+5:32  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/react-icons@5.5.0_react@19.0.0-rc-45804af1-20241021/node_modules/react-icons/fa6/index.d.ts' imported multiple times.  import/no-duplicates
+6:25  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/react-icons@5.5.0_react@19.0.0-rc-45804af1-20241021/node_modules/react-icons/fa6/index.d.ts' imported multiple times.  import/no-duplicates
+7:28  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/react-icons@5.5.0_react@19.0.0-rc-45804af1-20241021/node_modules/react-icons/fa6/index.d.ts' imported multiple times.  import/no-duplicates
+8:31  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/react-icons@5.5.0_react@19.0.0-rc-45804af1-20241021/node_modules/react-icons/fa6/index.d.ts' imported multiple times.  import/no-duplicates
+9:24  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/react-icons@5.5.0_react@19.0.0-rc-45804af1-20241021/node_modules/react-icons/fa6/index.d.ts' imported multiple times.  import/no-duplicates
+10:26  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/react-icons@5.5.0_react@19.0.0-rc-45804af1-20241021/node_modules/react-icons/fa6/index.d.ts' imported multiple times.  import/no-duplicates
+73:22  Warning: Classnames 'w-full, h-full' could be replaced by the 'size-full' shorthand!  tailwindcss/enforces-shorthand
+249:29  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+
+./app/verify/page.tsx
+23:8  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/ChatInput.tsx
+126:21  Warning: Classname 'placeholder-zinc-400' should be updated to 'placeholder:text-zinc-400' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+
+./components/Footer.tsx
+59:29  Warning: Classname 'placeholder-zinc-500' should be updated to 'placeholder:text-zinc-500' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+83:37  Warning: Classnames 'w-10, h-10' could be replaced by the 'size-10' shorthand!  tailwindcss/enforces-shorthand
+
+./components/Header.tsx
+23:13  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+
+./components/app-sidebar.tsx
+6:25  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/index.d.cts' imported multiple times.  import/no-duplicates
+26:53  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/date-fns@4.1.0/node_modules/date-fns/index.d.cts' imported multiple times.  import/no-duplicates
+80:14  Warning: Classnames 'w-72, h-72' could be replaced by the 'size-72' shorthand!  tailwindcss/enforces-shorthand
+81:14  Warning: Classnames 'w-56, h-56' could be replaced by the 'size-56' shorthand!  tailwindcss/enforces-shorthand
+82:14  Warning: Classnames 'w-72, h-72' could be replaced by the 'size-72' shorthand!  tailwindcss/enforces-shorthand
+140:20  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+156:20  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+
+./components/aura/AuraBotPanel.tsx
+51:18  Warning: Classnames 'w-full, h-full' could be replaced by the 'size-full' shorthand!  tailwindcss/enforces-shorthand
+56:28  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+80:41  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+
+./components/aura/AuraBotWidget.tsx
+19:32  Warning: Classnames 'w-7, h-7' could be replaced by the 'size-7' shorthand!  tailwindcss/enforces-shorthand
+
+./components/chat-header.tsx
+7:26  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@types+react@18.3.23/node_modules/@types/react/index.d.ts' imported multiple times.  import/no-duplicates
+13:22  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@types+react@18.3.23/node_modules/@types/react/index.d.ts' imported multiple times.  import/no-duplicates
+90:12  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+111:14  Warning: Classname 'bg-opacity-50' should be replaced by an opacity suffix (eg. '/50')  tailwindcss/migration-from-tailwind-2
+112:16  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+
+./components/chat.tsx
+231:6  Warning: React Hook useEffect has a missing dependency: 'emaili'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+270:16  Warning: Classnames 'w-16, h-16' could be replaced by the 'size-16' shorthand!  tailwindcss/enforces-shorthand
+287:16  Warning: Classnames 'w-64, h-64' could be replaced by the 'size-64' shorthand!  tailwindcss/enforces-shorthand
+288:16  Warning: Classnames 'w-56, h-56' could be replaced by the 'size-56' shorthand!  tailwindcss/enforces-shorthand
+289:16  Warning: Classnames 'w-72, h-72' could be replaced by the 'size-72' shorthand!  tailwindcss/enforces-shorthand
+290:16  Warning: Classnames 'w-48, h-48' could be replaced by the 'size-48' shorthand!  tailwindcss/enforces-shorthand
+313:20  Warning: Classnames 'py-6, px-6' could be replaced by the 'p-6' shorthand!  tailwindcss/enforces-shorthand
+
+./components/enhanced-chat-input.tsx
+6:83  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/ai/enhanced-prompts.ts' imported multiple times.  import/no-duplicates
+7:29  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/ai/enhanced-prompts.ts' imported multiple times.  import/no-duplicates
+45:26  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+51:34  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+57:27  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+63:31  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+80:8  Warning: React Hook useEffect has a missing dependency: 'suggestions'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+294:25  Warning: Classname 'placeholder-zinc-400' should be updated to 'placeholder:text-zinc-400' in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+298:35  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+
+./components/enhanced-message-actions.tsx
+241:8  Warning: React Hook useEffect has a missing dependency: 'checkNetworkqyStatus'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+271:30  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+280:34  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+289:30  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+302:30  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+304:31  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+326:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+327:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+328:50  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+329:21  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+344:38  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+376:47  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+385:60  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+385:91  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+394:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+403:60  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+403:91  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+415:88  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+416:90  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+417:86  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+418:83  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+419:84  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+428:63  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+448:56  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+456:51  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+
+./components/leafletmap.tsx
+19:22  Warning: Caution: `L` also has a named export `Icon`. Check if you meant to write `import {Icon} from 'leaflet'` instead.  import/no-named-as-default-member
+
+./components/loading-states.tsx
+65:17  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+92:26  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+120:13  Warning: Classnames 'left-0, right-0' could be replaced by the 'inset-x-0' shorthand!  tailwindcss/enforces-shorthand
+141:27  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+
+./components/notification-bell.tsx
+259:56  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+312:23  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+314:27  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+
+./components/onboarding-completion.tsx
+63:33  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+65:27  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+85:34  Warning: Classnames 'w-10, h-10' could be replaced by the 'size-10' shorthand!  tailwindcss/enforces-shorthand
+86:43  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+126:46  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+140:46  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+205:43  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+222:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+
+./components/optimized-navbar.tsx
+67:26  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+69:23  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+86:30  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+88:42  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+90:43  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+145:31  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+
+./components/profile-completion-wizard.tsx
+203:34  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+204:39  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+236:39  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+236:39  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+260:34  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+261:39  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+268:34  Warning: Classnames 'w-20, h-20' could be replaced by the 'size-20' shorthand!  tailwindcss/enforces-shorthand
+269:38  Warning: Classnames 'w-20, h-20' could be replaced by the 'size-20' shorthand!  tailwindcss/enforces-shorthand
+271:41  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+274:45  Warning: Classnames 'w-full, h-full' could be replaced by the 'size-full' shorthand!  tailwindcss/enforces-shorthand
+277:49  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+307:50  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+315:43  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+315:43  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+338:34  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+339:41  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+416:34  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+417:39  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+427:48  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+427:48  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+440:47  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+440:47  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+472:41  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+472:41  Warning: Classname 'transform' is not needed in Tailwind CSS v3!  tailwindcss/migration-from-tailwind-2
+514:34  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+515:43  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+556:46  Warning: Classnames 'w-5, h-5' could be replaced by the 'size-5' shorthand!  tailwindcss/enforces-shorthand
+628:42  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+642:49  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+647:51  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+
+./components/sidebar-user-nav.tsx
+42:18  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+
+./components/theme-toggle.tsx
+18:21  Warning: Classnames 'w-10, h-10' could be replaced by the 'size-10' shorthand!  tailwindcss/enforces-shorthand
+19:22  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+27:13  Warning: Classnames 'w-10, h-10' could be replaced by the 'size-10' shorthand!  tailwindcss/enforces-shorthand
+31:22  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+33:23  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+
+./components/welcome-onboarding.tsx
+35:22  Warning: Classnames 'w-20, h-20' could be replaced by the 'size-20' shorthand!  tailwindcss/enforces-shorthand
+36:31  Warning: Classnames 'w-10, h-10' could be replaced by the 'size-10' shorthand!  tailwindcss/enforces-shorthand
+55:26  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+56:31  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+95:26  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+96:33  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+106:34  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+107:41  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+115:34  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+116:44  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+124:34  Warning: Classnames 'w-8, h-8' could be replaced by the 'size-8' shorthand!  tailwindcss/enforces-shorthand
+125:40  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+137:38  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+141:38  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+145:38  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+149:38  Warning: Classnames 'w-3, h-3' could be replaced by the 'size-3' shorthand!  tailwindcss/enforces-shorthand
+166:26  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+167:32  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+176:30  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+185:30  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+194:30  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+223:26  Warning: Classnames 'w-12, h-12' could be replaced by the 'size-12' shorthand!  tailwindcss/enforces-shorthand
+224:40  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+236:46  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+240:46  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+244:46  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+248:46  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+299:14  Warning: Classname 'bg-opacity-50' should be replaced by an opacity suffix (eg. '/50')  tailwindcss/migration-from-tailwind-2
+310:39  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+318:32  Warning: Classnames 'w-6, h-6' could be replaced by the 'size-6' shorthand!  tailwindcss/enforces-shorthand
+328:30  Warning: Classname 'bg-opacity-20' should be replaced by an opacity suffix (eg. '/20')  tailwindcss/migration-from-tailwind-2
+372:40  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+392:49  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+400:50  Warning: Classnames 'w-4, h-4' could be replaced by the 'size-4' shorthand!  tailwindcss/enforces-shorthand
+
+./lib/ai/providers.ts
+9:24  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@ai-sdk+google@1.2.22_zod@3.25.76/node_modules/@ai-sdk/google/dist/index.d.ts' imported multiple times.  import/no-duplicates
+10:42  Warning: '/Users/sharo2/Downloads/networkqy-clone/node_modules/.pnpm/@ai-sdk+google@1.2.22_zod@3.25.76/node_modules/@ai-sdk/google/dist/index.d.ts' imported multiple times.  import/no-duplicates
+
+./lib/db/queries.ts
+5:34  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/db/schema.ts' imported multiple times.  import/no-duplicates
+7:76  Warning: '/Users/sharo2/Downloads/networkqy-clone/lib/db/schema.ts' imported multiple times.  import/no-duplicates
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/88) ...
+   Generating static pages (22/88) 
+[
+  {
+    title: 'AI Founders Mixer',
+    date: 'June 15, 2025',
+    location: 'Downtown Dubai',
+    desc: 'Meet top AI founders and researchers building the next generation of intelligent apps.'
+  },
+  {
+    title: 'Growth Hack Night',
+    date: 'July 8, 2025',
+    location: 'Hub71, Abu Dhabi',
+    desc: 'Startup teams compete to present real growth ideas to a panel of marketing experts.'
+  },
+  {
+    title: 'Pitch & Padels',
+    date: 'July 2, 2025',
+    location: 'Padel Pro Club, Al Quoz',
+    desc: 'Casual padel games followed by lightning startup pitches and networking.'
+  }
+]
+   Generating static pages (44/88) 
+   Generating static pages (66/88) 
+ ✓ Generating static pages (88/88)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                           Size  First Load JS
+┌ ○ /                                                189 B         157 kB
+├ ○ /_not-found                                      987 B         104 kB
+├ ○ /about                                         12.6 kB         156 kB
+├ ○ /anonymous-feed                                  19 kB         207 kB
+├ ƒ /anonymous-feed/[id]                             279 B         103 kB
+├ ƒ /api/anonymous-feed/comments/[commentId]/like    279 B         103 kB
+├ ƒ /api/anonymous-feed/posts                        279 B         103 kB
+├ ƒ /api/anonymous-feed/posts/[postId]               279 B         103 kB
+├ ƒ /api/anonymous-feed/posts/[postId]/comments      279 B         103 kB
+├ ƒ /api/anonymous-feed/posts/[postId]/like          279 B         103 kB
+├ ƒ /api/archive                                     279 B         103 kB
+├ ƒ /api/auth/[...nextauth]                          279 B         103 kB
+├ ƒ /api/auth/forgot-password                        279 B         103 kB
+├ ƒ /api/auth/reset-password                         279 B         103 kB
+├ ƒ /api/chat                                        177 B         106 kB
+├ ƒ /api/connections                                 279 B         103 kB
+├ ƒ /api/connections/all                             279 B         103 kB
+├ ƒ /api/connections/request                         279 B         103 kB
+├ ƒ /api/connections/respond                         279 B         103 kB
+├ ƒ /api/connections/send                            279 B         103 kB
+├ ƒ /api/connections/status                          279 B         103 kB
+├ ƒ /api/flagged-expiry                              279 B         103 kB
+├ ƒ /api/get-archived-cards                          279 B         103 kB
+├ ƒ /api/history                                     279 B         103 kB
+├ ƒ /api/login                                       279 B         103 kB
+├ ƒ /api/logout                                      279 B         103 kB
+├ ƒ /api/meeting-scheduler                           279 B         103 kB
+├ ƒ /api/messages/conversation                       279 B         103 kB
+├ ƒ /api/messages/conversations                      279 B         103 kB
+├ ƒ /api/messages/send                               279 B         103 kB
+├ ƒ /api/notifications                               279 B         103 kB
+├ ƒ /api/notifications/[id]                          279 B         103 kB
+├ ƒ /api/outreach/generate                           279 B         103 kB
+├ ƒ /api/outreach/log                                279 B         103 kB
+├ ƒ /api/outreach/send                               279 B         103 kB
+├ ƒ /api/proxycurl                                   279 B         103 kB
+├ ƒ /api/recommendations                             279 B         103 kB
+├ ƒ /api/register-apiuser                            279 B         103 kB
+├ ƒ /api/register-premuser                           279 B         103 kB
+├ ƒ /api/send-otp                                    279 B         103 kB
+├ ƒ /api/session                                     279 B         103 kB
+├ ƒ /api/timestamp                                   279 B         103 kB
+├ ƒ /api/user/aura                                   279 B         103 kB
+├ ƒ /api/user/context                                279 B         103 kB
+├ ƒ /api/user/ensure                                 279 B         103 kB
+├ ƒ /api/users/[id]                                  279 B         103 kB
+├ ƒ /api/users/check                                 279 B         103 kB
+├ ƒ /api/users/friends                               279 B         103 kB
+├ ○ /chat                                          3.69 kB         683 kB
+├ ƒ /chat-group                                      246 B         661 kB
+├ ƒ /chat-group/api/chat                             177 B         106 kB
+├ ƒ /chat-group/api/document                         279 B         103 kB
+├ ƒ /chat-group/api/files/upload                     279 B         103 kB
+├ ƒ /chat-group/api/history                          279 B         103 kB
+├ ƒ /chat-group/api/suggestions                      279 B         103 kB
+├ ƒ /chat-group/api/vote                             279 B         103 kB
+├ ƒ /chat-group/chat/[id]                            246 B         661 kB
+├ ○ /chat-group/opengraph-image.png                    0 B            0 B
+├ ○ /chat-group/twitter-image.png                      0 B            0 B
+├ ○ /comparor                                      2.73 kB         199 kB
+├ ○ /connect-setup                                 10.3 kB         169 kB
+├ ○ /connections                                   8.57 kB         186 kB
+├ ○ /dashboard                                     6.58 kB         240 kB
+├ ƒ /dm/[userId]                                   5.48 kB         131 kB
+├ ○ /expdashboard                                  9.42 kB         158 kB
+├ ○ /exphome                                       6.58 kB         245 kB
+├ ○ /faq                                            8.6 kB         152 kB
+├ ○ /folder                                        3.11 kB         236 kB
+├ ○ /forgot-password                               1.94 kB         113 kB
+├ ○ /friendprof                                    7.07 kB         197 kB
+├ ○ /friends                                       7.36 kB         180 kB
+├ ƒ /friends/api/findfr                              279 B         103 kB
+├ ○ /friends/enhanced-page                         4.36 kB         243 kB
+├ ○ /graph                                         3.73 kB         200 kB
+├ ○ /heatmap                                       4.97 kB         201 kB
+├ ○ /join                                          1.55 kB         110 kB
+├ ○ /landing-page                                    188 B         157 kB
+├ ○ /login                                         12.6 kB         141 kB
+├ ○ /matches                                       12.3 kB         176 kB
+├ ○ /messages                                      18.9 kB         209 kB
+├ ○ /onboarding                                    9.72 kB         173 kB
+├ ○ /privacy-policy                                 1.9 kB         105 kB
+├ ○ /profile                                       13.4 kB         206 kB
+├ ƒ /profile/api                                     279 B         103 kB
+├ ƒ /profile/api/debug                               279 B         103 kB
+├ ƒ /profile/get                                     279 B         103 kB
+├ ƒ /profile/save                                    279 B         103 kB
+├ ○ /reels                                          9.3 kB         117 kB
+├ ○ /register                                        385 B         103 kB
+├ ○ /register-for-api                              3.22 kB         107 kB
+├ ○ /register-for-premium                          3.07 kB         106 kB
+├ ○ /reset-password                                2.07 kB         113 kB
+├ ○ /terms-of-use                                   1.9 kB         108 kB
+├ ○ /university                                    8.63 kB         116 kB
+└ ○ /verify                                        37.9 kB         141 kB
++ First Load JS shared by all                       103 kB
+  ├ chunks/7931-5cbdb38ae42d9538.js                46.6 kB
+  ├ chunks/93f748ac-883abc790eaee3da.js            53.2 kB
+  └ other shared chunks (total)                       3 kB
+
+Route (pages)                                         Size  First Load JS
+─ ƒ /api/socketio                                      0 B        94.5 kB
++ First Load JS shared by all                      94.5 kB
+  ├ chunks/framework-4d4881917746be3d.js           57.4 kB
+  ├ chunks/main-6c5205656ea9410d.js                34.1 kB
+  └ other shared chunks (total)                    2.97 kB
+
+ƒ Middleware                                       85.3 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
