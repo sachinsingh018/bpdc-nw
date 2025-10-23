@@ -263,13 +263,13 @@ const allFeatures: Feature[] = [
 
 const testimonials: Testimonial[] = [
   {
-    quote: "Networkqy transformed my fundraising journey. I connected with investors who truly understood my vision, leading to successful seed funding!",
+    quote: "BITS Pilani Dubai Campus transformed my fundraising journey. I connected with investors who truly understood my vision, leading to successful seed funding!",
     author: "Sarah Chen",
     title: "Startup Founder",
     avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face"
   },
   {
-    quote: "Finding the right talent used to be a headache. NetworkQY's AI-driven matching brought me incredible candidates I wouldn't have found elsewhere.",
+    quote: "Finding the right talent used to be a headache. BITS Pilani Dubai Campus's AI-driven matching brought me incredible candidates I wouldn't have found elsewhere.",
     author: "Marcus Rodriguez",
     title: "Tech Recruiter",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
@@ -281,7 +281,7 @@ const testimonials: Testimonial[] = [
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
   },
   {
-    quote: "I've built more meaningful professional relationships in months on NetworkQY than years on other platforms. Highly recommended!",
+    quote: "I've built more meaningful professional relationships in months on BITS Pilani Dubai Campus than years on other platforms. Highly recommended!",
     author: "David Kumar",
     title: "Industry Veteran",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
@@ -385,8 +385,8 @@ export default function About() {
                 About
               </span>
               <br />
-              <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-violet-500 bg-clip-text text-transparent">
-                Networkqy
+              <span className="bg-gradient-to-r from-bits-blue-400 via-bits-gold-400 to-bits-blue-500 bg-clip-text text-transparent">
+                BITS Pilani Dubai Campus
               </span>
             </motion.h1>
 
@@ -440,15 +440,15 @@ export default function About() {
                   Our Mission
                 </h2>
                 <p className="text-lg text-gray-300 leading-relaxed">
-                  We believe professional networking is broken. Traditional platforms focus on broadcasting rather than meaningful connection, leading to noise instead of value. Networkqy leverages AI to transform how professionals discover, connect, and grow together.
+                  We believe professional networking is broken. Traditional platforms focus on broadcasting rather than meaningful connection, leading to noise instead of value. BITS Pilani Dubai Campus leverages AI to transform how professionals discover, connect, and grow together.
                 </p>
               </div>
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-violet-900/20 to-purple-900/20 border border-violet-500/20 backdrop-blur-sm">
-                <blockquote className="text-xl italic text-violet-200">
+              <div className="p-6 rounded-2xl bg-gradient-to-br from-bits-blue-900/20 to-bits-gold-900/20 border border-bits-blue-500/20 backdrop-blur-sm">
+                <blockquote className="text-xl italic text-bits-blue-200">
                   <p>{`We're not just building another social network. We're creating an intelligent system that understands human intent and facilitates serendipitous yet purposeful connections.`}</p>
 
                 </blockquote>
-                <cite className="text-sm text-gray-400 not-italic mt-4 block">— NetworkQY Founding Team</cite>
+                <cite className="text-sm text-gray-400 not-italic mt-4 block">— BITS Pilani Dubai Campus Founding Team</cite>
               </div>
             </motion.div>
             <motion.div
@@ -496,7 +496,7 @@ export default function About() {
             viewport={{ once: true, amount: 0.5 }}
           >
             <h2 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              How Networkqy Works
+              How BITS Pilani Dubai Campus Works
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               Our AI-powered approach transforms traditional networking into intelligent, purposeful connections
@@ -605,7 +605,7 @@ export default function About() {
               Key Features
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Discover the powerful capabilities that make Networkqy unique
+              Discover the powerful capabilities that make BITS Pilani Dubai Campus unique
             </p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -652,7 +652,7 @@ export default function About() {
               Plug our AI into your platform
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Seamlessly integrate Networkqy&apos;s intelligent networking capabilities into your existing tools and platforms
+              Seamlessly integrate BITS Pilani Dubai Campus's intelligent networking capabilities into your existing tools and platforms
             </p>
           </motion.div>
 
@@ -715,7 +715,7 @@ export default function About() {
               What Our Users Say
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Hear from the founders and professionals who are thriving with NetworkQY
+              Hear from the founders and professionals who are thriving with BITS Pilani Dubai Campus
             </p>
           </motion.div>
           <div className="grid md:grid-cols-2 gap-8">
