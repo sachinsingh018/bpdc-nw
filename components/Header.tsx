@@ -29,12 +29,12 @@ export const Header = () => {
             transition={{ duration: 0.6 }}
         >
             <div className="flex justify-between items-center px-8 py-5">
-                {/* NetworkQY Logo Link */}
+                {/* BITS Pilani Dubai Campus Logo Link */}
                 <Link
                     href="/"
-                    className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent tracking-tight cursor-pointer"
+                    className="text-2xl font-bold bg-gradient-to-r from-bits-blue-600 to-bits-gold-600 bg-clip-text text-transparent tracking-tight cursor-pointer"
                 >
-                    <motion.span whileHover={{ scale: 1.05 }}>Networkqy</motion.span>
+                    <motion.span whileHover={{ scale: 1.05 }}>BITS Pilani Dubai Campus</motion.span>
                 </Link>
 
                 <nav className="hidden md:flex space-x-8 text-sm font-medium">
@@ -46,7 +46,7 @@ export const Header = () => {
                             >
                                 {item}
                             </Link>
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-400 to-purple-400 transition-all duration-200 group-hover:w-full"></span>
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-bits-blue-400 to-bits-gold-400 transition-all duration-200 group-hover:w-full"></span>
                         </motion.div>
                     ))}
                 </nav>

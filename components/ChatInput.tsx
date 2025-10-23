@@ -112,10 +112,10 @@ export const ChatInput = ({ onResponse }: { onResponse?: () => void }) => {
             transition={{ delay: 0.8, duration: 0.6 }}
         >
             {/* Glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-violet-600/40 to-purple-700/40 rounded-3xl blur-2xl opacity-60 animate-pulse z-0"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-bits-blue-600/40 to-bits-gold-600/40 rounded-3xl blur-2xl opacity-60 animate-pulse z-0"></div>
 
             {/* Input area */}
-            <div className="relative z-10 flex flex-col sm:flex-row gap-4 p-4 sm:p-6 w-full border border-violet-500/50 rounded-3xl shadow-2xl bg-white/80 dark:bg-black/70 text-black dark:text-white backdrop-blur-2xl hover:border-violet-400/70 transition-all duration-300">
+            <div className="relative z-10 flex flex-col sm:flex-row gap-4 p-4 sm:p-6 w-full border border-bits-blue-500/50 rounded-3xl shadow-2xl bg-white/80 dark:bg-black/70 text-black dark:text-white backdrop-blur-2xl hover:border-bits-blue-400/70 transition-all duration-300">
                 <textarea
                     ref={textareaRef}
                     value={input}
@@ -123,7 +123,7 @@ export const ChatInput = ({ onResponse }: { onResponse?: () => void }) => {
                     onKeyDown={handleKeyDown}
                     placeholder={placeholder}
                     rows={1}
-                    className="w-full sm:flex-1 resize-none overflow-hidden p-3 min-w-0 bg-white/70 dark:bg-zinc-900/60 text-black dark:text-white  placeholder-zinc-400 border border-zinc-800/60 focus:outline-none focus:ring-2 focus:ring-violet-500/60 focus:border-violet-400/60 rounded-2xl backdrop-blur-xl transition-all duration-200 text-sm sm:text-base md:text-lg font-medium"
+                    className="w-full sm:flex-1 resize-none overflow-hidden p-3 min-w-0 bg-white/70 dark:bg-zinc-900/60 text-black dark:text-white  placeholder-zinc-400 border border-zinc-800/60 focus:outline-none focus:ring-2 focus:ring-bits-blue-500/60 focus:border-bits-blue-400/60 rounded-2xl backdrop-blur-xl transition-all duration-200 text-sm sm:text-base md:text-lg font-medium"
                     aria-label="Chat input"
                 />
 
@@ -133,7 +133,7 @@ export const ChatInput = ({ onResponse }: { onResponse?: () => void }) => {
                     aria-disabled={!input.trim() || loading}
                     className={`px-6 py-3 text-sm font-semibold rounded-2xl transition-all duration-200 shadow-lg ${!input.trim() || loading
                         ? "bg-zinc-900/50 text-zinc-500 cursor-not-allowed"
-                        : "bg-gradient-to-r from-violet-600 to-purple-700 hover:from-violet-700 hover:to-purple-800 text-white hover:shadow-violet-500/30 hover:scale-105"
+                        : "bg-gradient-to-r from-bits-blue-600 to-bits-gold-600 hover:from-bits-blue-700 hover:to-bits-gold-700 text-white hover:shadow-bits-blue-500/30 hover:scale-105"
                         }`}
                     whileHover={!input.trim() || loading ? {} : { scale: 1.05 }}
                     whileTap={!input.trim() || loading ? {} : { scale: 0.98 }}
@@ -154,7 +154,7 @@ export const ChatInput = ({ onResponse }: { onResponse?: () => void }) => {
                         className="relative z-10 px-6 py-5 rounded-2xl bg-white/80 dark:bg-black/30 text-black dark:text-white backdrop-blur-xl border border-zinc-300/40 dark:border-zinc-700/40 shadow-lg text-sm sm:text-base font-semibold leading-relaxed overflow-hidden"
                     >
                         {/* Blurred background with response text */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-purple-500/10 rounded-2xl blur-sm opacity-50 pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-bits-blue-500/10 to-bits-gold-500/10 rounded-2xl blur-sm opacity-50 pointer-events-none" />
 
                         {/* Blurred response text in background */}
                         <div className="absolute inset-0 p-6 blur-md opacity-30 pointer-events-none">
@@ -169,13 +169,13 @@ export const ChatInput = ({ onResponse }: { onResponse?: () => void }) => {
                                 </div>
                                 <a
                                     href="/onboarding"
-                                    className="inline-flex items-center space-x-2 px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-200 shadow-lg bg-gradient-to-r from-violet-600 to-purple-700 hover:from-violet-700 hover:to-purple-800 text-white hover:shadow-violet-500/30 hover:scale-105"
+                                    className="inline-flex items-center space-x-2 px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-200 shadow-lg bg-gradient-to-r from-bits-blue-600 to-bits-gold-600 hover:from-bits-blue-700 hover:to-bits-gold-700 text-white hover:shadow-bits-blue-500/30 hover:scale-105"
                                 >
                                     <span>Register to View Response</span>
                                     <ArrowRight size={16} />
                                 </a>
                                 <div className="text-xs text-gray-500 dark:text-gray-400">
-                                    Join NetworkQY to unlock full AI responses
+                                    Join BITS Pilani Dubai Campus to unlock full AI responses
                                 </div>
                             </div>
                         </div>
@@ -187,7 +187,7 @@ export const ChatInput = ({ onResponse }: { onResponse?: () => void }) => {
                         transition={{ delay: 0.3 }}
                         className="text-center text-zinc-300 dark:text-zinc-400 text-sm sm:text-base font-medium mt-4"
                     >
-                        ✨ Want smarter results? <span className="text-violet-400 font-semibold">Join NetworkQY</span> — your AI-powered networking wingman 💼🚀
+                        ✨ Want smarter results? <span className="text-bits-blue-400 font-semibold">Join BITS Pilani Dubai Campus</span> — your AI-powered networking wingman 💼🚀
                     </motion.p>
                 </>
             )}

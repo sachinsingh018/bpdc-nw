@@ -21,10 +21,10 @@ const sections = [
         heading: 'Reimagine Connections.',
         subheading: 'The First AI-Powered Professional Social Network.',
         cta: 'Unlock Smarter Connections',
-        description: 'Networkqy leverages artificial intelligence to help you build meaningful professional relationships faster and smarter.'
+        description: 'BITS Pilani Dubai Campus leverages artificial intelligence to help you build meaningful professional relationships faster and smarter.'
     },
     {
-        heading: 'Why Networkqy?',
+        heading: 'Why BITS Pilani Dubai Campus?',
         bullets: [
             { icon: Target, title: 'Find Hidden Matches', text: 'AI surfaces connections based on your intent, values, and timing — not just keywords.' },
             { icon: Users, title: 'Warm Intros, Always', text: 'Receive high-context intros that feel organic, not cold calls.' },
@@ -35,7 +35,7 @@ const sections = [
     },
     {
         heading: 'Built for Builders.',
-        tagline: 'Whether you\'re fundraising, hiring, or launching something new — Networkqy is your sidekick for serendipity.',
+        tagline: 'Whether you\'re fundraising, hiring, or launching something new — BITS Pilani Dubai Campus is your sidekick for serendipity.',
         cta: 'Join the Beta'
     }
 ];

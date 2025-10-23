@@ -11,29 +11,29 @@ import Script from 'next/script';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.networkqy.com/'),
-  title: 'Networkqy: Your AI Assistant to Networking',
+  metadataBase: new URL('https://www.bits-pilani-dubai.edu/'),
+  title: 'BITS Pilani Dubai Campus: Your AI Assistant to Networking',
   description: 'Bringing Global Network to your Keyboard',
   openGraph: {
-    title: 'Networkqy: Your AI Assistant to Networking',
+    title: 'BITS Pilani Dubai Campus: Your AI Assistant to Networking',
     description: 'Bringing Global Network to your Keyboard',
-    url: 'https://www.networkqy.com/',
-    siteName: 'Networkqy',
+    url: 'https://www.bits-pilani-dubai.edu/',
+    siteName: 'BITS Pilani Dubai Campus',
     images: [
       {
-        url: 'https://www.networkqy.com/imagetemplate.png',
+        url: 'https://www.bits-pilani-dubai.edu/imagetemplate.png',
         width: 1200,
         height: 630,
-        alt: 'Networkqy Preview',
+        alt: 'BITS Pilani Dubai Campus Preview',
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Networkqy: Your AI Assistant to Networking',
+    title: 'BITS Pilani Dubai Campus: Your AI Assistant to Networking',
     description: 'Bringing Global Network to your Keyboard',
-    images: ['https://www.networkqy.com/img.jpg'],
+    images: ['https://www.bits-pilani-dubai.edu/img.jpg'],
   },
 };
 

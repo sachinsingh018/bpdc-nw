@@ -47,7 +47,7 @@ const StarryBackground: React.FC<StarProps> = ({ starColor1, starColor2, numStar
 
   class Star implements StarInstance {
     x: number;
-    y: number;
+    y: number;//asas
     radius: number;
     alpha: number;
     twinkleSpeed: number;
