@@ -370,7 +370,7 @@ export default function About() {
               className="mb-8"
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-500/30 bg-violet-500/10 backdrop-blur-sm mb-8">
-                <Sparkles className="w-4 h-4 text-violet-400" />
+                <Sparkles className="size-4 text-violet-400" />
                 <span className="text-sm text-violet-300 font-medium">Revolutionizing Professional Networking</span>
               </div>
             </motion.div>
@@ -409,7 +409,7 @@ export default function About() {
               <button className="group relative px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-violet-500/25">
                 <span className="relative z-10 flex items-center gap-2">
                   Join the Revolution
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity"></div>
               </button>
@@ -693,7 +693,7 @@ export default function About() {
             <button className="group relative px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-violet-500/25">
               <span className="relative z-10 flex items-center gap-2">
                 Explore API Documentation
-                <Share2 className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <Share2 className="size-5 group-hover:translate-x-1 transition-transform" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity"></div>
             </button>
