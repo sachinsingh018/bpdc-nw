@@ -425,7 +425,7 @@ function JobBoardContent() {
                             <button
                                 onClick={() => handleToggleChange('all')}
                                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${jobType === 'all'
-                                    ? 'bg-white dark:bg-gray-600 text-purple-600 dark:text-purple-400 shadow-sm'
+                                    ? 'bg-white dark:bg-gray-600 text-bits-golden-yellow dark:text-bits-golden-yellow shadow-sm'
                                     : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                                     }`}
                             >
@@ -434,7 +434,7 @@ function JobBoardContent() {
                             <button
                                 onClick={() => handleToggleChange('remote')}
                                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${jobType === 'remote'
-                                    ? 'bg-white dark:bg-gray-600 text-purple-600 dark:text-purple-400 shadow-sm'
+                                    ? 'bg-white dark:bg-gray-600 text-bits-golden-yellow dark:text-bits-golden-yellow shadow-sm'
                                     : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                                     }`}
                             >
@@ -443,7 +443,7 @@ function JobBoardContent() {
                             <button
                                 onClick={() => handleToggleChange('parttime')}
                                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${jobType === 'parttime'
-                                    ? 'bg-white dark:bg-gray-600 text-purple-600 dark:text-purple-400 shadow-sm'
+                                    ? 'bg-white dark:bg-gray-600 text-bits-golden-yellow dark:text-bits-golden-yellow shadow-sm'
                                     : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                                     }`}
                             >

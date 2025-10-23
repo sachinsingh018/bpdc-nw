@@ -30,10 +30,10 @@ interface UserMembership {
 function ShimmerCard() {
     return (
         <div className="animate-pulse bg-white/60 dark:bg-slate-800/60 rounded-xl shadow-md p-6 flex flex-col items-center gap-4 h-80">
-            <div className="w-16 h-16 bg-purple-200/60 rounded-full" />
-            <div className="h-4 w-24 bg-purple-100 rounded" />
-            <div className="h-3 w-32 bg-purple-50 rounded flex-1" />
-            <div className="h-8 w-20 bg-purple-200 rounded" />
+            <div className="w-16 h-16 bg-bits-golden-yellow/20 rounded-full" />
+            <div className="h-4 w-24 bg-bits-golden-yellow/10 rounded" />
+            <div className="h-3 w-32 bg-bits-golden-yellow/5 rounded flex-1" />
+            <div className="h-8 w-20 bg-bits-golden-yellow/20 rounded" />
         </div>
     );
 }
@@ -120,18 +120,18 @@ export default function CommunitiesPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white dark:from-slate-900 dark:to-slate-950">
+        <div className="min-h-screen bg-gradient-to-br from-bits-golden-yellow/10 to-white dark:from-slate-900 dark:to-slate-950">
             {/* Common Navbar */}
             <CommonNavbar currentPage="/communities" showSignOut={true} />
 
             {/* Hero Section */}
             <div className="max-w-3xl mx-auto text-center py-16 px-4">
                 <div className="flex justify-center mb-4">
-                    <div className="bg-gradient-to-br from-purple-600 to-blue-500 p-3 rounded-full shadow-lg">
-                        <Users className="w-8 h-8 text-white" />
+                    <div className="bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue p-3 rounded-full shadow-lg">
+                        <Users className="w-8 h-8 text-bits-white" />
                     </div>
                 </div>
-                <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-4">
+                <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue bg-clip-text text-transparent mb-4">
                     Join Powerful Communities
                 </h1>
                 <p className="text-lg text-gray-700 dark:text-gray-200 max-w-xl mx-auto">
@@ -149,16 +149,16 @@ export default function CommunitiesPage() {
                         return (
                             <div
                                 key={community.id}
-                                className="bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 flex flex-col items-center gap-4 border border-purple-100 dark:border-slate-700 cursor-pointer h-80"
+                                className="bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 flex flex-col items-center gap-4 border border-bits-golden-yellow/20 dark:border-slate-700 cursor-pointer h-80"
                                 onClick={() => router.push(`/communities/${community.id}`)}
                             >
                                 <Avatar className="w-16 h-16 mb-2">
                                     <AvatarImage src={community.banner_image || undefined} alt={community.name} />
                                     <AvatarFallback>
-                                        <Sparkles className="w-6 h-6 text-purple-400" />
+                                        <Sparkles className="w-6 h-6 text-bits-golden-yellow" />
                                     </AvatarFallback>
                                 </Avatar>
-                                <h2 className="text-xl font-semibold text-purple-700 dark:text-purple-300 text-center">
+                                <h2 className="text-xl font-semibold text-bits-golden-yellow dark:text-bits-golden-yellow text-center">
                                     {community.name}
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300 text-center text-sm mb-2 flex-1">
@@ -166,7 +166,7 @@ export default function CommunitiesPage() {
                                 </p>
                                 <div className="flex gap-2 w-full mt-auto">
                                     <Button
-                                        className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold shadow-md hover:from-purple-700 hover:to-blue-700 rounded-lg flex items-center justify-center h-10"
+                                        className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-bits-white font-semibold shadow-md hover:from-bits-golden-yellow-600 hover:to-bits-royal-blue-600 rounded-lg flex items-center justify-center h-10"
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             router.push(`/communities/${community.id}`);
@@ -176,7 +176,7 @@ export default function CommunitiesPage() {
                                     </Button>
                                     {!membershipStatus ? (
                                         <Button
-                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold shadow-md hover:from-green-700 hover:to-green-800 rounded-lg flex items-center justify-center h-10"
+                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-white font-semibold shadow-md hover:from-green-700 hover:to-green-800 rounded-lg flex items-center justify-center h-10"
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 handleJoinCommunity(community.id);
@@ -186,14 +186,14 @@ export default function CommunitiesPage() {
                                         </Button>
                                     ) : membershipStatus === 'approved' ? (
                                         <Button
-                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
+                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-white font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
                                             disabled
                                         >
                                             Member
                                         </Button>
                                     ) : (
                                         <Button
-                                            className="flex-1 bg-gradient-to-r from-yellow-600 to-yellow-700 text-white font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
+                                            className="flex-1 bg-gradient-to-r from-yellow-600 to-yellow-700 text-bits-white font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
                                             disabled
                                         >
                                             Pending

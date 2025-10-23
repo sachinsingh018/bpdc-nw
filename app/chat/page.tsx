@@ -99,9 +99,9 @@ export default function ChatPage() {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 flex items-center justify-center">
+            <div className="min-h-screen bg-gradient-to-br from-gray-50 via-bits-golden-yellow/10 to-gray-100 dark:from-slate-900 dark:via-bits-deep-purple/20 dark:to-slate-900 flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                    <div className="w-16 h-16 border-4 border-bits-golden-yellow border-t-transparent rounded-full animate-spin mx-auto mb-4" />
                     <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         Loading AI Chat...
                     </h2>
@@ -117,7 +117,7 @@ export default function ChatPage() {
         <SidebarProvider defaultOpen={false}>
             <AppSidebar user={user} />
             <SidebarInset>
-                <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900">
+                <div className="min-h-screen bg-gradient-to-br from-gray-50 via-bits-golden-yellow/10 to-gray-100 dark:from-slate-900 dark:via-bits-deep-purple/20 dark:to-slate-900">
                     {/* Common Navbar */}
                     <CommonNavbar currentPage="/chat" showThemeToggle={false} />
 

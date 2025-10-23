@@ -203,9 +203,9 @@ const ConnectionsPage = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-100 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 flex items-center justify-center">
+            <div className="min-h-screen bg-gradient-to-br from-gray-50 via-bits-golden-yellow/10 to-gray-100 dark:from-slate-900 dark:via-bits-deep-purple/20 dark:to-slate-900 flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                    <div className="w-16 h-16 border-4 border-bits-golden-yellow border-t-transparent rounded-full animate-spin mx-auto mb-4" />
                     <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Loading connections...</h2>
                     <p className="text-gray-600 dark:text-gray-400">Fetching your network</p>
                 </div>
@@ -214,13 +214,13 @@ const ConnectionsPage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-100 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900">
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-bits-golden-yellow/10 to-gray-100 dark:from-slate-900 dark:via-bits-deep-purple/20 dark:to-slate-900">
             {/* Common Navbar */}
             <CommonNavbar currentPage="/connections" />
 
             {/* Tab Navigation - Mobile Optimized */}
             <div className="p-4 sm:p-6 max-w-7xl mx-auto">
-                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-1 bg-gradient-to-br from-white/90 via-purple-50/30 to-white/90 dark:from-slate-800/90 dark:via-purple-900/20 dark:to-slate-800/90 rounded-lg p-1 mb-6 border border-purple-200/50 dark:border-white/20 shadow-xl shadow-purple-500/10 dark:shadow-purple-500/20">
+                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-1 bg-gradient-to-br from-white/90 via-bits-golden-yellow/10 to-white/90 dark:from-slate-800/90 dark:via-bits-deep-purple/20 dark:to-slate-800/90 rounded-lg p-1 mb-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20">
                     <button
                         onClick={() => setActiveTab('connections')}
                         className={`flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-md transition-colors text-sm sm:text-base ${activeTab === 'connections'

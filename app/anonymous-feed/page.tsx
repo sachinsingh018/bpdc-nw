@@ -671,9 +671,9 @@ export default function AnonymousFeedPage() {
     // Show loading state while checking authentication
     if (loading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center">
+            <div className="min-h-screen bg-gradient-to-br from-bits-golden-yellow/20 to-bits-royal-blue/20 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                    <div className="w-16 h-16 border-4 border-bits-golden-yellow border-t-transparent rounded-full animate-spin mx-auto mb-4" />
                     <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Loading...</h2>
                     <p className="text-gray-600 dark:text-gray-400">Checking authentication</p>
                 </div>
@@ -688,7 +688,7 @@ export default function AnonymousFeedPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 dark:from-slate-900 dark:to-slate-800">
+        <div className="min-h-screen bg-gradient-to-br from-bits-golden-yellow/20 via-bits-golden-yellow/10 to-bits-royal-blue/20 dark:from-slate-900 dark:to-slate-800">
             {/* Common Navbar */}
             <CommonNavbar currentPage="/anonymous-feed" />
 
@@ -786,7 +786,7 @@ export default function AnonymousFeedPage() {
                                     {isUploadingImage && (
                                         <div className="absolute inset-0 bg-black/50 flex items-center justify-center rounded-lg">
                                             <div className="bg-white dark:bg-gray-800 px-4 py-2 rounded-lg flex items-center gap-2">
-                                                <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+                                                <div className="w-4 h-4 border-2 border-bits-golden-yellow border-t-transparent rounded-full animate-spin"></div>
                                                 <span className="text-sm">Uploading...</span>
                                             </div>
                                         </div>
