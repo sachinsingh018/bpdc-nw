@@ -293,7 +293,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                                                     <div className="w-14 h-14 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                                         <IconComponent size={28} className="text-white" />
                                                     </div>
-                                                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-violet-300 transition-colors">
+                                                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-bits-golden-yellow-300 transition-colors">
                                                         {item.title}
                                                     </h3>
                                                 </div>
@@ -333,7 +333,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                                         className="block"
                                     >
                                         <motion.button
-                                            className="group relative px-12 py-4 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-violet-700 hover:to-purple-800 rounded-2xl shadow-xl hover:shadow-violet-500/30 transition-all duration-300 font-semibold text-lg"
+                                            className="group relative px-12 py-4 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700 rounded-2xl shadow-xl hover:shadow-bits-golden-yellow/30 transition-all duration-300 font-semibold text-lg"
                                             whileHover={{
                                                 scale: 1.05,
                                                 y: -2,
@@ -345,7 +345,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                                                 <span>{sections[2].cta}</span>
                                                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                                             </span>
-                                            <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-purple-600 rounded-2xl blur-xl opacity-0 group-hover:opacity-25 transition-opacity duration-300"></div>
+                                            <div className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 rounded-2xl blur-xl opacity-0 group-hover:opacity-25 transition-opacity duration-300"></div>
                                         </motion.button>
                                     </motion.a>
 
@@ -413,7 +413,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                         </>
                     ) : (
                         <>
-                            <Moon size={16} className="text-purple-600" />
+                            <Moon size={16} className="text-bits-golden-yellow" />
                             Dark Mode
                         </>
                     )}

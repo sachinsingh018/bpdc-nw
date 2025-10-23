@@ -59,13 +59,13 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                     <button
                         type="button"
                         onClick={() => router.push('/profile')}
-                        className="flex items-center gap-1 md:gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors group"
+                        className="flex items-center gap-1 md:gap-2 text-gray-700 dark:text-gray-300 hover:text-bits-golden-yellow dark:hover:text-bits-golden-yellow transition-colors group"
                     >
-                        <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+                        <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
                             <Sparkles className="w-3 h-3 md:w-5 md:h-5 text-white" />
                         </div>
-                        <span className="text-base md:text-lg font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent whitespace-nowrap">
-                            Networkqy
+                        <span className="text-base md:text-lg font-bold bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue bg-clip-text text-transparent whitespace-nowrap">
+                            BITS Pilani Dubai Campus
                         </span>
                     </button>
                 </div>
@@ -81,7 +81,7 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => handleNavigation(item.path)}
-                                className={`flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 ${isActive ? 'bg-purple-50 dark:bg-purple-900/20' : ''
+                                className={`flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-bits-golden-yellow dark:hover:text-bits-golden-yellow ${isActive ? 'bg-bits-golden-yellow/10 dark:bg-bits-golden-yellow/20' : ''
                                     }`}
                             >
                                 <Icon className="w-4 h-4" />
@@ -133,7 +133,7 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                                     variant="ghost"
                                     size="sm"
                                     onClick={() => handleNavigation(item.path)}
-                                    className={`flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start ${isActive ? 'bg-purple-50 dark:bg-purple-900/20' : ''
+                                    className={`flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-bits-golden-yellow dark:hover:text-bits-golden-yellow justify-start ${isActive ? 'bg-bits-golden-yellow/10 dark:bg-bits-golden-yellow/20' : ''
                                         }`}
                                 >
                                     <Icon className="w-4 h-4" />

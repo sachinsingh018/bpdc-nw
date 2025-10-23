@@ -55,7 +55,7 @@ const geistMono = Geist_Mono({
 });
 
 const LIGHT_THEME_COLOR = 'hsl(0 0% 100%)';
-const DARK_THEME_COLOR = 'hsl(240deg 10% 3.92%)';
+const DARK_THEME_COLOR = 'hsl(0 0% 5%)';
 const THEME_COLOR_SCRIPT = `\
   (function() {
     var html = document.documentElement;
@@ -96,15 +96,15 @@ export default async function RootLayout({
           }}
         />
         {/* ✅ Force OG metadata for scrapers */}
-        <meta property="og:title" content="Networkqy: Your AI Assistant to Networking" />
+        <meta property="og:title" content="BITS Pilani Dubai Campus: Your AI Assistant to Networking" />
         <meta property="og:description" content="Bringing Global Network to your Keyboard" />
-        <meta property="og:image" content="https://www.networkqy.com/img.jpg" />
-        <meta property="og:url" content="https://www.networkqy.com" />
+        <meta property="og:image" content="https://www.bits-pilani-dubai.edu/img.jpg" />
+        <meta property="og:url" content="https://www.bits-pilani-dubai.edu" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Networkqy: Your AI Assistant to Networking" />
+        <meta name="twitter:title" content="BITS Pilani Dubai Campus: Your AI Assistant to Networking" />
         <meta name="twitter:description" content="Bringing Global Network to your Keyboard" />
-        <meta name="twitter:image" content="https://www.networkqy.com/img.jpg" />
+        <meta name="twitter:image" content="https://www.bits-pilani-dubai.edu/img.jpg" />
         <meta name="google" content="notranslate" />
         {/* Google Analytics Tag */}
         <Script

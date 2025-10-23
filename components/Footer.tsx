@@ -14,8 +14,8 @@ export const Footer = () => {
             <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
                 {/* Left Column */}
                 <div>
-                    <h2 className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent mb-4">
-                        Networkqy
+                    <h2 className="text-2xl font-bold bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 bg-clip-text text-transparent mb-4">
+                        BITS Pilani Dubai Campus
                     </h2>
                     <p className="text-zinc-400 leading-relaxed font-medium">
                         Reimagining how professionals connect through AI-powered, intent-based networking. Build smarter, deeper relationships.
@@ -39,7 +39,7 @@ export const Footer = () => {
                                         const el = e.currentTarget;
                                         el.textContent = 'Redirecting...';
                                     }}
-                                    className="hover:text-violet-400 transition-colors font-medium"
+                                    className="hover:text-bits-golden-yellow transition-colors font-medium"
                                 >
                                     {label}
                                 </Link>
@@ -56,10 +56,10 @@ export const Footer = () => {
                         <input
                             type="email"
                             placeholder="you@example.com"
-                            className="w-full px-4 py-3 rounded-xl bg-zinc-900/60 border border-zinc-800/60 placeholder-zinc-500 text-white focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent backdrop-blur-xl"
+                            className="w-full px-4 py-3 rounded-xl bg-zinc-900/60 border border-zinc-800/60 placeholder-zinc-500 text-white focus:outline-none focus:ring-2 focus:ring-bits-golden-yellow focus:border-transparent backdrop-blur-xl"
                         />
                         <motion.button
-                            className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-violet-600 to-purple-700 hover:from-violet-700 hover:to-purple-800 text-white rounded-xl transition-all duration-200 font-medium"
+                            className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700 text-white rounded-xl transition-all duration-200 font-medium"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
@@ -80,7 +80,7 @@ export const Footer = () => {
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-10 h-10 bg-zinc-900/60 hover:bg-zinc-800/60 rounded-xl flex items-center justify-center text-zinc-400 hover:text-violet-400 transition-all duration-200"
+                                    className="w-10 h-10 bg-zinc-900/60 hover:bg-zinc-800/60 rounded-xl flex items-center justify-center text-zinc-400 hover:text-bits-golden-yellow transition-all duration-200"
                                     whileHover={{ scale: 1.1 }}
                                 >
                                     <IconComponent size={18} />
@@ -111,7 +111,7 @@ export const Footer = () => {
                         </>
                     ) : (
                         <>
-                            <Moon size={18} className="text-purple-600" />
+                            <Moon size={18} className="text-bits-golden-yellow" />
                             Dark Mode
                         </>
                     )}

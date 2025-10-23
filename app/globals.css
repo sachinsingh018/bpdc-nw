@@ -136,7 +136,7 @@
         --sidebar-accent-foreground: 0 0% 5%;
         --sidebar-border: 0 0% 90%;
         --sidebar-ring: 0 0% 98%;
-        
+
         /* BITS Pilani Dubai Campus Brand Colors */
         --bits-royal-blue: #002E6E;
         --bits-golden-yellow: #F2B300;
@@ -189,13 +189,13 @@
     body {
         @apply text-foreground;
         /* BITS Pilani Dubai Campus Premium Gradient Background */
-        background: linear-gradient(135deg, 
-            var(--bits-royal-blue) 0%, 
-            #1a3a7a 20%, 
-            #2d1b69 40%, 
-            var(--bits-deep-purple) 60%, 
-            #2a0a3a 80%,
-            #1a0a2e 100%);
+        background: linear-gradient(135deg,
+                var(--bits-royal-blue) 0%,
+                #1a3a7a 20%,
+                #2d1b69 40%,
+                var(--bits-deep-purple) 60%,
+                #2a0a3a 80%,
+                #1a0a2e 100%);
         background-attachment: fixed;
         min-height: 100vh;
         position: relative;
@@ -209,7 +209,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: 
+        background:
             radial-gradient(circle at 20% 80%, rgba(242, 179, 0, 0.15) 0%, transparent 60%),
             radial-gradient(circle at 80% 20%, rgba(193, 18, 31, 0.08) 0%, transparent 60%),
             radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
@@ -219,20 +219,22 @@
     }
 
     /* Premium glassmorphism for cards and surfaces */
-    .card, .bg-card {
+    .card,
+    .bg-card {
         background: rgba(255, 255, 255, 0.95) !important;
         backdrop-filter: blur(20px) saturate(180%);
         border: 1px solid rgba(255, 255, 255, 0.3);
-        box-shadow: 
+        box-shadow:
             0 8px 32px rgba(0, 0, 0, 0.1),
             inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
-    .dark .card, .dark .bg-card {
+    .dark .card,
+    .dark .bg-card {
         background: rgba(0, 0, 0, 0.85) !important;
         backdrop-filter: blur(20px) saturate(180%);
         border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 
+        box-shadow:
             0 8px 32px rgba(0, 0, 0, 0.3),
             inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
@@ -242,7 +244,7 @@
         background: linear-gradient(135deg, var(--bits-golden-yellow) 0%, #ffcc1a 100%);
         color: var(--bits-royal-blue);
         border: none;
-        box-shadow: 
+        box-shadow:
             0 4px 15px rgba(242, 179, 0, 0.3),
             inset 0 1px 0 rgba(255, 255, 255, 0.2);
         transition: all 0.3s ease;
@@ -250,17 +252,17 @@
 
     .btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 
+        box-shadow:
             0 8px 25px rgba(242, 179, 0, 0.4),
             inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
     /* Premium text gradients */
     .text-gradient-bits {
-        background: linear-gradient(135deg, 
-            var(--bits-white) 0%, 
-            var(--bits-golden-yellow) 50%, 
-            var(--bits-white) 100%);
+        background: linear-gradient(135deg,
+                var(--bits-white) 0%,
+                var(--bits-golden-yellow) 50%,
+                var(--bits-white) 100%);
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
