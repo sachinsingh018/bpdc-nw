@@ -526,27 +526,81 @@ const ProfilePage = () => {
   // Loading state
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-bits-golden-yellow/10 to-gray-100 dark:from-slate-900 dark:via-bits-deep-purple/20 dark:to-slate-900 flex items-center justify-center">
+      <div className="min-h-screen relative overflow-hidden flex items-center justify-center" style={{
+        background: `
+          radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
+          radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
+          radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
+          radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
+          radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
+          radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
+          radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
+          radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
+          linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
+        `
+      }}>
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-bits-golden-yellow border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Loading your profile...</h2>
-          <p className="text-gray-600 dark:text-gray-400">Setting up your professional hub</p>
+          <div className="w-16 h-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
+            borderColor: 'rgba(255, 215, 0, 0.8)',
+            borderTopColor: 'transparent'
+          }} />
+          <h2 className="text-xl font-bold text-black mb-2">Loading your profile...</h2>
+          <p className="text-black font-medium">Setting up your professional hub</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-bits-golden-yellow/10 to-gray-100 dark:from-slate-900 dark:via-bits-deep-purple/20 dark:to-slate-900 relative overflow-hidden">
-      {/* Vibrant Background Bubbles */}
+    <div className="min-h-screen relative overflow-hidden" style={{
+      background: `
+        radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
+        radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
+        radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
+        radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
+        radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
+        radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
+      `
+    }}>
+      {/* Dynamic Vibrant Background Elements */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-bits-royal-blue/30 rounded-full blur-3xl opacity-60 animate-pulse"></div>
-        <div className="absolute bottom-40 right-20 w-80 h-80 bg-bits-deep-purple/30 rounded-full blur-3xl opacity-60 animate-pulse delay-1000"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-bits-golden-yellow/40 rounded-full blur-3xl opacity-70 animate-pulse delay-2000"></div>
-        <div className="absolute bottom-20 left-1/3 w-64 h-64 bg-bits-bright-red/25 rounded-full blur-3xl opacity-50 animate-pulse delay-500"></div>
-        <div className="absolute top-1/2 left-1/4 w-88 h-88 bg-bits-golden-yellow/35 rounded-full blur-3xl opacity-65 animate-pulse delay-1500"></div>
+        {/* Deep Royal Blue */}
+        <div className="absolute top-10 left-5 w-96 h-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
+        <div className="absolute top-1/3 right-10 w-80 h-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
+
+        {/* Bright Golden Yellow */}
+        <div className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
+        <div className="absolute bottom-1/4 left-1/4 w-88 h-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
+
+        {/* Crimson Red */}
+        <div className="absolute bottom-20 left-1/3 w-64 h-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
+        <div className="absolute top-1/2 right-1/3 w-56 h-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
+
+        {/* Charcoal Black */}
+        <div className="absolute bottom-10 right-5 w-72 h-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
+
+        {/* Light Gray */}
+        <div className="absolute top-1/4 left-1/2 w-60 h-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
+
+        {/* Mid-tone Blue */}
+        <div className="absolute bottom-1/3 right-1/4 w-68 h-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
+
+        {/* Warm Golden Glow */}
+        <div className="absolute top-1/2 left-1/5 w-76 h-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
+
+        {/* Vibrant Red */}
+        <div className="absolute top-2/3 right-1/5 w-52 h-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
+
+        {/* Neon Purple */}
+        <div className="absolute top-1/6 left-2/3 w-84 h-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
+        <div className="absolute bottom-1/6 left-1/6 w-48 h-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
       </div>
-      
+
       {/* Common Navbar */}
       <CommonNavbar currentPage="/profile" showSignOut={true} />
 
@@ -556,7 +610,12 @@ const ProfilePage = () => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-bits-royal-blue dark:text-bits-white rounded-2xl p-4 md:p-6 mb-6 shadow-lg"
+            className="rounded-2xl p-4 md:p-6 mb-6 shadow-lg backdrop-blur-sm border-2"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(25, 25, 112, 0.8) 50%, rgba(220, 20, 60, 0.9) 100%)',
+              borderColor: 'rgba(255, 215, 0, 0.6)',
+              boxShadow: '0 20px 40px rgba(25, 25, 112, 0.3), 0 0 20px rgba(255, 215, 0, 0.2)'
+            }}
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3 md:space-x-4">
@@ -564,11 +623,11 @@ const ProfilePage = () => {
                   <Sparkles className="w-4 h-4 md:w-6 md:h-6" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-sm md:text-lg font-semibold mb-1">Complete Your Profile</h3>
-                  <p className="text-bits-royal-blue dark:text-bits-white/90 text-xs md:text-sm hidden sm:block">
+                  <h3 className="text-sm md:text-lg font-semibold mb-1 text-black font-bold">Complete Your Profile</h3>
+                  <p className="text-black text-xs md:text-sm hidden sm:block font-medium">
                     Your profile is {profileCompletion}% complete. Add more details to get better matches and connections!
                   </p>
-                  <p className="text-bits-royal-blue dark:text-bits-white/90 text-xs sm:hidden">
+                  <p className="text-black text-xs sm:hidden font-medium">
                     {profileCompletion}% complete - add details for better connections!
                   </p>
                 </div>
@@ -576,7 +635,7 @@ const ProfilePage = () => {
               <button
                 type="button"
                 onClick={() => setShowProfileWizard(true)}
-                className="bg-white text-bits-royal-blue p-2 md:px-6 md:py-2 rounded-lg font-medium hover:bg-bits-golden-yellow/20 transition-colors flex items-center gap-2"
+                className="bg-white text-black p-2 md:px-6 md:py-2 rounded-lg font-bold hover:bg-yellow-200 transition-colors flex items-center gap-2 shadow-lg"
               >
                 <span className="hidden md:inline">Complete Profile</span>
                 <FaEdit className="w-4 h-4 md:hidden" />
@@ -584,12 +643,12 @@ const ProfilePage = () => {
             </div>
             <div className="mt-3 md:mt-4">
               <div className="flex items-center justify-between text-xs md:text-sm mb-2">
-                <span>Profile Completion</span>
-                <span>{profileCompletion}%</span>
+                <span className="text-black font-semibold">Profile Completion</span>
+                <span className="text-black font-bold">{profileCompletion}%</span>
               </div>
-              <div className="w-full bg-white/20 rounded-full h-1.5 md:h-2">
+              <div className="w-full bg-white/30 rounded-full h-1.5 md:h-2">
                 <div
-                  className="bg-white h-1.5 md:h-2 rounded-full transition-all duration-500"
+                  className="bg-black h-1.5 md:h-2 rounded-full transition-all duration-500"
                   style={{ width: `${profileCompletion}%` }}
                 />
               </div>
@@ -601,7 +660,12 @@ const ProfilePage = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-br from-white/90 via-bits-golden-yellow/10 to-white/90 dark:from-slate-800/90 dark:via-bits-deep-purple/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 mb-8 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20"
+          className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 mb-8 border-2 shadow-xl"
+          style={{
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 30%, rgba(138, 43, 226, 0.1) 70%, rgba(255, 255, 255, 0.95) 100%)',
+            borderColor: 'rgba(255, 215, 0, 0.6)',
+            boxShadow: '0 25px 50px rgba(25, 25, 112, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
+          }}
         >
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
             <div className="relative">
@@ -610,7 +674,12 @@ const ProfilePage = () => {
                 alt={userName}
                 width={120}
                 height={120}
-                className="w-20 h-20 md:w-[120px] md:h-[120px] rounded-full border-4 border-bits-golden-yellow shadow-xl shadow-bits-golden-yellow/30 ring-4 ring-bits-golden-yellow/20 dark:ring-bits-golden-yellow/30"
+                className="w-20 h-20 md:w-[120px] md:h-[120px] rounded-full border-4 shadow-xl ring-4"
+                style={{
+                  borderColor: 'rgba(255, 215, 0, 0.8)',
+                  boxShadow: '0 10px 30px rgba(25, 25, 112, 0.3), 0 0 20px rgba(255, 215, 0, 0.4)',
+                  ringColor: 'rgba(138, 43, 226, 0.3)'
+                }}
               />
               {isEditing && (
                 <button
@@ -632,11 +701,14 @@ const ProfilePage = () => {
                     className="text-lg md:text-xl lg:text-3xl font-bold bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-gray-900 dark:text-white w-full max-w-full"
                   />
                 ) : (
-                  <h1 className="text-xl md:text-3xl font-bold text-gray-900 dark:text-white">{userName}</h1>
+                  <h1 className="text-xl md:text-3xl font-bold text-black">{userName}</h1>
                 )}
-                <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full shadow-lg">
-                  <Star size={16} className="md:w-5 md:h-5" />
-                  <span className="text-xs md:text-sm font-medium">Premium Member</span>
+                <div className="flex items-center gap-2 px-3 py-1 rounded-full shadow-lg" style={{
+                  background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
+                  boxShadow: '0 5px 15px rgba(25, 25, 112, 0.3)'
+                }}>
+                  <Star size={16} className="md:w-5 md:h-5 text-black" />
+                  <span className="text-xs md:text-sm font-bold text-black">Premium Member</span>
                 </div>
               </div>
 
@@ -755,7 +827,7 @@ const ProfilePage = () => {
                 )}
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-gray-600 dark:text-gray-300 mb-3 md:mb-4 text-xs md:text-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-black mb-3 md:mb-4 text-xs md:text-sm font-medium">
                 <div className="flex items-center gap-2">
                   <MapPin size={12} className="md:w-4 md:h-4" />
                   {isEditing ? (
@@ -791,7 +863,7 @@ const ProfilePage = () => {
                     onBlur={() => console.log('Textarea blurred, userBio value:', userBio)}
                   />
                 ) : (
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm md:text-base">
+                  <p className="text-black leading-relaxed text-sm md:text-base font-medium">
                     {userBio || "Passionate professional looking to connect and grow in the tech ecosystem. Always open to new opportunities and meaningful collaborations."}
                   </p>
                 )}
@@ -800,15 +872,15 @@ const ProfilePage = () => {
               {/* Anonymous Identity Section */}
               <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-2 mb-3">
-                  <MessageCircle size={16} className="text-bits-golden-yellow dark:text-bits-golden-yellow" />
-                  <h3 className="text-sm font-medium text-gray-900 dark:text-white">Anonymous Identity</h3>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">(for anonymous chat feed)</span>
+                  <MessageCircle size={16} className="text-yellow-500" />
+                  <h3 className="text-sm font-bold text-black">Anonymous Identity</h3>
+                  <span className="text-xs text-black font-medium">(for anonymous chat feed)</span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                   {/* Anonymous Username */}
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label className="block text-xs font-bold text-black mb-1">
                       Anonymous Username
                     </label>
                     {isEditing ? (
@@ -876,7 +948,7 @@ const ProfilePage = () => {
 
                   {/* Anonymous Avatar */}
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label className="block text-xs font-bold text-black mb-1">
                       Anonymous Avatar
                     </label>
                     {isEditing ? (
@@ -916,7 +988,7 @@ const ProfilePage = () => {
                             <MessageCircle className="w-3 h-3 text-bits-golden-yellow dark:text-bits-golden-yellow" />
                           )}
                         </div>
-                        <span className="text-xs text-gray-600 dark:text-gray-400">
+                        <span className="text-xs text-black font-medium">
                           {anonymousAvatar ? 'Custom avatar set' : 'Default avatar'}
                         </span>
                       </div>
@@ -937,13 +1009,18 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-gradient-to-br from-white/90 via-purple-50/30 to-white/90 dark:from-slate-800/90 dark:via-purple-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20 relative"
-              style={{ zIndex: 5 }}
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(138, 43, 226, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                borderColor: 'rgba(138, 43, 226, 0.6)',
+                boxShadow: '0 25px 50px rgba(138, 43, 226, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                zIndex: 5
+              }}
             >
 
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                  <Briefcase size={20} className="text-bits-golden-yellow dark:text-bits-golden-yellow" />
+                <h2 className="text-xl font-bold text-black flex items-center gap-2">
+                  <Briefcase size={20} className="text-purple-600" />
                   Career Goals
                 </h2>
                 {isEditing && (
@@ -959,8 +1036,11 @@ const ProfilePage = () => {
               </div>
               <div className="flex flex-wrap gap-2">
                 {goals.filter(goal => goal && goal.trim() !== '' && goal !== '[]').map((goal, index) => (
-                  <div key={index} className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white px-3 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105">
-                    <span className="text-sm font-medium">{goal}</span>
+                  <div key={index} className="flex items-center gap-2 px-3 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105" style={{
+                    background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
+                    boxShadow: '0 5px 15px rgba(138, 43, 226, 0.3)'
+                  }}>
+                    <span className="text-sm font-bold text-white">{goal}</span>
                     {isEditing && (
                       <button
                         type="button"
@@ -978,11 +1058,16 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-gradient-to-br from-white/90 via-purple-50/30 to-white/90 dark:from-slate-800/90 dark:via-purple-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20"
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(70, 130, 180, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                borderColor: 'rgba(70, 130, 180, 0.6)',
+                boxShadow: '0 25px 50px rgba(70, 130, 180, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
+              }}
             >
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                  <Briefcase size={20} className="text-bits-golden-yellow dark:text-bits-golden-yellow" />
+                <h2 className="text-xl font-bold text-black flex items-center gap-2">
+                  <Briefcase size={20} className="text-blue-600" />
                   Uploaded Documents
                 </h2>
               </div>
@@ -1003,7 +1088,7 @@ const ProfilePage = () => {
                       >
                         <div className="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-center sm:gap-3">
                           <p
-                            className="text-sm font-medium text-gray-800 dark:text-gray-200 truncate"
+                            className="text-sm font-bold text-black truncate"
                             title={doc.fileUrl.split('_').pop()}
                           >
                             {doc.fileUrl.split('_').pop()}
@@ -1053,7 +1138,7 @@ const ProfilePage = () => {
                   })}
                 </div>
               ) : (
-                <p className="text-sm text-gray-600 dark:text-gray-400 italic">
+                <p className="text-sm text-black italic font-medium">
                   No documents uploaded yet.
                 </p>
               )}
@@ -1064,13 +1149,18 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-gradient-to-br from-white/90 via-blue-50/30 to-white/90 dark:from-slate-800/90 dark:via-blue-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border border-blue-200/50 dark:border-white/20 shadow-xl shadow-blue-500/10 dark:shadow-blue-500/20 relative"
-              style={{ zIndex: 5 }}
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(70, 130, 180, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                borderColor: 'rgba(70, 130, 180, 0.6)',
+                boxShadow: '0 25px 50px rgba(70, 130, 180, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                zIndex: 5
+              }}
             >
 
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                  <Award size={20} className="text-blue-600 dark:text-blue-400" />
+                <h2 className="text-xl font-bold text-black flex items-center gap-2">
+                  <Award size={20} className="text-blue-600" />
                   Skills & Expertise
                 </h2>
                 {isEditing && (
@@ -1086,8 +1176,11 @@ const ProfilePage = () => {
               </div>
               <div className="flex flex-wrap gap-2">
                 {skills.filter(skill => skill && skill.trim() !== '' && skill !== '[]').map((skill, index) => (
-                  <div key={index} className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105">
-                    <span className="text-sm font-medium">{skill}</span>
+                  <div key={index} className="flex items-center gap-2 px-3 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105" style={{
+                    background: 'linear-gradient(135deg, rgba(70, 130, 180, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
+                    boxShadow: '0 5px 15px rgba(70, 130, 180, 0.3)'
+                  }}>
+                    <span className="text-sm font-bold text-white">{skill}</span>
                     {isEditing && (
                       <button
                         type="button"
@@ -1107,13 +1200,18 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-gradient-to-br from-white/90 via-green-50/30 to-white/90 dark:from-slate-800/90 dark:via-green-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border border-green-200/50 dark:border-white/20 shadow-xl shadow-green-500/10 dark:shadow-green-500/20 relative"
-              style={{ zIndex: 5 }}
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(220, 20, 60, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                borderColor: 'rgba(220, 20, 60, 0.6)',
+                boxShadow: '0 25px 50px rgba(220, 20, 60, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                zIndex: 5
+              }}
             >
 
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                  <Heart size={20} className="text-green-600 dark:text-green-400" />
+                <h2 className="text-xl font-bold text-black flex items-center gap-2">
+                  <Heart size={20} className="text-red-600" />
                   Interests & Industries
                 </h2>
                 {isEditing && (
@@ -1129,8 +1227,11 @@ const ProfilePage = () => {
               </div>
               <div className="flex flex-wrap gap-2">
                 {interests.filter(interest => interest && interest.trim() !== '' && interest !== '[]').map((interest) => (
-                  <div key={interest} className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105">
-                    <span className="text-sm font-medium">{interest}</span>
+                  <div key={interest} className="flex items-center gap-2 px-3 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105" style={{
+                    background: 'linear-gradient(135deg, rgba(220, 20, 60, 0.9) 0%, rgba(255, 0, 0, 0.8) 100%)',
+                    boxShadow: '0 5px 15px rgba(220, 20, 60, 0.3)'
+                  }}>
+                    <span className="text-sm font-bold text-white">{interest}</span>
                     {isEditing && (
                       <button
                         type="button"
@@ -1151,17 +1252,26 @@ const ProfilePage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="bg-gradient-to-br from-white/90 via-yellow-50/30 to-white/90 dark:from-slate-800/90 dark:via-yellow-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border border-yellow-200/50 dark:border-white/20 shadow-xl shadow-yellow-500/10 dark:shadow-yellow-500/20 relative"
-                style={{ zIndex: 1 }}
+                className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                  borderColor: 'rgba(255, 215, 0, 0.6)',
+                  boxShadow: '0 25px 50px rgba(255, 215, 0, 0.2), 0 0 30px rgba(138, 43, 226, 0.1)',
+                  zIndex: 1
+                }}
               >
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                    <Trophy size={20} className="text-yellow-600 dark:text-yellow-400" />
+                  <h2 className="text-xl font-bold text-black flex items-center gap-2">
+                    <Trophy size={20} className="text-yellow-600" />
                     Skill Assessment Badges
                   </h2>
                   <button
                     onClick={() => router.push('/skill-assessment')}
-                    className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex items-center gap-2 text-xs md:text-sm font-medium"
+                    className="px-3 py-1.5 md:px-4 md:py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex items-center gap-2 text-xs md:text-sm font-bold text-white"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
+                      boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
+                    }}
                   >
                     <Award size={14} className="md:w-4 md:h-4" />
                     <span className="hidden sm:inline">Take Assessment</span>
@@ -1239,17 +1349,26 @@ const ProfilePage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="bg-gradient-to-br from-white/90 via-yellow-50/30 to-white/90 dark:from-slate-800/90 dark:via-yellow-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border border-yellow-200/50 dark:border-white/20 shadow-xl shadow-yellow-500/10 dark:shadow-yellow-500/20 relative"
-                style={{ zIndex: 1 }}
+                className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                  borderColor: 'rgba(255, 215, 0, 0.6)',
+                  boxShadow: '0 25px 50px rgba(255, 215, 0, 0.2), 0 0 30px rgba(138, 43, 226, 0.1)',
+                  zIndex: 1
+                }}
               >
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                    <Trophy size={20} className="text-yellow-600 dark:text-yellow-400" />
+                  <h2 className="text-xl font-bold text-black flex items-center gap-2">
+                    <Trophy size={20} className="text-yellow-600" />
                     Skill Assessment Badges
                   </h2>
                   <button
                     onClick={() => router.push('/skill-assessment')}
-                    className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex items-center gap-2 text-xs md:text-sm font-medium"
+                    className="px-3 py-1.5 md:px-4 md:py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 flex items-center gap-2 text-xs md:text-sm font-bold text-white"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
+                      boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
+                    }}
                   >
                     <Award size={14} className="md:w-4 md:h-4" />
                     <span className="hidden sm:inline">Take Assessment</span>
@@ -1258,15 +1377,19 @@ const ProfilePage = () => {
                 </div>
                 <div className="text-center py-8">
                   <Trophy className="w-16 h-16 text-yellow-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  <h3 className="text-lg font-bold text-black mb-2">
                     No Skill Badges Yet
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                  <p className="text-black text-sm mb-4 font-medium">
                     Take skill assessments to earn badges and showcase your expertise!
                   </p>
                   <button
                     onClick={() => router.push('/skill-assessment')}
-                    className="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 font-medium"
+                    className="px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 font-bold text-white"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
+                      boxShadow: '0 10px 25px rgba(255, 215, 0, 0.3)'
+                    }}
                   >
                     Start Your First Assessment
                   </button>
@@ -1281,12 +1404,17 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-gradient-to-br from-white/90 via-indigo-50/30 to-white/90 dark:from-slate-800/90 dark:via-indigo-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border border-indigo-200/50 dark:border-white/20 shadow-xl shadow-indigo-500/10 dark:shadow-indigo-500/20 relative"
-              style={{ zIndex: 1 }}
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(25, 25, 112, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                borderColor: 'rgba(25, 25, 112, 0.6)',
+                boxShadow: '0 25px 50px rgba(25, 25, 112, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                zIndex: 1
+              }}
             >
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                  <Briefcase size={20} className="text-indigo-600 dark:text-indigo-400" />
+                <h2 className="text-xl font-bold text-black flex items-center gap-2">
+                  <Briefcase size={20} className="text-blue-800" />
                   Professional Headline
                 </h2>
               </div>
@@ -1299,7 +1427,7 @@ const ProfilePage = () => {
                   className="w-full bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 text-sm"
                 />
               ) : (
-                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                <p className="text-black text-sm font-medium">
                   {headline || "Add your professional headline to make a strong first impression"}
                 </p>
               )}
@@ -1310,12 +1438,17 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-gradient-to-br from-white/90 via-emerald-50/30 to-white/90 dark:from-slate-800/90 dark:via-emerald-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border border-emerald-200/50 dark:border-white/20 shadow-xl shadow-emerald-500/10 dark:shadow-emerald-500/20 relative"
-              style={{ zIndex: 1 }}
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(70, 130, 180, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                borderColor: 'rgba(70, 130, 180, 0.6)',
+                boxShadow: '0 25px 50px rgba(70, 130, 180, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                zIndex: 1
+              }}
             >
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                  <Award size={20} className="text-emerald-600 dark:text-emerald-400" />
+                <h2 className="text-xl font-bold text-black flex items-center gap-2">
+                  <Award size={20} className="text-blue-600" />
                   Education
                 </h2>
                 {isEditing && (
@@ -1332,7 +1465,7 @@ const ProfilePage = () => {
               </div>
               <div className="space-y-4">
                 {education.length === 0 ? (
-                  <p className="text-gray-600 dark:text-gray-400 text-sm italic">
+                  <p className="text-black text-sm italic font-medium">
                     No education entries yet. Add your educational background.
                   </p>
                 ) : (
@@ -1393,9 +1526,9 @@ const ProfilePage = () => {
                         </div>
                       ) : (
                         <div>
-                          <h3 className="font-semibold text-gray-900 dark:text-white text-sm">{edu.school_name}</h3>
-                          <p className="text-gray-600 dark:text-gray-400 text-sm">{edu.degree} in {edu.field_of_study}</p>
-                          <p className="text-gray-500 dark:text-gray-500 text-xs">{edu.start_year} - {edu.end_year}</p>
+                          <h3 className="font-bold text-black text-sm">{edu.school_name}</h3>
+                          <p className="text-black text-sm font-medium">{edu.degree} in {edu.field_of_study}</p>
+                          <p className="text-black text-xs font-medium">{edu.start_year} - {edu.end_year}</p>
                         </div>
                       )}
                     </div>
@@ -1409,12 +1542,17 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="bg-gradient-to-br from-white/90 via-blue-50/30 to-white/90 dark:from-slate-800/90 dark:via-blue-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border border-blue-200/50 dark:border-white/20 shadow-xl shadow-blue-500/10 dark:shadow-blue-500/20 relative"
-              style={{ zIndex: 1 }}
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(25, 25, 112, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                borderColor: 'rgba(25, 25, 112, 0.6)',
+                boxShadow: '0 25px 50px rgba(25, 25, 112, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                zIndex: 1
+              }}
             >
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                  <Briefcase size={20} className="text-blue-600 dark:text-blue-400" />
+                <h2 className="text-xl font-bold text-black flex items-center gap-2">
+                  <Briefcase size={20} className="text-blue-800" />
                   Experience
                 </h2>
                 {isEditing && (
@@ -1431,7 +1569,7 @@ const ProfilePage = () => {
               </div>
               <div className="space-y-4">
                 {experience.length === 0 ? (
-                  <p className="text-gray-600 dark:text-gray-400 text-sm italic">
+                  <p className="text-black text-sm italic font-medium">
                     No experience entries yet. Add your work experience.
                   </p>
                 ) : (
@@ -1492,11 +1630,11 @@ const ProfilePage = () => {
                         </div>
                       ) : (
                         <div>
-                          <h3 className="font-semibold text-gray-900 dark:text-white text-sm">{exp.position_title}</h3>
-                          <p className="text-blue-600 dark:text-blue-400 text-sm">{exp.company_name}</p>
-                          <p className="text-gray-500 dark:text-gray-500 text-xs">{exp.start_date} - {exp.end_date}</p>
+                          <h3 className="font-bold text-black text-sm">{exp.position_title}</h3>
+                          <p className="text-blue-600 text-sm font-medium">{exp.company_name}</p>
+                          <p className="text-black text-xs font-medium">{exp.start_date} - {exp.end_date}</p>
                           {exp.description && (
-                            <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">{exp.description}</p>
+                            <p className="text-black text-sm mt-2 font-medium">{exp.description}</p>
                           )}
                         </div>
                       )}
@@ -1511,12 +1649,17 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="bg-gradient-to-br from-white/90 via-purple-50/30 to-white/90 dark:from-slate-800/90 dark:via-purple-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20 relative"
-              style={{ zIndex: 5 }}
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(138, 43, 226, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                borderColor: 'rgba(138, 43, 226, 0.6)',
+                boxShadow: '0 25px 50px rgba(138, 43, 226, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                zIndex: 5
+              }}
             >
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                  <Award size={20} className="text-bits-golden-yellow dark:text-bits-golden-yellow" />
+                <h2 className="text-xl font-bold text-black flex items-center gap-2">
+                  <Award size={20} className="text-purple-600" />
                   Professional Skills
                 </h2>
                 {isEditing && (
@@ -1532,8 +1675,11 @@ const ProfilePage = () => {
               </div>
               <div className="flex flex-wrap gap-2">
                 {professionalSkills.map((skill, index) => (
-                  <div key={index} className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white px-3 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105">
-                    <span className="text-sm font-medium">{skill}</span>
+                  <div key={index} className="flex items-center gap-2 px-3 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105" style={{
+                    background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
+                    boxShadow: '0 5px 15px rgba(138, 43, 226, 0.3)'
+                  }}>
+                    <span className="text-sm font-bold text-white">{skill}</span>
                     {isEditing && (
                       <button
                         type="button"
@@ -1553,12 +1699,17 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="bg-gradient-to-br from-white/90 via-orange-50/30 to-white/90 dark:from-slate-800/90 dark:via-orange-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border border-orange-200/50 dark:border-white/20 shadow-xl shadow-orange-500/10 dark:shadow-orange-500/20 relative"
-              style={{ zIndex: 1 }}
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 0, 0, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                borderColor: 'rgba(255, 0, 0, 0.6)',
+                boxShadow: '0 25px 50px rgba(255, 0, 0, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                zIndex: 1
+              }}
             >
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                  <Trophy size={20} className="text-orange-600 dark:text-orange-400" />
+                <h2 className="text-xl font-bold text-black flex items-center gap-2">
+                  <Trophy size={20} className="text-red-600" />
                   Certifications
                 </h2>
                 {isEditing && (
@@ -1575,7 +1726,7 @@ const ProfilePage = () => {
               </div>
               <div className="space-y-4">
                 {certifications.length === 0 ? (
-                  <p className="text-gray-600 dark:text-gray-400 text-sm italic">
+                  <p className="text-black text-sm italic font-medium">
                     No certifications yet. Add your professional certifications.
                   </p>
                 ) : (
@@ -1629,11 +1780,11 @@ const ProfilePage = () => {
                         </div>
                       ) : (
                         <div>
-                          <h3 className="font-semibold text-gray-900 dark:text-white text-sm">{cert.certification_name}</h3>
-                          <p className="text-orange-600 dark:text-orange-400 text-sm">{cert.issuing_org}</p>
-                          <p className="text-gray-500 dark:text-gray-500 text-xs">Issued: {cert.issue_date}</p>
+                          <h3 className="font-bold text-black text-sm">{cert.certification_name}</h3>
+                          <p className="text-red-600 text-sm font-medium">{cert.issuing_org}</p>
+                          <p className="text-black text-xs font-medium">Issued: {cert.issue_date}</p>
                           {cert.expiry_date && (
-                            <p className="text-gray-500 dark:text-gray-500 text-xs">Expires: {cert.expiry_date}</p>
+                            <p className="text-black text-xs font-medium">Expires: {cert.expiry_date}</p>
                           )}
                         </div>
                       )}
@@ -1651,34 +1802,55 @@ const ProfilePage = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-gradient-to-br from-white/90 via-purple-50/30 to-white/90 dark:from-slate-800/90 dark:via-purple-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20"
+              className="backdrop-blur-sm rounded-2xl p-6 border-2 shadow-xl"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(138, 43, 226, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                borderColor: 'rgba(138, 43, 226, 0.6)',
+                boxShadow: '0 25px 50px rgba(138, 43, 226, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
+              }}
             >
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Actions</h2>
+              <h2 className="text-xl font-bold text-black mb-4">Quick Actions</h2>
               <div className="space-y-3">
                 <button
                   onClick={() => router.push('/chat')}
-                  className="w-full flex items-center gap-3 p-3 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 text-white font-bold"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
+                    boxShadow: '0 5px 15px rgba(138, 43, 226, 0.3)'
+                  }}
                 >
                   <MessageSquare size={20} />
                   <span>Start Chat</span>
                 </button>
                 <button
                   onClick={() => router.push('/connections')}
-                  className="w-full flex items-center gap-3 p-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 text-white font-bold"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(70, 130, 180, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
+                    boxShadow: '0 5px 15px rgba(70, 130, 180, 0.3)'
+                  }}
                 >
                   <Users size={20} />
                   <span>My Connections</span>
                 </button>
                 <button
                   onClick={() => router.push('/anonymous-feed')}
-                  className="w-full flex items-center gap-3 p-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 text-white font-bold"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(220, 20, 60, 0.9) 0%, rgba(255, 0, 0, 0.8) 100%)',
+                    boxShadow: '0 5px 15px rgba(220, 20, 60, 0.3)'
+                  }}
                 >
                   <BarChart3 size={20} />
                   <span>Go To Feed</span>
                 </button>
                 <button
                   onClick={() => router.push('/reels')}
-                  className="w-full flex items-center gap-3 p-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 text-white font-bold"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
+                    boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
+                  }}
                 >
                   <Calendar size={20} />
                   <span>Elevator Reels</span>
@@ -1691,18 +1863,28 @@ const ProfilePage = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
-              className="bg-gradient-to-br from-white/90 via-purple-50/30 to-white/90 dark:from-slate-800/90 dark:via-purple-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20"
+              className="backdrop-blur-sm rounded-2xl p-6 border-2 shadow-xl"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(70, 130, 180, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                borderColor: 'rgba(70, 130, 180, 0.6)',
+                boxShadow: '0 25px 50px rgba(70, 130, 180, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
+              }}
             >
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h2>
+              <h2 className="text-xl font-bold text-black mb-4">Recent Activity</h2>
               <div className="space-y-3">
                 {recentActivity.map((activity) => (
-                  <div key={activity.id} className="flex items-center gap-3 p-3 bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-lg border border-purple-200/50 dark:border-purple-500/30 hover:shadow-md transition-all duration-200">
-                    <div className="p-2 bg-purple-500 text-white rounded-full">
-                      <activity.icon size={16} />
+                  <div key={activity.id} className="flex items-center gap-3 p-3 rounded-lg border-2 hover:shadow-md transition-all duration-200" style={{
+                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(70, 130, 180, 0.1) 100%)',
+                    borderColor: 'rgba(70, 130, 180, 0.3)'
+                  }}>
+                    <div className="p-2 rounded-full" style={{
+                      background: 'linear-gradient(135deg, rgba(70, 130, 180, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)'
+                    }}>
+                      <activity.icon size={16} className="text-white" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-gray-900 dark:text-white text-sm font-medium">{activity.text}</p>
-                      <p className="text-bits-golden-yellow dark:text-bits-golden-yellow text-xs">{activity.time}</p>
+                      <p className="text-black text-sm font-bold">{activity.text}</p>
+                      <p className="text-black text-xs font-medium">{activity.time}</p>
                     </div>
                   </div>
                 ))}
@@ -1714,10 +1896,15 @@ const ProfilePage = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6 }}
-              className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-white/20 shadow-lg relative"
+              className="backdrop-blur-sm rounded-2xl p-6 border-2 shadow-lg relative"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                borderColor: 'rgba(255, 215, 0, 0.6)',
+                boxShadow: '0 25px 50px rgba(255, 215, 0, 0.2), 0 0 30px rgba(138, 43, 226, 0.1)'
+              }}
             >
 
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Contact Information</h2>
+              <h2 className="text-xl font-bold text-black mb-4">Contact Information</h2>
               <div className="space-y-3">
                 {isEditing ? (
                   <>
@@ -1765,29 +1952,29 @@ const ProfilePage = () => {
                 ) : (
                   <>
                     {socialLinks.linkedin && (
-                      <div className="flex items-center gap-3 text-gray-900 dark:text-white">
+                      <div className="flex items-center gap-3 text-black">
                         <FaLinkedin className="text-blue-600" />
-                        <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-sm hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                        <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-sm hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
                           LinkedIn Profile
                         </a>
                       </div>
                     )}
                     {socialLinks.facebook && (
-                      <div className="flex items-center gap-3 text-gray-900 dark:text-white">
+                      <div className="flex items-center gap-3 text-black">
                         <FaFacebook className="text-blue-600" />
-                        <span className="text-sm">{socialLinks.facebook}</span>
+                        <span className="text-sm font-medium">{socialLinks.facebook}</span>
                       </div>
                     )}
                     {socialLinks.phone && (
-                      <div className="flex items-center gap-3 text-gray-900 dark:text-white">
+                      <div className="flex items-center gap-3 text-black">
                         <FaPhone className="text-green-600" />
-                        <span className="text-sm">{socialLinks.phone}</span>
+                        <span className="text-sm font-medium">{socialLinks.phone}</span>
                       </div>
                     )}
                     {socialLinks.email && (
-                      <div className="flex items-center gap-3 text-gray-900 dark:text-white">
+                      <div className="flex items-center gap-3 text-black">
                         <FaEnvelope className="text-red-600" />
-                        <a href={`mailto:${socialLinks.email}`} className="text-sm hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                        <a href={`mailto:${socialLinks.email}`} className="text-sm hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
                           {socialLinks.email}
                         </a>
                       </div>

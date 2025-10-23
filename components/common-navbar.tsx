@@ -64,7 +64,7 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                         <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
                             <Sparkles className="w-3 h-3 md:w-5 md:h-5 text-white" />
                         </div>
-                        <span className="text-base md:text-lg font-bold bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue bg-clip-text text-transparent whitespace-nowrap">
+                        <span className="text-base md:text-lg font-bold bg-gradient-to-r from-gray-800 to-gray-900 dark:from-gray-200 dark:to-gray-100 bg-clip-text text-transparent whitespace-nowrap">
                             BITS Pilani Dubai Campus
                         </span>
                     </button>
