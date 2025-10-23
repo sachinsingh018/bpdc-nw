@@ -421,7 +421,7 @@ export default function About() {
         </motion.section>
 
         {/* Divider */}
-        <div className="relative w-full h-[1px] bg-gradient-to-r from-transparent via-violet-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-violet-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
           <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-violet-500/20 blur-sm"></div>
         </div>
 
@@ -482,7 +482,7 @@ export default function About() {
         </section>
 
         {/* Divider */}
-        <div className="relative w-full h-[1px] bg-gradient-to-r from-transparent via-violet-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-violet-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
           <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-violet-500/20 blur-sm"></div>
         </div>
 
@@ -516,7 +516,7 @@ export default function About() {
                   <div className="absolute inset-0 bg-gradient-to-br from-violet-600/5 to-purple-600/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                   <div className="relative z-10 text-center">
-                    <div className="w-12 h-12 mx-auto mb-6 text-violet-400 transition-colors duration-300 group-hover:text-violet-300">
+                    <div className="size-12 mx-auto mb-6 text-violet-400 transition-colors duration-300 group-hover:text-violet-300">
                       {step.icon}
                     </div>
                     <h3 className="text-xl font-bold mb-4 text-white transition-colors duration-300 group-hover:text-violet-200">
@@ -528,7 +528,7 @@ export default function About() {
                   </div>
                 </div>
                 {i < howItWorksSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 right-0 w-8 h-0.5 bg-gradient-to-r from-violet-500 to-transparent transform -translate-y-1/2 z-10"></div>
+                  <div className="hidden md:block absolute top-1/2 right-0 w-8 h-0.5 bg-gradient-to-r from-violet-500 to-transparent -translate-y-1/2 z-10"></div>
                 )}
                 {i < howItWorksSteps.length - 1 && (
                   <div className="md:hidden absolute bottom-0 left-1/2 -translate-x-1/2 h-8 w-0.5 bg-gradient-to-b from-violet-500 to-transparent z-10"></div>
@@ -539,7 +539,7 @@ export default function About() {
         </section>
 
         {/* Divider */}
-        <div className="relative w-full h-[1px] bg-gradient-to-r from-transparent via-purple-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-purple-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
           <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-purple-500/20 blur-sm"></div>
         </div>
         {/* Core Values */}
@@ -572,7 +572,7 @@ export default function About() {
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-pink-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 <div className="relative z-10">
-                  <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center text-purple-400 group-hover:text-purple-300 transition-colors">
+                  <div className="size-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center text-purple-400 group-hover:text-purple-300 transition-colors">
                     {value.icon}
                   </div>
                   <h3 className="text-xl font-bold mb-4 text-white group-hover:text-purple-200 transition-colors">
@@ -588,7 +588,7 @@ export default function About() {
         </section>
 
         {/* Divider */}
-        <div className="relative w-full h-[1px] bg-gradient-to-r from-transparent via-violet-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-violet-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
           <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-violet-500/20 blur-sm"></div>
         </div>
 
@@ -637,7 +637,7 @@ export default function About() {
         </section>
 
         {/* Divider */}
-        <div className="relative w-full h-[1px] bg-gradient-to-r from-transparent via-purple-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-purple-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
           <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-purple-500/20 blur-sm"></div>
         </div>
         <section className="py-24 px-4 sm:px-6 max-w-7xl mx-auto">
@@ -652,7 +652,7 @@ export default function About() {
               Plug our AI into your platform
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Seamlessly integrate BITS Pilani Dubai Campus's intelligent networking capabilities into your existing tools and platforms
+              Seamlessly integrate BITS Pilani Dubai Campus&apos;s intelligent networking capabilities into your existing tools and platforms
             </p>
           </motion.div>
 
@@ -669,7 +669,7 @@ export default function About() {
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-600/5 to-purple-600/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 <div className="relative z-10">
-                  <div className="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-violet-500/20 to-purple-500/20 flex items-center justify-center text-violet-400 group-hover:text-violet-300 transition-colors duration-300">
+                  <div className="size-16 mb-6 rounded-2xl bg-gradient-to-br from-violet-500/20 to-purple-500/20 flex items-center justify-center text-violet-400 group-hover:text-violet-300 transition-colors duration-300">
                     {integration.icon}
                   </div>
                   <h3 className="text-xl font-bold mb-4 text-white group-hover:text-violet-200 transition-colors duration-300">
@@ -699,7 +699,7 @@ export default function About() {
             </button>
           </motion.div>
         </section>
-        <div className="relative w-full h-[1px] bg-gradient-to-r from-transparent via-purple-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-purple-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
           <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-purple-500/20 blur-sm"></div>
         </div>
         {/* Testimonials Section */}
@@ -736,7 +736,7 @@ export default function About() {
                     <img
                       src={testimonial.avatar}
                       alt={testimonial.author}
-                      className="w-12 h-12 rounded-full mr-4 object-cover border border-violet-400"
+                      className="size-12 rounded-full mr-4 object-cover border border-violet-400"
                     />
                     <div>
                       <p className="font-semibold text-white">{testimonial.author}</p>
@@ -750,7 +750,7 @@ export default function About() {
         </section>
 
         {/* Divider */}
-        <div className="relative w-full h-[1px] bg-gradient-to-r from-transparent via-violet-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-violet-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
           <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-violet-500/20 blur-sm"></div>
         </div>
 
@@ -802,7 +802,7 @@ export default function About() {
                 <img
                   src={logo.src}
                   alt={logo.name}
-                  className="w-full h-full object-contain"
+                  className="size-full object-contain"
                   onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                     e.currentTarget.style.display = 'none';
                   }}
