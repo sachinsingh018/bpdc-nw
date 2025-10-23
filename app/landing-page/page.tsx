@@ -139,9 +139,11 @@ export default function Home() { // Renamed from PageNew to Home, common practic
             <div className="bg-white text-black dark:bg-black dark:text-white font-sans antialiased transition-colors duration-300">
                 {/* Ambient Background */}
                 <div className="fixed inset-0 z-0">
-                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-bits-royal-blue/25 rounded-full blur-3xl animate-pulse"></div>
-                    <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-bits-deep-purple/25 rounded-full blur-3xl animate-pulse delay-1000"></div>
-                    <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-bits-golden-yellow/25 rounded-full blur-3xl animate-pulse delay-2000"></div>
+                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-bits-royal-blue/45 rounded-full blur-3xl animate-pulse opacity-80"></div>
+                    <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-bits-deep-purple/45 rounded-full blur-3xl animate-pulse delay-1000 opacity-80"></div>
+                    <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-bits-golden-yellow/45 rounded-full blur-3xl animate-pulse delay-2000 opacity-80"></div>
+                    <div className="absolute top-1/2 right-1/3 w-72 h-72 bg-bits-bright-red/35 rounded-full blur-3xl animate-pulse delay-500 opacity-70"></div>
+                    <div className="absolute bottom-0 right-0 w-64 h-64 bg-bits-golden-yellow/30 rounded-full blur-3xl animate-pulse delay-1500 opacity-60"></div>
                 </div>
 
                 {/* Header Bar with Auth Buttons */}

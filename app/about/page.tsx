@@ -357,9 +357,10 @@ export default function About() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           {/* Decorative Blurs */}
-          <div className="absolute top-20 left-10 w-64 h-64 bg-bits-royal-blue/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-          <div className="absolute bottom-40 right-20 w-80 h-80 bg-bits-deep-purple/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-          <div className="absolute top-40 right-10 w-56 h-56 bg-bits-golden-yellow/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+          <div className="absolute top-20 left-10 w-64 h-64 bg-bits-royal-blue/40 rounded-full blur-3xl opacity-70 pointer-events-none animate-pulse"></div>
+          <div className="absolute bottom-40 right-20 w-80 h-80 bg-bits-deep-purple/40 rounded-full blur-3xl opacity-70 pointer-events-none animate-pulse delay-1000"></div>
+          <div className="absolute top-40 right-10 w-56 h-56 bg-bits-golden-yellow/40 rounded-full blur-3xl opacity-70 pointer-events-none animate-pulse delay-2000"></div>
+          <div className="absolute bottom-20 left-1/3 w-72 h-72 bg-bits-bright-red/30 rounded-full blur-3xl opacity-60 pointer-events-none animate-pulse delay-500"></div>
 
           {/* Content */}
           <div className="relative z-10 max-w-6xl mx-auto">
