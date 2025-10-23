@@ -151,7 +151,7 @@ export default function ReelsPage() {
                 {[...Array(20)].map((_, i) => (
                     <div
                         key={i}
-                        className="absolute w-2 h-2 bg-white/20 rounded-full animate-pulse"
+                        className="absolute size-2 bg-white/20 rounded-full animate-pulse"
                         style={{
                             left: `${Math.random() * 100}%`,
                             top: `${Math.random() * 100}%`,
@@ -194,8 +194,8 @@ export default function ReelsPage() {
                             <div
                                 key={index}
                                 className={`h-1 rounded-full transition-all duration-300 ${index === current
-                                        ? 'bg-gradient-to-r from-pink-500 to-purple-500 flex-1'
-                                        : 'bg-white/20 flex-1'
+                                    ? 'bg-gradient-to-r from-pink-500 to-purple-500 flex-1'
+                                    : 'bg-white/20 flex-1'
                                     }`}
                             />
                         ))}
@@ -204,7 +204,7 @@ export default function ReelsPage() {
 
                 {/* Reel Card */}
                 <div className={`relative w-full max-w-sm aspect-[9/16] bg-gray-900 rounded-3xl overflow-hidden shadow-2xl transition-transform duration-300 ${swipeDirection === 'left' ? 'animate-slideOutLeft' :
-                        swipeDirection === 'right' ? 'animate-slideOutRight' : ''
+                    swipeDirection === 'right' ? 'animate-slideOutRight' : ''
                     }`}>
                     <ReactPlayer
                         url={reel.videoUrl}
@@ -223,7 +223,7 @@ export default function ReelsPage() {
                     {/* Play/Pause Button */}
                     <button
                         onClick={() => setIsPlaying(!isPlaying)}
-                        className="absolute top-4 right-4 w-12 h-12 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-black/70 transition-all"
+                        className="absolute top-4 right-4 size-12 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-black/70 transition-all"
                     >
                         {isPlaying ? <FaPause className="text-white" /> : <FaPlay className="text-white ml-1" />}
                     </button>
@@ -237,13 +237,13 @@ export default function ReelsPage() {
                     )}
 
                     {/* User Info */}
-                    <div className="absolute bottom-6 left-4 right-4 z-10">
+                    <div className="absolute bottom-6 inset-x-4 z-10">
                         <div className="flex items-center gap-2 mb-2">
                             <h3 className="text-lg font-bold text-white drop-shadow-lg">
                                 {reel.name}
                             </h3>
                             {reel.isVerified && (
-                                <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                                <div className="size-5 bg-blue-500 rounded-full flex items-center justify-center">
                                     <FaStar className="text-white text-xs" />
                                 </div>
                             )}
@@ -262,19 +262,19 @@ export default function ReelsPage() {
                     <div className="absolute right-4 bottom-20 flex flex-col gap-4">
                         <button
                             onClick={toggleLike}
-                            className={`w-12 h-12 rounded-full flex items-center justify-center transition-all transform hover:scale-110 ${reel.isLiked
-                                    ? 'bg-red-500 text-white'
-                                    : 'bg-white/20 backdrop-blur-md text-white hover:bg-white/30'
+                            className={`size-12 rounded-full flex items-center justify-center transition-all hover:scale-110 ${reel.isLiked
+                                ? 'bg-red-500 text-white'
+                                : 'bg-white/20 backdrop-blur-md text-white hover:bg-white/30'
                                 }`}
                         >
                             {reel.isLiked ? <FaHeart className="text-lg" /> : <BiSolidLike className="text-lg" />}
                         </button>
 
-                        <button className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-all transform hover:scale-110">
+                        <button className="size-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-all hover:scale-110">
                             <FaComment className="text-white text-lg" />
                         </button>
 
-                        <button className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-all transform hover:scale-110">
+                        <button className="size-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-all hover:scale-110">
                             <FaShare className="text-white text-lg" />
                         </button>
                     </div>
@@ -284,7 +284,7 @@ export default function ReelsPage() {
                 <div className="flex items-center gap-4 mt-6">
                     <button
                         onClick={handlePrev}
-                        className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/20 transition-all transform hover:scale-110"
+                        className="size-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110"
                     >
                         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -297,7 +297,7 @@ export default function ReelsPage() {
 
                     <button
                         onClick={handleNext}
-                        className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/20 transition-all transform hover:scale-110"
+                        className="size-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110"
                     >
                         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
