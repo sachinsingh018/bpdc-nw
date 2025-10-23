@@ -345,21 +345,21 @@ export default function About() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-950 to-violet-950/30 text-white font-sans leading-relaxed tracking-wide">
+    <div className="min-h-screen text-white font-sans leading-relaxed tracking-wide">
       {/* Enhanced Header */}
       {/* <Header /> */}
       <main>
         {/* Hero Section with Parallax */}
         <motion.section
-          className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 bg-gradient-to-b from-black via-gray-900 to-purple-950 text-white overflow-hidden"
+          className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 text-white overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           {/* Decorative Blurs */}
-          <div className="absolute top-20 left-10 w-64 h-64 bg-violet-600/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-          <div className="absolute bottom-40 right-20 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-          <div className="absolute top-40 right-10 w-56 h-56 bg-violet-700/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+          <div className="absolute top-20 left-10 w-64 h-64 bg-bits-royal-blue/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+          <div className="absolute bottom-40 right-20 w-80 h-80 bg-bits-deep-purple/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+          <div className="absolute top-40 right-10 w-56 h-56 bg-bits-golden-yellow/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
           {/* Content */}
           <div className="relative z-10 max-w-6xl mx-auto">
@@ -369,9 +369,9 @@ export default function About() {
               transition={{ delay: 0.1, duration: 0.5 }}
               className="mb-8"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-500/30 bg-violet-500/10 backdrop-blur-sm mb-8">
-                <Sparkles className="size-4 text-violet-400" />
-                <span className="text-sm text-violet-300 font-medium">Revolutionizing Professional Networking</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-bits-golden-yellow/30 bg-bits-golden-yellow/10 backdrop-blur-sm mb-8">
+                <Sparkles className="size-4 text-bits-golden-yellow" />
+                <span className="text-sm text-bits-golden-yellow font-medium">Revolutionizing Professional Networking</span>
               </div>
             </motion.div>
 
@@ -381,7 +381,7 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <span className="bg-gradient-to-r from-white via-violet-300 to-purple-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white via-bits-golden-yellow to-bits-white bg-clip-text text-transparent">
                 About
               </span>
               <br />
@@ -397,7 +397,7 @@ export default function About() {
               transition={{ delay: 0.3, duration: 0.5 }}
             >
               The first AI-powered professional network that understands
-              <span className="text-violet-300 font-semibold"> intent, timing, and values</span> — not just keywords.
+              <span className="text-bits-golden-yellow font-semibold"> intent, timing, and values</span> — not just keywords.
             </motion.p>
 
             <motion.div
@@ -406,12 +406,12 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-violet-500/25">
+              <button className="group relative px-8 py-4 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-bits-golden-yellow/25 text-bits-royal-blue">
                 <span className="relative z-10 flex items-center gap-2">
                   Join the Revolution
                   <ArrowRight className="size-5 group-hover:translate-x-1 transition-transform" />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 rounded-xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity"></div>
               </button>
               <button className="px-8 py-4 border border-gray-600 rounded-xl font-semibold hover:border-gray-400 transition-all duration-300 hover:bg-white/5">
                 Watch Demo
@@ -421,8 +421,8 @@ export default function About() {
         </motion.section>
 
         {/* Divider */}
-        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-violet-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
-          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-violet-500/20 blur-sm"></div>
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-bits-golden-yellow/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-bits-golden-yellow/20 blur-sm"></div>
         </div>
 
         {/* Mission & Vision Section */}
@@ -458,7 +458,7 @@ export default function About() {
               viewport={{ once: true, amount: 0.4 }} // Increased amount
               className="relative"
             >
-              <div className="aspect-square rounded-3xl bg-gradient-to-br from-violet-600/20 to-purple-600/20 p-8 backdrop-blur-sm border border-white/10">
+              <div className="aspect-square rounded-3xl bg-gradient-to-br from-bits-royal-blue/20 to-bits-deep-purple/20 p-8 backdrop-blur-sm border border-white/10">
                 <div className="h-full flex flex-col justify-center space-y-6">
                   {['Intent Recognition', 'Smart Matching', 'Relationship Building'].map((item, i) => (
                     <motion.div
@@ -469,7 +469,7 @@ export default function About() {
                       transition={{ delay: i * 0.1, duration: 0.4 }} // Reduced delay and duration
                       viewport={{ once: true, amount: 0.6 }} // Increased amount
                     >
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center font-bold text-white">
+                      <div className="size-12 rounded-xl bg-gradient-to-br from-bits-golden-yellow to-bits-golden-yellow-600 flex items-center justify-center font-bold text-bits-royal-blue">
                         {i + 1}
                       </div>
                       <span className="font-semibold text-white">{item}</span>
@@ -482,8 +482,8 @@ export default function About() {
         </section>
 
         {/* Divider */}
-        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-violet-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
-          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-violet-500/20 blur-sm"></div>
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-bits-golden-yellow/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-bits-golden-yellow/20 blur-sm"></div>
         </div>
 
         {/* How It Works Section */}
@@ -512,14 +512,14 @@ export default function About() {
                 transition={{ delay: i * 0.1, duration: 0.6 }} // Reduced delay and duration
                 viewport={{ once: true, amount: 0.5 }}
               >
-                <div className="relative p-8 rounded-3xl bg-gradient-to-br from-gray-900/80 to-gray-800/80 border border-gray-700/50 backdrop-blur-sm transition-all duration-300 ease-out h-full hover:border-violet-500/50 hover:shadow-lg hover:shadow-violet-500/10">
-                  <div className="absolute inset-0 bg-gradient-to-br from-violet-600/5 to-purple-600/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative p-8 rounded-3xl bg-gradient-to-br from-gray-900/80 to-gray-800/80 border border-gray-700/50 backdrop-blur-sm transition-all duration-300 ease-out h-full hover:border-bits-golden-yellow/50 hover:shadow-lg hover:shadow-bits-golden-yellow/10">
+                  <div className="absolute inset-0 bg-gradient-to-br from-bits-golden-yellow/5 to-bits-golden-yellow/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                   <div className="relative z-10 text-center">
-                    <div className="size-12 mx-auto mb-6 text-violet-400 transition-colors duration-300 group-hover:text-violet-300">
+                    <div className="size-12 mx-auto mb-6 text-bits-golden-yellow transition-colors duration-300 group-hover:text-bits-golden-yellow-400">
                       {step.icon}
                     </div>
-                    <h3 className="text-xl font-bold mb-4 text-white transition-colors duration-300 group-hover:text-violet-200">
+                    <h3 className="text-xl font-bold mb-4 text-white transition-colors duration-300 group-hover:text-bits-golden-yellow-200">
                       {step.title}
                     </h3>
                     <p className="text-gray-400 leading-relaxed">
@@ -528,10 +528,10 @@ export default function About() {
                   </div>
                 </div>
                 {i < howItWorksSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 right-0 w-8 h-0.5 bg-gradient-to-r from-violet-500 to-transparent -translate-y-1/2 z-10"></div>
+                  <div className="hidden md:block absolute top-1/2 right-0 w-8 h-0.5 bg-gradient-to-r from-bits-golden-yellow to-transparent -translate-y-1/2 z-10"></div>
                 )}
                 {i < howItWorksSteps.length - 1 && (
-                  <div className="md:hidden absolute bottom-0 left-1/2 -translate-x-1/2 h-8 w-0.5 bg-gradient-to-b from-violet-500 to-transparent z-10"></div>
+                  <div className="md:hidden absolute bottom-0 left-1/2 -translate-x-1/2 h-8 w-0.5 bg-gradient-to-b from-bits-golden-yellow to-transparent z-10"></div>
                 )}
               </motion.div>
             ))}
@@ -539,8 +539,8 @@ export default function About() {
         </section>
 
         {/* Divider */}
-        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-purple-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
-          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-purple-500/20 blur-sm"></div>
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-bits-golden-yellow/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-bits-golden-yellow/20 blur-sm"></div>
         </div>
         {/* Core Values */}
         <section className="py-24 px-4 sm:px-6 max-w-7xl mx-auto">
@@ -562,20 +562,20 @@ export default function About() {
             {coreValues.map((value, i) => (
               <motion.div
                 key={i}
-                className="group relative p-8 rounded-3xl bg-gradient-to-br from-gray-900/80 to-gray-800/80 border border-gray-700/50 backdrop-blur-sm hover:border-purple-500/50 transition-all duration-500 text-center"
+                className="group relative p-8 rounded-3xl bg-gradient-to-br from-gray-900/80 to-gray-800/80 border border-gray-700/50 backdrop-blur-sm hover:border-bits-golden-yellow/50 transition-all duration-500 text-center"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08, duration: 0.5 }} // Reduced delay and duration
                 viewport={{ once: true, amount: 0.5 }}
               // Removed whileHover for a calmer feel, keeping only CSS transitions
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-pink-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-bits-golden-yellow/10 to-bits-golden-yellow/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 <div className="relative z-10">
-                  <div className="size-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center text-purple-400 group-hover:text-purple-300 transition-colors">
+                  <div className="size-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-bits-golden-yellow/20 to-bits-golden-yellow/20 flex items-center justify-center text-bits-golden-yellow group-hover:text-bits-golden-yellow-400 transition-colors">
                     {value.icon}
                   </div>
-                  <h3 className="text-xl font-bold mb-4 text-white group-hover:text-purple-200 transition-colors">
+                  <h3 className="text-xl font-bold mb-4 text-white group-hover:text-bits-golden-yellow-200 transition-colors">
                     {value.title}
                   </h3>
                   <p className="text-gray-400 leading-relaxed">
@@ -588,8 +588,8 @@ export default function About() {
         </section>
 
         {/* Divider */}
-        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-violet-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
-          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-violet-500/20 blur-sm"></div>
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-bits-golden-yellow/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-bits-golden-yellow/20 blur-sm"></div>
         </div>
 
         {/* Key Features Section */}
@@ -612,18 +612,18 @@ export default function About() {
             {allFeatures.map((feature, i) => (
               <motion.div
                 key={i}
-                className="group relative p-8 rounded-3xl bg-gradient-to-br from-gray-900/80 to-gray-800/80 border border-gray-700/50 backdrop-blur-sm hover:border-violet-500/50 transition-all duration-500 h-full"
+                className="group relative p-8 rounded-3xl bg-gradient-to-br from-gray-900/80 to-gray-800/80 border border-gray-700/50 backdrop-blur-sm hover:border-bits-golden-yellow/50 transition-all duration-500 h-full"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08, duration: 0.5 }} // Reduced delay and duration
                 viewport={{ once: true, amount: 0.5 }}
               // Removed whileHover
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-purple-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-bits-golden-yellow/10 to-bits-golden-yellow/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10 flex items-start space-x-4">
                   <div className="text-4xl leading-none">{feature.emoji}</div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2 text-white group-hover:text-violet-200 transition-colors">
+                    <h3 className="text-xl font-bold mb-2 text-white group-hover:text-bits-golden-yellow-200 transition-colors">
                       {feature.title}
                     </h3>
                     <p className="text-gray-400 leading-relaxed">
@@ -637,8 +637,8 @@ export default function About() {
         </section>
 
         {/* Divider */}
-        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-purple-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
-          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-purple-500/20 blur-sm"></div>
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-bits-golden-yellow/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-bits-golden-yellow/20 blur-sm"></div>
         </div>
         <section className="py-24 px-4 sm:px-6 max-w-7xl mx-auto">
           <motion.div
@@ -660,19 +660,19 @@ export default function About() {
             {apiIntegrations.map((integration, i) => (
               <motion.div
                 key={i}
-                className="group relative p-8 rounded-3xl bg-gradient-to-br from-gray-900/80 to-gray-800/80 border border-gray-700/50 backdrop-blur-sm hover:border-violet-500/50 transition-all duration-500 h-full"
+                className="group relative p-8 rounded-3xl bg-gradient-to-br from-gray-900/80 to-gray-800/80 border border-gray-700/50 backdrop-blur-sm hover:border-bits-golden-yellow/50 transition-all duration-500 h-full"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
                 viewport={{ once: true, amount: 0.3 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-600/5 to-purple-600/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-bits-golden-yellow/5 to-bits-golden-yellow/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 <div className="relative z-10">
-                  <div className="size-16 mb-6 rounded-2xl bg-gradient-to-br from-violet-500/20 to-purple-500/20 flex items-center justify-center text-violet-400 group-hover:text-violet-300 transition-colors duration-300">
+                  <div className="size-16 mb-6 rounded-2xl bg-gradient-to-br from-bits-golden-yellow/20 to-bits-golden-yellow/20 flex items-center justify-center text-bits-golden-yellow group-hover:text-bits-golden-yellow-400 transition-colors duration-300">
                     {integration.icon}
                   </div>
-                  <h3 className="text-xl font-bold mb-4 text-white group-hover:text-violet-200 transition-colors duration-300">
+                  <h3 className="text-xl font-bold mb-4 text-white group-hover:text-bits-golden-yellow-200 transition-colors duration-300">
                     {integration.title}
                   </h3>
                   <p className="text-gray-400 leading-relaxed">
@@ -690,17 +690,17 @@ export default function About() {
             transition={{ delay: 0.4, duration: 0.6 }}
             viewport={{ once: true, amount: 0.5 }}
           >
-            <button className="group relative px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-violet-500/25">
+            <button className="group relative px-8 py-4 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-bits-golden-yellow/25">
               <span className="relative z-10 flex items-center gap-2">
                 Explore API Documentation
                 <Share2 className="size-5 group-hover:translate-x-1 transition-transform" />
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-purple-600 rounded-xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 rounded-xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity"></div>
             </button>
           </motion.div>
         </section>
-        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-purple-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
-          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-purple-500/20 blur-sm"></div>
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-bits-golden-yellow/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-bits-golden-yellow/20 blur-sm"></div>
         </div>
         {/* Testimonials Section */}
         <section className="py-24 px-4 sm:px-6 max-w-7xl mx-auto">
@@ -722,25 +722,25 @@ export default function About() {
             {testimonials.map((testimonial, i) => (
               <motion.div
                 key={i}
-                className="group relative p-8 rounded-3xl bg-gradient-to-br from-gray-900/80 to-gray-800/80 border border-gray-700/50 backdrop-blur-sm hover:border-violet-500/50 transition-all duration-500 h-full flex flex-col justify-between"
+                className="group relative p-8 rounded-3xl bg-gradient-to-br from-gray-900/80 to-gray-800/80 border border-gray-700/50 backdrop-blur-sm hover:border-bits-golden-yellow/50 transition-all duration-500 h-full flex flex-col justify-between"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08, duration: 0.5 }}
                 viewport={{ once: true, amount: 0.5 }}
               // Removed whileHover
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-purple-600/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-bits-golden-yellow/10 to-bits-golden-yellow/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10">
                   <p className="text-lg italic text-gray-300 mb-6">{`"${testimonial.quote}"`}</p>
                   <div className="flex items-center">
                     <img
                       src={testimonial.avatar}
                       alt={testimonial.author}
-                      className="size-12 rounded-full mr-4 object-cover border border-violet-400"
+                      className="size-12 rounded-full mr-4 object-cover border border-bits-golden-yellow"
                     />
                     <div>
                       <p className="font-semibold text-white">{testimonial.author}</p>
-                      <p className="text-sm text-violet-300">{testimonial.title}</p>
+                      <p className="text-sm text-bits-golden-yellow-400">{testimonial.title}</p>
                     </div>
                   </div>
                 </div>
@@ -750,8 +750,8 @@ export default function About() {
         </section>
 
         {/* Divider */}
-        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-violet-700/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
-          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-violet-500/20 blur-sm"></div>
+        <div className="relative w-full h-px bg-gradient-to-r from-transparent via-bits-golden-yellow/50 to-transparent mx-auto max-w-7xl my-10 md:my-12">
+          <div className="absolute -inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-bits-golden-yellow/20 blur-sm"></div>
         </div>
 
 

@@ -139,9 +139,9 @@ export default function Home() { // Renamed from PageNew to Home, common practic
             <div className="bg-white text-black dark:bg-black dark:text-white font-sans antialiased transition-colors duration-300">
                 {/* Ambient Background */}
                 <div className="fixed inset-0 z-0">
-                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-600/25 rounded-full blur-3xl animate-pulse"></div>
-                    <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-purple-700/25 rounded-full blur-3xl animate-pulse delay-1000"></div>
-                    <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-violet-800/25 rounded-full blur-3xl animate-pulse delay-2000"></div>
+                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-bits-royal-blue/25 rounded-full blur-3xl animate-pulse"></div>
+                    <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-bits-deep-purple/25 rounded-full blur-3xl animate-pulse delay-1000"></div>
+                    <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-bits-golden-yellow/25 rounded-full blur-3xl animate-pulse delay-2000"></div>
                 </div>
 
                 {/* Header Bar with Auth Buttons */}
@@ -149,7 +149,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                     {status === 'authenticated' ? (
                         <div className="flex gap-2">
                             <Link href="/profile">
-                                <button type="button" className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold shadow-lg hover:scale-105 transition-transform duration-200">
+                                <button type="button" className="px-6 py-2 rounded-full bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-white font-semibold shadow-lg hover:scale-105 transition-transform duration-200">
                                     Go to Profile
                                 </button>
                             </Link>
@@ -163,7 +163,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                         </div>
                     ) : (
                         <Link href="/login">
-                            <button type="button" className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold shadow-lg hover:scale-105 transition-transform duration-200">
+                            <button type="button" className="px-6 py-2 rounded-full bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-white font-semibold shadow-lg hover:scale-105 transition-transform duration-200">
                                 Recruiter Sign In
                             </button>
                         </Link>
@@ -183,8 +183,8 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                             <motion.div variants={itemVariants} className="space-y-6">
                                 <motion.h1
                                     className="text-[clamp(2.5rem,8vw,6rem)] font-black tracking-tight break-words 
-    bg-gradient-to-r from-zinc-800 via-purple-700 to-zinc-900 
-    dark:from-white dark:via-purple-400 dark:to-white 
+    bg-gradient-to-r from-zinc-800 via-bits-royal-blue to-zinc-900 
+    dark:from-white dark:via-bits-golden-yellow dark:to-white 
     bg-clip-text text-transparent"
                                 >
                                     Networkqy
@@ -192,12 +192,12 @@ export default function Home() { // Renamed from PageNew to Home, common practic
 
 
                                 <motion.p
-                                    className="text-2xl sm:text-3xl md:text-4xl font-semibold bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent min-h-[4rem] flex items-center justify-center"
+                                    className="text-2xl sm:text-3xl md:text-4xl font-semibold bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 bg-clip-text text-transparent min-h-[4rem] flex items-center justify-center"
                                     variants={itemVariants}
                                 >
                                     {displayedText}
                                     <motion.span
-                                        className="ml-1 w-1 h-8 bg-violet-400"
+                                        className="ml-1 w-1 h-8 bg-bits-golden-yellow"
                                         animate={{ opacity: [0, 1, 0] }}
                                         transition={{ duration: 1, repeat: Infinity }}
                                     />
@@ -231,7 +231,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                                     className="block"
                                 >
                                     <motion.button
-                                        className={`group relative px-12 py-4 rounded-2xl shadow-xl font-semibold text-lg text-white transition-all duration-300 bg-gradient-to-r from-violet-600 to-purple-700 ${responseGenerated ? 'border-2 border-[#5B21B6]' : 'border-2 border-transparent'
+                                        className={`group relative px-12 py-4 rounded-2xl shadow-xl font-semibold text-lg text-white transition-all duration-300 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 ${responseGenerated ? 'border-2 border-[#5B21B6]' : 'border-2 border-transparent'
                                             }`}
                                         animate={responseGenerated ? { scale: [1, 1.1, 1] } : {}}
                                         transition={{ duration: 1.5 }}
@@ -287,10 +287,10 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                                             variants={itemVariants}
                                             className="group relative"
                                         >
-                                            <div className="absolute inset-0 bg-gradient-to-r from-violet-600/25 to-purple-700/25 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                                            <div className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow/25 to-bits-golden-yellow/25 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
                                             <div className="relative bg-zinc-950/60 backdrop-blur-xl border border-zinc-800/50 rounded-3xl p-8 hover:border-zinc-700/50 transition-all duration-300 h-full">
                                                 <div className="mb-6">
-                                                    <div className="w-14 h-14 bg-gradient-to-r from-violet-600 to-purple-700 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                                    <div className="w-14 h-14 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                                         <IconComponent size={28} className="text-white" />
                                                     </div>
                                                     <h3 className="text-xl font-bold text-white mb-3 group-hover:text-violet-300 transition-colors">
@@ -318,7 +318,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                                 transition={{ duration: 0.8 }}
                                 viewport={{ once: true }}
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-violet-600/25 to-purple-700/25 rounded-3xl blur-2xl"></div>
+                                <div className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow/25 to-bits-golden-yellow/25 rounded-3xl blur-2xl"></div>
                                 <div className="relative bg-zinc-950/60 backdrop-blur-2xl border border-zinc-800/50 rounded-3xl p-12 sm:p-16 text-center">
                                     <h2 className="text-4xl sm:text-5xl font-black mb-6 bg-gradient-to-r from-white to-zinc-300 bg-clip-text text-transparent">
                                         {sections[2].heading}
@@ -333,7 +333,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                                         className="block"
                                     >
                                         <motion.button
-                                            className="group relative px-12 py-4 bg-gradient-to-r from-violet-600 to-purple-700 hover:from-violet-700 hover:to-purple-800 rounded-2xl shadow-xl hover:shadow-violet-500/30 transition-all duration-300 font-semibold text-lg"
+                                            className="group relative px-12 py-4 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-violet-700 hover:to-purple-800 rounded-2xl shadow-xl hover:shadow-violet-500/30 transition-all duration-300 font-semibold text-lg"
                                             whileHover={{
                                                 scale: 1.05,
                                                 y: -2,
