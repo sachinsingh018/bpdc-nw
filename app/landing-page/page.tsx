@@ -13,7 +13,6 @@ import { useSession, signOut } from 'next-auth/react';
 import { Header } from '@/components/Header'; // Adjust path as needed
 import { Footer } from '@/components/Footer'; // Adjust path as needed
 import { ChatInput } from '@/components/ChatInput'; // Import ChatInput from its new components directory
-import { GoogleSignIn } from '@/components/GoogleSignIn'; // Import GoogleSignIn component
 
 
 const sections = [
@@ -227,7 +226,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
     dark:from-white dark:via-bits-golden-yellow dark:to-white 
     bg-clip-text text-transparent"
                                 >
-                                    Networkqy
+                                    BITS Pilani, Dubai Campus
                                 </motion.h1>
 
 
@@ -258,9 +257,17 @@ export default function Home() { // Renamed from PageNew to Home, common practic
 
 
 
-                            {/* Google Sign-In Section */}
+                            {/* Login Button */}
                             <motion.div variants={itemVariants} className="flex flex-col items-center">
-                                <GoogleSignIn className="w-full max-w-md" />
+                                <Link href="/login">
+                                    <motion.button
+                                        className="px-8 py-3 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-200"
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                    >
+                                        Login
+                                    </motion.button>
+                                </Link>
                             </motion.div>
 
                             {/* <motion.div variants={itemVariants}>
