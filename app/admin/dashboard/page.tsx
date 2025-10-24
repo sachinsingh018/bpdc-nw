@@ -81,17 +81,31 @@ interface FeatureUsage {
     usage_count: number;
 }
 
+interface Student {
+    email: string;
+    name: string;
+    batch_year: string;
+    profile: string;
+}
+
 export default function AdminDashboard() {
     const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
     const [userEngagement, setUserEngagement] = useState<UserEngagement[]>([]);
     const [dailyTrends, setDailyTrends] = useState<DailyTrends[]>([]);
     const [featureUsage, setFeatureUsage] = useState<FeatureUsage[]>([]);
+    const [students, setStudents] = useState<Student[]>([]);
     const [loading, setLoading] = useState(true);
     const [selectedUser, setSelectedUser] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [dateRange, setDateRange] = useState('7d');
     const [searchTerm, setSearchTerm] = useState('');
+    const [userListSearchTerm, setUserListSearchTerm] = useState('');
+    const [selectedBatchYear, setSelectedBatchYear] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
     const [generatingPdf, setGeneratingPdf] = useState(false);
+
+    // Pagination constants
+    const USERS_PER_PAGE = 50;
 
     // Summary stats
     const [summaryStats, setSummaryStats] = useState({
@@ -136,10 +150,38 @@ export default function AdminDashboard() {
             const featureResponse = await fetch(`/api/admin/feature-usage?days=30`);
             const features = await featureResponse.json();
             setFeatureUsage(features);
+
+            // Load student data from CSV
+            await loadStudentData();
         } catch (error) {
             console.error('Error loading dashboard data:', error);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const loadStudentData = async () => {
+        try {
+            const response = await fetch('/bits_dubai_directory.csv');
+            const csvText = await response.text();
+            const lines = csvText.split('\n');
+            const headers = lines[0].split(',');
+
+            const studentData: Student[] = lines.slice(1)
+                .filter(line => line.trim())
+                .map(line => {
+                    const values = line.split(',');
+                    return {
+                        email: values[0] || '',
+                        name: values[1] || '',
+                        batch_year: values[2] || '',
+                        profile: values[3] || ''
+                    };
+                });
+
+            setStudents(studentData);
+        } catch (error) {
+            console.error('Error loading student data:', error);
         }
     };
 
@@ -153,6 +195,25 @@ export default function AdminDashboard() {
 
         return matchesUser && matchesCategory && matchesSearch;
     });
+
+    const filteredStudents = students.filter(student => {
+        const matchesSearch = !userListSearchTerm ||
+            student.name?.toLowerCase().includes(userListSearchTerm.toLowerCase()) ||
+            student.email?.toLowerCase().includes(userListSearchTerm.toLowerCase());
+        const matchesBatch = !selectedBatchYear || student.batch_year === selectedBatchYear;
+        return matchesSearch && matchesBatch;
+    });
+
+    // Pagination logic
+    const totalPages = Math.ceil(filteredStudents.length / USERS_PER_PAGE);
+    const startIndex = (currentPage - 1) * USERS_PER_PAGE;
+    const endIndex = startIndex + USERS_PER_PAGE;
+    const paginatedStudents = filteredStudents.slice(startIndex, endIndex);
+
+    // Reset to first page when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [userListSearchTerm, selectedBatchYear]);
 
     const getActionCategoryColor = (category: string) => {
         const colors: { [key: string]: string } = {
@@ -803,11 +864,12 @@ export default function AdminDashboard() {
 
                 {/* Main Content Tabs */}
                 <Tabs defaultValue="activity" className="space-y-6">
-                    <TabsList className="grid w-full grid-cols-4 bg-white/10 backdrop-blur-md border-white/20">
+                    <TabsList className="grid w-full grid-cols-5 bg-white/10 backdrop-blur-md border-white/20">
                         <TabsTrigger value="activity" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">Recent Activity</TabsTrigger>
                         <TabsTrigger value="users" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">User Engagement</TabsTrigger>
                         <TabsTrigger value="trends" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">Daily Trends</TabsTrigger>
                         <TabsTrigger value="features" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">Feature Usage</TabsTrigger>
+                        <TabsTrigger value="userlist" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">User List</TabsTrigger>
                     </TabsList>
 
                     {/* Recent Activity Tab */}
@@ -991,6 +1053,156 @@ export default function AdminDashboard() {
                                         </div>
                                     )) : <div className="text-purple-200">No data available</div>}
                                 </div>
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+
+                    {/* User List Tab */}
+                    <TabsContent value="userlist" className="space-y-4">
+                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                            <CardHeader>
+                                <CardTitle className="text-white flex items-center gap-2">
+                                    <Users className="size-5" />
+                                    Student Directory
+                                </CardTitle>
+                                <CardDescription className="text-purple-200">Complete list of BITS Dubai students and alumni</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                {/* Filters */}
+                                <div className="flex gap-4 mb-6">
+                                    <div className="flex-1">
+                                        <Input
+                                            placeholder="Search by name or email..."
+                                            value={userListSearchTerm}
+                                            onChange={(e) => setUserListSearchTerm(e.target.value)}
+                                            className="max-w-sm bg-white/10 border-white/20 text-white placeholder:text-purple-200"
+                                        />
+                                    </div>
+                                    <Select value={selectedBatchYear || 'all'} onValueChange={setSelectedBatchYear}>
+                                        <SelectTrigger className="w-40 bg-white/10 border-white/20 text-white">
+                                            <SelectValue placeholder="All Batches" />
+                                        </SelectTrigger>
+                                        <SelectContent className="bg-slate-800 border-white/20">
+                                            <SelectItem value="all">All Batches</SelectItem>
+                                            <SelectItem value="2016">2016</SelectItem>
+                                            <SelectItem value="2017">2017</SelectItem>
+                                            <SelectItem value="2018">2018</SelectItem>
+                                            <SelectItem value="2019">2019</SelectItem>
+                                            <SelectItem value="2020">2020</SelectItem>
+                                            <SelectItem value="2021">2021</SelectItem>
+                                            <SelectItem value="2022">2022</SelectItem>
+                                            <SelectItem value="2023">2023</SelectItem>
+                                            <SelectItem value="2024">2024</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+
+                                {/* Student Grid */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-h-96 overflow-y-auto">
+                                    {paginatedStudents.map((student, index) => (
+                                        <div key={index} className="p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors">
+                                            <div className="flex items-center gap-3 mb-3">
+                                                <div className="size-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                                                    <span className="text-sm font-medium text-white">
+                                                        {student.name?.charAt(0) || student.email?.charAt(0) || '?'}
+                                                    </span>
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <div className="font-medium text-white truncate">
+                                                        {student.name || 'Unknown'}
+                                                    </div>
+                                                    <div className="text-xs text-purple-200 truncate">
+                                                        {student.email}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-xs text-purple-200">Batch:</span>
+                                                    <Badge className="bg-blue-100 text-blue-800 text-xs">
+                                                        {student.batch_year}
+                                                    </Badge>
+                                                </div>
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-xs text-purple-200">Profile:</span>
+                                                    <Badge className={`${student.profile === 'alumni' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'} text-xs`}>
+                                                        {student.profile}
+                                                    </Badge>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {paginatedStudents.length === 0 && (
+                                    <div className="text-center py-8 text-purple-200">
+                                        No students found matching your criteria
+                                    </div>
+                                )}
+
+                                {/* Pagination Controls */}
+                                {totalPages > 1 && (
+                                    <div className="flex items-center justify-between mt-6">
+                                        <div className="text-sm text-purple-200">
+                                            Showing {startIndex + 1}-{Math.min(endIndex, filteredStudents.length)} of {filteredStudents.length} students
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Button
+                                                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                                disabled={currentPage === 1}
+                                                variant="outline"
+                                                size="sm"
+                                                className="text-white border-white/20 hover:bg-white/10 disabled:opacity-50"
+                                            >
+                                                Previous
+                                            </Button>
+                                            <div className="flex items-center gap-1">
+                                                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                                                    let pageNum;
+                                                    if (totalPages <= 5) {
+                                                        pageNum = i + 1;
+                                                    } else if (currentPage <= 3) {
+                                                        pageNum = i + 1;
+                                                    } else if (currentPage >= totalPages - 2) {
+                                                        pageNum = totalPages - 4 + i;
+                                                    } else {
+                                                        pageNum = currentPage - 2 + i;
+                                                    }
+
+                                                    return (
+                                                        <Button
+                                                            key={pageNum}
+                                                            onClick={() => setCurrentPage(pageNum)}
+                                                            variant={currentPage === pageNum ? "default" : "outline"}
+                                                            size="sm"
+                                                            className={`text-white border-white/20 hover:bg-white/10 ${currentPage === pageNum
+                                                                    ? 'bg-gradient-to-r from-purple-500 to-pink-500'
+                                                                    : ''
+                                                                }`}
+                                                        >
+                                                            {pageNum}
+                                                        </Button>
+                                                    );
+                                                })}
+                                            </div>
+                                            <Button
+                                                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                                disabled={currentPage === totalPages}
+                                                variant="outline"
+                                                size="sm"
+                                                className="text-white border-white/20 hover:bg-white/10 disabled:opacity-50"
+                                            >
+                                                Next
+                                            </Button>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {totalPages === 1 && (
+                                    <div className="mt-4 text-sm text-purple-200">
+                                        Showing {filteredStudents.length} of {students.length} students
+                                    </div>
+                                )}
                             </CardContent>
                         </Card>
                     </TabsContent>
