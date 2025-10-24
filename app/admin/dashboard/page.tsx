@@ -101,6 +101,7 @@ export default function AdminDashboard() {
     const [searchTerm, setSearchTerm] = useState('');
     const [userListSearchTerm, setUserListSearchTerm] = useState('');
     const [selectedBatchYear, setSelectedBatchYear] = useState('');
+    const [selectedProfile, setSelectedProfile] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [generatingPdf, setGeneratingPdf] = useState(false);
 
@@ -165,24 +166,50 @@ export default function AdminDashboard() {
             const response = await fetch('/bits_dubai_directory.csv');
             const csvText = await response.text();
             const lines = csvText.split('\n');
-            const headers = lines[0].split(',');
 
-            const studentData: Student[] = lines.slice(1)
-                .filter(line => line.trim())
-                .map(line => {
-                    const values = line.split(',');
-                    return {
-                        email: values[0] || '',
-                        name: values[1] || '',
-                        batch_year: values[2] || '',
-                        profile: values[3] || ''
-                    };
-                });
+            // Skip header line and filter out empty lines
+            const dataLines = lines.slice(1).filter(line => line.trim());
 
+            const studentData: Student[] = dataLines.map(line => {
+                // Parse CSV line properly handling commas within quoted fields
+                const values = parseCSVLine(line);
+                return {
+                    email: values[0]?.trim() || '',
+                    name: values[1]?.trim() || '',
+                    batch_year: values[2]?.trim() || '',
+                    profile: values[3]?.trim() || ''
+                };
+            }).filter(student => student.email && student.name); // Filter out invalid entries
+
+            console.log(`Loaded ${studentData.length} students from CSV`);
             setStudents(studentData);
         } catch (error) {
             console.error('Error loading student data:', error);
+            toast.error('Failed to load student directory data');
         }
+    };
+
+    // Helper function to parse CSV line properly
+    const parseCSVLine = (line: string): string[] => {
+        const result: string[] = [];
+        let current = '';
+        let inQuotes = false;
+
+        for (let i = 0; i < line.length; i++) {
+            const char = line[i];
+
+            if (char === '"') {
+                inQuotes = !inQuotes;
+            } else if (char === ',' && !inQuotes) {
+                result.push(current);
+                current = '';
+            } else {
+                current += char;
+            }
+        }
+
+        result.push(current);
+        return result;
     };
 
     const filteredActivityLogs = activityLogs.filter(log => {
@@ -200,8 +227,9 @@ export default function AdminDashboard() {
         const matchesSearch = !userListSearchTerm ||
             student.name?.toLowerCase().includes(userListSearchTerm.toLowerCase()) ||
             student.email?.toLowerCase().includes(userListSearchTerm.toLowerCase());
-        const matchesBatch = !selectedBatchYear || student.batch_year === selectedBatchYear;
-        return matchesSearch && matchesBatch;
+        const matchesBatch = !selectedBatchYear || selectedBatchYear === 'all' || student.batch_year === selectedBatchYear;
+        const matchesProfile = !selectedProfile || selectedProfile === 'all' || student.profile === selectedProfile;
+        return matchesSearch && matchesBatch && matchesProfile;
     });
 
     // Pagination logic
@@ -213,7 +241,7 @@ export default function AdminDashboard() {
     // Reset to first page when filters change
     useEffect(() => {
         setCurrentPage(1);
-    }, [userListSearchTerm, selectedBatchYear]);
+    }, [userListSearchTerm, selectedBatchYear, selectedProfile]);
 
     const getActionCategoryColor = (category: string) => {
         const colors: { [key: string]: string } = {
@@ -1093,8 +1121,48 @@ export default function AdminDashboard() {
                                             <SelectItem value="2022">2022</SelectItem>
                                             <SelectItem value="2023">2023</SelectItem>
                                             <SelectItem value="2024">2024</SelectItem>
+                                            <SelectItem value="2025">2025</SelectItem>
                                         </SelectContent>
                                     </Select>
+                                    <Select value={selectedProfile || 'all'} onValueChange={setSelectedProfile}>
+                                        <SelectTrigger className="w-40 bg-white/10 border-white/20 text-white">
+                                            <SelectValue placeholder="All Profiles" />
+                                        </SelectTrigger>
+                                        <SelectContent className="bg-slate-800 border-white/20">
+                                            <SelectItem value="all">All Profiles</SelectItem>
+                                            <SelectItem value="student">Students</SelectItem>
+                                            <SelectItem value="alumni">Alumni</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+
+                                {/* Clear Filters Button */}
+                                {(userListSearchTerm || selectedBatchYear !== '' || selectedProfile !== '') && (
+                                    <div className="mb-4">
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() => {
+                                                setUserListSearchTerm('');
+                                                setSelectedBatchYear('');
+                                                setSelectedProfile('');
+                                            }}
+                                            className="bg-white/10 border-white/20 text-black hover:bg-white/20"
+                                        >
+                                            Clear All Filters
+                                        </Button>
+                                    </div>
+                                )}
+
+                                {/* Student Statistics */}
+                                <div className="flex items-center gap-4 mb-4 text-sm text-purple-200">
+                                    <span>Total: {students.length} students</span>
+                                    <span>•</span>
+                                    <span>Alumni: {students.filter(s => s.profile === 'alumni').length}</span>
+                                    <span>•</span>
+                                    <span>Current Students: {students.filter(s => s.profile === 'student').length}</span>
+                                    <span>•</span>
+                                    <span>Showing: {filteredStudents.length}</span>
                                 </div>
 
                                 {/* Student Grid */}
@@ -1152,7 +1220,7 @@ export default function AdminDashboard() {
                                                 disabled={currentPage === 1}
                                                 variant="outline"
                                                 size="sm"
-                                                className="text-white border-white/20 hover:bg-white/10 disabled:opacity-50"
+                                                className="text-black border-white/20 hover:bg-white/10 disabled:opacity-50"
                                             >
                                                 Previous
                                             </Button>
@@ -1175,9 +1243,9 @@ export default function AdminDashboard() {
                                                             onClick={() => setCurrentPage(pageNum)}
                                                             variant={currentPage === pageNum ? "default" : "outline"}
                                                             size="sm"
-                                                            className={`text-white border-white/20 hover:bg-white/10 ${currentPage === pageNum
-                                                                    ? 'bg-gradient-to-r from-purple-500 to-pink-500'
-                                                                    : ''
+                                                            className={`text-black border-white/20 hover:bg-white/10 ${currentPage === pageNum
+                                                                ? 'bg-gradient-to-r from-purple-500 to-pink-500'
+                                                                : ''
                                                                 }`}
                                                         >
                                                             {pageNum}
@@ -1190,7 +1258,7 @@ export default function AdminDashboard() {
                                                 disabled={currentPage === totalPages}
                                                 variant="outline"
                                                 size="sm"
-                                                className="text-white border-white/20 hover:bg-white/10 disabled:opacity-50"
+                                                className="text-black border-white/20 hover:bg-white/10 disabled:opacity-50"
                                             >
                                                 Next
                                             </Button>

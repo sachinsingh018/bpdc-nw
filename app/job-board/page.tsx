@@ -413,6 +413,8 @@ function JobBoardContent() {
                 `
             }}
         >
+            {/* Navbar */}
+            <CommonNavbar currentPage="job-board" />
             {/* Dynamic Vibrant Background Elements */}
             <div className="fixed inset-0 z-0">
                 {/* Deep Royal Blue */}
