@@ -183,21 +183,21 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                     {status === 'authenticated' ? (
                         <div className="flex gap-2">
                             <Link href="/profile">
-                                <button type="button" className="px-6 py-2 rounded-full bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-white font-semibold shadow-lg hover:scale-105 transition-transform duration-200">
+                                <button type="button" className="px-6 py-2 rounded-full bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black font-semibold shadow-lg hover:scale-105 transition-transform duration-200">
                                     Go to Profile
                                 </button>
                             </Link>
                             <button
                                 type="button"
                                 onClick={() => signOut({ callbackUrl: '/' })}
-                                className="px-6 py-2 rounded-full bg-red-600 text-white font-semibold shadow-lg hover:scale-105 transition-transform duration-200"
+                                className="px-6 py-2 rounded-full bg-red-600 text-black font-semibold shadow-lg hover:scale-105 transition-transform duration-200"
                             >
                                 Sign Out
                             </button>
                         </div>
                     ) : (
                         <Link href="/login">
-                            <button type="button" className="px-6 py-2 rounded-full bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-white font-semibold shadow-lg hover:scale-105 transition-transform duration-200">
+                            <button type="button" className="px-6 py-2 rounded-full bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black font-semibold shadow-lg hover:scale-105 transition-transform duration-200">
                                 Recruiter Sign In
                             </button>
                         </Link>
@@ -262,7 +262,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
 
                             <motion.p
                                 variants={itemVariants}
-                                className="text-sm sm:text-base md:text-lg text-zinc-400 max-w-3xl mx-auto leading-relaxed font-medium"
+                                className="text-sm sm:text-base md:text-lg text-black max-w-3xl mx-auto leading-relaxed font-medium"
                             >
                                 {sections[0].description}
                             </motion.p>
@@ -273,7 +273,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                             <motion.div variants={itemVariants} className="flex flex-col items-center">
                                 <Link href="/login">
                                     <motion.button
-                                        className="px-8 py-3 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-200"
+                                        className="px-8 py-3 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-200"
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
@@ -290,7 +290,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                                     className="block"
                                 >
                                     <motion.button
-                                        className={`group relative px-12 py-4 rounded-2xl shadow-xl font-semibold text-lg text-white transition-all duration-300 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 ${responseGenerated ? 'border-2 border-[#5B21B6]' : 'border-2 border-transparent'
+                                        className={`group relative px-12 py-4 rounded-2xl shadow-xl font-semibold text-lg text-black transition-all duration-300 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 ${responseGenerated ? 'border-2 border-[#5B21B6]' : 'border-2 border-transparent'
                                             }`}
                                         animate={responseGenerated ? { scale: [1, 1.1, 1] } : {}}
                                         transition={{ duration: 1.5 }}
@@ -350,13 +350,13 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                                             <div className="relative bg-zinc-950/60 backdrop-blur-xl border border-zinc-800/50 rounded-3xl p-8 hover:border-zinc-700/50 transition-all duration-300 h-full">
                                                 <div className="mb-6">
                                                     <div className="size-14 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                                                        <IconComponent size={28} className="text-white" />
+                                                        <IconComponent size={28} className="text-black" />
                                                     </div>
-                                                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-bits-golden-yellow-300 transition-colors">
+                                                    <h3 className="text-xl font-bold text-black mb-3 group-hover:text-bits-golden-yellow-300 transition-colors">
                                                         {item.title}
                                                     </h3>
                                                 </div>
-                                                <p className="text-zinc-400 leading-relaxed font-medium">
+                                                <p className="text-black leading-relaxed font-medium">
                                                     {item.text}
                                                 </p>
                                             </div>
@@ -372,7 +372,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                     <section className="relative py-20 px-6">
                         <div className="max-w-7xl mx-auto">
                             <motion.h2
-                                className="text-lg font-bold text-zinc-400 uppercase tracking-wider text-center mb-12"
+                                className="text-lg font-bold text-black uppercase tracking-wider text-center mb-12"
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6 }}
@@ -418,7 +418,7 @@ export default function Home() { // Renamed from PageNew to Home, common practic
 
                 <button
                     onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                    className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-zinc-200 dark:bg-zinc-800 text-black dark:text-white rounded-full shadow-md hover:scale-105 transition-all"
+                    className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-zinc-200 dark:bg-zinc-800 text-black dark:text-black rounded-full shadow-md hover:scale-105 transition-all"
                 >
                     {theme === 'dark' ? (
                         <>

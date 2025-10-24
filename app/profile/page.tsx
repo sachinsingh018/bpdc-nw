@@ -111,7 +111,7 @@ const CustomDropdown = ({
               <button
                 key={option}
                 onClick={() => handleSelect(option)}
-                className={`w-full text-left px-4 py-3 text-sm text-gray-900 dark:text-white transition-colors duration-200 ${styles.item} first:rounded-t-lg last:rounded-b-lg`}
+                className={`w-full text-left px-4 py-3 text-sm text-black dark:text-black transition-colors duration-200 ${styles.item} first:rounded-t-lg last:rounded-b-lg`}
               >
                 {option}
               </button>
@@ -697,7 +697,7 @@ const ProfilePage = () => {
                     type="text"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
-                    className="text-lg md:text-xl lg:text-3xl font-bold bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-gray-900 dark:text-white w-full max-w-full"
+                    className="text-lg md:text-xl lg:text-3xl font-bold bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-black dark:text-black w-full max-w-full"
                   />
                 ) : (
                   <h1 className="text-xl md:text-3xl font-bold text-black">{userName}</h1>
@@ -751,9 +751,9 @@ const ProfilePage = () => {
                     </AlertDialogHeader>
 
                     <div className="mb-3">
-                      <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mr-2">File Type:</label>
+                      <label className="text-sm font-medium text-black dark:text-gray-300 mr-2">File Type:</label>
                       <select
-                        className="border border-gray-300 dark:border-white/20 rounded px-2 py-1 text-sm bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                        className="border border-gray-300 dark:border-white/20 rounded px-2 py-1 text-sm bg-white dark:bg-slate-700 text-black dark:text-black"
                         value={fileType}
                         onChange={(e) => setFileType(e.target.value as 'cv' | 'cover-letter')}
                       >
@@ -856,7 +856,7 @@ const ProfilePage = () => {
                     defaultValue={userBio || ''} // Use defaultValue instead of value
                     onChange={(e) => setUserBio(e.target.value)}
                     placeholder="Tell us about yourself..."
-                    className="w-full bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 resize-none text-xs md:text-sm max-w-full"
+                    className="w-full bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-black dark:text-black placeholder:text-black dark:placeholder:text-black resize-none text-xs md:text-sm max-w-full"
                     rows={2}
                     onFocus={() => console.log('Textarea focused, userBio value:', userBio)}
                     onBlur={() => console.log('Textarea blurred, userBio value:', userBio)}
@@ -898,7 +898,7 @@ const ProfilePage = () => {
                           }}
                           placeholder="Enter anonymous username..."
                           maxLength={50}
-                          className={`w-full bg-white/50 dark:bg-slate-700/80 border rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 max-w-full ${anonymousUsername && !usernameValidation.isValid
+                          className={`w-full bg-white/50 dark:bg-slate-700/80 border rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black dark:text-black placeholder:text-black dark:placeholder:text-black max-w-full ${anonymousUsername && !usernameValidation.isValid
                             ? 'border-red-500 dark:border-red-400'
                             : 'border-gray-300 dark:border-white/20'
                             }`}
@@ -914,7 +914,7 @@ const ProfilePage = () => {
                         {/* Username Suggestions */}
                         {showUsernameSuggestions && usernameValidation.suggestions && (
                           <div className="space-y-2">
-                            <div className="text-xs text-gray-600 dark:text-gray-400">
+                            <div className="text-xs text-black dark:text-black">
                               Suggested usernames:
                             </div>
                             <div className="flex flex-wrap gap-1">
@@ -938,7 +938,7 @@ const ProfilePage = () => {
                       </div>
                     ) : (
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-gray-900 dark:text-white font-medium">
+                        <span className="text-sm text-black dark:text-black font-medium">
                           {anonymousUsername || 'Not set'}
                         </span>
                       </div>
@@ -963,7 +963,7 @@ const ProfilePage = () => {
                             />
                           ) : (
                             <div className="w-full h-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
-                              <MessageCircle className="size-4 text-gray-400" />
+                              <MessageCircle className="size-4 text-black" />
                             </div>
                           )}
                         </div>
@@ -971,7 +971,7 @@ const ProfilePage = () => {
                           onClick={() => setShowAvatarSelector(true)}
                           variant="outline"
                           size="sm"
-                          className="bg-bits-golden-yellow hover:bg-bits-golden-yellow-600 text-white border-purple-600 text-xs"
+                          className="bg-bits-golden-yellow hover:bg-bits-golden-yellow-600 text-black border-purple-600 text-xs"
                         >
                           Choose Avatar
                         </Button>
@@ -1041,12 +1041,12 @@ const ProfilePage = () => {
                     background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
                     boxShadow: '0 5px 15px rgba(138, 43, 226, 0.3)'
                   }}>
-                    <span className="text-sm font-bold text-white">{goal}</span>
+                    <span className="text-sm font-bold text-black">{goal}</span>
                     {isEditing && (
                       <button
                         type="button"
                         onClick={() => removeItem(goals, setGoals, goal)}
-                        className="text-white/80 hover:text-white transition-colors"
+                        className="text-black/80 hover:text-black transition-colors"
                       >
                         <FaTrash size={12} />
                       </button>
@@ -1181,12 +1181,12 @@ const ProfilePage = () => {
                     background: 'linear-gradient(135deg, rgba(70, 130, 180, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
                     boxShadow: '0 5px 15px rgba(70, 130, 180, 0.3)'
                   }}>
-                    <span className="text-sm font-bold text-white">{skill}</span>
+                    <span className="text-sm font-bold text-black">{skill}</span>
                     {isEditing && (
                       <button
                         type="button"
                         onClick={() => removeItem(skills, setSkills, skill)}
-                        className="text-white/80 hover:text-white transition-colors"
+                        className="text-black/80 hover:text-black transition-colors"
                       >
                         <FaTrash size={12} />
                       </button>
@@ -1232,12 +1232,12 @@ const ProfilePage = () => {
                     background: 'linear-gradient(135deg, rgba(220, 20, 60, 0.9) 0%, rgba(255, 0, 0, 0.8) 100%)',
                     boxShadow: '0 5px 15px rgba(220, 20, 60, 0.3)'
                   }}>
-                    <span className="text-sm font-bold text-white">{interest}</span>
+                    <span className="text-sm font-bold text-black">{interest}</span>
                     {isEditing && (
                       <button
                         type="button"
                         onClick={() => removeItem(interests, setInterests, interest)}
-                        className="text-white/80 hover:text-white transition-colors"
+                        className="text-black/80 hover:text-black transition-colors"
                       >
                         <FaTrash size={12} />
                       </button>
@@ -1268,7 +1268,7 @@ const ProfilePage = () => {
                   </h2>
                   <button
                     onClick={() => router.push('/skill-assessment')}
-                    className="px-3 py-1.5 md:px-4 md:py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex items-center gap-2 text-xs md:text-sm font-bold text-white"
+                    className="px-3 py-1.5 md:px-4 md:py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex items-center gap-2 text-xs md:text-sm font-bold text-black"
                     style={{
                       background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
                       boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
@@ -1293,7 +1293,7 @@ const ProfilePage = () => {
                         }`}
                     >
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold text-white text-sm md:text-base">
+                        <h3 className="font-semibold text-black text-sm md:text-base">
                           {badge.skillName}
                         </h3>
                         {badge.percentage === 100 && (
@@ -1303,7 +1303,7 @@ const ProfilePage = () => {
                           </div>
                         )}
                       </div>
-                      <div className="flex items-center justify-between text-white/90 text-xs">
+                      <div className="flex items-center justify-between text-black/90 text-xs">
                         <span>Score: {badge.score}/{badge.total}</span>
                         <span className="font-semibold">{badge.percentage}%</span>
                       </div>
@@ -1330,7 +1330,7 @@ const ProfilePage = () => {
                 </div>
                 {skillBadges.filter(badge => badge.percentage === 100).length === 0 && (
                   <div className="text-center py-4">
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    <p className="text-black dark:text-black text-sm">
                       Complete skill assessments to earn badges!
                       <button
                         onClick={() => router.push('/skill-assessment')}
@@ -1365,7 +1365,7 @@ const ProfilePage = () => {
                   </h2>
                   <button
                     onClick={() => router.push('/skill-assessment')}
-                    className="px-3 py-1.5 md:px-4 md:py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex items-center gap-2 text-xs md:text-sm font-bold text-white"
+                    className="px-3 py-1.5 md:px-4 md:py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex items-center gap-2 text-xs md:text-sm font-bold text-black"
                     style={{
                       background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
                       boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
@@ -1386,7 +1386,7 @@ const ProfilePage = () => {
                   </p>
                   <button
                     onClick={() => router.push('/skill-assessment')}
-                    className="px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 font-bold text-white"
+                    className="px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 font-bold text-black"
                     style={{
                       background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
                       boxShadow: '0 10px 25px rgba(255, 215, 0, 0.3)'
@@ -1425,7 +1425,7 @@ const ProfilePage = () => {
                   value={headline}
                   onChange={(e) => setHeadline(e.target.value)}
                   placeholder="e.g., Senior Software Engineer at Tech Corp"
-                  className="w-full bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 text-sm"
+                  className="w-full bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-black dark:text-black placeholder:text-black dark:placeholder:text-black text-sm"
                 />
               ) : (
                 <p className="text-black text-sm font-medium">
@@ -1457,7 +1457,7 @@ const ProfilePage = () => {
                     onClick={addEducation}
                     variant="outline"
                     size="sm"
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white border-emerald-600 text-xs"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-black border-emerald-600 text-xs"
                   >
                     <FaPlus size={12} className="mr-1" />
                     Add Education
@@ -1561,7 +1561,7 @@ const ProfilePage = () => {
                     onClick={addExperience}
                     variant="outline"
                     size="sm"
-                    className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 text-xs"
+                    className="bg-blue-600 hover:bg-blue-700 text-black border-blue-600 text-xs"
                   >
                     <FaPlus size={12} className="mr-1" />
                     Add Experience
@@ -1680,12 +1680,12 @@ const ProfilePage = () => {
                     background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
                     boxShadow: '0 5px 15px rgba(138, 43, 226, 0.3)'
                   }}>
-                    <span className="text-sm font-bold text-white">{skill}</span>
+                    <span className="text-sm font-bold text-black">{skill}</span>
                     {isEditing && (
                       <button
                         type="button"
                         onClick={() => removeItem(professionalSkills, setProfessionalSkills, skill)}
-                        className="text-white/80 hover:text-white transition-colors"
+                        className="text-black/80 hover:text-black transition-colors"
                       >
                         <FaTrash size={12} />
                       </button>
@@ -1718,7 +1718,7 @@ const ProfilePage = () => {
                     onClick={addCertification}
                     variant="outline"
                     size="sm"
-                    className="bg-orange-600 hover:bg-orange-700 text-white border-orange-600 text-xs"
+                    className="bg-orange-600 hover:bg-orange-700 text-black border-orange-600 text-xs"
                   >
                     <FaPlus size={12} className="mr-1" />
                     Add Certification
@@ -1814,7 +1814,7 @@ const ProfilePage = () => {
               <div className="space-y-3">
                 <button
                   onClick={() => router.push('/chat')}
-                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-white font-bold"
+                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-black font-bold"
                   style={{
                     background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
                     boxShadow: '0 5px 15px rgba(138, 43, 226, 0.3)'
@@ -1825,7 +1825,7 @@ const ProfilePage = () => {
                 </button>
                 <button
                   onClick={() => router.push('/connections')}
-                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-white font-bold"
+                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-black font-bold"
                   style={{
                     background: 'linear-gradient(135deg, rgba(70, 130, 180, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
                     boxShadow: '0 5px 15px rgba(70, 130, 180, 0.3)'
@@ -1836,7 +1836,7 @@ const ProfilePage = () => {
                 </button>
                 <button
                   onClick={() => router.push('/anonymous-feed')}
-                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-white font-bold"
+                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-black font-bold"
                   style={{
                     background: 'linear-gradient(135deg, rgba(220, 20, 60, 0.9) 0%, rgba(255, 0, 0, 0.8) 100%)',
                     boxShadow: '0 5px 15px rgba(220, 20, 60, 0.3)'
@@ -1847,7 +1847,7 @@ const ProfilePage = () => {
                 </button>
                 <button
                   onClick={() => router.push('/reels')}
-                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-white font-bold"
+                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-black font-bold"
                   style={{
                     background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
                     boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
@@ -1881,7 +1881,7 @@ const ProfilePage = () => {
                     <div className="p-2 rounded-full" style={{
                       background: 'linear-gradient(135deg, rgba(70, 130, 180, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)'
                     }}>
-                      <activity.icon size={16} className="text-white" />
+                      <activity.icon size={16} className="text-black" />
                     </div>
                     <div className="flex-1">
                       <p className="text-black text-sm font-bold">{activity.text}</p>
@@ -1916,7 +1916,7 @@ const ProfilePage = () => {
                         value={socialLinks.linkedin}
                         onChange={(e) => setSocialLinks(prev => ({ ...prev, linkedin: e.target.value }))}
                         placeholder="LinkedIn URL"
-                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-gray-900 dark:text-white max-w-full"
+                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black dark:text-black max-w-full"
                       />
                     </div>
                     <div className="flex items-center gap-3">
@@ -1926,7 +1926,7 @@ const ProfilePage = () => {
                         value={socialLinks.facebook}
                         onChange={(e) => setSocialLinks(prev => ({ ...prev, facebook: e.target.value }))}
                         placeholder="Facebook URL"
-                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-gray-900 dark:text-white max-w-full"
+                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black dark:text-black max-w-full"
                       />
                     </div>
                     <div className="flex items-center gap-3">
@@ -1936,7 +1936,7 @@ const ProfilePage = () => {
                         value={socialLinks.phone}
                         onChange={(e) => setSocialLinks(prev => ({ ...prev, phone: e.target.value }))}
                         placeholder="Phone number"
-                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-gray-900 dark:text-white max-w-full"
+                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black dark:text-black max-w-full"
                       />
                     </div>
                     <div className="flex items-center gap-3">
@@ -1946,7 +1946,7 @@ const ProfilePage = () => {
                         value={socialLinks.email}
                         onChange={(e) => setSocialLinks(prev => ({ ...prev, email: e.target.value }))}
                         placeholder="Email address"
-                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-gray-900 dark:text-white max-w-full"
+                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black dark:text-black max-w-full"
                       />
                     </div>
                   </>

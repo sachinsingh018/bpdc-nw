@@ -678,24 +678,24 @@ export default function AdminDashboard() {
                             onClick={() => window.history.back()}
                             variant="ghost"
                             size="sm"
-                            className="text-white hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 border border-white/20 backdrop-blur-md bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
+                            className="text-black hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 border border-white/20 backdrop-blur-md bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
                         >
                             <ArrowLeft className="size-4 mr-2" />
                             Back
                         </Button>
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
-                                <Shield className="size-6 text-white" />
+                                <Shield className="size-6 text-black" />
                             </div>
                             <div>
-                                <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
-                                <p className="text-purple-200">Monitor user activity and platform usage</p>
+                                <h1 className="text-3xl font-bold text-black">Admin Dashboard</h1>
+                                <p className="text-black">Monitor user activity and platform usage</p>
                             </div>
                         </div>
                     </div>
                     <div className="flex items-center gap-3">
                         <Select value={dateRange} onValueChange={setDateRange}>
-                            <SelectTrigger className="w-32 bg-white/10 border-white/20 text-white">
+                            <SelectTrigger className="w-32 bg-white/10 border-white/20 text-black">
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent className="bg-slate-800 border-white/20">
@@ -709,7 +709,7 @@ export default function AdminDashboard() {
                             onClick={loadDashboardData}
                             variant="outline"
                             size="sm"
-                            className="text-white border-white/20 hover:bg-white/10"
+                            className="text-black border-white/20 hover:bg-white/10"
                         >
                             <RefreshCw className="size-4" />
                         </Button>
@@ -717,7 +717,7 @@ export default function AdminDashboard() {
                             onClick={handleGeneratePdf}
                             variant="default"
                             size="sm"
-                            className="text-white bg-gradient-to-r from-purple-500 to-pink-500 border-white/20 hover:from-pink-500 hover:to-purple-500 flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-60"
+                            className="text-black bg-gradient-to-r from-purple-500 to-pink-500 border-white/20 hover:from-pink-500 hover:to-purple-500 flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-60"
                             disabled={generatingPdf}
                         >
                             <Download className="size-4 mr-1" />
@@ -767,7 +767,7 @@ export default function AdminDashboard() {
                             }}
                             variant="default"
                             size="sm"
-                            className="text-white bg-gradient-to-r from-blue-500 to-purple-500 border-white/20 hover:from-purple-500 hover:to-blue-500 flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-60 font-semibold"
+                            className="text-black bg-gradient-to-r from-blue-500 to-purple-500 border-white/20 hover:from-purple-500 hover:to-blue-500 flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-60 font-semibold"
                         >
                             <Sparkles className="size-4 mr-1" />
                             Give Feedback
@@ -779,111 +779,111 @@ export default function AdminDashboard() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     {/* Total Users (All Time) */}
                     {/* New Users (Selected Range) */}
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">New Users</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">New Users</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
-                                <UserPlus className="size-4 text-white" />
+                                <UserPlus className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.newUsers?.toLocaleString() || '0'}</div>
-                            <p className="text-xs text-purple-200">
+                            <div className="text-2xl font-bold text-black">{summaryStats.newUsers?.toLocaleString() || '0'}</div>
+                            <p className="text-xs text-black">
                                 Registered in last {dateRange}
                             </p>
                         </CardContent>
                     </Card>
 
                     {/* Active Users (Selected Range) */}
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Active Users</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Active Users</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg">
-                                <Activity className="size-4 text-white" />
+                                <Activity className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.activeUsers?.toLocaleString() || '0'}</div>
-                            <p className="text-xs text-purple-200">In last {dateRange}</p>
+                            <div className="text-2xl font-bold text-black">{summaryStats.activeUsers?.toLocaleString() || '0'}</div>
+                            <p className="text-xs text-black">In last {dateRange}</p>
                         </CardContent>
                     </Card>
 
                     {/* Total Actions */}
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Total Actions</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Total Actions</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg">
-                                <Zap className="size-4 text-white" />
+                                <Zap className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.totalActions?.toLocaleString() || '0'}</div>
-                            <p className="text-xs text-purple-200">In last {dateRange}</p>
+                            <div className="text-2xl font-bold text-black">{summaryStats.totalActions?.toLocaleString() || '0'}</div>
+                            <p className="text-xs text-black">In last {dateRange}</p>
                         </CardContent>
                     </Card>
 
                     {/* Active Sessions */}
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Active Sessions</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Active Sessions</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
-                                <Monitor className="size-4 text-white" />
+                                <Monitor className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.totalSessions?.toLocaleString() || '0'}</div>
-                            <p className="text-xs text-purple-200">In last {dateRange}</p>
+                            <div className="text-2xl font-bold text-black">{summaryStats.totalSessions?.toLocaleString() || '0'}</div>
+                            <p className="text-xs text-black">In last {dateRange}</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">New Job Postings</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">New Job Postings</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg">
-                                <Briefcase className="size-4 text-white" />
+                                <Briefcase className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.newJobs?.toLocaleString() || '0'}</div>
-                            <p className="text-xs text-purple-200">Posted in last {dateRange}</p>
+                            <div className="text-2xl font-bold text-black">{summaryStats.newJobs?.toLocaleString() || '0'}</div>
+                            <p className="text-xs text-black">Posted in last {dateRange}</p>
                         </CardContent>
                     </Card>
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Job Applications (Users)</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Job Applications (Users)</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg">
-                                <FileText className="size-4 text-white" />
+                                <FileText className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.userApplications?.toLocaleString() || '0'}</div>
-                            <p className="text-xs text-purple-200">in last {dateRange}</p>
+                            <div className="text-2xl font-bold text-black">{summaryStats.userApplications?.toLocaleString() || '0'}</div>
+                            <p className="text-xs text-black">in last {dateRange}</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Job Applications (Aura Bot)</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Job Applications (Aura Bot)</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-purple-500 to-move-500 rounded-lg">
-                                <Bot className="size-4 text-white" />
+                                <Bot className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.auraBotApplications?.toLocaleString() || '0'}</div>
-                            <p className="text-xs text-purple-200">in last {dateRange}</p>
+                            <div className="text-2xl font-bold text-black">{summaryStats.auraBotApplications?.toLocaleString() || '0'}</div>
+                            <p className="text-xs text-black">in last {dateRange}</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Page Views</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Page Views</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg">
-                                <Eye className="size-4 text-white" />
+                                <Eye className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{((summaryStats.totalActions || 0) * 2.5).toLocaleString()}</div>
-                            <p className="text-xs text-purple-200">
+                            <div className="text-2xl font-bold text-black">{((summaryStats.totalActions || 0) * 2.5).toLocaleString()}</div>
+                            <p className="text-xs text-black">
                                 Estimated from actions
                             </p>
                         </CardContent>
@@ -893,22 +893,22 @@ export default function AdminDashboard() {
                 {/* Main Content Tabs */}
                 <Tabs defaultValue="activity" className="space-y-6">
                     <TabsList className="grid w-full grid-cols-5 bg-white/10 backdrop-blur-md border-white/20">
-                        <TabsTrigger value="activity" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">Recent Activity</TabsTrigger>
-                        <TabsTrigger value="users" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">User Engagement</TabsTrigger>
-                        <TabsTrigger value="trends" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">Daily Trends</TabsTrigger>
-                        <TabsTrigger value="features" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">Feature Usage</TabsTrigger>
-                        <TabsTrigger value="userlist" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">User List</TabsTrigger>
+                        <TabsTrigger value="activity" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">Recent Activity</TabsTrigger>
+                        <TabsTrigger value="users" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">User Engagement</TabsTrigger>
+                        <TabsTrigger value="trends" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">Daily Trends</TabsTrigger>
+                        <TabsTrigger value="features" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">Feature Usage</TabsTrigger>
+                        <TabsTrigger value="userlist" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">User List</TabsTrigger>
                     </TabsList>
 
                     {/* Recent Activity Tab */}
                     <TabsContent value="activity" className="space-y-4">
-                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                             <CardHeader>
-                                <CardTitle className="text-white flex items-center gap-2">
+                                <CardTitle className="text-black flex items-center gap-2">
                                     <Database className="size-5" />
                                     Recent User Activity
                                 </CardTitle>
-                                <CardDescription className="text-purple-200">Latest actions across the platform</CardDescription>
+                                <CardDescription className="text-black">Latest actions across the platform</CardDescription>
                             </CardHeader>
                             <CardContent>
                                 {/* Filters */}
@@ -918,11 +918,11 @@ export default function AdminDashboard() {
                                             placeholder="Search by user, action, or content..."
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="max-w-sm bg-white/10 border-white/20 text-white placeholder:text-purple-200"
+                                            className="max-w-sm bg-white/10 border-white/20 text-black placeholder:text-black"
                                         />
                                     </div>
                                     <Select value={selectedCategory || 'all'} onValueChange={setSelectedCategory}>
-                                        <SelectTrigger className="w-40 bg-white/10 border-white/20 text-white">
+                                        <SelectTrigger className="w-40 bg-white/10 border-white/20 text-black">
                                             <SelectValue placeholder="All Categories" />
                                         </SelectTrigger>
                                         <SelectContent className="bg-slate-800 border-white/20">
@@ -946,27 +946,27 @@ export default function AdminDashboard() {
                                         <div key={log.id} className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors">
                                             <div className="flex items-center gap-3">
                                                 <div className="size-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                                                    <span className="text-xs font-medium text-white">
+                                                    <span className="text-xs font-medium text-black">
                                                         {log.name?.charAt(0) || log.email?.charAt(0) || '?'}
                                                     </span>
                                                 </div>
                                                 <div>
                                                     <div className="flex items-center gap-2">
-                                                        <span className="font-medium text-sm text-white">
+                                                        <span className="font-medium text-sm text-black">
                                                             {log.name || log.email || 'Unknown User'}
                                                         </span>
                                                         <Badge className={`${getActionCategoryColor(log.action_category)} bg-white/20 backdrop-blur-md border-white/20`}>
                                                             {log.action_category}
                                                         </Badge>
                                                     </div>
-                                                    <div className="text-sm text-purple-200">
+                                                    <div className="text-sm text-black">
                                                         {log.action_type.replace(/_/g, ' ')}
                                                         {log.resource_type && ` • ${log.resource_type}`}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="text-right">
-                                                <div className="text-sm text-purple-200">
+                                                <div className="text-sm text-black">
                                                     {formatRelativeTime(log.created_at)}
                                                 </div>
                                                 <div className="text-xs text-purple-300">
@@ -982,13 +982,13 @@ export default function AdminDashboard() {
 
                     {/* User Engagement Tab */}
                     <TabsContent value="users" className="space-y-4">
-                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                             <CardHeader>
-                                <CardTitle className="text-white flex items-center gap-2">
+                                <CardTitle className="text-black flex items-center gap-2">
                                     <Users className="size-5" />
                                     User Engagement
                                 </CardTitle>
-                                <CardDescription className="text-purple-200">Most active users and their activity patterns</CardDescription>
+                                <CardDescription className="text-black">Most active users and their activity patterns</CardDescription>
                             </CardHeader>
                             <CardContent>
                                 <div className="space-y-3">
@@ -996,20 +996,20 @@ export default function AdminDashboard() {
                                         <div key={user.id} className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors">
                                             <div className="flex items-center gap-3">
                                                 <div className="size-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
-                                                    <span className="text-sm font-medium text-white">
+                                                    <span className="text-sm font-medium text-black">
                                                         {user.name?.charAt(0) || user.email?.charAt(0) || '?'}
                                                     </span>
                                                 </div>
                                                 <div>
-                                                    <div className="font-medium text-white">{user.name || user.email}</div>
-                                                    <div className="text-sm text-purple-200">
+                                                    <div className="font-medium text-black">{user.name || user.email}</div>
+                                                    <div className="text-sm text-black">
                                                         Joined {formatDate(user.registered_at)}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="text-right">
-                                                <div className="font-medium text-white">{user.total_actions} actions</div>
-                                                <div className="text-sm text-purple-200">
+                                                <div className="font-medium text-black">{user.total_actions} actions</div>
+                                                <div className="text-sm text-black">
                                                     {user.total_sessions} sessions • {user.total_page_views} page views
                                                 </div>
                                                 <div className="text-xs text-purple-300">
@@ -1017,7 +1017,7 @@ export default function AdminDashboard() {
                                                 </div>
                                             </div>
                                         </div>
-                                    )) : <div className="text-purple-200">No data available</div>}
+                                    )) : <div className="text-black">No data available</div>}
                                 </div>
                             </CardContent>
                         </Card>
@@ -1025,32 +1025,32 @@ export default function AdminDashboard() {
 
                     {/* Daily Trends Tab */}
                     <TabsContent value="trends" className="space-y-4">
-                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                             <CardHeader>
-                                <CardTitle className="text-white flex items-center gap-2">
+                                <CardTitle className="text-black flex items-center gap-2">
                                     <ChartBar className="size-5" />
                                     Daily Activity Trends
                                 </CardTitle>
-                                <CardDescription className="text-purple-200">Platform usage over the last 30 days</CardDescription>
+                                <CardDescription className="text-black">Platform usage over the last 30 days</CardDescription>
                             </CardHeader>
                             <CardContent>
                                 <div className="space-y-3">
                                     {Array.isArray(dailyTrends) ? dailyTrends.slice(0, 10).map((trend) => (
                                         <div key={trend.activity_date} className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors">
                                             <div>
-                                                <div className="font-medium text-white">{new Date(trend.activity_date).toLocaleDateString()}</div>
-                                                <div className="text-sm text-purple-200">
+                                                <div className="font-medium text-black">{new Date(trend.activity_date).toLocaleDateString()}</div>
+                                                <div className="text-sm text-black">
                                                     {trend.active_users} active users
                                                 </div>
                                             </div>
                                             <div className="text-right">
-                                                <div className="font-medium text-white">{trend.total_actions} total actions</div>
-                                                <div className="text-sm text-purple-200">
+                                                <div className="font-medium text-black">{trend.total_actions} total actions</div>
+                                                <div className="text-sm text-black">
                                                     Auth: {trend.auth_actions} • Social: {trend.social_actions} • Content: {trend.content_actions}
                                                 </div>
                                             </div>
                                         </div>
-                                    )) : <div className="text-purple-200">No data available</div>}
+                                    )) : <div className="text-black">No data available</div>}
                                 </div>
                             </CardContent>
                         </Card>
@@ -1058,28 +1058,28 @@ export default function AdminDashboard() {
 
                     {/* Feature Usage Tab */}
                     <TabsContent value="features" className="space-y-4">
-                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                             <CardHeader>
-                                <CardTitle className="text-white flex items-center gap-2">
+                                <CardTitle className="text-black flex items-center gap-2">
                                     <TrendingUp className="size-5" />
                                     Feature Usage
                                 </CardTitle>
-                                <CardDescription className="text-purple-200">Most used features in the last 30 days</CardDescription>
+                                <CardDescription className="text-black">Most used features in the last 30 days</CardDescription>
                             </CardHeader>
                             <CardContent>
                                 <div className="space-y-3">
                                     {Array.isArray(featureUsage) ? featureUsage.map((feature) => (
                                         <div key={feature.feature_name} className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors">
                                             <div>
-                                                <div className="font-medium capitalize text-white">
+                                                <div className="font-medium capitalize text-black">
                                                     {feature.feature_name.replace(/_/g, ' ')}
                                                 </div>
                                             </div>
                                             <div className="text-right">
-                                                <div className="font-medium text-white">{feature.usage_count.toLocaleString()} uses</div>
+                                                <div className="font-medium text-black">{feature.usage_count.toLocaleString()} uses</div>
                                             </div>
                                         </div>
-                                    )) : <div className="text-purple-200">No data available</div>}
+                                    )) : <div className="text-black">No data available</div>}
                                 </div>
                             </CardContent>
                         </Card>
@@ -1087,13 +1087,13 @@ export default function AdminDashboard() {
 
                     {/* User List Tab */}
                     <TabsContent value="userlist" className="space-y-4">
-                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                             <CardHeader>
-                                <CardTitle className="text-white flex items-center gap-2">
+                                <CardTitle className="text-black flex items-center gap-2">
                                     <Users className="size-5" />
                                     Student Directory
                                 </CardTitle>
-                                <CardDescription className="text-purple-200">Complete list of BITS Dubai students and alumni</CardDescription>
+                                <CardDescription className="text-black">Complete list of BITS Dubai students and alumni</CardDescription>
                             </CardHeader>
                             <CardContent>
                                 {/* Filters */}
@@ -1103,11 +1103,11 @@ export default function AdminDashboard() {
                                             placeholder="Search by name or email..."
                                             value={userListSearchTerm}
                                             onChange={(e) => setUserListSearchTerm(e.target.value)}
-                                            className="max-w-sm bg-white/10 border-white/20 text-white placeholder:text-purple-200"
+                                            className="max-w-sm bg-white/10 border-white/20 text-black placeholder:text-black"
                                         />
                                     </div>
                                     <Select value={selectedBatchYear || 'all'} onValueChange={setSelectedBatchYear}>
-                                        <SelectTrigger className="w-40 bg-white/10 border-white/20 text-white">
+                                        <SelectTrigger className="w-40 bg-white/10 border-white/20 text-black">
                                             <SelectValue placeholder="All Batches" />
                                         </SelectTrigger>
                                         <SelectContent className="bg-slate-800 border-white/20">
@@ -1125,7 +1125,7 @@ export default function AdminDashboard() {
                                         </SelectContent>
                                     </Select>
                                     <Select value={selectedProfile || 'all'} onValueChange={setSelectedProfile}>
-                                        <SelectTrigger className="w-40 bg-white/10 border-white/20 text-white">
+                                        <SelectTrigger className="w-40 bg-white/10 border-white/20 text-black">
                                             <SelectValue placeholder="All Profiles" />
                                         </SelectTrigger>
                                         <SelectContent className="bg-slate-800 border-white/20">
@@ -1155,7 +1155,7 @@ export default function AdminDashboard() {
                                 )}
 
                                 {/* Student Statistics */}
-                                <div className="flex items-center gap-4 mb-4 text-sm text-purple-200">
+                                <div className="flex items-center gap-4 mb-4 text-sm text-black">
                                     <span>Total: {students.length} students</span>
                                     <span>•</span>
                                     <span>Alumni: {students.filter(s => s.profile === 'alumni').length}</span>
@@ -1171,28 +1171,28 @@ export default function AdminDashboard() {
                                         <div key={index} className="p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors">
                                             <div className="flex items-center gap-3 mb-3">
                                                 <div className="size-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                                                    <span className="text-sm font-medium text-white">
+                                                    <span className="text-sm font-medium text-black">
                                                         {student.name?.charAt(0) || student.email?.charAt(0) || '?'}
                                                     </span>
                                                 </div>
                                                 <div className="flex-1 min-w-0">
-                                                    <div className="font-medium text-white truncate">
+                                                    <div className="font-medium text-black truncate">
                                                         {student.name || 'Unknown'}
                                                     </div>
-                                                    <div className="text-xs text-purple-200 truncate">
+                                                    <div className="text-xs text-black truncate">
                                                         {student.email}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="space-y-2">
                                                 <div className="flex items-center justify-between">
-                                                    <span className="text-xs text-purple-200">Batch:</span>
+                                                    <span className="text-xs text-black">Batch:</span>
                                                     <Badge className="bg-blue-100 text-blue-800 text-xs">
                                                         {student.batch_year}
                                                     </Badge>
                                                 </div>
                                                 <div className="flex items-center justify-between">
-                                                    <span className="text-xs text-purple-200">Profile:</span>
+                                                    <span className="text-xs text-black">Profile:</span>
                                                     <Badge className={`${student.profile === 'alumni' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'} text-xs`}>
                                                         {student.profile}
                                                     </Badge>
@@ -1203,7 +1203,7 @@ export default function AdminDashboard() {
                                 </div>
 
                                 {paginatedStudents.length === 0 && (
-                                    <div className="text-center py-8 text-purple-200">
+                                    <div className="text-center py-8 text-black">
                                         No students found matching your criteria
                                     </div>
                                 )}
@@ -1211,7 +1211,7 @@ export default function AdminDashboard() {
                                 {/* Pagination Controls */}
                                 {totalPages > 1 && (
                                     <div className="flex items-center justify-between mt-6">
-                                        <div className="text-sm text-purple-200">
+                                        <div className="text-sm text-black">
                                             Showing {startIndex + 1}-{Math.min(endIndex, filteredStudents.length)} of {filteredStudents.length} students
                                         </div>
                                         <div className="flex items-center gap-2">
@@ -1267,7 +1267,7 @@ export default function AdminDashboard() {
                                 )}
 
                                 {totalPages === 1 && (
-                                    <div className="mt-4 text-sm text-purple-200">
+                                    <div className="mt-4 text-sm text-black">
                                         Showing {filteredStudents.length} of {students.length} students
                                     </div>
                                 )}

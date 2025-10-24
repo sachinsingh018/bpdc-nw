@@ -134,7 +134,7 @@ const PurePreviewMessage = ({
                                 <Button
                                   data-testid="message-edit-button"
                                   variant="ghost"
-                                  className="px-2 h-fit rounded-full text-muted-foreground opacity-0 group-hover/message:opacity-100"
+                                  className="px-2 h-fit rounded-full text-black opacity-0 group-hover/message:opacity-100"
                                   onClick={() => {
                                     setMode('edit');
                                   }}
@@ -224,7 +224,7 @@ const PurePreviewMessage = ({
                                             <h3 className="text-lg font-semibold text-gray-800">
                                               {parsed.length} {parsed.length === 1 ? 'Result' : 'Results'} Found
                                             </h3>
-                                            <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+                                            <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-black">
                                               AI Generated
                                             </Badge>
                                           </div>
@@ -258,7 +258,7 @@ const PurePreviewMessage = ({
                                   }
                                   if (Array.isArray(parsed) && parsed.length === 0) {
                                     return (
-                                      <div className="text-center text-muted-foreground py-4">
+                                      <div className="text-center text-black py-4">
                                         No relevant results found. Try a different question 💡
                                       </div>
                                     );
@@ -282,7 +282,7 @@ const PurePreviewMessage = ({
                               {Array.from({ length: cardCount }).map((_, index) => (
                                 <div
                                   key={index}
-                                  className="rounded-xl p-5 text-white shadow-lg shadow-purple-500/50 relative"
+                                  className="rounded-xl p-5 text-black shadow-lg shadow-purple-500/50 relative"
                                   style={{
                                     backgroundColor: '#0E0B1E',
                                     minHeight: '180px',
@@ -375,7 +375,7 @@ export const ThinkingMessage = () => {
         </div>
 
         <div className="flex flex-col gap-2 w-full">
-          <div className="flex flex-col gap-4 text-muted-foreground">
+          <div className="flex flex-col gap-4 text-black">
             Hmm...
           </div>
         </div>

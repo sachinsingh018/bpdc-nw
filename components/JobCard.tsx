@@ -240,15 +240,15 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                 />
                 <div className="flex flex-col min-w-0">
                     <span className="text-base font-semibold text-purple-700 dark:text-purple-300 truncate">{job.company}</span>
-                    {job.job_country && <span className="text-xs text-gray-400 dark:text-gray-500 font-normal">{job.job_country}</span>}
+                    {job.job_country && <span className="text-xs text-black dark:text-black font-normal">{job.job_country}</span>}
                 </div>
             </div>
             {/* Job Title below company info */}
-            <div className="text-lg md:text-xl font-bold text-slate-900 dark:text-white leading-tight whitespace-normal break-words tracking-tight mb-1">
+            <div className="text-lg md:text-xl font-bold text-slate-900 dark:text-black leading-tight whitespace-normal break-words tracking-tight mb-1">
                 {job.title}
             </div>
             {/* Location and posted date */}
-            <div className="flex flex-wrap gap-2 mb-1 text-sm text-gray-500 dark:text-gray-400 font-normal">
+            <div className="flex flex-wrap gap-2 mb-1 text-sm text-black dark:text-black font-normal">
                 {(job.job_city || job.job_state) && (
                     <span>
                         {job.job_city ? job.job_city : ''}
@@ -257,7 +257,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                     </span>
                 )}
                 {job.job_posted_at_datetime_utc && (
-                    <span className="text-gray-500 dark:text-gray-400 font-normal">Posted: {new Date(job.job_posted_at_datetime_utc).toLocaleDateString()}</span>
+                    <span className="text-black dark:text-black font-normal">Posted: {new Date(job.job_posted_at_datetime_utc).toLocaleDateString()}</span>
                 )}
             </div>
             {/* Professional tags: Employment Type, Remote, and Posted By */}
@@ -277,7 +277,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                         ? 'bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-200 border-blue-100 dark:border-blue-700'
                         : job.posted_by === 'career_team'
                             ? 'bg-green-50 dark:bg-green-900/40 text-green-700 dark:text-green-200 border-green-100 dark:border-green-700'
-                            : 'bg-gray-50 dark:bg-gray-900/40 text-gray-700 dark:text-gray-200 border-gray-100 dark:border-gray-700'
+                            : 'bg-gray-50 dark:bg-gray-900/40 text-black dark:text-gray-200 border-gray-100 dark:border-gray-700'
                         }`}>
                         {job.posted_by === 'alumni' ? 'Alumni' :
                             job.posted_by === 'career_team' ? 'Career Team' :
@@ -299,7 +299,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                 </div>
             )}
             {/* Applicants info */}
-            <div className="mb-1 text-xs text-gray-400 dark:text-gray-500 font-light italic">
+            <div className="mb-1 text-xs text-black dark:text-black font-light italic">
                 {applicants} people have also applied for this job
             </div>
             {/* Job apply link - Removed from card, now in modal */}
@@ -310,7 +310,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                     <button
                         onClick={handleShare}
                         className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium
-                            bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600
+                            bg-gray-100 dark:bg-gray-700 text-black dark:text-gray-300 border border-gray-200 dark:border-gray-600
                             hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-150
                             focus:outline-none focus:ring-2 focus:ring-gray-400"
                         title="Share this job"
@@ -324,7 +324,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                     {isApplied ? (
                         <button
                             className="w-full py-2 px-4 rounded font-bold text-sm flex items-center justify-center
-                            bg-green-600 text-white shadow-md border-none
+                            bg-green-600 text-black shadow-md border-none
                             transition-colors duration-150
                             cursor-default"
                             disabled
@@ -336,7 +336,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                             job={job}
                             onApply={() => setShowModal(true)}
                             className="w-full py-2 px-4 rounded font-bold text-sm flex items-center justify-center
-                            bg-purple-700 text-white shadow-md border-none
+                            bg-purple-700 text-black shadow-md border-none
                             transition-colors duration-150
                             hover:bg-purple-800 active:bg-purple-900
                             focus:outline-none focus:ring-2 focus:ring-purple-400"
@@ -356,7 +356,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                         }}
                     >
                         <button
-                            className="absolute top-2 right-2 sm:top-4 sm:right-4 text-gray-400 hover:text-red-500 text-2xl sm:text-3xl font-bold focus:outline-none rounded-full bg-white/70 dark:bg-slate-800/70 size-12 flex items-center justify-center shadow-md"
+                            className="absolute top-2 right-2 sm:top-4 sm:right-4 text-black hover:text-red-500 text-2xl sm:text-3xl font-bold focus:outline-none rounded-full bg-white/70 dark:bg-slate-800/70 size-12 flex items-center justify-center shadow-md"
                             onClick={() => {
                                 setShowModal(false);
                                 setSubmitted(false);
@@ -384,7 +384,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                                 }}
                             />
                             <div className="flex-1">
-                                <div className="font-mono font-bold text-2xl text-slate-900 dark:text-white flex items-center gap-1">
+                                <div className="font-mono font-bold text-2xl text-slate-900 dark:text-black flex items-center gap-1">
                                     {job.title}
                                 </div>
                                 <div className="text-sm text-slate-700 dark:text-gray-300 font-mono font-bold">
@@ -424,7 +424,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                                 value={name}
                                 onChange={e => setName(e.target.value)}
                                 required
-                                className="block w-full rounded border border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                className="block w-full rounded border border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 px-3 py-2 text-sm text-black dark:text-black focus:outline-none focus:ring-2 focus:ring-purple-500"
                                 placeholder="Your full name"
                             />
                             <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1">Email:</label>
@@ -433,7 +433,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 required
-                                className="block w-full rounded border border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                className="block w-full rounded border border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 px-3 py-2 text-sm text-black dark:text-black focus:outline-none focus:ring-2 focus:ring-purple-500"
                                 placeholder="you@email.com"
                             />
                             <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1">Cover Letter:</label>
@@ -442,7 +442,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                                 onChange={e => setCoverLetter(e.target.value)}
                                 required
                                 rows={4}
-                                className="block w-full rounded border border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+                                className="block w-full rounded border border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 px-3 py-2 text-sm text-black dark:text-black focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
                                 placeholder="Write a short cover letter..."
                             />
                             <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1">Attach your CV (PDF, DOCX):</label>
@@ -450,7 +450,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                                 type="file"
                                 accept=".pdf,.doc,.docx"
                                 onChange={handleFileChange}
-                                className="block w-full text-sm text-gray-700 dark:text-gray-200 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 dark:file:bg-purple-900/40 dark:file:text-purple-200 dark:hover:file:bg-purple-900/60"
+                                className="block w-full text-sm text-black dark:text-gray-200 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 dark:file:bg-purple-900/40 dark:file:text-purple-200 dark:hover:file:bg-purple-900/60"
                             />
                             {cvName && <span className="text-sm text-green-600 dark:text-green-400">Selected: {cvName}</span>}
 
@@ -493,7 +493,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
 
                             <button
                                 type="submit"
-                                className="mt-2 py-3 px-6 rounded bg-purple-600 text-white font-bold font-mono shadow hover:bg-purple-700 transition-all focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:opacity-60 text-lg"
+                                className="mt-2 py-3 px-6 rounded bg-purple-600 text-black font-bold font-mono shadow hover:bg-purple-700 transition-all focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:opacity-60 text-lg"
                                 disabled={submitting || submitted}
                             >
                                 {submitting ? 'Submitting...' : submitted ? 'Submitted!' : 'Submit Application'}

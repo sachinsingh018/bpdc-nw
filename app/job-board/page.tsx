@@ -453,12 +453,12 @@ function JobBoardContent() {
                 <div className="flex flex-col gap-6 max-w-7xl mx-auto py-12 px-4">
                     <div className="flex-1 space-y-4">
                         <h1
-                            className="text-5xl font-extrabold tracking-normal text-black dark:text-white mb-2 z-[60] pointer-events-auto relative"
+                            className="text-5xl font-extrabold tracking-normal text-black dark:text-black mb-2 z-[60] pointer-events-auto relative"
                             style={{ fontFamily: "'Press Start 2P', 'Lucida Console', 'Courier New', Courier, monospace", letterSpacing: '-0.02em' }}
                         >
                             {jobType === 'remote' ? 'Remote Jobs' : jobType === 'parttime' ? 'Part-time Jobs' : 'Job Board'}
                         </h1>
-                        <p className="text-lg text-gray-700 dark:text-gray-200 font-light max-w-2xl mb-4 ml-1">
+                        <p className="text-lg text-black dark:text-black font-light max-w-2xl mb-4 ml-1">
                             Discover and apply to {jobType === 'remote' ? 'remote' : jobType === 'parttime' ? 'part-time' : ''} jobs using AI.
                         </p>
 
@@ -468,7 +468,7 @@ function JobBoardContent() {
                                 onClick={() => handleToggleChange('all')}
                                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${jobType === 'all'
                                     ? 'bg-white dark:bg-gray-600 text-bits-golden-yellow dark:text-bits-golden-yellow shadow-sm'
-                                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-black'
                                     }`}
                             >
                                 All Jobs
@@ -477,7 +477,7 @@ function JobBoardContent() {
                                 onClick={() => handleToggleChange('remote')}
                                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${jobType === 'remote'
                                     ? 'bg-white dark:bg-gray-600 text-bits-golden-yellow dark:text-bits-golden-yellow shadow-sm'
-                                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-black'
                                     }`}
                             >
                                 Remote Jobs
@@ -486,7 +486,7 @@ function JobBoardContent() {
                                 onClick={() => handleToggleChange('parttime')}
                                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${jobType === 'parttime'
                                     ? 'bg-white dark:bg-gray-600 text-bits-golden-yellow dark:text-bits-golden-yellow shadow-sm'
-                                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                                    : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-black'
                                     }`}
                             >
                                 Part-time Jobs
@@ -523,7 +523,7 @@ function JobBoardContent() {
                                     }`}
                             >
                                 <div className="size-3 bg-gray-500 rounded-full"></div>
-                                <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">External: {categoryCounts.external}</span>
+                                <span className="text-sm font-semibold text-black dark:text-gray-300">External: {categoryCounts.external}</span>
                             </button>
                         </div>
                         {/* Always-visible Search Bar with Filter/Sort Buttons */}
@@ -536,11 +536,11 @@ function JobBoardContent() {
                                         placeholder={`Search ${jobType === 'remote' ? 'remote ' : jobType === 'parttime' ? 'part-time ' : ''}jobs...`}
                                         value={searchInput}
                                         onChange={(e) => setSearchInput(e.target.value)}
-                                        className="bg-transparent outline-none text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder-gray-300 text-sm py-1 w-full"
+                                        className="bg-transparent outline-none text-gray-900 dark:text-black placeholder:text-gray-500 dark:placeholder-gray-300 text-sm py-1 w-full"
                                     />
                                     <button
                                         type="submit"
-                                        className="ml-1 px-3 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold flex items-center shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+                                        className="ml-1 px-3 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-black font-bold flex items-center shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
                                         aria-label="Search"
                                     >
                                         <SearchIcon className="size-4" />
@@ -552,14 +552,14 @@ function JobBoardContent() {
                         <div className="flex flex-col sm:flex-row flex-wrap items-center gap-2 mb-4 w-full">
                             {/* View My Applications */}
                             <Button
-                                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 border-0"
+                                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-black font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 border-0"
                                 onClick={() => router.push('/job-board/my-applications')}
                             >
                                 View My Applications
                             </Button>
                             {/* Auto Applier Aura Bot Button - Commented out */}
                             {/* <Button
-                                className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 border-0 flex items-center gap-2"
+                                className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 border-0 flex items-center gap-2"
                                 onClick={async () => {
                                     if (loading || paginatedJobs.length < 1) return;
                                     let userEmail = '';
@@ -628,19 +628,19 @@ function JobBoardContent() {
                             </Button> */}
                             {/* Post Job Button - Hidden */}
                             {/* <Button
-                                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 border-0 flex items-center gap-2"
+                                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-black font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 border-0 flex items-center gap-2"
                                 onClick={() => setShowPostJobModal(true)}
                             >
                                 <Plus className="size-4" />
                                 Post {jobType === 'remote' ? 'Remote ' : jobType === 'parttime' ? 'Part-time ' : ''}Job
                             </Button> */}
                             {/* Category Filter Dropdown */}
-                            <label htmlFor="category-filter" className="font-semibold text-sm text-gray-700 dark:text-gray-200 ml-2">Category:</label>
+                            <label htmlFor="category-filter" className="font-semibold text-sm text-black dark:text-black ml-2">Category:</label>
                             <select
                                 id="category-filter"
                                 value={categoryFilter}
                                 onChange={e => setCategoryFilter(e.target.value)}
-                                className="border-2 border-gray-200 dark:border-gray-600 rounded-xl px-4 py-2 text-sm bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="border-2 border-gray-200 dark:border-gray-600 rounded-xl px-4 py-2 text-sm bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm text-gray-900 dark:text-black focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                                 style={{ minWidth: 140 }}
                             >
                                 <option value="">All Categories</option>
@@ -649,12 +649,12 @@ function JobBoardContent() {
                                 <option value="external">External</option>
                             </select>
                             {/* Country Filter Dropdown */}
-                            <label htmlFor="country-filter" className="font-semibold text-sm text-gray-700 dark:text-gray-200 ml-2">Country:</label>
+                            <label htmlFor="country-filter" className="font-semibold text-sm text-black dark:text-black ml-2">Country:</label>
                             <select
                                 id="country-filter"
                                 value={countryFilter}
                                 onChange={e => setCountryFilter(e.target.value)}
-                                className="border-2 border-gray-200 dark:border-gray-600 rounded-xl px-4 py-2 text-sm bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="border-2 border-gray-200 dark:border-gray-600 rounded-xl px-4 py-2 text-sm bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm text-gray-900 dark:text-black focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                                 style={{ minWidth: 140 }}
                             >
                                 <option value="">All Countries</option>
@@ -686,7 +686,7 @@ function JobBoardContent() {
                             <div className="mb-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl border-2 border-green-200 dark:border-green-700 shadow-lg">
                                 <div className="flex items-center gap-3 mb-3">
                                     <div className="size-8 bg-green-500 rounded-full flex items-center justify-center">
-                                        <span className="text-white font-bold text-sm">✓</span>
+                                        <span className="text-black font-bold text-sm">✓</span>
                                     </div>
                                     <h3 className="text-xl font-bold text-green-800 dark:text-green-200">
                                         Partner Recruiter Opportunities
@@ -725,7 +725,7 @@ function JobBoardContent() {
                         {totalPages > 1 && (
                             <div className="flex justify-center items-center gap-4 mt-8 z-[60] pointer-events-auto relative">
                                 <button
-                                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 disabled:shadow-lg"
+                                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-black font-bold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 disabled:shadow-lg"
                                     onClick={() => setPage(p => Math.max(1, p - 1))}
                                     disabled={page === 1}
                                 >
@@ -735,7 +735,7 @@ function JobBoardContent() {
                                     <span className="text-sm font-bold text-purple-700 dark:text-purple-300">Page {page} of {totalPages}</span>
                                 </div>
                                 <button
-                                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 disabled:shadow-lg"
+                                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-black font-bold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 disabled:shadow-lg"
                                     onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                                     disabled={page === totalPages}
                                 >
@@ -835,7 +835,7 @@ function PostJobModal({ onClose, onSubmit, loading }: {
                 <div className="flex items-center justify-between mb-8">
                     <div className="flex items-center gap-3">
                         <div className="size-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
-                            <Plus className="size-5 text-white" />
+                            <Plus className="size-5 text-black" />
                         </div>
                         <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Post a Job</h2>
                     </div>
@@ -850,7 +850,7 @@ function PostJobModal({ onClose, onSubmit, loading }: {
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="block text-sm font-semibold text-black dark:text-gray-300 mb-2">
                                 Job Title *
                             </label>
                             <input
@@ -858,13 +858,13 @@ function PostJobModal({ onClose, onSubmit, loading }: {
                                 required
                                 value={formData.jobTitle}
                                 onChange={(e) => setFormData(prev => ({ ...prev, jobTitle: e.target.value }))}
-                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-black focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                                 placeholder="e.g., Senior Software Engineer"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="block text-sm font-semibold text-black dark:text-gray-300 mb-2">
                                 Company Name *
                             </label>
                             <input
@@ -872,58 +872,58 @@ function PostJobModal({ onClose, onSubmit, loading }: {
                                 required
                                 value={formData.employerName}
                                 onChange={(e) => setFormData(prev => ({ ...prev, employerName: e.target.value }))}
-                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-black focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                                 placeholder="e.g., Tech Corp Inc."
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="block text-sm font-semibold text-black dark:text-gray-300 mb-2">
                                 City
                             </label>
                             <input
                                 type="text"
                                 value={formData.jobCity}
                                 onChange={(e) => setFormData(prev => ({ ...prev, jobCity: e.target.value }))}
-                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-black focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                                 placeholder="e.g., San Francisco"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="block text-sm font-semibold text-black dark:text-gray-300 mb-2">
                                 State/Province
                             </label>
                             <input
                                 type="text"
                                 value={formData.jobState}
                                 onChange={(e) => setFormData(prev => ({ ...prev, jobState: e.target.value }))}
-                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-black focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                                 placeholder="e.g., California"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="block text-sm font-semibold text-black dark:text-gray-300 mb-2">
                                 Country
                             </label>
                             <input
                                 type="text"
                                 value={formData.jobCountry}
                                 onChange={(e) => setFormData(prev => ({ ...prev, jobCountry: e.target.value }))}
-                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-black focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                                 placeholder="e.g., United States"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="block text-sm font-semibold text-black dark:text-gray-300 mb-2">
                                 Employment Type
                             </label>
                             <select
                                 value={formData.jobEmploymentType}
                                 onChange={(e) => setFormData(prev => ({ ...prev, jobEmploymentType: e.target.value }))}
-                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-black focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             >
                                 <option value="Full-time">Full-time</option>
                                 <option value="Part-time">Part-time</option>
@@ -934,13 +934,13 @@ function PostJobModal({ onClose, onSubmit, loading }: {
                         </div>
 
                         <div className="space-y-2">
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="block text-sm font-semibold text-black dark:text-gray-300 mb-2">
                                 Posted By
                             </label>
                             <select
                                 value={formData.postedBy}
                                 onChange={(e) => setFormData(prev => ({ ...prev, postedBy: e.target.value }))}
-                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-black focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             >
                                 {/* <option value="alumni">Alumni</option> */}
                                 <option value="career_team">Partner Recruiters</option>
@@ -956,14 +956,14 @@ function PostJobModal({ onClose, onSubmit, loading }: {
                                 onChange={(e) => setFormData(prev => ({ ...prev, jobIsRemote: e.target.checked }))}
                                 className="size-5 text-purple-600 rounded focus:ring-2 focus:ring-purple-500/20"
                             />
-                            <label htmlFor="remote" className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <label htmlFor="remote" className="text-sm font-medium text-black dark:text-gray-300">
                                 Remote Position
                             </label>
                         </div>
                     </div>
 
                     <div className="space-y-2">
-                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        <label className="block text-sm font-semibold text-black dark:text-gray-300 mb-2">
                             Application Link *
                         </label>
                         <input
@@ -971,46 +971,46 @@ function PostJobModal({ onClose, onSubmit, loading }: {
                             required
                             value={formData.jobApplyLink}
                             onChange={(e) => setFormData(prev => ({ ...prev, jobApplyLink: e.target.value }))}
-                            className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                            className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-black focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             placeholder="https://company.com/careers/job-123"
                         />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="space-y-2">
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="block text-sm font-semibold text-black dark:text-gray-300 mb-2">
                                 Min Salary
                             </label>
                             <input
                                 type="text"
                                 value={formData.jobMinSalary}
                                 onChange={(e) => setFormData(prev => ({ ...prev, jobMinSalary: e.target.value }))}
-                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-black focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                                 placeholder="50000"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="block text-sm font-semibold text-black dark:text-gray-300 mb-2">
                                 Max Salary
                             </label>
                             <input
                                 type="text"
                                 value={formData.jobMaxSalary}
                                 onChange={(e) => setFormData(prev => ({ ...prev, jobMaxSalary: e.target.value }))}
-                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-black focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                                 placeholder="80000"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <label className="block text-sm font-semibold text-black dark:text-gray-300 mb-2">
                                 Salary Period
                             </label>
                             <select
                                 value={formData.jobSalaryPeriod}
                                 onChange={(e) => setFormData(prev => ({ ...prev, jobSalaryPeriod: e.target.value }))}
-                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                                className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-black focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             >
                                 <option value="Annual">Annual</option>
                                 <option value="Monthly">Monthly</option>
@@ -1020,7 +1020,7 @@ function PostJobModal({ onClose, onSubmit, loading }: {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                        <label className="block text-sm font-semibold text-black dark:text-gray-300 mb-2">
                             Job Description *
                         </label>
                         <textarea
@@ -1028,7 +1028,7 @@ function PostJobModal({ onClose, onSubmit, loading }: {
                             rows={6}
                             value={formData.jobDescription}
                             onChange={(e) => setFormData(prev => ({ ...prev, jobDescription: e.target.value }))}
-                            className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white resize-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
+                            className="w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-black resize-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                             placeholder="Describe the role, responsibilities, requirements, and qualifications..."
                         />
                     </div>
@@ -1037,7 +1037,7 @@ function PostJobModal({ onClose, onSubmit, loading }: {
                         <Button
                             type="submit"
                             disabled={loading}
-                            className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+                            className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-black font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
                         >
                             {loading ? 'Posting...' : 'Post Job'}
                         </Button>

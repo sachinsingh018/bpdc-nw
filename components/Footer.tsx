@@ -17,15 +17,15 @@ export const Footer = () => {
                     <h2 className="text-2xl font-bold bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 bg-clip-text text-transparent mb-4">
                         BITS Pilani Dubai Campus
                     </h2>
-                    <p className="text-zinc-400 leading-relaxed font-medium">
+                    <p className="text-black leading-relaxed font-medium">
                         Reimagining how professionals connect through AI-powered, intent-based networking. Build smarter, deeper relationships.
                     </p>
                 </div>
 
                 {/* Middle Column */}
                 <div>
-                    <h3 className="text-white font-semibold mb-6 uppercase tracking-wider text-sm">Quick Links</h3>
-                    <ul className="space-y-3 text-zinc-400">
+                    <h3 className="text-black font-semibold mb-6 uppercase tracking-wider text-sm">Quick Links</h3>
+                    <ul className="space-y-3 text-black">
                         {[
                             { label: 'About Us', path: '/about' },
                             { label: 'FAQs', path: '/faq' },
@@ -51,15 +51,15 @@ export const Footer = () => {
 
                 {/* Right Column */}
                 <div>
-                    <h3 className="text-white font-semibold mb-6 uppercase tracking-wider text-sm">Stay Updated</h3>
+                    <h3 className="text-black font-semibold mb-6 uppercase tracking-wider text-sm">Stay Updated</h3>
                     <form className="w-full flex flex-col sm:flex-row gap-4 mb-6">
                         <input
                             type="email"
                             placeholder="you@example.com"
-                            className="w-full px-4 py-3 rounded-xl bg-zinc-900/60 border border-zinc-800/60 placeholder-zinc-500 text-white focus:outline-none focus:ring-2 focus:ring-bits-golden-yellow focus:border-transparent backdrop-blur-xl"
+                            className="w-full px-4 py-3 rounded-xl bg-zinc-900/60 border border-zinc-800/60 placeholder-zinc-500 text-black focus:outline-none focus:ring-2 focus:ring-bits-golden-yellow focus:border-transparent backdrop-blur-xl"
                         />
                         <motion.button
-                            className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700 text-white rounded-xl transition-all duration-200 font-medium"
+                            className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700 text-black rounded-xl transition-all duration-200 font-medium"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
@@ -80,7 +80,7 @@ export const Footer = () => {
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="size-10 bg-zinc-900/60 hover:bg-zinc-800/60 rounded-xl flex items-center justify-center text-zinc-400 hover:text-bits-golden-yellow transition-all duration-200"
+                                    className="size-10 bg-zinc-900/60 hover:bg-zinc-800/60 rounded-xl flex items-center justify-center text-black hover:text-bits-golden-yellow transition-all duration-200"
                                     whileHover={{ scale: 1.1 }}
                                 >
                                     <IconComponent size={18} />
@@ -96,7 +96,7 @@ export const Footer = () => {
             <div className="mt-10 flex justify-center">
                 <button
                     onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                    className="flex items-center gap-2 px-4 py-2 bg-zinc-200 dark:bg-zinc-800 text-black dark:text-white rounded-full shadow-md hover:scale-105 transition-all"
+                    className="flex items-center gap-2 px-4 py-2 bg-zinc-200 dark:bg-zinc-800 text-black dark:text-black rounded-full shadow-md hover:scale-105 transition-all"
                 >
                     {theme === 'dark' ? (
                         <>
@@ -113,7 +113,7 @@ export const Footer = () => {
             </div>
 
             <div className="border-t border-zinc-800/50 mt-12 pt-8">
-                <p className="text-center text-zinc-500 text-sm font-medium">
+                <p className="text-center text-black text-sm font-medium">
                     &copy; 2025 Networkqy. All rights reserved.
                 </p>
             </div>
