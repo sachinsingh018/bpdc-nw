@@ -522,7 +522,7 @@ export default function AdminDashboard() {
         return (
             <div className="flex items-center justify-center min-h-screen">
                 <div className="flex items-center gap-2">
-                    <RefreshCw className="w-5 h-5 animate-spin" />
+                    <RefreshCw className="size-5 animate-spin" />
                     <span>Loading dashboard...</span>
                 </div>
             </div>
@@ -550,35 +550,35 @@ export default function AdminDashboard() {
             {/* Dynamic Vibrant Background Elements */}
             <div className="fixed inset-0 z-0">
                 {/* Deep Royal Blue */}
-                <div className="absolute top-10 left-5 w-96 h-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
-                <div className="absolute top-1/3 right-10 w-80 h-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
+                <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
+                <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
 
                 {/* Bright Golden Yellow */}
-                <div className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
-                <div className="absolute bottom-1/4 left-1/4 w-88 h-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
+                <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
+                <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
 
                 {/* Crimson Red */}
-                <div className="absolute bottom-20 left-1/3 w-64 h-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
-                <div className="absolute top-1/2 right-1/3 w-56 h-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
+                <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
+                <div className="absolute top-1/2 right-1/3 size-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
 
                 {/* Charcoal Black */}
-                <div className="absolute bottom-10 right-5 w-72 h-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
+                <div className="absolute bottom-10 right-5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
 
                 {/* Light Gray */}
-                <div className="absolute top-1/4 left-1/2 w-60 h-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
+                <div className="absolute top-1/4 left-1/2 size-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
 
                 {/* Mid-tone Blue */}
-                <div className="absolute bottom-1/3 right-1/4 w-68 h-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
+                <div className="absolute bottom-1/3 right-1/4 size-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
 
                 {/* Warm Golden Glow */}
-                <div className="absolute top-1/2 left-1/5 w-76 h-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
+                <div className="absolute top-1/2 left-1/5 size-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
 
                 {/* Vibrant Red */}
-                <div className="absolute top-2/3 right-1/5 w-52 h-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
+                <div className="absolute top-2/3 right-1/5 size-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
 
                 {/* Neon Purple */}
-                <div className="absolute top-1/6 left-2/3 w-84 h-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
-                <div className="absolute bottom-1/6 left-1/6 w-48 h-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
+                <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
+                <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
             </div>
 
             <div className="container mx-auto px-4 py-8 relative z-10">
@@ -591,12 +591,12 @@ export default function AdminDashboard() {
                             size="sm"
                             className="text-white hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 border border-white/20 backdrop-blur-md bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
                         >
-                            <ArrowLeft className="w-4 h-4 mr-2" />
+                            <ArrowLeft className="size-4 mr-2" />
                             Back
                         </Button>
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
-                                <Shield className="w-6 h-6 text-white" />
+                                <Shield className="size-6 text-white" />
                             </div>
                             <div>
                                 <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
@@ -622,7 +622,7 @@ export default function AdminDashboard() {
                             size="sm"
                             className="text-white border-white/20 hover:bg-white/10"
                         >
-                            <RefreshCw className="w-4 h-4" />
+                            <RefreshCw className="size-4" />
                         </Button>
                         <Button
                             onClick={handleGeneratePdf}
@@ -631,7 +631,7 @@ export default function AdminDashboard() {
                             className="text-white bg-gradient-to-r from-purple-500 to-pink-500 border-white/20 hover:from-pink-500 hover:to-purple-500 flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-60"
                             disabled={generatingPdf}
                         >
-                            <Download className="w-4 h-4 mr-1" />
+                            <Download className="size-4 mr-1" />
                             Generate PDF Report
                         </Button>
                         <Button
@@ -680,7 +680,7 @@ export default function AdminDashboard() {
                             size="sm"
                             className="text-white bg-gradient-to-r from-blue-500 to-purple-500 border-white/20 hover:from-purple-500 hover:to-blue-500 flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-60 font-semibold"
                         >
-                            <Sparkles className="w-4 h-4 mr-1" />
+                            <Sparkles className="size-4 mr-1" />
                             Give Feedback
                         </Button>
                     </div>
@@ -694,7 +694,7 @@ export default function AdminDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">New Users</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
-                                <UserPlus className="h-4 w-4 text-white" />
+                                <UserPlus className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -710,7 +710,7 @@ export default function AdminDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Active Users</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg">
-                                <Activity className="h-4 w-4 text-white" />
+                                <Activity className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -724,7 +724,7 @@ export default function AdminDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Total Actions</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg">
-                                <Zap className="h-4 w-4 text-white" />
+                                <Zap className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -738,7 +738,7 @@ export default function AdminDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Active Sessions</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
-                                <Monitor className="h-4 w-4 text-white" />
+                                <Monitor className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -751,7 +751,7 @@ export default function AdminDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">New Job Postings</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg">
-                                <Briefcase className="h-4 w-4 text-white" />
+                                <Briefcase className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -763,7 +763,7 @@ export default function AdminDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Job Applications (Users)</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg">
-                                <FileText className="h-4 w-4 text-white" />
+                                <FileText className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -776,7 +776,7 @@ export default function AdminDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Job Applications (Aura Bot)</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-purple-500 to-move-500 rounded-lg">
-                                <Bot className="h-4 w-4 text-white" />
+                                <Bot className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -789,7 +789,7 @@ export default function AdminDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Page Views</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg">
-                                <Eye className="h-4 w-4 text-white" />
+                                <Eye className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -815,7 +815,7 @@ export default function AdminDashboard() {
                         <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
                             <CardHeader>
                                 <CardTitle className="text-white flex items-center gap-2">
-                                    <Database className="w-5 h-5" />
+                                    <Database className="size-5" />
                                     Recent User Activity
                                 </CardTitle>
                                 <CardDescription className="text-purple-200">Latest actions across the platform</CardDescription>
@@ -855,7 +855,7 @@ export default function AdminDashboard() {
                                     {(filteredActivityLogs || []).map((log) => (
                                         <div key={log.id} className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                                                <div className="size-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
                                                     <span className="text-xs font-medium text-white">
                                                         {log.name?.charAt(0) || log.email?.charAt(0) || '?'}
                                                     </span>
@@ -895,7 +895,7 @@ export default function AdminDashboard() {
                         <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
                             <CardHeader>
                                 <CardTitle className="text-white flex items-center gap-2">
-                                    <Users className="w-5 h-5" />
+                                    <Users className="size-5" />
                                     User Engagement
                                 </CardTitle>
                                 <CardDescription className="text-purple-200">Most active users and their activity patterns</CardDescription>
@@ -905,7 +905,7 @@ export default function AdminDashboard() {
                                     {Array.isArray(userEngagement) ? userEngagement.map((user) => (
                                         <div key={user.id} className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
+                                                <div className="size-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
                                                     <span className="text-sm font-medium text-white">
                                                         {user.name?.charAt(0) || user.email?.charAt(0) || '?'}
                                                     </span>
@@ -938,7 +938,7 @@ export default function AdminDashboard() {
                         <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
                             <CardHeader>
                                 <CardTitle className="text-white flex items-center gap-2">
-                                    <ChartBar className="w-5 h-5" />
+                                    <ChartBar className="size-5" />
                                     Daily Activity Trends
                                 </CardTitle>
                                 <CardDescription className="text-purple-200">Platform usage over the last 30 days</CardDescription>
@@ -971,7 +971,7 @@ export default function AdminDashboard() {
                         <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
                             <CardHeader>
                                 <CardTitle className="text-white flex items-center gap-2">
-                                    <TrendingUp className="w-5 h-5" />
+                                    <TrendingUp className="size-5" />
                                     Feature Usage
                                 </CardTitle>
                                 <CardDescription className="text-purple-200">Most used features in the last 30 days</CardDescription>

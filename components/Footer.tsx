@@ -80,7 +80,7 @@ export const Footer = () => {
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-10 h-10 bg-zinc-900/60 hover:bg-zinc-800/60 rounded-xl flex items-center justify-center text-zinc-400 hover:text-bits-golden-yellow transition-all duration-200"
+                                    className="size-10 bg-zinc-900/60 hover:bg-zinc-800/60 rounded-xl flex items-center justify-center text-zinc-400 hover:text-bits-golden-yellow transition-all duration-200"
                                     whileHover={{ scale: 1.1 }}
                                 >
                                     <IconComponent size={18} />

@@ -79,8 +79,8 @@ export default function Stats() {
 
                                 <div className="relative z-10">
                                     {/* Icon */}
-                                    <div className={`w-16 h-16 bg-gradient-to-r ${stat.color} rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300`}>
-                                        <stat.icon className="w-8 h-8 text-white" />
+                                    <div className={`size-16 bg-gradient-to-r ${stat.color} rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300`}>
+                                        <stat.icon className="size-8 text-white" />
                                     </div>
 
                                     {/* Content */}

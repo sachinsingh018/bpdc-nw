@@ -12,9 +12,9 @@ interface LoadingSpinnerProps {
 
 export function LoadingSpinner({ size = 'md', text, className = '' }: LoadingSpinnerProps) {
     const sizeClasses = {
-        sm: 'w-4 h-4',
-        md: 'w-8 h-8',
-        lg: 'w-12 h-12'
+        sm: 'size-4',
+        md: 'size-8',
+        lg: 'size-12'
     };
 
     return (
@@ -62,7 +62,7 @@ export function PageLoading({
             </motion.h1>
 
             <motion.div
-                className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4"
+                className="size-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
@@ -89,7 +89,7 @@ export function SkeletonCard({ className = '' }: SkeletonCardProps) {
         <div className={`bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200 dark:border-white/20 shadow-lg ${className}`}>
             <div className="animate-pulse">
                 <div className="flex items-center space-x-4 mb-4">
-                    <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+                    <div className="size-12 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
                     <div className="flex-1">
                         <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-3/4 mb-2"></div>
                         <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-1/2"></div>
@@ -138,7 +138,7 @@ export function QuickLoading({ message = "Loading..." }: QuickLoadingProps) {
             className="flex items-center justify-center p-4"
         >
             <div className="flex items-center space-x-2">
-                <Sparkles className="w-4 h-4 text-purple-600 animate-pulse" />
+                <Sparkles className="size-4 text-purple-600 animate-pulse" />
                 <span className="text-sm text-gray-600 dark:text-gray-400">{message}</span>
             </div>
         </motion.div>

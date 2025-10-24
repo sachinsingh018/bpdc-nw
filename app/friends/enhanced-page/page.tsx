@@ -193,11 +193,11 @@ export default function EnhancedFriendsPage() {
 
     const getMatchTypeIcon = (matchType: string) => {
         switch (matchType) {
-            case 'industry': return <FaIndustry className="w-4 h-4" />;
-            case 'location': return <FaMapMarkerAlt className="w-4 h-4" />;
-            case 'skills': return <FaLightbulb className="w-4 h-4" />;
-            case 'goals': return <FaStar className="w-4 h-4" />;
-            default: return <FaUsers className="w-4 h-4" />;
+            case 'industry': return <FaIndustry className="size-4" />;
+            case 'location': return <FaMapMarkerAlt className="size-4" />;
+            case 'skills': return <FaLightbulb className="size-4" />;
+            case 'goals': return <FaStar className="size-4" />;
+            default: return <FaUsers className="size-4" />;
         }
     };
 
@@ -232,7 +232,7 @@ export default function EnhancedFriendsPage() {
                                 onClick={() => setShowFilters(!showFilters)}
                                 className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
                             >
-                                <FaFilter className="w-4 h-4" />
+                                <FaFilter className="size-4" />
                                 Filters
                             </button>
                         </div>
@@ -247,7 +247,7 @@ export default function EnhancedFriendsPage() {
                                 className="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl p-6 mb-8 shadow-lg"
                             >
                                 <div className="flex items-start gap-3">
-                                    <FaLightbulb className="w-6 h-6 mt-1 flex-shrink-0" />
+                                    <FaLightbulb className="size-6 mt-1 shrink-0" />
                                     <div>
                                         <h3 className="text-lg font-semibold mb-2">AI Insights</h3>
                                         <p className="text-purple-100 leading-relaxed">{aiInsights}</p>
@@ -353,7 +353,7 @@ export default function EnhancedFriendsPage() {
                             </div>
                         ) : filteredRecommendations.length === 0 ? (
                             <div className="text-center py-12">
-                                <FaUserFriends className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                                <FaUserFriends className="size-16 text-gray-400 mx-auto mb-4" />
                                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                                     No matches found
                                 </h3>
@@ -392,7 +392,7 @@ export default function EnhancedFriendsPage() {
                                         <div className="space-y-3 mb-4">
                                             {recommendation.user.linkedinInfo && (
                                                 <div className="flex items-start gap-2">
-                                                    <FaBriefcase className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                                                    <FaBriefcase className="size-4 text-gray-500 mt-0.5 shrink-0" />
                                                     <p className="text-sm text-gray-700 dark:text-gray-300">
                                                         {recommendation.user.linkedinInfo}
                                                     </p>
@@ -400,7 +400,7 @@ export default function EnhancedFriendsPage() {
                                             )}
                                             {recommendation.user.goals && (
                                                 <div className="flex items-start gap-2">
-                                                    <FaStar className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                                                    <FaStar className="size-4 text-gray-500 mt-0.5 shrink-0" />
                                                     <p className="text-sm text-gray-700 dark:text-gray-300">
                                                         {recommendation.user.goals}
                                                     </p>
@@ -414,7 +414,7 @@ export default function EnhancedFriendsPage() {
                                             <div className="space-y-1">
                                                 {recommendation.reasons.slice(0, 3).map((reason, index) => (
                                                     <div key={index} className="flex items-center gap-2">
-                                                        <div className="w-1.5 h-1.5 bg-purple-500 rounded-full" />
+                                                        <div className="size-1.5 bg-purple-500 rounded-full" />
                                                         <span className="text-xs text-gray-600 dark:text-gray-300">{reason}</span>
                                                     </div>
                                                 ))}
@@ -433,12 +433,12 @@ export default function EnhancedFriendsPage() {
                                         >
                                             {sentRequests.has(recommendation.userId) ? (
                                                 <span className="flex items-center justify-center gap-2">
-                                                    <FaHandshake className="w-4 h-4" />
+                                                    <FaHandshake className="size-4" />
                                                     Request Sent
                                                 </span>
                                             ) : (
                                                 <span className="flex items-center justify-center gap-2">
-                                                    <FaHandshake className="w-4 h-4" />
+                                                    <FaHandshake className="size-4" />
                                                     Connect
                                                 </span>
                                             )}

@@ -79,7 +79,7 @@ export default function Roadmap() {
                                     }`}
                             >
                                 {/* Timeline dot */}
-                                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full border-4 border-[#0B0B10] z-10" />
+                                <div className="absolute left-1/2 transform -translate-x-1/2 size-6 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full border-4 border-[#0B0B10] z-10" />
 
                                 {/* Content */}
                                 <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
@@ -95,9 +95,9 @@ export default function Roadmap() {
                                                 ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
                                                 : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
                                             }`}>
-                                            {milestone.status === 'completed' && <CheckCircle className="w-3 h-3 mr-1" />}
-                                            {milestone.status === 'current' && <Rocket className="w-3 h-3 mr-1" />}
-                                            {milestone.status === 'upcoming' && <Clock className="w-3 h-3 mr-1" />}
+                                            {milestone.status === 'completed' && <CheckCircle className="size-3 mr-1" />}
+                                            {milestone.status === 'current' && <Rocket className="size-3 mr-1" />}
+                                            {milestone.status === 'upcoming' && <Clock className="size-3 mr-1" />}
                                             {milestone.status === 'completed' ? 'Completed' : milestone.status === 'current' ? 'In Progress' : 'Upcoming'}
                                         </div>
 
@@ -115,8 +115,8 @@ export default function Roadmap() {
                                         </p>
 
                                         {/* Icon */}
-                                        <div className={`w-12 h-12 bg-gradient-to-r ${milestone.color} rounded-xl flex items-center justify-center mt-4`}>
-                                            <milestone.icon className="w-6 h-6 text-white" />
+                                        <div className={`size-12 bg-gradient-to-r ${milestone.color} rounded-xl flex items-center justify-center mt-4`}>
+                                            <milestone.icon className="size-6 text-white" />
                                         </div>
                                     </motion.div>
                                 </div>

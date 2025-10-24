@@ -56,8 +56,8 @@ export default function CTA() {
                             transition={{ duration: 0.6, delay: 0.2 }}
                             className="mb-8"
                         >
-                            <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <Bell className="w-10 h-10 text-white" />
+                            <div className="size-20 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <Bell className="size-10 text-white" />
                             </div>
                             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                                 Get Updates Before Launch
@@ -75,8 +75,8 @@ export default function CTA() {
                                 transition={{ duration: 0.5 }}
                                 className="text-center py-8"
                             >
-                                <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <CheckCircle className="w-10 h-10 text-white" />
+                                <div className="size-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <CheckCircle className="size-10 text-white" />
                                 </div>
                                 <h3 className="text-2xl font-bold text-green-400 mb-2">Successfully Subscribed!</h3>
                                 <p className="text-white/70">
@@ -107,7 +107,7 @@ export default function CTA() {
                                         className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white px-8 py-4 font-semibold rounded-xl transition-all duration-300 hover:scale-105 disabled:opacity-50"
                                     >
                                         {isSubmitting ? 'Subscribing...' : 'Notify Me'}
-                                        <ArrowRight className="ml-2 w-5 h-5" />
+                                        <ArrowRight className="ml-2 size-5" />
                                     </Button>
                                 </div>
                                 <p className="text-white/50 text-sm">
@@ -124,7 +124,7 @@ export default function CTA() {
                         >
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                                 <div>
-                                    <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                    <div className="size-12 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
                                         <span className="text-purple-400 font-bold text-lg">🚀</span>
                                     </div>
                                     <h4 className="text-white font-semibold mb-2">Early Access</h4>
@@ -132,7 +132,7 @@ export default function CTA() {
                                 </div>
 
                                 <div>
-                                    <div className="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                    <div className="size-12 bg-cyan-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
                                         <span className="text-cyan-400 font-bold text-lg">💎</span>
                                     </div>
                                     <h4 className="text-white font-semibold mb-2">Exclusive Updates</h4>
@@ -140,7 +140,7 @@ export default function CTA() {
                                 </div>
 
                                 <div>
-                                    <div className="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                    <div className="size-12 bg-amber-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
                                         <span className="text-amber-400 font-bold text-lg">🎯</span>
                                     </div>
                                     <h4 className="text-white font-semibold mb-2">Community Access</h4>

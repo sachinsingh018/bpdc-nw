@@ -61,11 +61,11 @@ export default function RemoteJobApplicationsPage() {
     const getStatusIcon = (status: string) => {
         switch (status) {
             case 'accepted':
-                return <CheckCircle className="w-5 h-5 text-green-500" />;
+                return <CheckCircle className="size-5 text-green-500" />;
             case 'rejected':
-                return <XCircle className="w-5 h-5 text-red-500" />;
+                return <XCircle className="size-5 text-red-500" />;
             default:
-                return <Clock className="w-5 h-5 text-yellow-500" />;
+                return <Clock className="size-5 text-yellow-500" />;
         }
     };
 
@@ -96,7 +96,7 @@ export default function RemoteJobApplicationsPage() {
             <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
                 <div className="max-w-4xl mx-auto px-4 py-8">
                     <div className="text-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+                        <div className="animate-spin rounded-full size-12 border-b-2 border-purple-600 mx-auto"></div>
                         <p className="mt-4 text-gray-600 dark:text-gray-400">Loading applications...</p>
                     </div>
                 </div>
@@ -114,7 +114,7 @@ export default function RemoteJobApplicationsPage() {
                         onClick={() => router.push('/remote-jobs')}
                         className="flex items-center gap-2"
                     >
-                        <ArrowLeft className="w-4 h-4" />
+                        <ArrowLeft className="size-4" />
                         Back to Remote Jobs
                     </Button>
                     <div>
@@ -130,7 +130,7 @@ export default function RemoteJobApplicationsPage() {
                 {/* Applications List */}
                 {applications.length === 0 ? (
                     <div className="text-center py-12">
-                        <Briefcase className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                        <Briefcase className="size-16 text-gray-400 mx-auto mb-4" />
                         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                             No applications yet
                         </h3>

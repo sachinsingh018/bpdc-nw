@@ -270,7 +270,7 @@ export function NotificationBell() {
                                                 onClick={() => markAsRead(notification.id)}
                                                 className="ml-2 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
                                             >
-                                                <Check className="w-4 h-4 text-green-500" />
+                                                <Check className="size-4 text-green-500" />
                                             </button>
                                         )}
                                     </div>
@@ -323,9 +323,9 @@ export function NotificationBell() {
                 onClick={handleToggle}
                 className="relative p-2 rounded-full bg-gradient-to-br from-purple-900 via-[#0E0B1E] to-black text-white hover:scale-105 transition-all duration-300 border border-purple-700 shadow-md"
             >
-                <Bell className="w-5 h-5" />
+                <Bell className="size-5" />
                 {unreadCount > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full size-5 flex items-center justify-center">
                         {unreadCount > 9 ? '9+' : unreadCount}
                     </span>
                 )}

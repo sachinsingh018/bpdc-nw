@@ -161,7 +161,7 @@ export default function CommunityPage() {
     if (loading) {
         return (
             <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white dark:from-slate-900 dark:to-slate-950 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-600"></div>
+                <div className="animate-spin rounded-full size-32 border-b-2 border-purple-600"></div>
             </div>
         );
     }
@@ -205,12 +205,12 @@ export default function CommunityPage() {
                             onClick={() => router.push('/communities')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <ArrowLeft className="w-4 h-4" />
+                            <ArrowLeft className="size-4" />
                             <span>Back</span>
                         </Button>
                         <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300 group">
-                            <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-                                <Sparkles className="w-5 h-5 text-white" />
+                            <div className="size-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+                                <Sparkles className="size-5 text-white" />
                             </div>
                             <span className="text-lg font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                 Networkqy
@@ -226,7 +226,7 @@ export default function CommunityPage() {
                             onClick={() => router.push('/profile')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <Home className="w-4 h-4" />
+                            <Home className="size-4" />
                             <span>Home</span>
                         </Button>
                         <Button
@@ -235,7 +235,7 @@ export default function CommunityPage() {
                             onClick={() => router.push('/friends')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <Users className="w-4 h-4" />
+                            <Users className="size-4" />
                             <span>Network</span>
                         </Button>
                         <Button
@@ -244,7 +244,7 @@ export default function CommunityPage() {
                             onClick={() => router.push('/chat')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <MessageSquare className="w-4 h-4" />
+                            <MessageSquare className="size-4" />
                             <span>AI Chat</span>
                         </Button>
                         <Button
@@ -253,7 +253,7 @@ export default function CommunityPage() {
                             onClick={() => router.push('/connections')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <User className="w-4 h-4" />
+                            <User className="size-4" />
                             <span>Connections</span>
                         </Button>
                         <Button
@@ -262,7 +262,7 @@ export default function CommunityPage() {
                             onClick={() => router.push('/anonymous-feed')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <MessageCircle className="w-4 h-4" />
+                            <MessageCircle className="size-4" />
                             <span>Anonymous Feed</span>
                         </Button>
                         <Button
@@ -271,7 +271,7 @@ export default function CommunityPage() {
                             onClick={() => router.push('/messages')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <MessageCircle className="w-4 h-4" />
+                            <MessageCircle className="size-4" />
                             <span>Messages</span>
                         </Button>
                         <Button
@@ -280,7 +280,7 @@ export default function CommunityPage() {
                             onClick={() => router.push('/job-board')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <Briefcase className="w-4 h-4" />
+                            <Briefcase className="size-4" />
                             <span>Job Board</span>
                         </Button>
                         <Button
@@ -289,7 +289,7 @@ export default function CommunityPage() {
                             onClick={() => router.push('/communities')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 bg-purple-50 dark:bg-purple-900/20"
                         >
-                            <Users className="w-4 h-4" />
+                            <Users className="size-4" />
                             <span>Communities</span>
                         </Button>
                     </div>
@@ -304,7 +304,7 @@ export default function CommunityPage() {
                             className="p-2 rounded-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-300 hover:bg-red-100 dark:hover:bg-red-800 transition-all flex items-center justify-center"
                             title="Sign Out"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M18 12h-9m0 0l3-3m-3 3l3 3" />
                             </svg>
                         </button>
@@ -315,7 +315,7 @@ export default function CommunityPage() {
                             onClick={() => setShowMobileMenu(!showMobileMenu)}
                             className="md:hidden"
                         >
-                            <Menu className="w-5 h-5" />
+                            <Menu className="size-5" />
                         </Button>
                     </div>
                 </div>
@@ -333,7 +333,7 @@ export default function CommunityPage() {
                                 }}
                                 className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start bg-purple-50 dark:bg-purple-900/20"
                             >
-                                <Home className="w-4 h-4" />
+                                <Home className="size-4" />
                                 <span>Home</span>
                             </Button>
                             <Button
@@ -345,7 +345,7 @@ export default function CommunityPage() {
                                 }}
                                 className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
                             >
-                                <Users className="w-4 h-4" />
+                                <Users className="size-4" />
                                 <span>Network</span>
                             </Button>
                             <Button
@@ -357,7 +357,7 @@ export default function CommunityPage() {
                                 }}
                                 className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
                             >
-                                <MessageSquare className="w-4 h-4" />
+                                <MessageSquare className="size-4" />
                                 <span>AI Chat</span>
                             </Button>
                             <Button
@@ -369,7 +369,7 @@ export default function CommunityPage() {
                                 }}
                                 className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
                             >
-                                <User className="w-4 h-4" />
+                                <User className="size-4" />
                                 <span>Connections</span>
                             </Button>
                             <Button
@@ -381,7 +381,7 @@ export default function CommunityPage() {
                                 }}
                                 className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
                             >
-                                <MessageCircle className="w-4 h-4" />
+                                <MessageCircle className="size-4" />
                                 <span>Anonymous Feed</span>
                             </Button>
                             <Button
@@ -393,7 +393,7 @@ export default function CommunityPage() {
                                 }}
                                 className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
                             >
-                                <MessageCircle className="w-4 h-4" />
+                                <MessageCircle className="size-4" />
                                 <span>Messages</span>
                             </Button>
                             <Button
@@ -402,7 +402,7 @@ export default function CommunityPage() {
                                 onClick={() => { router.push('/job-board'); setShowMobileMenu(false); }}
                                 className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
                             >
-                                <Briefcase className="w-4 h-4" />
+                                <Briefcase className="size-4" />
                                 <span>Job Board</span>
                             </Button>
                             <Button
@@ -411,7 +411,7 @@ export default function CommunityPage() {
                                 onClick={() => { router.push('/communities'); setShowMobileMenu(false); }}
                                 className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start bg-purple-50 dark:bg-purple-900/20"
                             >
-                                <Users className="w-4 h-4" />
+                                <Users className="size-4" />
                                 <span>Communities</span>
                             </Button>
                         </div>
@@ -427,10 +427,10 @@ export default function CommunityPage() {
                     className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-purple-200/50 dark:border-white/20 shadow-xl"
                 >
                     <div className="flex items-start gap-6">
-                        <Avatar className="w-20 h-20">
+                        <Avatar className="size-20">
                             <AvatarImage src={community.banner_image || undefined} alt={community.name} />
                             <AvatarFallback>
-                                <Sparkles className="w-8 h-8 text-purple-400" />
+                                <Sparkles className="size-8 text-purple-400" />
                             </AvatarFallback>
                         </Avatar>
                         <div className="flex-1">
@@ -442,11 +442,11 @@ export default function CommunityPage() {
                             </p>
                             <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
                                 <div className="flex items-center gap-1">
-                                    <Users className="w-4 h-4" />
+                                    <Users className="size-4" />
                                     <span>{approvedMembers.length} members</span>
                                 </div>
                                 <div className="flex items-center gap-1">
-                                    <Calendar className="w-4 h-4" />
+                                    <Calendar className="size-4" />
                                     <span>Created {formatDate(community.created_at)}</span>
                                 </div>
                             </div>
@@ -464,7 +464,7 @@ export default function CommunityPage() {
                                     disabled
                                     className="bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold shadow-md rounded-lg"
                                 >
-                                    <UserCheck className="w-4 h-4 mr-2" />
+                                    <UserCheck className="size-4 mr-2" />
                                     Member
                                 </Button>
                             )}
@@ -566,10 +566,10 @@ export default function CommunityPage() {
                                     <div className="space-y-4">
                                         {approvedMembers.map(({ user, membership }) => (
                                             <div key={membership.id} className="flex items-center gap-4 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
-                                                <Avatar className="w-10 h-10">
+                                                <Avatar className="size-10">
                                                     <AvatarImage src={undefined} alt={user.name || user.email} />
                                                     <AvatarFallback>
-                                                        <User className="w-5 h-5" />
+                                                        <User className="size-5" />
                                                     </AvatarFallback>
                                                 </Avatar>
                                                 <div className="flex-1">
@@ -580,7 +580,7 @@ export default function CommunityPage() {
                                                         Member since {formatDate(membership.joined_at)}
                                                     </p>
                                                 </div>
-                                                <UserCheck className="w-5 h-5 text-green-600 dark:text-green-400" />
+                                                <UserCheck className="size-5 text-green-600 dark:text-green-400" />
                                             </div>
                                         ))}
                                     </div>
@@ -592,10 +592,10 @@ export default function CommunityPage() {
                                         <div className="space-y-4">
                                             {pendingMembers.map(({ user, membership }) => (
                                                 <div key={membership.id} className="flex items-center gap-4 p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-                                                    <Avatar className="w-10 h-10">
+                                                    <Avatar className="size-10">
                                                         <AvatarImage src={undefined} alt={user.name || user.email} />
                                                         <AvatarFallback>
-                                                            <User className="w-5 h-5" />
+                                                            <User className="size-5" />
                                                         </AvatarFallback>
                                                     </Avatar>
                                                     <div className="flex-1">
@@ -606,7 +606,7 @@ export default function CommunityPage() {
                                                             Requested {formatDate(membership.joined_at)}
                                                         </p>
                                                     </div>
-                                                    <Clock className="w-5 h-5 text-yellow-600 dark:text-yellow-400" />
+                                                    <Clock className="size-5 text-yellow-600 dark:text-yellow-400" />
                                                 </div>
                                             ))}
                                         </div>
@@ -662,7 +662,7 @@ export default function CommunityPage() {
                                                 onClick={() => setShowNewPostForm(true)}
                                                 className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold shadow-md hover:from-purple-700 hover:to-blue-700 rounded-lg"
                                             >
-                                                <Plus className="w-4 h-4 mr-2" />
+                                                <Plus className="size-4 mr-2" />
                                                 Create New Post
                                             </Button>
                                         )}
@@ -676,10 +676,10 @@ export default function CommunityPage() {
                                             {posts.map(({ post, user }) => (
                                                 <div key={post.id} className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0">
                                                     <div className="flex items-start gap-4">
-                                                        <Avatar className="w-10 h-10">
+                                                        <Avatar className="size-10">
                                                             <AvatarImage src={undefined} alt={user.name || user.email} />
                                                             <AvatarFallback>
-                                                                <User className="w-5 h-5" />
+                                                                <User className="size-5" />
                                                             </AvatarFallback>
                                                         </Avatar>
                                                         <div className="flex-1">

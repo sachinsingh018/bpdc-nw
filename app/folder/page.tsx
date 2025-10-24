@@ -121,7 +121,7 @@ export default function ArchivedChatsPage() {
                 <h1 className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent mb-4 text-center animate-pulse">
                     Loading Networkqy...
                 </h1>
-                <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4" />
+                <div className="size-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4" />
                 <p className="text-sm text-gray-600 dark:text-gray-400 font-mono">
                     Please wait while we fetch your data
                 </p>
@@ -155,10 +155,10 @@ export default function ArchivedChatsPage() {
                 <div className="relative min-h-screen bg-background text-white p-6 z-10">
                     {/* 🌌 Floating Bubbles Background */}
                     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                        <div className="absolute w-64 h-64 bg-purple-700 rounded-full opacity-30 blur-2xl animate-float-slow top-[10%] left-[10%]" />
-                        <div className="absolute w-56 h-56 bg-purple-600 rounded-full opacity-25 blur-2xl animate-float-medium top-[40%] left-[60%]" />
-                        <div className="absolute w-72 h-72 bg-purple-400 rounded-full opacity-25 blur-2xl animate-float-fast bottom-[5%] left-[30%]" />
-                        <div className="absolute w-48 h-48 bg-purple-200 rounded-full opacity-25 blur-2xl animate-float-slow top-[70%] left-[80%]" />
+                        <div className="absolute size-64 bg-purple-700 rounded-full opacity-30 blur-2xl animate-float-slow top-[10%] left-[10%]" />
+                        <div className="absolute size-56 bg-purple-600 rounded-full opacity-25 blur-2xl animate-float-medium top-[40%] left-[60%]" />
+                        <div className="absolute size-72 bg-purple-400 rounded-full opacity-25 blur-2xl animate-float-fast bottom-[5%] left-[30%]" />
+                        <div className="absolute size-48 bg-purple-200 rounded-full opacity-25 blur-2xl animate-float-slow top-[70%] left-[80%]" />
                     </div>
 
                     {/* Top Bar */}
@@ -209,10 +209,10 @@ export default function ArchivedChatsPage() {
                                         {isExpanded ? (
                                             <Minimize2
                                                 onClick={() => setExpandedIndex(null)}
-                                                className="absolute top-3 right-3 w-5 h-5 text-white hover:text-purple-400 cursor-pointer"
+                                                className="absolute top-3 right-3 size-5 text-white hover:text-purple-400 cursor-pointer"
                                             />
                                         ) : (
-                                            <Maximize2 className="absolute top-3 right-3 w-5 h-5 text-white hover:text-purple-400" />
+                                            <Maximize2 className="absolute top-3 right-3 size-5 text-white hover:text-purple-400" />
                                         )}
                                         <p className="font-bold text-lg mb-1 mt-6">{chat.name}</p>
                                         <p className="text-sm text-green-400 mb-2">Match: {chat.matchPercentage}%</p>

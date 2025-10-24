@@ -142,11 +142,11 @@ export default function InterviewPage() {
         <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
             {/* Animated Background */}
             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                <div className="absolute w-96 h-96 bg-purple-600 rounded-full opacity-20 blur-3xl animate-pulse top-[-100px] left-[-100px]" />
-                <div className="absolute w-80 h-80 bg-violet-500 rounded-full opacity-15 blur-2xl animate-spin-slow bottom-[-80px] right-[-60px]" />
-                <div className="absolute w-64 h-64 bg-purple-400 rounded-full opacity-25 blur-2xl animate-float-slow top-[40%] left-[20%]" />
-                <div className="absolute w-72 h-72 bg-violet-600 rounded-full opacity-20 blur-2xl animate-float-medium top-[20%] right-[30%]" />
-                <div className="absolute w-56 h-56 bg-purple-300 rounded-full opacity-15 blur-2xl animate-float-fast bottom-[20%] left-[60%]" />
+                <div className="absolute size-96 bg-purple-600 rounded-full opacity-20 blur-3xl animate-pulse top-[-100px] left-[-100px]" />
+                <div className="absolute size-80 bg-violet-500 rounded-full opacity-15 blur-2xl animate-spin-slow bottom-[-80px] right-[-60px]" />
+                <div className="absolute size-64 bg-purple-400 rounded-full opacity-25 blur-2xl animate-float-slow top-[40%] left-[20%]" />
+                <div className="absolute size-72 bg-violet-600 rounded-full opacity-20 blur-2xl animate-float-medium top-[20%] right-[30%]" />
+                <div className="absolute size-56 bg-purple-300 rounded-full opacity-15 blur-2xl animate-float-fast bottom-[20%] left-[60%]" />
             </div>
 
             {/* Main Content */}
@@ -159,11 +159,11 @@ export default function InterviewPage() {
                     className="text-center mb-8"
                 >
                     <div className="flex items-center justify-center gap-2 mb-4">
-                        <Sparkles className="w-6 h-6 text-purple-400" />
+                        <Sparkles className="size-6 text-purple-400" />
                         <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
                             AI Interview Studio
                         </h1>
-                        <Sparkles className="w-6 h-6 text-purple-400" />
+                        <Sparkles className="size-6 text-purple-400" />
                     </div>
                     <p className="text-lg text-purple-200 max-w-2xl mx-auto">
                         Experience the future of interviewing with AI-powered voice conversations
@@ -206,13 +206,13 @@ export default function InterviewPage() {
                             <CardContent className="p-4">
                                 <div className="flex items-center gap-4">
                                     <div className="flex items-center gap-2">
-                                        <Calendar className="w-5 h-5 text-purple-300" />
+                                        <Calendar className="size-5 text-purple-300" />
                                         <span className="text-sm text-purple-200">
                                             {eligibility.interviewCount} interviews completed
                                         </span>
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <Clock className="w-5 h-5 text-purple-300" />
+                                        <Clock className="size-5 text-purple-300" />
                                         <span className={`text-sm ${eligibility.canStart ? 'text-green-300' : 'text-yellow-300'}`}>
                                             {eligibility.canStart ? 'Available now' : `${eligibility.daysUntilNext} days until next`}
                                         </span>
@@ -261,7 +261,7 @@ export default function InterviewPage() {
                     <Card className="flex-1 bg-white/10 backdrop-blur-xl border-white/20 shadow-2xl">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2 text-purple-200">
-                                <Volume2 className="w-5 h-5" />
+                                <Volume2 className="size-5" />
                                 Interview Transcript
                             </CardTitle>
                             <CardDescription className="text-purple-300">
@@ -287,7 +287,7 @@ export default function InterviewPage() {
                                 ) : (
                                     <div className="flex items-center justify-center h-full text-purple-400">
                                         <div className="text-center">
-                                            <Volume2 className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                                            <Volume2 className="size-12 mx-auto mb-4 opacity-50" />
                                             <p>Transcript will appear here once the interview begins</p>
                                         </div>
                                     </div>
@@ -332,7 +332,7 @@ export default function InterviewPage() {
                                                         : 'bg-gray-600/50 text-gray-400 cursor-not-allowed'
                                                     }`}
                                             >
-                                                <Play className="w-5 h-5 mr-2" />
+                                                <Play className="size-5 mr-2" />
                                                 {isLoadingEligibility ? 'Checking...' : eligibility?.canStart ? 'Start Interview' : 'Weekly Limit Reached'}
                                             </Button>
                                         </motion.div>
@@ -351,7 +351,7 @@ export default function InterviewPage() {
                                                 onClick={stopInterview}
                                                 className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-semibold py-3"
                                             >
-                                                <Square className="w-5 h-5 mr-2" />
+                                                <Square className="size-5 mr-2" />
                                                 Stop Interview
                                             </Button>
 
@@ -378,7 +378,7 @@ export default function InterviewPage() {
                                                 onClick={startInterview}
                                                 className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3"
                                             >
-                                                <Play className="w-5 h-5 mr-2" />
+                                                <Play className="size-5 mr-2" />
                                                 Resume Interview
                                             </Button>
 
@@ -387,7 +387,7 @@ export default function InterviewPage() {
                                                 variant="outline"
                                                 className="w-full border-purple-500/50 text-purple-300 hover:bg-purple-500/20"
                                             >
-                                                <RotateCcw className="w-5 h-5 mr-2" />
+                                                <RotateCcw className="size-5 mr-2" />
                                                 Reset Interview
                                             </Button>
                                         </motion.div>
@@ -411,7 +411,7 @@ export default function InterviewPage() {
                                                 onClick={resetInterview}
                                                 className="w-full bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white font-semibold py-3"
                                             >
-                                                <RotateCcw className="w-5 h-5 mr-2" />
+                                                <RotateCcw className="size-5 mr-2" />
                                                 Start New Interview
                                             </Button>
                                         </motion.div>
@@ -420,7 +420,7 @@ export default function InterviewPage() {
 
                                 {/* Voice Recording Status */}
                                 <div className="flex items-center justify-center gap-2 p-3 bg-black/30 rounded-lg border border-white/10">
-                                    <div className={`w-3 h-3 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-gray-500'}`} />
+                                    <div className={`size-3 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-gray-500'}`} />
                                     <span className="text-sm text-purple-300">
                                         {isRecording ? 'Recording...' : 'Voice Ready'}
                                     </span>

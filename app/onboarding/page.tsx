@@ -331,8 +331,8 @@ export default function OnboardingPage() {
                         className="space-y-6"
                     >
                         <div className="text-center mb-8">
-                            <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <User className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+                            <div className="size-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <User className="size-8 text-purple-600 dark:text-purple-400" />
                             </div>
                             <h2 className="text-2xl font-bold mb-2">Let&apos;s get started</h2>
                             <p className="text-gray-600 dark:text-gray-400">Tell us about yourself</p>
@@ -364,7 +364,7 @@ export default function OnboardingPage() {
                         <div>
                             <Label htmlFor="email">Email Address *</Label>
                             <div className="relative mt-1">
-                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 size-4" />
                                 <Input
                                     id="email"
                                     type="email"
@@ -380,7 +380,7 @@ export default function OnboardingPage() {
                             <div>
                                 <Label htmlFor="password">Password *</Label>
                                 <div className="relative mt-1">
-                                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 size-4" />
                                     <Input
                                         id="password"
                                         type="password"
@@ -409,8 +409,8 @@ export default function OnboardingPage() {
                         className="space-y-6"
                     >
                         <div className="text-center mb-8">
-                            <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Target className="w-8 h-8 text-green-600 dark:text-green-400" />
+                            <div className="size-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <Target className="size-8 text-green-600 dark:text-green-400" />
                             </div>
                             <h2 className="text-2xl font-bold mb-2">Your Goals & Strengths</h2>
                             <p className="text-gray-600 dark:text-gray-400">What brings you to Networkqy?</p>
@@ -486,8 +486,8 @@ export default function OnboardingPage() {
                         className="space-y-6"
                     >
                         <div className="text-center mb-8">
-                            <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Star className="w-8 h-8 text-orange-600 dark:text-orange-400" />
+                            <div className="size-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <Star className="size-8 text-orange-600 dark:text-orange-400" />
                             </div>
                             <h2 className="text-2xl font-bold mb-2">Education or Work Details (Optional)</h2>
                             <p className="text-gray-600 dark:text-gray-400">Add your university or work experience (optional)</p>
@@ -553,8 +553,8 @@ export default function OnboardingPage() {
                         className="space-y-6"
                     >
                         <div className="text-center mb-8">
-                            <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Sparkles className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+                            <div className="size-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <Sparkles className="size-8 text-purple-600 dark:text-purple-400" />
                             </div>
                             <h2 className="text-2xl font-bold mb-2">Almost Done!</h2>
                             <p className="text-gray-600 dark:text-gray-400">Final preferences</p>
@@ -585,7 +585,7 @@ export default function OnboardingPage() {
                                         }`}
                                 >
                                     <span
-                                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${formData.notifications ? 'translate-x-6' : 'translate-x-1'
+                                        className={`inline-block size-4 transform rounded-full bg-white transition-transform ${formData.notifications ? 'translate-x-6' : 'translate-x-1'
                                             }`}
                                     />
                                 </button>
@@ -620,8 +620,8 @@ export default function OnboardingPage() {
         <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
             {/* Background Elements */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-blue-200/30 rounded-full blur-3xl animate-pulse delay-1000" />
+                <div className="absolute top-0 left-1/4 size-96 bg-purple-200/30 rounded-full blur-3xl animate-pulse" />
+                <div className="absolute bottom-0 right-1/4 size-80 bg-blue-200/30 rounded-full blur-3xl animate-pulse delay-1000" />
             </div>
 
             <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
@@ -668,7 +668,7 @@ export default function OnboardingPage() {
                                     : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
                                     }`}
                             >
-                                <ChevronLeft className="w-4 h-4" />
+                                <ChevronLeft className="size-4" />
                                 Back
                             </button>
 
@@ -683,12 +683,12 @@ export default function OnboardingPage() {
                                 ) : currentStep === 5 ? (
                                     <>
                                         Complete Setup
-                                        <ArrowRight className="w-4 h-4" />
+                                        <ArrowRight className="size-4" />
                                     </>
                                 ) : (
                                     <>
                                         Continue
-                                        <ChevronRight className="w-4 h-4" />
+                                        <ChevronRight className="size-4" />
                                     </>
                                 )}
                             </button>
@@ -705,12 +705,12 @@ export default function OnboardingPage() {
                             >
                                 {theme === 'dark' ? (
                                     <>
-                                        <div className="w-4 h-4 bg-yellow-400 rounded-full" />
+                                        <div className="size-4 bg-yellow-400 rounded-full" />
                                         Light Mode
                                     </>
                                 ) : (
                                     <>
-                                        <div className="w-4 h-4 bg-gray-600 rounded-full" />
+                                        <div className="size-4 bg-gray-600 rounded-full" />
                                         Dark Mode
                                     </>
                                 )}

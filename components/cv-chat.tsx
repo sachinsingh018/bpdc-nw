@@ -241,7 +241,7 @@ export function CVChat({ resumeText, onPromptSent, isLimitReached, dailyPromptCo
                                 onChange={(e) => setInput(e.target.value)}
                                 placeholder="Ask about your resume... (e.g., 'Rewrite my summary section for data science')"
                                 spellCheck={false}
-                                className="min-h-[60px] w-full resize-none bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-white/20 dark:border-gray-700/20 rounded-2xl px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                                className="min-h-[60px] w-full resize-none bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-white/20 dark:border-gray-700/20 rounded-2xl px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400"
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter' && !e.shiftKey) {
                                         e.preventDefault();
@@ -256,7 +256,7 @@ export function CVChat({ resumeText, onPromptSent, isLimitReached, dailyPromptCo
                             size="icon"
                             disabled={!input.trim() || isLoading}
                             onClick={handleSubmit}
-                            className="shrink-0 bg-purple-600 hover:bg-purple-700 text-white rounded-full w-10 h-10"
+                            className="shrink-0 bg-purple-600 hover:bg-purple-700 text-white rounded-full size-10"
                         >
                             {isLoading ? (
                                 <StopIcon size={16} />

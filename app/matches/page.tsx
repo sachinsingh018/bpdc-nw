@@ -175,8 +175,8 @@ export default function MatchesPage() {
         <div className="relative min-h-screen bg-white text-black dark:bg-black dark:text-white overflow-hidden flex items-center justify-center px-4">
             {/* Background Orbs */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                <div className="absolute w-80 h-80 bg-purple-500 opacity-20 blur-3xl rounded-full top-10 left-10 animate-pulse" />
-                <div className="absolute w-60 h-60 bg-blue-400 opacity-10 blur-2xl rounded-full bottom-20 right-20 animate-spin-slow" />
+                <div className="absolute size-80 bg-purple-500 opacity-20 blur-3xl rounded-full top-10 left-10 animate-pulse" />
+                <div className="absolute size-60 bg-blue-400 opacity-10 blur-2xl rounded-full bottom-20 right-20 animate-spin-slow" />
             </div>
 
             <motion.div
@@ -220,7 +220,7 @@ export default function MatchesPage() {
                                     delay: 0.5 + (i * 0.1),
                                     ease: "easeOut"
                                 }}
-                                className="bg-white dark:bg-white/10 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200 dark:border-white/20 hover:shadow-purple-500/40 transition flex flex-col items-center transform hover:scale-105 duration-300"
+                                className="bg-white dark:bg-white/10 backdrop-blur-lg p-6 rounded-2xl shadow-xl border border-gray-200 dark:border-white/20 hover:shadow-purple-500/40 transition flex flex-col items-center hover:scale-105 duration-300"
                             >
                                 <Avatar
                                     size={90}

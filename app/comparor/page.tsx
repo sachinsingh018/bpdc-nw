@@ -95,7 +95,7 @@ export default function LinkedInComparePage() {
                 <h1 className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent mb-4 text-center animate-pulse">
                     Loading Networkqy...
                 </h1>
-                <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4" />
+                <div className="size-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4" />
                 <p className="text-sm text-gray-600 dark:text-gray-400 font-mono">
                     Please wait while we fetch your data
                 </p>
@@ -153,7 +153,7 @@ export default function LinkedInComparePage() {
                     {matchScore !== null && comparison && (
                         <div className="mt-12 text-center">
                             <div className="flex flex-col items-center">
-                                <div className="relative w-28 h-28 mb-4">
+                                <div className="relative size-28 mb-4">
                                     <svg className="absolute top-0 left-0 w-full h-full transform -rotate-90" viewBox="0 0 36 36">
                                         <circle
                                             cx="18"

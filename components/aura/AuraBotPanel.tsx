@@ -53,7 +53,7 @@ export function AuraBotPanel({ onClose }: { onClose: () => void }) {
                 <div className="flex items-center justify-between p-4 border-b border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-purple-600 to-blue-600 text-white">
                     <h2 className="text-lg font-bold">AuraBot</h2>
                     <button type="button" onClick={onClose} aria-label="Close" className="p-2 rounded-full hover:bg-white/10">
-                        <X className="w-5 h-5" />
+                        <X className="size-5" />
                     </button>
                 </div>
                 {/* AuraQY Score & Missions */}
@@ -77,7 +77,7 @@ export function AuraBotPanel({ onClose }: { onClose: () => void }) {
                                             // Toggle completion locally (for demo)
                                             setMissions(missions.map(m => m.id === mission.id ? { ...m, completed: !m.completed } : m));
                                         }}
-                                        className="accent-purple-600 w-4 h-4 rounded"
+                                        className="accent-purple-600 size-4 rounded"
                                     />
                                     <span className={mission.completed ? "line-through text-gray-400" : "text-gray-900 dark:text-white"}>{mission.title}</span>
                                     <span className="text-xs text-gray-400 ml-2">{mission.description}</span>

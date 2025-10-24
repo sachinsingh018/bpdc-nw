@@ -513,7 +513,7 @@ export default function NetworkqyTokenPage() {
                                 className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-4 rounded-lg font-semibold flex items-center gap-2"
                             >
                                 Join Whitelist
-                                <ArrowRight className="w-5 h-5" />
+                                <ArrowRight className="size-5" />
                             </motion.button>
 
                             <motion.button
@@ -522,7 +522,7 @@ export default function NetworkqyTokenPage() {
                                 className="border border-purple-500 text-purple-400 px-8 py-4 rounded-lg font-semibold flex items-center gap-2 hover:bg-purple-500/10 transition-colors"
                             >
                                 Read Whitepaper
-                                <Download className="w-5 h-5" />
+                                <Download className="size-5" />
                             </motion.button>
                         </div>
                     </motion.div>

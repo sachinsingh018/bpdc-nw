@@ -145,10 +145,10 @@ export default function UserDashboard() {
                 <CardContent className="p-6">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     <div className="relative">
-                      <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                      <div className="size-20 sm:size-24 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
                         {user.name.split(' ').map(n => n[0]).join('')}
                       </div>
-                      <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
+                      <div className="absolute -bottom-1 -right-1 size-6 bg-green-500 rounded-full border-2 border-white"></div>
                     </div>
                     <div className="flex-1 min-w-0">
                       <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-1">
@@ -159,11 +159,11 @@ export default function UserDashboard() {
                       </p>
                       <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
                         <div className="flex items-center gap-1">
-                          <MapPin className="w-4 h-4" />
+                          <MapPin className="size-4" />
                           {user.location}
                         </div>
                         <div className="flex items-center gap-1">
-                          <Building className="w-4 h-4" />
+                          <Building className="size-4" />
                           {user.company}
                         </div>
                       </div>
@@ -172,7 +172,7 @@ export default function UserDashboard() {
                       onClick={handleCompleteProfile}
                       className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
                     >
-                      <Edit className="w-4 h-4 mr-2" />
+                      <Edit className="size-4 mr-2" />
                       Edit Profile
                     </Button>
                   </div>
@@ -201,8 +201,8 @@ export default function UserDashboard() {
               {stats.map((stat, index) => (
                 <Card key={index} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                   <CardContent className="p-4 text-center">
-                    <div className={`w-12 h-12 mx-auto mb-3 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center`}>
-                      <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                    <div className={`size-12 mx-auto mb-3 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center`}>
+                      <stat.icon className={`size-6 ${stat.color}`} />
                     </div>
                     <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
                       {stat.value}
@@ -226,28 +226,28 @@ export default function UserDashboard() {
               <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <User className="w-5 h-5 text-purple-600" />
+                    <User className="size-5 text-purple-600" />
                     Contact Information
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
                     <Label className="flex items-center gap-2 text-sm font-medium">
-                      <Mail className="w-4 h-4 text-gray-400" />
+                      <Mail className="size-4 text-gray-400" />
                       Email
                     </Label>
                     <Input value={user.email} readOnly className="bg-gray-50 dark:bg-gray-700" />
                   </div>
                   <div className="space-y-2">
                     <Label className="flex items-center gap-2 text-sm font-medium">
-                      <Phone className="w-4 h-4 text-gray-400" />
+                      <Phone className="size-4 text-gray-400" />
                       Phone
                     </Label>
                     <Input value={user.phone} readOnly className="bg-gray-50 dark:bg-gray-700" />
                   </div>
                   <div className="space-y-2">
                     <Label className="flex items-center gap-2 text-sm font-medium">
-                      <MapPin className="w-4 h-4 text-gray-400" />
+                      <MapPin className="size-4 text-gray-400" />
                       Location
                     </Label>
                     <Input value={user.location} readOnly className="bg-gray-50 dark:bg-gray-700" />
@@ -259,28 +259,28 @@ export default function UserDashboard() {
               <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Briefcase className="w-5 h-5 text-blue-600" />
+                    <Briefcase className="size-5 text-blue-600" />
                     Professional Details
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
                     <Label className="flex items-center gap-2 text-sm font-medium">
-                      <Building className="w-4 h-4 text-gray-400" />
+                      <Building className="size-4 text-gray-400" />
                       Company
                     </Label>
                     <Input value={user.company} readOnly className="bg-gray-50 dark:bg-gray-700" />
                   </div>
                   <div className="space-y-2">
                     <Label className="flex items-center gap-2 text-sm font-medium">
-                      <Briefcase className="w-4 h-4 text-gray-400" />
+                      <Briefcase className="size-4 text-gray-400" />
                       Title
                     </Label>
                     <Input value={user.title} readOnly className="bg-gray-50 dark:bg-gray-700" />
                   </div>
                   <div className="space-y-2">
                     <Label className="flex items-center gap-2 text-sm font-medium">
-                      <Award className="w-4 h-4 text-gray-400" />
+                      <Award className="size-4 text-gray-400" />
                       Experience
                     </Label>
                     <Input value={user.experience} readOnly className="bg-gray-50 dark:bg-gray-700" />
@@ -305,7 +305,7 @@ export default function UserDashboard() {
               <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Calendar className="w-5 h-5 text-green-600" />
+                    <Calendar className="size-5 text-green-600" />
                     Recent Activity
                   </CardTitle>
                 </CardHeader>
@@ -313,7 +313,7 @@ export default function UserDashboard() {
                   <div className="space-y-4">
                     {recentActivity.map((activity, index) => (
                       <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50">
-                        <div className="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
+                        <div className="size-2 bg-purple-500 rounded-full mt-2"></div>
                         <div className="flex-1">
                           <p className="text-sm font-medium text-gray-900 dark:text-white">
                             {activity.text}
@@ -325,7 +325,7 @@ export default function UserDashboard() {
                       </div>
                     ))}
                     <Button variant="outline" className="w-full">
-                      <ArrowRight className="w-4 h-4 mr-2" />
+                      <ArrowRight className="size-4 mr-2" />
                       View All Activity
                     </Button>
                   </div>
@@ -341,19 +341,19 @@ export default function UserDashboard() {
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
             >
               <Button className="h-20 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white">
-                <Users className="w-6 h-6 mr-2" />
+                <Users className="size-6 mr-2" />
                 Find Connections
               </Button>
               <Button variant="outline" className="h-20">
-                <Plus className="w-6 h-6 mr-2" />
+                <Plus className="size-6 mr-2" />
                 Create Post
               </Button>
               <Button variant="outline" className="h-20">
-                <Calendar className="w-6 h-6 mr-2" />
+                <Calendar className="size-6 mr-2" />
                 Schedule Meeting
               </Button>
               <Button variant="outline" className="h-20">
-                <TrendingUp className="w-6 h-6 mr-2" />
+                <TrendingUp className="size-6 mr-2" />
                 View Analytics
               </Button>
             </motion.div>
@@ -377,8 +377,8 @@ export default function UserDashboard() {
               </div>
               <div className="space-y-6">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <User className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+                  <div className="size-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <User className="size-8 text-purple-600 dark:text-purple-400" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2">Profile Completion</h3>
                   <p className="text-gray-600 dark:text-gray-400">

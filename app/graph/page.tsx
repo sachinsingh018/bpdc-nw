@@ -151,7 +151,7 @@ export default function NearbyEventsPage() {
                 <h1 className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent mb-4 text-center animate-pulse">
                     Loading Networkqy...
                 </h1>
-                <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4" />
+                <div className="size-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4" />
                 <p className="text-sm text-gray-600 dark:text-gray-400 font-mono">
                     Please wait while we fetch your data
                 </p>
@@ -180,7 +180,7 @@ export default function NearbyEventsPage() {
                                 </p>
                                 {isLoadingGraph && (
                                     <div className="flex items-center justify-center gap-2">
-                                        <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+                                        <div className="size-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
                                         <span className="text-sm text-gray-400">Loading network...</span>
                                     </div>
                                 )}
@@ -227,7 +227,7 @@ export default function NearbyEventsPage() {
                                             className="bg-gray-900 border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-purple-700/40 transition"
                                         >
                                             <div className="flex items-center gap-4 mb-4">
-                                                <div className="w-12 h-12 rounded-full bg-purple-800 flex items-center justify-center text-white font-bold text-sm">
+                                                <div className="size-12 rounded-full bg-purple-800 flex items-center justify-center text-white font-bold text-sm">
                                                     {person.name.split(' ').map((n: string) => n[0]).join('')}
                                                 </div>
                                                 <div>

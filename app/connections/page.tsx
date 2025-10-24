@@ -218,7 +218,7 @@ const ConnectionsPage = () => {
                 `
             }}>
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
+                    <div className="size-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
                         borderColor: 'rgba(255, 215, 0, 0.8)',
                         borderTopColor: 'transparent'
                     }} />
@@ -247,35 +247,35 @@ const ConnectionsPage = () => {
             {/* Dynamic Vibrant Background Elements */}
             <div className="fixed inset-0 z-0">
                 {/* Deep Royal Blue */}
-                <div className="absolute top-10 left-5 w-96 h-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
-                <div className="absolute top-1/3 right-10 w-80 h-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
+                <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
+                <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
 
                 {/* Bright Golden Yellow */}
-                <div className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
-                <div className="absolute bottom-1/4 left-1/4 w-88 h-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
+                <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
+                <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
 
                 {/* Crimson Red */}
-                <div className="absolute bottom-20 left-1/3 w-64 h-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
-                <div className="absolute top-1/2 right-1/3 w-56 h-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
+                <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
+                <div className="absolute top-1/2 right-1/3 size-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
 
                 {/* Charcoal Black */}
-                <div className="absolute bottom-10 right-5 w-72 h-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
+                <div className="absolute bottom-10 right-5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
 
                 {/* Light Gray */}
-                <div className="absolute top-1/4 left-1/2 w-60 h-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
+                <div className="absolute top-1/4 left-1/2 size-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
 
                 {/* Mid-tone Blue */}
-                <div className="absolute bottom-1/3 right-1/4 w-68 h-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
+                <div className="absolute bottom-1/3 right-1/4 size-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
 
                 {/* Warm Golden Glow */}
-                <div className="absolute top-1/2 left-1/5 w-76 h-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
+                <div className="absolute top-1/2 left-1/5 size-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
 
                 {/* Vibrant Red */}
-                <div className="absolute top-2/3 right-1/5 w-52 h-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
+                <div className="absolute top-2/3 right-1/5 size-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
 
                 {/* Neon Purple */}
-                <div className="absolute top-1/6 left-2/3 w-84 h-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
-                <div className="absolute bottom-1/6 left-1/6 w-48 h-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
+                <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
+                <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
             </div>
 
             {/* Common Navbar */}
@@ -379,7 +379,7 @@ const ConnectionsPage = () => {
                                         >
                                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                                 <div className="flex items-center gap-4 min-w-0 flex-1">
-                                                    <div className="w-12 h-12 bg-purple-100 dark:bg-purple-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                                    <div className="size-12 bg-purple-100 dark:bg-purple-600/20 rounded-full flex items-center justify-center shrink-0">
                                                         <FaUser className="text-purple-600 dark:text-purple-400" size={20} />
                                                     </div>
                                                     <div className="min-w-0 flex-1">
@@ -398,7 +398,7 @@ const ConnectionsPage = () => {
                                                 </div>
                                                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-2">
                                                     <span className="px-3 py-1.5 bg-gradient-to-r from-green-400 to-emerald-500 text-white rounded-full text-sm font-medium shadow-sm flex items-center gap-1.5 w-fit">
-                                                        <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                                                        <div className="size-2 bg-white rounded-full animate-pulse"></div>
                                                         Connected
                                                     </span>
                                                     <button
@@ -413,9 +413,9 @@ const ConnectionsPage = () => {
                                                                 console.error('User or email not found:', { user, currentUserId });
                                                             }
                                                         }}
-                                                        className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white rounded-xl transition-all duration-200 text-sm font-medium shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center gap-2 w-full sm:w-auto justify-center"
+                                                        className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white rounded-xl transition-all duration-200 text-sm font-medium shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2 w-full sm:w-auto justify-center"
                                                     >
-                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                                                         </svg>
                                                         Message
@@ -469,7 +469,7 @@ const ConnectionsPage = () => {
                                                         >
                                                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                                                 <div className="flex items-center gap-4 min-w-0 flex-1">
-                                                                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                                                    <div className="size-12 bg-blue-100 dark:bg-blue-600/20 rounded-full flex items-center justify-center shrink-0">
                                                                         <FaUser className="text-blue-600 dark:text-blue-400" size={20} />
                                                                     </div>
                                                                     <div className="min-w-0 flex-1">
@@ -489,14 +489,14 @@ const ConnectionsPage = () => {
                                                                 <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                                                                     <button
                                                                         onClick={() => handleConnectionResponse(request.id, 'accepted')}
-                                                                        className="px-4 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium"
+                                                                        className="px-4 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:scale-105 font-medium"
                                                                     >
                                                                         <FaCheck size={14} />
                                                                         Accept
                                                                     </button>
                                                                     <button
                                                                         onClick={() => handleConnectionResponse(request.id, 'rejected')}
-                                                                        className="px-4 py-2.5 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium"
+                                                                        className="px-4 py-2.5 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:scale-105 font-medium"
                                                                     >
                                                                         <FaTimes size={14} />
                                                                         Decline
@@ -531,7 +531,7 @@ const ConnectionsPage = () => {
                                                         >
                                                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                                                 <div className="flex items-center gap-4 min-w-0 flex-1">
-                                                                    <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                                                    <div className="size-12 bg-yellow-100 dark:bg-yellow-600/20 rounded-full flex items-center justify-center shrink-0">
                                                                         <FaUser className="text-yellow-600 dark:text-yellow-400" size={20} />
                                                                     </div>
                                                                     <div className="min-w-0 flex-1">
@@ -553,7 +553,7 @@ const ConnectionsPage = () => {
                                                                 </div>
                                                                 <div className="flex items-center gap-2">
                                                                     <span className="px-3 py-1.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full text-sm font-medium shadow-sm flex items-center gap-1.5 w-fit">
-                                                                        <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                                                                        <div className="size-2 bg-white rounded-full animate-pulse"></div>
                                                                         Pending
                                                                     </span>
                                                                 </div>
@@ -598,7 +598,7 @@ const ConnectionsPage = () => {
                                         >
                                             <div className="flex items-start justify-between gap-4">
                                                 <div className="flex items-start gap-4 min-w-0 flex-1">
-                                                    <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${notification.type === 'connection_request' ? 'bg-blue-100 dark:bg-blue-600/20' :
+                                                    <div className={`size-12 rounded-full flex items-center justify-center shrink-0 ${notification.type === 'connection_request' ? 'bg-blue-100 dark:bg-blue-600/20' :
                                                         notification.type === 'connection_accepted' ? 'bg-green-100 dark:bg-green-600/20' :
                                                             'bg-red-100 dark:bg-red-600/20'
                                                         }`}>
@@ -621,7 +621,7 @@ const ConnectionsPage = () => {
                                                     </div>
                                                 </div>
                                                 {!notification.is_read && (
-                                                    <div className="w-3 h-3 bg-purple-500 rounded-full flex-shrink-0"></div>
+                                                    <div className="size-3 bg-purple-500 rounded-full shrink-0"></div>
                                                 )}
                                             </div>
                                         </motion.div>

@@ -268,7 +268,7 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
         if (connectionStatus === 'pending') {
             return (
                 <Button disabled variant="outline" className="w-full bg-yellow-50 border-yellow-200 text-yellow-700 hover:bg-yellow-50">
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <Loader2 className="size-4 mr-2 animate-spin" />
                     Request Pending
                 </Button>
             );
@@ -277,7 +277,7 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
         if (connectionStatus === 'accepted') {
             return (
                 <Button disabled variant="outline" className="w-full bg-green-50 border-green-200 text-green-700 hover:bg-green-50">
-                    <CheckCircle className="w-4 h-4 mr-2" />
+                    <CheckCircle className="size-4 mr-2" />
                     Connected
                 </Button>
             );
@@ -286,7 +286,7 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
         if (connectionStatus === 'rejected') {
             return (
                 <Button disabled variant="outline" className="w-full bg-red-50 border-red-200 text-red-700 hover:bg-red-50">
-                    <XCircle className="w-4 h-4 mr-2" />
+                    <XCircle className="size-4 mr-2" />
                     Request Declined
                 </Button>
             );
@@ -299,9 +299,9 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
                 className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
             >
                 {isSendingRequest ? (
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <Loader2 className="size-4 mr-2 animate-spin" />
                 ) : (
-                    <UserPlus className="w-4 h-4 mr-2" />
+                    <UserPlus className="size-4 mr-2" />
                 )}
                 Send Connection Request
             </Button>
@@ -323,10 +323,10 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
     };
 
     const getMatchIcon = (percentage: number) => {
-        if (percentage >= 90) return <Star className="w-4 h-4" />;
-        if (percentage >= 80) return <Sparkles className="w-4 h-4" />;
-        if (percentage >= 70) return <TrendingUp className="w-4 h-4" />;
-        return <Zap className="w-4 h-4" />;
+        if (percentage >= 90) return <Star className="size-4" />;
+        if (percentage >= 80) return <Sparkles className="size-4" />;
+        if (percentage >= 70) return <TrendingUp className="size-4" />;
+        return <Zap className="size-4" />;
     };
 
     return (
@@ -341,7 +341,7 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
                     <div className={`bg-gradient-to-r ${getGradientClass(personData.match_percentage)} p-4 text-white`}>
                         <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-3">
-                                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                <div className="size-12 bg-white/20 rounded-full flex items-center justify-center">
                                     <span className="text-lg font-bold">
                                         {personData.name.split(' ').map(n => n[0]).join('').toUpperCase()}
                                     </span>
@@ -373,7 +373,7 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
                             {personData.email && personData.email !== 'Email not available' && (
                                 <div className="flex items-center justify-between p-2 bg-blue-50 rounded-lg">
                                     <div className="flex items-center space-x-2">
-                                        <Mail className="w-4 h-4 text-blue-600" />
+                                        <Mail className="size-4 text-blue-600" />
                                         <span className="text-sm text-gray-700">{personData.email}</span>
                                     </div>
                                     <Button
@@ -382,7 +382,7 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
                                         onClick={() => personData.email && copyToClipboard(personData.email, 'Email')}
                                         className="h-8 px-2"
                                     >
-                                        {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                                        {isCopied ? <Check className="size-4" /> : <Copy className="size-4" />}
                                     </Button>
                                 </div>
                             )}
@@ -391,7 +391,7 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
                             {personData.phone && personData.phone !== 'Phone number not available' && (
                                 <div className="flex items-center justify-between p-2 bg-green-50 rounded-lg">
                                     <div className="flex items-center space-x-2">
-                                        <Phone className="w-4 h-4 text-green-600" />
+                                        <Phone className="size-4 text-green-600" />
                                         <span className="text-sm text-gray-700">{personData.phone}</span>
                                     </div>
                                     <Button
@@ -400,7 +400,7 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
                                         onClick={() => personData.phone && copyToClipboard(personData.phone, 'Phone')}
                                         className="h-8 px-2"
                                     >
-                                        {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                                        {isCopied ? <Check className="size-4" /> : <Copy className="size-4" />}
                                     </Button>
                                 </div>
                             )}
@@ -412,11 +412,11 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
                                     {socialLinks.map((link, index) => (
                                         <div key={link.url || index} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
                                             <div className="flex items-center space-x-2">
-                                                {link.type === 'linkedin' && <Linkedin className="w-4 h-4 text-blue-600" />}
-                                                {link.type === 'instagram' && <Instagram className="w-4 h-4 text-pink-600" />}
-                                                {link.type === 'twitter' && <Twitter className="w-4 h-4 text-blue-400" />}
-                                                {link.type === 'github' && <Globe className="w-4 h-4 text-gray-600" />}
-                                                {link.type === 'website' && <Globe className="w-4 h-4 text-gray-600" />}
+                                                {link.type === 'linkedin' && <Linkedin className="size-4 text-blue-600" />}
+                                                {link.type === 'instagram' && <Instagram className="size-4 text-pink-600" />}
+                                                {link.type === 'twitter' && <Twitter className="size-4 text-blue-400" />}
+                                                {link.type === 'github' && <Globe className="size-4 text-gray-600" />}
+                                                {link.type === 'website' && <Globe className="size-4 text-gray-600" />}
                                                 <span className="text-sm text-gray-700">{link.label}</span>
                                             </div>
                                             <Button
@@ -425,7 +425,7 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
                                                 onClick={() => window.open(link.url, '_blank')}
                                                 className="h-8 px-2"
                                             >
-                                                <ExternalLink className="w-4 h-4" />
+                                                <ExternalLink className="size-4" />
                                             </Button>
                                         </div>
                                     ))}
@@ -445,7 +445,7 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
                                         onClick={handleMessageOnNetworkqy}
                                         className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
                                     >
-                                        <MessageCircle className="w-4 h-4 mr-2" />
+                                        <MessageCircle className="size-4 mr-2" />
                                         Message on Networkqy
                                     </Button>
                                 ) : (
@@ -453,7 +453,7 @@ export function EnhancedMessageActions({ personData, onActionComplete }: Enhance
                                         onClick={handleInviteToNetworkqy}
                                         className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
                                     >
-                                        <UserPlus className="w-4 h-4 mr-2" />
+                                        <UserPlus className="size-4 mr-2" />
                                         Invite to Networkqy
                                     </Button>
                                 )}

@@ -236,19 +236,19 @@ const howItWorksSteps: HowItWorksStep[] = [
     step: '1',
     title: 'Define Your Intent',
     description: 'Share your goals—whether fundraising, hiring, or finding co-founders',
-    icon: <Target className="w-8 h-8" />
+    icon: <Target className="size-8" />
   },
   {
     step: '2',
     title: 'AI-Powered Discovery',
     description: 'Our AI analyzes compatibility beyond keywords—values, timing, and intent',
-    icon: <Sparkles className="w-8 h-8" />
+    icon: <Sparkles className="size-8" />
   },
   {
     step: '3',
     title: 'Meaningful Connections',
     description: 'Receive warm introductions with context that drive real relationships',
-    icon: <Users className="w-8 h-8" />
+    icon: <Users className="size-8" />
   },
 ];
 
@@ -290,22 +290,22 @@ const testimonials: Testimonial[] = [
 
 const coreValues: Value[] = [
   {
-    icon: <Sparkles className="w-8 h-8" />,
+    icon: <Sparkles className="size-8" />,
     title: "AI-First Innovation",
     description: "We leverage cutting-edge artificial intelligence to solve real human connection challenges with unprecedented precision."
   },
   {
-    icon: <Users className="w-8 h-8" />,
+    icon: <Users className="size-8" />,
     title: "Authentic Relationships",
     description: "Every connection facilitated through our platform prioritizes genuine compatibility and mutual value creation."
   },
   {
-    icon: <Target className="w-8 h-8" />,
+    icon: <Target className="size-8" />,
     title: "Intent-Driven Matching",
     description: "We go beyond surface-level matching to understand deep motivations, timing, and professional objectives."
   },
   {
-    icon: <Zap className="w-8 h-8" />,
+    icon: <Zap className="size-8" />,
     title: "Accelerated Growth",
     description: "Our mission is to compress the traditional networking timeline, helping professionals achieve their goals faster."
   }
@@ -314,22 +314,22 @@ const apiIntegrations = [
   {
     title: "Community & Event Platforms",
     description: "Embed smart networking features into your community platform to help members discover and connect with like-minded professionals.",
-    icon: <Network className="w-8 h-8" />
+    icon: <Network className="size-8" />
   },
   {
     title: "Corporate HR Tools",
     description: "Integrate our AI-powered matching into your HR platform to facilitate internal networking, mentorship, and team collaboration.",
-    icon: <Briefcase className="w-8 h-8" />
+    icon: <Briefcase className="size-8" />
   },
   {
     title: "Slack/Discord Bots",
     description: "Deploy our intelligent networking bot in your workspace to suggest connections and foster meaningful professional relationships.",
-    icon: <Share2 className="w-8 h-8" />
+    icon: <Share2 className="size-8" />
   },
   {
     title: "Embedded Chat Widgets",
     description: "Add our networking widget to your website or app to help users connect with relevant professionals in real-time.",
-    icon: <MessageCircle className="w-8 h-8" />
+    icon: <MessageCircle className="size-8" />
   }
 ];
 const partnerLogos = [
@@ -357,10 +357,10 @@ export default function About() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           {/* Decorative Blurs */}
-          <div className="absolute top-20 left-10 w-64 h-64 bg-bits-royal-blue/40 rounded-full blur-3xl opacity-70 pointer-events-none animate-pulse"></div>
-          <div className="absolute bottom-40 right-20 w-80 h-80 bg-bits-deep-purple/40 rounded-full blur-3xl opacity-70 pointer-events-none animate-pulse delay-1000"></div>
-          <div className="absolute top-40 right-10 w-56 h-56 bg-bits-golden-yellow/40 rounded-full blur-3xl opacity-70 pointer-events-none animate-pulse delay-2000"></div>
-          <div className="absolute bottom-20 left-1/3 w-72 h-72 bg-bits-bright-red/30 rounded-full blur-3xl opacity-60 pointer-events-none animate-pulse delay-500"></div>
+          <div className="absolute top-20 left-10 size-64 bg-bits-royal-blue/40 rounded-full blur-3xl opacity-70 pointer-events-none animate-pulse"></div>
+          <div className="absolute bottom-40 right-20 size-80 bg-bits-deep-purple/40 rounded-full blur-3xl opacity-70 pointer-events-none animate-pulse delay-1000"></div>
+          <div className="absolute top-40 right-10 size-56 bg-bits-golden-yellow/40 rounded-full blur-3xl opacity-70 pointer-events-none animate-pulse delay-2000"></div>
+          <div className="absolute bottom-20 left-1/3 size-72 bg-bits-bright-red/30 rounded-full blur-3xl opacity-60 pointer-events-none animate-pulse delay-500"></div>
 
           {/* Content */}
           <div className="relative z-10 max-w-6xl mx-auto">

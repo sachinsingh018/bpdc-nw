@@ -190,7 +190,7 @@ export default function ProfessionalDashboard() {
                         <div className="p-6 border-b border-purple-800/20">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-12 h-12 bg-gradient-to-br from-violet-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                    <div className="size-12 bg-gradient-to-br from-violet-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                                         <span className="text-xl font-bold text-white">N</span>
                                     </div>
                                     <div>
@@ -215,7 +215,7 @@ export default function ProfessionalDashboard() {
                         {/* User Profile */}
                         <div className="p-6 border-b border-purple-800/20">
                             <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 bg-gradient-to-br from-violet-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                                <div className="size-14 bg-gradient-to-br from-violet-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                                     <span className="text-lg font-semibold text-white">AK</span>
                                 </div>
                                 <div>
@@ -257,7 +257,7 @@ export default function ProfessionalDashboard() {
                         <div className="p-4">
                             <div className="p-4 rounded-2xl bg-gradient-to-br from-purple-900/50 to-fuchsia-900/50 border border-purple-700/50">
                                 <div className="text-center">
-                                    <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-xl mx-auto mb-3 flex items-center justify-center">
+                                    <div className="size-12 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-xl mx-auto mb-3 flex items-center justify-center">
                                         <FaStar className="text-white text-lg" />
                                     </div>
                                     <h4 className="font-semibold mb-2 text-purple-100">
@@ -324,11 +324,11 @@ export default function ProfessionalDashboard() {
                                         whileTap={{ scale: 0.95 }}
                                     >
                                         <FaBell />
-                                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-fuchsia-500 to-pink-500 rounded-full" />
+                                        <div className="absolute -top-1 -right-1 size-3 bg-gradient-to-r from-fuchsia-500 to-pink-500 rounded-full" />
                                     </motion.button>
 
                                     <motion.div
-                                        className="w-12 h-12 bg-gradient-to-br from-purple-600 to-fuchsia-600 rounded-xl flex items-center justify-center cursor-pointer shadow-lg"
+                                        className="size-12 bg-gradient-to-br from-purple-600 to-fuchsia-600 rounded-xl flex items-center justify-center cursor-pointer shadow-lg"
                                         whileHover={{ scale: 1.1 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
@@ -484,7 +484,7 @@ export default function ProfessionalDashboard() {
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ delay: index * 0.1 }}
                                             >
-                                                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-fuchsia-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                                                <div className="size-10 bg-gradient-to-br from-purple-500 to-fuchsia-500 rounded-xl flex items-center justify-center shrink-0">
                                                     <span className="text-white text-xs font-semibold">
                                                         {activity.avatar}
                                                     </span>
@@ -526,7 +526,7 @@ export default function ProfessionalDashboard() {
                                                 animate={{ opacity: 1, y: 0 }}
                                                 transition={{ delay: index * 0.1 }}
                                             >
-                                                <div className="w-12 h-12 bg-gradient-to-br from-violet-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                                                <div className="size-12 bg-gradient-to-br from-violet-500 to-purple-500 rounded-xl flex items-center justify-center shrink-0">
                                                     <span className="text-white text-xs font-semibold">
                                                         {connection.avatar}
                                                     </span>

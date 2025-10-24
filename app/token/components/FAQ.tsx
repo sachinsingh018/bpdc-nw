@@ -92,8 +92,8 @@ export default function FAQ() {
                                     className="w-full px-6 py-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors duration-200"
                                 >
                                     <div className="flex items-start space-x-4">
-                                        <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                            <HelpCircle className="w-4 h-4 text-white" />
+                                        <div className="size-8 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center shrink-0 mt-1">
+                                            <HelpCircle className="size-4 text-white" />
                                         </div>
                                         <div className="text-left">
                                             <h3 className="text-lg font-semibold text-white mb-1">
@@ -105,7 +105,7 @@ export default function FAQ() {
                                         </div>
                                     </div>
                                     <ChevronDown
-                                        className={`w-5 h-5 text-white/60 transition-transform duration-200 ${openIndex === index ? 'rotate-180' : ''
+                                        className={`size-5 text-white/60 transition-transform duration-200 ${openIndex === index ? 'rotate-180' : ''
                                             }`}
                                     />
                                 </button>

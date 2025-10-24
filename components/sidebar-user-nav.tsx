@@ -39,7 +39,7 @@ export function SidebarUserNav({ user }: { user: User }) {
       <SidebarMenu>
         <SidebarMenuItem>
           <div className="flex items-center space-x-3 p-2 h-10 w-full animate-pulse bg-muted rounded-lg">
-            <div className="w-6 h-6 rounded-full bg-gray-400" />
+            <div className="size-6 rounded-full bg-gray-400" />
             <div className="w-24 h-4 bg-gray-400 rounded" />
           </div>
         </SidebarMenuItem>

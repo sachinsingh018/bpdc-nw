@@ -247,7 +247,7 @@ export default function AlumniPage() {
                         exit={{ opacity: 0, y: -20 }}
                         className="fixed top-4 right-4 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2"
                     >
-                        <Check className="w-5 h-5" />
+                        <Check className="size-5" />
                         <span className="font-medium">{showSuccessMessage}</span>
                     </motion.div>
                 )}
@@ -265,10 +265,10 @@ export default function AlumniPage() {
                         <CardContent className="p-6">
                             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                                 <div className="relative">
-                                    <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                                    <div className="size-20 sm:size-24 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
                                         {user.name.split(' ').map(n => n[0]).join('')}
                                     </div>
-                                    <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
+                                    <div className="absolute -bottom-1 -right-1 size-6 bg-green-500 rounded-full border-2 border-white"></div>
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-1">
@@ -279,11 +279,11 @@ export default function AlumniPage() {
                                     </p>
                                     <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
                                         <div className="flex items-center gap-1">
-                                            <MapPin className="w-4 h-4" />
+                                            <MapPin className="size-4" />
                                             {user.location}
                                         </div>
                                         <div className="flex items-center gap-1">
-                                            <Building className="w-4 h-4" />
+                                            <Building className="size-4" />
                                             {user.company}
                                         </div>
                                     </div>
@@ -304,8 +304,8 @@ export default function AlumniPage() {
                     {statsData.map((stat, index) => (
                         <Card key={index} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
                             <CardContent className="p-4 text-center">
-                                <div className={`w-12 h-12 mx-auto mb-3 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center`}>
-                                    <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                                <div className={`size-12 mx-auto mb-3 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center`}>
+                                    <stat.icon className={`size-6 ${stat.color}`} />
                                 </div>
                                 <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
                                     {stat.value}
@@ -329,7 +329,7 @@ export default function AlumniPage() {
                     <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
-                                <Briefcase className="w-5 h-5 text-blue-600" />
+                                <Briefcase className="size-5 text-blue-600" />
                                 Post a Job
                             </CardTitle>
                         </CardHeader>
@@ -373,7 +373,7 @@ export default function AlumniPage() {
                                         placeholder="Describe the role, responsibilities, requirements..."
                                         value={jobForm.description}
                                         onChange={(e) => setJobForm({ ...jobForm, description: e.target.value })}
-                                        className="w-full min-h-[100px] px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                        className="w-full min-h-[100px] px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                                     />
                                 </div>
                                 <div className="space-y-2">
@@ -390,7 +390,7 @@ export default function AlumniPage() {
                                     )}
                                 </div>
                                 <Button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white">
-                                    <Plus className="w-4 h-4 mr-2" />
+                                    <Plus className="size-4 mr-2" />
                                     Post Job
                                 </Button>
                             </form>
@@ -401,7 +401,7 @@ export default function AlumniPage() {
                     <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
-                                <Briefcase className="w-5 h-5 text-blue-600" />
+                                <Briefcase className="size-5 text-blue-600" />
                                 Posted Jobs ({postedJobs.length})
                             </CardTitle>
                         </CardHeader>
@@ -437,7 +437,7 @@ export default function AlumniPage() {
                                 </AnimatePresence>
                                 {postedJobs.length === 0 && (
                                     <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-                                        <Briefcase className="w-12 h-12 mx-auto mb-3 text-gray-300 dark:text-gray-600" />
+                                        <Briefcase className="size-12 mx-auto mb-3 text-gray-300 dark:text-gray-600" />
                                         <p>No jobs posted yet. Post your first job above!</p>
                                     </div>
                                 )}
@@ -449,7 +449,7 @@ export default function AlumniPage() {
                     <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
-                                <Calendar className="w-5 h-5 text-green-600" />
+                                <Calendar className="size-5 text-green-600" />
                                 Mentorship Availability
                             </CardTitle>
                         </CardHeader>
@@ -509,12 +509,12 @@ export default function AlumniPage() {
                                         type="checkbox"
                                         checked={mentorshipSlot.recurring}
                                         onChange={(e) => setMentorshipSlot({ ...mentorshipSlot, recurring: e.target.checked })}
-                                        className="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        className="size-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                     />
                                     <Label htmlFor="recurring">Recurring weekly</Label>
                                 </div>
                                 <Button type="submit" className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white">
-                                    <Plus className="w-4 h-4 mr-2" />
+                                    <Plus className="size-4 mr-2" />
                                     Add Time Slot
                                 </Button>
                             </form>
@@ -532,7 +532,7 @@ export default function AlumniPage() {
                                         >
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-2">
-                                                    <Clock className="w-4 h-4 text-gray-500" />
+                                                    <Clock className="size-4 text-gray-500" />
                                                     <span className="font-medium text-gray-900 dark:text-white">
                                                         {slot.date} at {slot.startTime}
                                                     </span>
@@ -548,7 +548,7 @@ export default function AlumniPage() {
                                             </div>
                                             <div className="flex gap-2">
                                                 <Button variant="outline" size="sm" className="hover:bg-blue-50 dark:hover:bg-blue-900/20">
-                                                    <Edit className="w-4 h-4" />
+                                                    <Edit className="size-4" />
                                                 </Button>
                                                 <Button
                                                     variant="outline"
@@ -556,7 +556,7 @@ export default function AlumniPage() {
                                                     onClick={() => handleDeleteMentorshipSlot(slot.id)}
                                                     className="hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400"
                                                 >
-                                                    <Trash2 className="w-4 h-4" />
+                                                    <Trash2 className="size-4" />
                                                 </Button>
                                             </div>
                                         </motion.div>
@@ -578,7 +578,7 @@ export default function AlumniPage() {
                     <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
-                                <MessageSquare className="w-5 h-5 text-purple-600" />
+                                <MessageSquare className="size-5 text-purple-600" />
                                 Student Mentorship Requests
                             </CardTitle>
                         </CardHeader>
@@ -620,7 +620,7 @@ export default function AlumniPage() {
                                                         onClick={() => handleMentorshipRequest(request.id, 'accept')}
                                                         className="bg-green-600 hover:bg-green-700 text-white transition-colors duration-200"
                                                     >
-                                                        <CheckCircle className="w-4 h-4 mr-1" />
+                                                        <CheckCircle className="size-4 mr-1" />
                                                         Accept
                                                     </Button>
                                                     <Button
@@ -629,7 +629,7 @@ export default function AlumniPage() {
                                                         onClick={() => handleMentorshipRequest(request.id, 'ignore')}
                                                         className="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
                                                     >
-                                                        <X className="w-4 h-4 mr-1" />
+                                                        <X className="size-4 mr-1" />
                                                         Ignore
                                                     </Button>
                                                 </div>
@@ -645,7 +645,7 @@ export default function AlumniPage() {
                     <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
-                                <TrendingUp className="w-5 h-5 text-orange-600" />
+                                <TrendingUp className="size-5 text-orange-600" />
                                 Recent Activity
                             </CardTitle>
                         </CardHeader>
@@ -659,8 +659,8 @@ export default function AlumniPage() {
                                             animate={{ opacity: 1, x: 0 }}
                                             className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 hover:scale-[1.02]"
                                         >
-                                            <div className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-                                                <activity.icon className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                                            <div className="size-8 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                                                <activity.icon className="size-4 text-purple-600 dark:text-purple-400" />
                                             </div>
                                             <div className="flex-1">
                                                 <p className="text-sm font-medium text-gray-900 dark:text-white">

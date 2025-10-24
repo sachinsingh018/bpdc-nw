@@ -96,9 +96,9 @@ export default function Footer() {
                                             animate={isInView ? { opacity: 1, scale: 1 } : {}}
                                             transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
                                             whileHover={{ scale: 1.1 }}
-                                            className={`w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-white/70 transition-all duration-200 ${social.color}`}
+                                            className={`size-10 bg-white/10 rounded-lg flex items-center justify-center text-white/70 transition-all duration-200 ${social.color}`}
                                         >
-                                            <social.icon className="w-5 h-5" />
+                                            <social.icon className="size-5" />
                                         </motion.a>
                                     ))}
                                 </div>
@@ -129,7 +129,7 @@ export default function Footer() {
                                                 className="text-white/60 hover:text-white transition-colors duration-200 flex items-center group"
                                             >
                                                 {link.name}
-                                                <ExternalLink className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                                                <ExternalLink className="size-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                                             </a>
                                         </motion.li>
                                     ))}
@@ -152,7 +152,7 @@ export default function Footer() {
 
                             <div className="flex items-center space-x-6 text-sm">
                                 <a href="/token/whitepaper.pdf" className="text-white/60 hover:text-white transition-colors duration-200 flex items-center">
-                                    <FileText className="w-4 h-4 mr-2" />
+                                    <FileText className="size-4 mr-2" />
                                     Whitepaper
                                 </a>
                                 <a href="/status" className="text-white/60 hover:text-white transition-colors duration-200">

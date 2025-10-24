@@ -46,8 +46,8 @@ export default function AuraQY() {
 
                         <div className="space-y-6">
                             <div className="flex items-start space-x-4">
-                                <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                    <Shield className="w-4 h-4 text-white" />
+                                <div className="size-8 bg-purple-500 rounded-full flex items-center justify-center shrink-0 mt-1">
+                                    <Shield className="size-4 text-white" />
                                 </div>
                                 <div>
                                     <h4 className="text-white font-semibold mb-2">Verified Identity</h4>
@@ -56,8 +56,8 @@ export default function AuraQY() {
                             </div>
 
                             <div className="flex items-start space-x-4">
-                                <div className="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                    <CheckCircle className="w-4 h-4 text-white" />
+                                <div className="size-8 bg-cyan-500 rounded-full flex items-center justify-center shrink-0 mt-1">
+                                    <CheckCircle className="size-4 text-white" />
                                 </div>
                                 <div>
                                     <h4 className="text-white font-semibold mb-2">Contribution Tracking</h4>
@@ -66,8 +66,8 @@ export default function AuraQY() {
                             </div>
 
                             <div className="flex items-start space-x-4">
-                                <div className="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                    <Star className="w-4 h-4 text-white" />
+                                <div className="size-8 bg-amber-500 rounded-full flex items-center justify-center shrink-0 mt-1">
+                                    <Star className="size-4 text-white" />
                                 </div>
                                 <div>
                                     <h4 className="text-white font-semibold mb-2">Community Endorsements</h4>
@@ -110,7 +110,7 @@ export default function AuraQY() {
                                 {/* AuraQY Score */}
                                 <div className="text-center">
                                     <h4 className="text-white font-semibold mb-3">AuraQY Score</h4>
-                                    <div className="bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full w-24 h-24 mx-auto flex items-center justify-center">
+                                    <div className="bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full size-24 mx-auto flex items-center justify-center">
                                         <span className="text-white font-bold text-lg">850</span>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@ export default function AuraQY() {
                     className="mt-16 text-center"
                 >
                     <div className="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/20 rounded-2xl p-8 backdrop-blur-xl">
-                        <TrendingUp className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
+                        <TrendingUp className="size-12 text-cyan-400 mx-auto mb-4" />
                         <h3 className="text-2xl font-bold text-white mb-4">
                             Score-Based Benefits
                         </h3>

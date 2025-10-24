@@ -46,7 +46,7 @@ export const Header = () => {
                             >
                                 {item}
                             </Link>
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-bits-golden-yellow-400 to-bits-white transition-all duration-200 group-hover:w-full"></span>
+                            <span className="absolute -bottom-1 left-0 size-0.5 bg-gradient-to-r from-bits-golden-yellow-400 to-bits-white transition-all duration-200 group-hover:w-full"></span>
                         </motion.div>
                     ))}
                 </nav>

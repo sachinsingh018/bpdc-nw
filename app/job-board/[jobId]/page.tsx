@@ -98,7 +98,7 @@ export default function JobDetailPage() {
                 <CommonNavbar currentPage="/job-board" hideForPublic={true} />
                 <div className="flex items-center justify-center min-h-[60vh]">
                     <div className="text-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
+                        <div className="animate-spin rounded-full size-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
                         <p className="text-lg text-gray-600 dark:text-gray-300">Loading job details...</p>
                     </div>
                 </div>
@@ -136,18 +136,18 @@ export default function JobDetailPage() {
                     variant="outline"
                     className="mb-6 flex items-center gap-2"
                 >
-                    <ArrowLeft className="w-4 h-4" />
+                    <ArrowLeft className="size-4" />
                     Back
                 </Button>
 
                 {/* Job Header */}
                 <div className="bg-white/95 dark:bg-slate-900/95 rounded-2xl p-8 shadow-xl border border-purple-200 dark:border-purple-800 mb-6">
                     <div className="flex flex-col md:flex-row gap-6">
-                        <div className="flex-shrink-0">
+                        <div className="shrink-0">
                             <img
                                 src={job.logo || '/imagetemplate.png'}
                                 alt={job.company}
-                                className="w-20 h-20 rounded-xl border border-purple-200 dark:border-purple-700 bg-white object-cover shadow-md"
+                                className="size-20 rounded-xl border border-purple-200 dark:border-purple-700 bg-white object-cover shadow-md"
                                 onError={e => {
                                     const target = e.target as HTMLImageElement;
                                     if (target.src !== window.location.origin + '/imagetemplate.png') {
@@ -231,7 +231,7 @@ export default function JobDetailPage() {
                                         onClick={handleShare}
                                         className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700"
                                     >
-                                        {copied ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
+                                        {copied ? <Check className="size-4" /> : <Share2 className="size-4" />}
                                         {copied ? 'Copied!' : 'Share Job'}
                                     </Button>
 
@@ -240,7 +240,7 @@ export default function JobDetailPage() {
                                             onClick={() => job.job_apply_link && window.open(job.job_apply_link, '_blank')}
                                             className="flex items-center gap-2 bg-green-600 hover:bg-green-700"
                                         >
-                                            <ExternalLink className="w-4 h-4" />
+                                            <ExternalLink className="size-4" />
                                             Apply Now
                                         </Button>
                                     )}

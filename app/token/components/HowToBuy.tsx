@@ -66,8 +66,8 @@ export default function HowToBuy() {
                     >
                         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8">
                             <div className="text-center mb-8">
-                                <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <Bell className="w-10 h-10 text-white" />
+                                <div className="size-20 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <Bell className="size-10 text-white" />
                                 </div>
                                 <h3 className="text-2xl font-bold text-white mb-2">
                                     Launching Soon
@@ -79,15 +79,15 @@ export default function HowToBuy() {
 
                             <div className="space-y-4 mb-8">
                                 <div className="flex items-center space-x-3 text-white/70">
-                                    <CheckCircle className="w-5 h-5 text-green-400" />
+                                    <CheckCircle className="size-5 text-green-400" />
                                     <span>Token Generation Event (TGE) coming soon</span>
                                 </div>
                                 <div className="flex items-center space-x-3 text-white/70">
-                                    <CheckCircle className="w-5 h-5 text-green-400" />
+                                    <CheckCircle className="size-5 text-green-400" />
                                     <span>Initial DEX offering planned</span>
                                 </div>
                                 <div className="flex items-center space-x-3 text-white/70">
-                                    <CheckCircle className="w-5 h-5 text-green-400" />
+                                    <CheckCircle className="size-5 text-green-400" />
                                     <span>Multiple chain support</span>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@ export default function HowToBuy() {
                                 onClick={() => document.getElementById('email-capture')?.scrollIntoView({ behavior: 'smooth' })}
                             >
                                 Get Notified at Launch
-                                <ArrowRight className="ml-2 w-5 h-5" />
+                                <ArrowRight className="ml-2 size-5" />
                             </Button>
                         </div>
                     </motion.div>
@@ -111,8 +111,8 @@ export default function HowToBuy() {
                     >
                         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8">
                             <div className="text-center mb-8">
-                                <div className="w-20 h-20 bg-gradient-to-r from-cyan-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <Wallet className="w-10 h-10 text-white" />
+                                <div className="size-20 bg-gradient-to-r from-cyan-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <Wallet className="size-10 text-white" />
                                 </div>
                                 <h3 className="text-2xl font-bold text-white mb-2">
                                     When Live
@@ -124,7 +124,7 @@ export default function HowToBuy() {
 
                             <div className="space-y-6">
                                 <div className="flex items-start space-x-4">
-                                    <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <div className="size-8 bg-purple-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                                         <span className="text-white font-bold text-sm">1</span>
                                     </div>
                                     <div>
@@ -134,7 +134,7 @@ export default function HowToBuy() {
                                 </div>
 
                                 <div className="flex items-start space-x-4">
-                                    <div className="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <div className="size-8 bg-cyan-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                                         <span className="text-white font-bold text-sm">2</span>
                                     </div>
                                     <div>
@@ -144,7 +144,7 @@ export default function HowToBuy() {
                                 </div>
 
                                 <div className="flex items-start space-x-4">
-                                    <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <div className="size-8 bg-emerald-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                                         <span className="text-white font-bold text-sm">3</span>
                                     </div>
                                     <div>
@@ -176,8 +176,8 @@ export default function HowToBuy() {
 
                         {isSuccess ? (
                             <div className="text-center py-4">
-                                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <CheckCircle className="w-8 h-8 text-white" />
+                                <div className="size-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <CheckCircle className="size-8 text-white" />
                                 </div>
                                 <p className="text-green-400 font-semibold">Successfully subscribed!</p>
                                 <p className="text-white/60 text-sm mt-2">We&apos;ll notify you when ${TOKEN_CONFIG.symbol} launches</p>

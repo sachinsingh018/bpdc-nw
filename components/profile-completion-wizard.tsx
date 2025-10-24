@@ -200,8 +200,8 @@ export function ProfileCompletionWizard({
                         className="space-y-6"
                     >
                         <div className="text-center mb-6">
-                            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <User className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                            <div className="size-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <User className="size-6 text-purple-600 dark:text-purple-400" />
                             </div>
                             <h3 className="text-xl font-semibold mb-1">Basic Information</h3>
                             <p className="text-sm text-gray-600 dark:text-gray-400">Let&apos;s start with your details</p>
@@ -233,7 +233,7 @@ export function ProfileCompletionWizard({
                         <div>
                             <Label htmlFor="email">Email Address *</Label>
                             <div className="relative mt-1">
-                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 size-4" />
                                 <Input
                                     id="email"
                                     type="email"
@@ -257,16 +257,16 @@ export function ProfileCompletionWizard({
                         className="space-y-6"
                     >
                         <div className="text-center mb-6">
-                            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <User className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                            <div className="size-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <User className="size-6 text-blue-600 dark:text-blue-400" />
                             </div>
                             <h3 className="text-xl font-semibold mb-1">Your Profile</h3>
                             <p className="text-sm text-gray-600 dark:text-gray-400">Help others get to know you</p>
                         </div>
 
                         <div className="text-center">
-                            <div className="relative w-20 h-20 mx-auto mb-4">
-                                <div className="w-20 h-20 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-600">
+                            <div className="relative size-20 mx-auto mb-4">
+                                <div className="size-20 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-600">
                                     {formData.profilePic ? (
                                         <img
                                             src={URL.createObjectURL(formData.profilePic)}
@@ -274,7 +274,7 @@ export function ProfileCompletionWizard({
                                             className="w-full h-full rounded-full object-cover"
                                         />
                                     ) : (
-                                        <Upload className="w-6 h-6 text-gray-400" />
+                                        <Upload className="size-6 text-gray-400" />
                                     )}
                                 </div>
                                 <label className="absolute inset-0 cursor-pointer">
@@ -304,7 +304,7 @@ export function ProfileCompletionWizard({
                                     {formData.bio.length}/500 characters
                                 </span>
                                 {formData.bio.length >= 30 && (
-                                    <CheckCircle className="w-4 h-4 text-green-500" />
+                                    <CheckCircle className="size-4 text-green-500" />
                                 )}
                             </div>
                         </div>
@@ -312,7 +312,7 @@ export function ProfileCompletionWizard({
                         <div>
                             <Label htmlFor="linkedin">LinkedIn Profile</Label>
                             <div className="relative mt-1">
-                                <Linkedin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                                <Linkedin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 size-4" />
                                 <Input
                                     id="linkedin"
                                     value={formData.linkedin}
@@ -335,8 +335,8 @@ export function ProfileCompletionWizard({
                         className="space-y-6"
                     >
                         <div className="text-center mb-6">
-                            <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <Target className="w-6 h-6 text-green-600 dark:text-green-400" />
+                            <div className="size-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <Target className="size-6 text-green-600 dark:text-green-400" />
                             </div>
                             <h3 className="text-xl font-semibold mb-1">Goals & Strengths</h3>
                             <p className="text-sm text-gray-600 dark:text-gray-400">What brings you to Networkqy?</p>
@@ -413,8 +413,8 @@ export function ProfileCompletionWizard({
                         className="space-y-6"
                     >
                         <div className="text-center mb-6">
-                            <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <Star className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+                            <div className="size-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <Star className="size-6 text-orange-600 dark:text-orange-400" />
                             </div>
                             <h3 className="text-xl font-semibold mb-1">Professional Details</h3>
                             <p className="text-sm text-gray-600 dark:text-gray-400">Your work experience</p>
@@ -424,7 +424,7 @@ export function ProfileCompletionWizard({
                             <div>
                                 <Label htmlFor="title">Job Title *</Label>
                                 <div className="relative mt-1">
-                                    <Briefcase className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                                    <Briefcase className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 size-4" />
                                     <Input
                                         id="title"
                                         value={formData.title}
@@ -437,7 +437,7 @@ export function ProfileCompletionWizard({
                             <div>
                                 <Label htmlFor="company">Company</Label>
                                 <div className="relative mt-1">
-                                    <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                                    <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 size-4" />
                                     <Input
                                         id="company"
                                         value={formData.company}
@@ -469,7 +469,7 @@ export function ProfileCompletionWizard({
                         <div>
                             <Label htmlFor="location">Location *</Label>
                             <div className="relative mt-1">
-                                <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                                <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 size-4" />
                                 <Input
                                     id="location"
                                     value={formData.location}
@@ -511,8 +511,8 @@ export function ProfileCompletionWizard({
                         className="space-y-6"
                     >
                         <div className="text-center mb-6">
-                            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <Sparkles className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                            <div className="size-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <Sparkles className="size-6 text-purple-600 dark:text-purple-400" />
                             </div>
                             <h3 className="text-xl font-semibold mb-1">Additional Information</h3>
                             <p className="text-sm text-gray-600 dark:text-gray-400">Optional details to enhance your profile</p>
@@ -553,7 +553,7 @@ export function ProfileCompletionWizard({
 
                         <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
                             <div className="flex items-center gap-2 mb-2">
-                                <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
+                                <CheckCircle className="size-5 text-green-600 dark:text-green-400" />
                                 <h4 className="font-medium text-green-800 dark:text-green-200">Profile Complete!</h4>
                             </div>
                             <p className="text-sm text-green-700 dark:text-green-300">
@@ -625,7 +625,7 @@ export function ProfileCompletionWizard({
                             disabled={currentStep === 1}
                             className="flex items-center gap-2"
                         >
-                            <ChevronLeft className="w-4 h-4" />
+                            <ChevronLeft className="size-4" />
                             Back
                         </Button>
 
@@ -639,12 +639,12 @@ export function ProfileCompletionWizard({
                             ) : currentStep === 5 ? (
                                 <>
                                     Complete Profile
-                                    <ArrowRight className="w-4 h-4" />
+                                    <ArrowRight className="size-4" />
                                 </>
                             ) : (
                                 <>
                                     Continue
-                                    <ChevronRight className="w-4 h-4" />
+                                    <ChevronRight className="size-4" />
                                 </>
                             )}
                         </Button>

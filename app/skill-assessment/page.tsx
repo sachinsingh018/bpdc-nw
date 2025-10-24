@@ -135,11 +135,11 @@ export default function SkillAssessmentPage() {
         <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
             {/* Animated Background */}
             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                <div className="absolute w-96 h-96 bg-purple-600 rounded-full opacity-20 blur-3xl animate-pulse top-[-100px] left-[-100px]" />
-                <div className="absolute w-80 h-80 bg-violet-500 rounded-full opacity-15 blur-2xl animate-spin-slow bottom-[-80px] right-[-60px]" />
-                <div className="absolute w-64 h-64 bg-purple-400 rounded-full opacity-25 blur-2xl animate-float-slow top-[40%] left-[20%]" />
-                <div className="absolute w-72 h-72 bg-violet-600 rounded-full opacity-20 blur-2xl animate-float-medium top-[20%] right-[30%]" />
-                <div className="absolute w-56 h-56 bg-purple-300 rounded-full opacity-15 blur-2xl animate-float-fast bottom-[20%] left-[60%]" />
+                <div className="absolute size-96 bg-purple-600 rounded-full opacity-20 blur-3xl animate-pulse top-[-100px] left-[-100px]" />
+                <div className="absolute size-80 bg-violet-500 rounded-full opacity-15 blur-2xl animate-spin-slow bottom-[-80px] right-[-60px]" />
+                <div className="absolute size-64 bg-purple-400 rounded-full opacity-25 blur-2xl animate-float-slow top-[40%] left-[20%]" />
+                <div className="absolute size-72 bg-violet-600 rounded-full opacity-20 blur-2xl animate-float-medium top-[20%] right-[30%]" />
+                <div className="absolute size-56 bg-purple-300 rounded-full opacity-15 blur-2xl animate-float-fast bottom-[20%] left-[60%]" />
             </div>
 
             {/* Main Content */}
@@ -152,11 +152,11 @@ export default function SkillAssessmentPage() {
                     className="text-center mb-8"
                 >
                     <div className="flex items-center justify-center gap-2 mb-4">
-                        <Brain className="w-8 h-8 text-purple-400" />
+                        <Brain className="size-8 text-purple-400" />
                         <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
                             Skill Assessment
                         </h1>
-                        <Brain className="w-8 h-8 text-purple-400" />
+                        <Brain className="size-8 text-purple-400" />
                     </div>
                     <p className="text-lg text-purple-200 max-w-2xl mx-auto">
                         Test your knowledge and track your progress across different skills
@@ -173,7 +173,7 @@ export default function SkillAssessmentPage() {
                     <Card className="bg-white/10 backdrop-blur-xl border-white/20 shadow-2xl">
                         <CardHeader>
                             <CardTitle className="text-purple-200 flex items-center gap-2">
-                                <Target className="w-5 h-5" />
+                                <Target className="size-5" />
                                 Choose a Skill
                             </CardTitle>
                             <CardDescription className="text-purple-300">
@@ -209,7 +209,7 @@ export default function SkillAssessmentPage() {
                         className="flex justify-center items-center py-12"
                     >
                         <div className="text-center">
-                            <Loader2 className="w-8 h-8 text-purple-400 animate-spin mx-auto mb-4" />
+                            <Loader2 className="size-8 text-purple-400 animate-spin mx-auto mb-4" />
                             <p className="text-purple-200">Loading questions...</p>
                         </div>
                     </motion.div>
@@ -285,12 +285,12 @@ export default function SkillAssessmentPage() {
                                 >
                                     {isSubmitting ? (
                                         <>
-                                            <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                                            <Loader2 className="size-5 mr-2 animate-spin" />
                                             Submitting...
                                         </>
                                     ) : (
                                         <>
-                                            <Trophy className="w-5 h-5 mr-2" />
+                                            <Trophy className="size-5 mr-2" />
                                             Submit Assessment
                                         </>
                                     )}
@@ -314,7 +314,7 @@ export default function SkillAssessmentPage() {
                             <Card className="bg-white/10 backdrop-blur-xl border-white/20 shadow-2xl">
                                 <CardHeader className="text-center">
                                     <CardTitle className="text-2xl text-purple-200 flex items-center justify-center gap-2">
-                                        <Trophy className="w-6 h-6" />
+                                        <Trophy className="size-6" />
                                         Assessment Complete!
                                     </CardTitle>
                                     <CardDescription className="text-purple-300 text-lg">
@@ -355,9 +355,9 @@ export default function SkillAssessmentPage() {
                                                     <CardContent className="pt-6">
                                                         <div className="flex items-start gap-3 mb-3">
                                                             {isCorrect ? (
-                                                                <CheckCircle className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
+                                                                <CheckCircle className="size-5 text-green-400 mt-1 shrink-0" />
                                                             ) : (
-                                                                <XCircle className="w-5 h-5 text-red-400 mt-1 flex-shrink-0" />
+                                                                <XCircle className="size-5 text-red-400 mt-1 shrink-0" />
                                                             )}
                                                             <div className="flex-1">
                                                                 <p className="text-white font-medium mb-2">
@@ -379,10 +379,10 @@ export default function SkillAssessmentPage() {
                                                                         >
                                                                             {option}
                                                                             {optionIndex === question.correctIndex && (
-                                                                                <CheckCircle className="w-4 h-4 text-green-400 ml-2 inline" />
+                                                                                <CheckCircle className="size-4 text-green-400 ml-2 inline" />
                                                                             )}
                                                                             {optionIndex === userAnswer && !isCorrect && (
-                                                                                <XCircle className="w-4 h-4 text-red-400 ml-2 inline" />
+                                                                                <XCircle className="size-4 text-red-400 ml-2 inline" />
                                                                             )}
                                                                         </div>
                                                                     ))}

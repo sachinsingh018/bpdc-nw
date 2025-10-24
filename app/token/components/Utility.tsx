@@ -88,8 +88,8 @@ export default function Utility() {
 
                                 <div className="relative z-10">
                                     {/* Icon */}
-                                    <div className={`w-20 h-20 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                                        <feature.icon className="w-10 h-10 text-white" />
+                                    <div className={`size-20 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                                        <feature.icon className="size-10 text-white" />
                                     </div>
 
                                     {/* Content */}

@@ -67,7 +67,7 @@ export default function Hero() {
                             disabled
                             onClick={() => setShowNotifyModal(true)}
                         >
-                            <Bell className="mr-2 h-5 w-5" />
+                            <Bell className="mr-2 size-5" />
                             Launching Soon — ${TOKEN_CONFIG.symbol}
                         </Button>
 
@@ -77,7 +77,7 @@ export default function Hero() {
                             className="border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black px-8 py-4 text-lg font-semibold rounded-2xl transition-all duration-300 hover:scale-105"
                             onClick={() => window.open(TOKEN_CONFIG.whitepaperUrl, '_blank')}
                         >
-                            <FileText className="mr-2 h-5 w-5" />
+                            <FileText className="mr-2 size-5" />
                             Read Whitepaper
                         </Button>
                     </motion.div>
@@ -90,7 +90,7 @@ export default function Hero() {
                         transition={{ duration: 0.6, delay: 1.2 }}
                     >
                         <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                            <div className="w-2 h-2 bg-amber-400 rounded-full mr-2 animate-pulse"></div>
+                            <div className="size-2 bg-amber-400 rounded-full mr-2 animate-pulse"></div>
                             {TOKEN_CONFIG.status}
                         </span>
                     </motion.div>
@@ -150,8 +150,8 @@ function NotifyModal({ onClose }: { onClose: () => void }) {
 
                 {isSuccess ? (
                     <div className="text-center py-8">
-                        <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="size-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg className="size-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
@@ -182,7 +182,7 @@ function NotifyModal({ onClose }: { onClose: () => void }) {
                     onClick={onClose}
                     className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors"
                 >
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>

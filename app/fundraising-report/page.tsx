@@ -124,10 +124,10 @@ export default function FundraisingReportPage() {
 
     const getStatusIcon = (status: string) => {
         switch (status) {
-            case 'completed': return <CheckCircle className="w-4 h-4" />;
-            case 'pending': return <ClockIcon className="w-4 h-4" />;
-            case 'failed': return <XCircle className="w-4 h-4" />;
-            default: return <ClockIcon className="w-4 h-4" />;
+            case 'completed': return <CheckCircle className="size-4" />;
+            case 'pending': return <ClockIcon className="size-4" />;
+            case 'failed': return <XCircle className="size-4" />;
+            default: return <ClockIcon className="size-4" />;
         }
     };
 
@@ -146,7 +146,7 @@ export default function FundraisingReportPage() {
                             onClick={() => router.push('/fundraising-demo')}
                             className="flex items-center gap-2"
                         >
-                            <ArrowLeft className="w-4 h-4" />
+                            <ArrowLeft className="size-4" />
                             Back to Campaign
                         </Button>
                         <div>
@@ -161,11 +161,11 @@ export default function FundraisingReportPage() {
 
                     <div className="flex gap-2">
                         <Button variant="outline" className="flex items-center gap-2">
-                            <Download className="w-4 h-4" />
+                            <Download className="size-4" />
                             Export
                         </Button>
                         <Button variant="outline" className="flex items-center gap-2">
-                            <Share2 className="w-4 h-4" />
+                            <Share2 className="size-4" />
                             Share
                         </Button>
                     </div>
@@ -182,7 +182,7 @@ export default function FundraisingReportPage() {
                         <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                                    <Mail className="w-5 h-5 text-blue-600" />
+                                    <Mail className="size-5 text-blue-600" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">Emails Sent</p>
@@ -198,7 +198,7 @@ export default function FundraisingReportPage() {
                         <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-green-100 dark:bg-green-900/20 rounded-lg">
-                                    <Eye className="w-5 h-5 text-green-600" />
+                                    <Eye className="size-5 text-green-600" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">Open Rate</p>
@@ -214,7 +214,7 @@ export default function FundraisingReportPage() {
                         <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-                                    <MessageSquare className="w-5 h-5 text-purple-600" />
+                                    <MessageSquare className="size-5 text-purple-600" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">Reply Rate</p>
@@ -230,7 +230,7 @@ export default function FundraisingReportPage() {
                         <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
-                                    <DollarSign className="w-5 h-5 text-orange-600" />
+                                    <DollarSign className="size-5 text-orange-600" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">Total Raised</p>
@@ -246,7 +246,7 @@ export default function FundraisingReportPage() {
                         <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-emerald-100 dark:bg-emerald-900/20 rounded-lg">
-                                    <TrendingUp className="w-5 h-5 text-emerald-600" />
+                                    <TrendingUp className="size-5 text-emerald-600" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">Conversion</p>
@@ -270,7 +270,7 @@ export default function FundraisingReportPage() {
                     <Card>
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
-                                <DollarSign className="w-5 h-5" />
+                                <DollarSign className="size-5" />
                                 Recent Donations
                             </CardTitle>
                         </CardHeader>
@@ -279,7 +279,7 @@ export default function FundraisingReportPage() {
                                 {donationRecords.slice(0, 6).map((donation) => (
                                     <div key={donation.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                                            <div className="size-8 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
                                                 {donation.donorName.split(' ').map(n => n[0]).join('')}
                                             </div>
                                             <div>
@@ -312,7 +312,7 @@ export default function FundraisingReportPage() {
                     <Card>
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
-                                <Target className="w-5 h-5" />
+                                <Target className="size-5" />
                                 Interest-Based Performance
                             </CardTitle>
                         </CardHeader>
@@ -352,7 +352,7 @@ export default function FundraisingReportPage() {
                     <Card>
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
-                                <Mail className="w-5 h-5" />
+                                <Mail className="size-5" />
                                 Email Response Details
                             </CardTitle>
                         </CardHeader>
@@ -387,23 +387,23 @@ export default function FundraisingReportPage() {
                                                 </td>
                                                 <td className="py-3 px-4 text-center">
                                                     {response.opened ? (
-                                                        <CheckCircle className="w-5 h-5 text-green-600 mx-auto" />
+                                                        <CheckCircle className="size-5 text-green-600 mx-auto" />
                                                     ) : (
-                                                        <XCircle className="w-5 h-5 text-gray-400 mx-auto" />
+                                                        <XCircle className="size-5 text-gray-400 mx-auto" />
                                                     )}
                                                 </td>
                                                 <td className="py-3 px-4 text-center">
                                                     {response.clicked ? (
-                                                        <CheckCircle className="w-5 h-5 text-green-600 mx-auto" />
+                                                        <CheckCircle className="size-5 text-green-600 mx-auto" />
                                                     ) : (
-                                                        <XCircle className="w-5 h-5 text-gray-400 mx-auto" />
+                                                        <XCircle className="size-5 text-gray-400 mx-auto" />
                                                     )}
                                                 </td>
                                                 <td className="py-3 px-4 text-center">
                                                     {response.replied ? (
-                                                        <CheckCircle className="w-5 h-5 text-green-600 mx-auto" />
+                                                        <CheckCircle className="size-5 text-green-600 mx-auto" />
                                                     ) : (
-                                                        <XCircle className="w-5 h-5 text-gray-400 mx-auto" />
+                                                        <XCircle className="size-5 text-gray-400 mx-auto" />
                                                     )}
                                                 </td>
                                                 <td className="py-3 px-4 text-right">
@@ -435,7 +435,7 @@ export default function FundraisingReportPage() {
                         <CardContent className="p-6">
                             <div className="flex items-center gap-3">
                                 <div className="p-3 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                                    <Users className="w-6 h-6 text-blue-600" />
+                                    <Users className="size-6 text-blue-600" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">Total Alumni Reached</p>
@@ -451,7 +451,7 @@ export default function FundraisingReportPage() {
                         <CardContent className="p-6">
                             <div className="flex items-center gap-3">
                                 <div className="p-3 bg-green-100 dark:bg-green-900/20 rounded-lg">
-                                    <Heart className="w-6 h-6 text-green-600" />
+                                    <Heart className="size-6 text-green-600" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">Successful Donations</p>
@@ -467,7 +467,7 @@ export default function FundraisingReportPage() {
                         <CardContent className="p-6">
                             <div className="flex items-center gap-3">
                                 <div className="p-3 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
-                                    <TrendingUp className="w-6 h-6 text-orange-600" />
+                                    <TrendingUp className="size-6 text-orange-600" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">Average Donation</p>

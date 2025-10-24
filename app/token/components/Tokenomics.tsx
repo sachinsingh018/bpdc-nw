@@ -71,11 +71,11 @@ export default function Tokenomics() {
                         className="relative"
                     >
                         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center">
-                            <PieChart className="w-16 h-16 text-purple-400 mx-auto mb-6" />
+                            <PieChart className="size-16 text-purple-400 mx-auto mb-6" />
                             <h3 className="text-2xl font-bold text-white mb-6">Token Distribution</h3>
 
                             {/* Simple donut chart visualization */}
-                            <div className="relative w-64 h-64 mx-auto mb-6">
+                            <div className="relative size-64 mx-auto mb-6">
                                 <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                                     {tokenomicsData.map((item, index) => {
                                         const previousPercentages = tokenomicsData
@@ -136,7 +136,7 @@ export default function Tokenomics() {
                                     <div className="flex items-center justify-between mb-2">
                                         <div className="flex items-center space-x-3">
                                             <div
-                                                className="w-4 h-4 rounded-full"
+                                                className="size-4 rounded-full"
                                                 style={{ backgroundColor: item.color }}
                                             />
                                             <span className="text-white font-semibold">{item.category}</span>
@@ -156,7 +156,7 @@ export default function Tokenomics() {
                             className="mt-8 p-6 bg-amber-500/10 border border-amber-500/20 rounded-xl"
                         >
                             <div className="flex items-start space-x-3">
-                                <Shield className="w-6 h-6 text-amber-400 mt-1 flex-shrink-0" />
+                                <Shield className="size-6 text-amber-400 mt-1 shrink-0" />
                                 <div>
                                     <h4 className="text-amber-400 font-semibold mb-2">Important Note</h4>
                                     <p className="text-white/70 text-sm">
@@ -188,19 +188,19 @@ export default function Tokenomics() {
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div className="text-center p-6 bg-purple-500/10 border border-purple-500/20 rounded-xl">
-                                <Coins className="w-12 h-12 text-purple-400 mx-auto mb-4" />
+                                <Coins className="size-12 text-purple-400 mx-auto mb-4" />
                                 <h4 className="text-white font-semibold mb-2">Initial Release</h4>
                                 <p className="text-white/60 text-sm">TBD at Token Generation Event</p>
                             </div>
 
                             <div className="text-center p-6 bg-cyan-500/10 border border-cyan-500/20 rounded-xl">
-                                <TrendingUp className="w-12 h-12 text-cyan-400 mx-auto mb-4" />
+                                <TrendingUp className="size-12 text-cyan-400 mx-auto mb-4" />
                                 <h4 className="text-white font-semibold mb-2">Vesting Period</h4>
                                 <p className="text-white/60 text-sm">Linear release over 12-24 months</p>
                             </div>
 
                             <div className="text-center p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
-                                <Users className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
+                                <Users className="size-12 text-emerald-400 mx-auto mb-4" />
                                 <h4 className="text-white font-semibold mb-2">Community</h4>
                                 <p className="text-white/60 text-sm">Governance voting on future releases</p>
                             </div>

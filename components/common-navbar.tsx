@@ -61,8 +61,8 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                         onClick={() => router.push('/profile')}
                         className="flex items-center gap-1 md:gap-2 text-gray-700 dark:text-gray-300 hover:text-bits-golden-yellow dark:hover:text-bits-golden-yellow transition-colors group"
                     >
-                        <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-                            <Sparkles className="w-3 h-3 md:w-5 md:h-5 text-white" />
+                        <div className="size-6 md:size-8 bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <Sparkles className="size-3 md:size-5 text-white" />
                         </div>
                         <span className="text-base md:text-lg font-bold bg-gradient-to-r from-gray-800 to-gray-900 dark:from-gray-200 dark:to-gray-100 bg-clip-text text-transparent whitespace-nowrap">
                             BITS Pilani Dubai Campus
@@ -84,7 +84,7 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                                 className={`flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-bits-golden-yellow dark:hover:text-bits-golden-yellow ${isActive ? 'bg-bits-golden-yellow/10 dark:bg-bits-golden-yellow/20' : ''
                                     }`}
                             >
-                                <Icon className="w-4 h-4" />
+                                <Icon className="size-4" />
                                 <span>{item.label}</span>
                             </Button>
                         );
@@ -102,7 +102,7 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                             className="p-2 rounded-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-300 hover:bg-red-100 dark:hover:bg-red-800 transition-all flex items-center justify-center"
                             title="Sign Out"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M18 12h-9m0 0l3-3m-3 3l3 3" />
                             </svg>
                         </button>
@@ -115,7 +115,7 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                         onClick={() => setShowMobileMenu(!showMobileMenu)}
                         className="md:hidden"
                     >
-                        <Menu className="w-5 h-5" />
+                        <Menu className="size-5" />
                     </Button>
                 </div>
             </div>
@@ -136,7 +136,7 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                                     className={`flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-bits-golden-yellow dark:hover:text-bits-golden-yellow justify-start ${isActive ? 'bg-bits-golden-yellow/10 dark:bg-bits-golden-yellow/20' : ''
                                         }`}
                                 >
-                                    <Icon className="w-4 h-4" />
+                                    <Icon className="size-4" />
                                     <span>{item.label}</span>
                                 </Button>
                             );

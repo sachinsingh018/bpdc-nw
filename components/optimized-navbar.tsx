@@ -65,9 +65,9 @@ export function OptimizedNavbar({ currentPage }: OptimizedNavbarProps) {
                 }`}
         >
             {isNavigating === path ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="size-4 animate-spin" />
             ) : (
-                <Icon className="w-4 h-4" />
+                <Icon className="size-4" />
             )}
             <span>{label}</span>
         </Button>
@@ -84,11 +84,11 @@ export function OptimizedNavbar({ currentPage }: OptimizedNavbarProps) {
                         disabled={isNavigating === '/profile'}
                         className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors group disabled:opacity-50"
                     >
-                        <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+                        <div className="size-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
                             {isNavigating === '/profile' ? (
-                                <Loader2 className="w-5 h-5 text-white animate-spin" />
+                                <Loader2 className="size-5 text-white animate-spin" />
                             ) : (
-                                <Sparkles className="w-5 h-5 text-white" />
+                                <Sparkles className="size-5 text-white" />
                             )}
                         </div>
                         <span className="text-lg font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
@@ -155,7 +155,7 @@ export function OptimizedNavbar({ currentPage }: OptimizedNavbarProps) {
                         onClick={() => setShowMobileMenu(!showMobileMenu)}
                         className="md:hidden"
                     >
-                        <Menu className="w-5 h-5" />
+                        <Menu className="size-5" />
                     </Button>
                 </div>
             </div>

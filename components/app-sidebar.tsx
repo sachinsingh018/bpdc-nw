@@ -77,9 +77,9 @@ export function AppSidebar({ user }: { user: User | undefined }) {
     <div className="relative min-h-screen overflow-hidden">
       {/* Bubble Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute w-72 h-72 bg-purple-500 rounded-full opacity-20 blur-2xl animate-pulse top-10 left-1/2 -translate-x-1/2" />
-        <div className="absolute w-56 h-56 bg-blue-400 rounded-full opacity-10 blur-2xl animate-spin-slow top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute w-72 h-72 bg-pink-500 rounded-full opacity-10 blur-2xl animate-pulse bottom-10 left-1/2 -translate-x-1/2" />
+        <div className="absolute size-72 bg-purple-500 rounded-full opacity-20 blur-2xl animate-pulse top-10 left-1/2 -translate-x-1/2" />
+        <div className="absolute size-56 bg-blue-400 rounded-full opacity-10 blur-2xl animate-spin-slow top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute size-72 bg-pink-500 rounded-full opacity-10 blur-2xl animate-pulse bottom-10 left-1/2 -translate-x-1/2" />
       </div>
 
       {/* Sidebar */}

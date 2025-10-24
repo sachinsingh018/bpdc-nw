@@ -232,7 +232,7 @@ export default function FriendsPage() {
                 `
             }}>
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
+                    <div className="size-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
                         borderColor: 'rgba(255, 215, 0, 0.8)',
                         borderTopColor: 'transparent'
                     }} />
@@ -265,35 +265,35 @@ export default function FriendsPage() {
             {/* Dynamic Vibrant Background Elements */}
             <div className="fixed inset-0 z-0">
                 {/* Deep Royal Blue */}
-                <div className="absolute top-10 left-5 w-96 h-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
-                <div className="absolute top-1/3 right-10 w-80 h-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
+                <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
+                <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
 
                 {/* Bright Golden Yellow */}
-                <div className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
-                <div className="absolute bottom-1/4 left-1/4 w-88 h-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
+                <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
+                <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
 
                 {/* Crimson Red */}
-                <div className="absolute bottom-20 left-1/3 w-64 h-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
-                <div className="absolute top-1/2 right-1/3 w-56 h-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
+                <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
+                <div className="absolute top-1/2 right-1/3 size-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
 
                 {/* Charcoal Black */}
-                <div className="absolute bottom-10 right-5 w-72 h-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
+                <div className="absolute bottom-10 right-5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
 
                 {/* Light Gray */}
-                <div className="absolute top-1/4 left-1/2 w-60 h-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
+                <div className="absolute top-1/4 left-1/2 size-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
 
                 {/* Mid-tone Blue */}
-                <div className="absolute bottom-1/3 right-1/4 w-68 h-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
+                <div className="absolute bottom-1/3 right-1/4 size-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
 
                 {/* Warm Golden Glow */}
-                <div className="absolute top-1/2 left-1/5 w-76 h-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
+                <div className="absolute top-1/2 left-1/5 size-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
 
                 {/* Vibrant Red */}
-                <div className="absolute top-2/3 right-1/5 w-52 h-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
+                <div className="absolute top-2/3 right-1/5 size-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
 
                 {/* Neon Purple */}
-                <div className="absolute top-1/6 left-2/3 w-84 h-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
-                <div className="absolute bottom-1/6 left-1/6 w-48 h-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
+                <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
+                <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
             </div>
 
             {/* Common Navbar */}
@@ -316,11 +316,11 @@ export default function FriendsPage() {
                     <form className="flex flex-col md:flex-row gap-4" onSubmit={handleSearch}>
                         <div className="flex-1">
                             <div className="relative">
-                                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 size-5" />
                                 <input
                                     type="text"
                                     placeholder="Search by name, company, or skills..."
-                                    className="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg text-gray-900 dark:text-bits-royal-blue dark:text-bits-white placeholder-gray-500 dark:placeholder-gray-400"
+                                    className="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg text-gray-900 dark:text-bits-royal-blue dark:text-bits-white placeholder:text-gray-500 dark:placeholder:text-gray-400"
                                     value={searchQuery}
                                     onChange={e => setSearchQuery(e.target.value)}
                                 />
@@ -329,15 +329,15 @@ export default function FriendsPage() {
                         <Button type="submit" variant="default" className="h-full px-6 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700 shadow-lg hover:shadow-xl transition-all duration-200">{isSearching ? 'Searching...' : 'Search'}</Button>
                         <div className="flex gap-2">
                             <Button variant="outline" size="sm" className="flex items-center gap-2">
-                                <MapPin className="w-4 h-4" />
+                                <MapPin className="size-4" />
                                 <span>Dubai</span>
                             </Button>
                             <Button variant="outline" size="sm" className="flex items-center gap-2">
-                                <Briefcase className="w-4 h-4" />
+                                <Briefcase className="size-4" />
                                 <span>Industry</span>
                             </Button>
                             <Button variant="outline" size="sm" className="flex items-center gap-2">
-                                <Filter className="w-4 h-4" />
+                                <Filter className="size-4" />
                                 <span>Filters</span>
                             </Button>
                         </div>
@@ -367,7 +367,7 @@ export default function FriendsPage() {
                                 {[1, 2, 3, 4].map((i) => (
                                     <div key={i} className="bg-gradient-to-br from-white/90 via-purple-50/20 to-white/90 dark:from-slate-800/90 dark:via-purple-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20 animate-pulse">
                                         <div className="flex items-center gap-3 mb-4">
-                                            <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+                                            <div className="size-12 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
                                             <div className="flex-1">
                                                 <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-2"></div>
                                                 <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-2/3"></div>
@@ -397,7 +397,7 @@ export default function FriendsPage() {
                                         >
                                             <div className="flex items-start justify-between mb-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-12 h-12 bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue rounded-full flex items-center justify-center shadow-lg ring-2 ring-bits-golden-yellow/20 dark:ring-bits-golden-yellow/30">
+                                                    <div className="size-12 bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue rounded-full flex items-center justify-center shadow-lg ring-2 ring-bits-golden-yellow/20 dark:ring-bits-golden-yellow/30">
                                                         <span className="text-bits-royal-blue dark:text-bits-white font-semibold">
                                                             {user.name?.charAt(0) || 'U'}
                                                         </span>
@@ -412,7 +412,7 @@ export default function FriendsPage() {
                                                     </div>
                                                 </div>
                                                 <Button variant="ghost" size="sm">
-                                                    <Heart className="w-4 h-4" />
+                                                    <Heart className="size-4" />
                                                 </Button>
                                             </div>
 
@@ -465,7 +465,7 @@ export default function FriendsPage() {
                             </div>
                         ) : (
                             <div className="text-center py-8">
-                                <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                                <Users className="size-16 text-gray-400 mx-auto mb-4" />
                                 <h3 className="text-xl font-semibold text-gray-900 dark:text-bits-royal-blue dark:text-bits-white mb-2">
                                     No recommendations available
                                 </h3>
@@ -499,7 +499,7 @@ export default function FriendsPage() {
                                     >
                                         <div className="flex items-start justify-between mb-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-12 h-12 bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue rounded-full flex items-center justify-center shadow-lg ring-2 ring-bits-golden-yellow/20 dark:ring-bits-golden-yellow/30">
+                                                <div className="size-12 bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue rounded-full flex items-center justify-center shadow-lg ring-2 ring-bits-golden-yellow/20 dark:ring-bits-golden-yellow/30">
                                                     <span className="text-bits-royal-blue dark:text-bits-white font-semibold">
                                                         {userObj.name?.charAt(0) || 'U'}
                                                     </span>
@@ -514,7 +514,7 @@ export default function FriendsPage() {
                                                 </div>
                                             </div>
                                             <Button variant="ghost" size="sm">
-                                                <Heart className="w-4 h-4" />
+                                                <Heart className="size-4" />
                                             </Button>
                                         </div>
                                         <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
@@ -563,7 +563,7 @@ export default function FriendsPage() {
                             })
                         ) : (
                             <div className="col-span-full text-center py-12">
-                                <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                                <Users className="size-16 text-gray-400 mx-auto mb-4" />
                                 <h3 className="text-xl font-semibold text-gray-900 dark:text-bits-royal-blue dark:text-bits-white mb-2">
                                     No results found
                                 </h3>
@@ -574,7 +574,7 @@ export default function FriendsPage() {
                         )
                     ) : (
                         <div className="col-span-full text-center py-12">
-                            <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                            <Search className="size-16 text-gray-400 mx-auto mb-4" />
                             <h3 className="text-xl font-semibold text-gray-900 dark:text-bits-royal-blue dark:text-bits-white mb-2">
                                 Start Your Search
                             </h3>

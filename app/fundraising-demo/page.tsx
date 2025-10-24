@@ -323,9 +323,9 @@ Alumni Relations Team`;
                         className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
                     >
                         {isLoadingProfiles ? (
-                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            <Loader2 className="size-4 mr-2 animate-spin" />
                         ) : (
-                            <RefreshCw className="w-4 h-4 mr-2" />
+                            <RefreshCw className="size-4 mr-2" />
                         )}
                         {isLoadingProfiles ? 'Extracting Alumni...' : 'Extract / Refresh Alumni'}
                     </Button>
@@ -337,7 +337,7 @@ Alumni Relations Team`;
                                 onClick={selectAllProfiles}
                                 className="flex-1"
                             >
-                                <UserCheck className="w-4 h-4 mr-2" />
+                                <UserCheck className="size-4 mr-2" />
                                 Select All
                             </Button>
                             <Button
@@ -345,7 +345,7 @@ Alumni Relations Team`;
                                 onClick={deselectAllProfiles}
                                 className="flex-1"
                             >
-                                <Users className="w-4 h-4 mr-2" />
+                                <Users className="size-4 mr-2" />
                                 Deselect All
                             </Button>
                         </div>
@@ -395,22 +395,22 @@ Alumni Relations Team`;
 
                                                 <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                                                     <div className="flex items-center gap-2">
-                                                        <Mail className="w-4 h-4" />
+                                                        <Mail className="size-4" />
                                                         <span className="truncate">{profile.email}</span>
                                                     </div>
 
                                                     <div className="flex items-center gap-2">
-                                                        <Building className="w-4 h-4" />
+                                                        <Building className="size-4" />
                                                         <span className="truncate">{profile.currentEmployment}</span>
                                                     </div>
 
                                                     <div className="flex items-center gap-2">
-                                                        <MapPin className="w-4 h-4" />
+                                                        <MapPin className="size-4" />
                                                         <span>{profile.location}</span>
                                                     </div>
 
                                                     <div className="flex items-center gap-2">
-                                                        <DollarSign className="w-4 h-4" />
+                                                        <DollarSign className="size-4" />
                                                         <span>{profile.estimatedIncome}</span>
                                                     </div>
                                                 </div>
@@ -447,7 +447,7 @@ Alumni Relations Team`;
                         <Card>
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
-                                    <Mail className="w-5 h-5" />
+                                    <Mail className="size-5" />
                                     Email Composer
                                 </CardTitle>
                             </CardHeader>
@@ -467,9 +467,9 @@ Alumni Relations Team`;
                                         className="flex-1"
                                     >
                                         {isRefiningEmail ? (
-                                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                            <Loader2 className="size-4 mr-2 animate-spin" />
                                         ) : (
-                                            <Sparkles className="w-4 h-4 mr-2" />
+                                            <Sparkles className="size-4 mr-2" />
                                         )}
                                         {isRefiningEmail ? 'Refining...' : 'Refine with AI'}
                                     </Button>
@@ -480,9 +480,9 @@ Alumni Relations Team`;
                                         className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white"
                                     >
                                         {isSendingEmail ? (
-                                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                            <Loader2 className="size-4 mr-2 animate-spin" />
                                         ) : (
-                                            <Send className="w-4 h-4 mr-2" />
+                                            <Send className="size-4 mr-2" />
                                         )}
                                         {isSendingEmail ? 'Sending...' : `Send Email (${selectedProfilesCount})`}
                                     </Button>
@@ -503,7 +503,7 @@ Alumni Relations Team`;
                         <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
-                                    <Send className="w-5 h-5 text-blue-600" />
+                                    <Send className="size-5 text-blue-600" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">Total Emails Sent</p>
@@ -519,7 +519,7 @@ Alumni Relations Team`;
                         <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-green-100 dark:bg-green-900/20 rounded-lg">
-                                    <MessageSquare className="w-5 h-5 text-green-600" />
+                                    <MessageSquare className="size-5 text-green-600" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">Replies Received</p>
@@ -535,7 +535,7 @@ Alumni Relations Team`;
                         <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-purple-100 dark:bg-purple-900/20 rounded-lg">
-                                    <TrendingUp className="w-5 h-5 text-purple-600" />
+                                    <TrendingUp className="size-5 text-purple-600" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">Click-Through Rate</p>
@@ -551,7 +551,7 @@ Alumni Relations Team`;
                         <CardContent className="p-4">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
-                                    <DollarSign className="w-5 h-5 text-orange-600" />
+                                    <DollarSign className="size-5 text-orange-600" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">Total Donations</p>
@@ -574,7 +574,7 @@ Alumni Relations Team`;
                         <Card>
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
-                                    <Target className="w-5 h-5" />
+                                    <Target className="size-5" />
                                     AI-Detected Interests Summary
                                 </CardTitle>
                             </CardHeader>
@@ -600,7 +600,7 @@ Alumni Relations Team`;
                     <Card className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-green-200 dark:border-green-800">
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2 text-green-800 dark:text-green-200">
-                                <Heart className="w-5 h-5" />
+                                <Heart className="size-5" />
                                 Make a Donation
                             </CardTitle>
                         </CardHeader>
@@ -625,9 +625,9 @@ Alumni Relations Team`;
                                         className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white"
                                     >
                                         {isProcessingPayment ? (
-                                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                            <Loader2 className="size-4 mr-2 animate-spin" />
                                         ) : (
-                                            <DollarSign className="w-4 h-4 mr-2" />
+                                            <DollarSign className="size-4 mr-2" />
                                         )}
                                         {isProcessingPayment ? 'Processing...' : 'Pay with Card'}
                                     </Button>
@@ -653,7 +653,7 @@ Alumni Relations Team`;
                         variant="outline"
                         className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 border-purple-200 dark:border-purple-800 hover:from-purple-100 hover:to-blue-100 dark:hover:from-purple-800 dark:hover:to-blue-800"
                     >
-                        <BarChart3 className="w-4 h-4 mr-2" />
+                        <BarChart3 className="size-4 mr-2" />
                         View Campaign Report
                     </Button>
                 </motion.div>
@@ -667,7 +667,7 @@ Alumni Relations Team`;
                             exit={{ opacity: 0, scale: 0.9 }}
                             className="fixed top-4 right-4 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2"
                         >
-                            <CheckCircle className="w-5 h-5" />
+                            <CheckCircle className="size-5" />
                             <span className="font-medium">Payment successful! Thank you for your support.</span>
                         </motion.div>
                     )}

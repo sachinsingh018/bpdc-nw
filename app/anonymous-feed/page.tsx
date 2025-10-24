@@ -686,7 +686,7 @@ export default function AnonymousFeedPage() {
                 `
             }}>
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
+                    <div className="size-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
                         borderColor: 'rgba(255, 215, 0, 0.8)',
                         borderTopColor: 'transparent'
                     }} />
@@ -721,35 +721,35 @@ export default function AnonymousFeedPage() {
             {/* Dynamic Vibrant Background Elements */}
             <div className="fixed inset-0 z-0">
                 {/* Deep Royal Blue */}
-                <div className="absolute top-10 left-5 w-96 h-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
-                <div className="absolute top-1/3 right-10 w-80 h-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
+                <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
+                <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
 
                 {/* Bright Golden Yellow */}
-                <div className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
-                <div className="absolute bottom-1/4 left-1/4 w-88 h-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
+                <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
+                <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
 
                 {/* Crimson Red */}
-                <div className="absolute bottom-20 left-1/3 w-64 h-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
-                <div className="absolute top-1/2 right-1/3 w-56 h-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
+                <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
+                <div className="absolute top-1/2 right-1/3 size-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
 
                 {/* Charcoal Black */}
-                <div className="absolute bottom-10 right-5 w-72 h-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
+                <div className="absolute bottom-10 right-5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
 
                 {/* Light Gray */}
-                <div className="absolute top-1/4 left-1/2 w-60 h-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
+                <div className="absolute top-1/4 left-1/2 size-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
 
                 {/* Mid-tone Blue */}
-                <div className="absolute bottom-1/3 right-1/4 w-68 h-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
+                <div className="absolute bottom-1/3 right-1/4 size-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
 
                 {/* Warm Golden Glow */}
-                <div className="absolute top-1/2 left-1/5 w-76 h-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
+                <div className="absolute top-1/2 left-1/5 size-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
 
                 {/* Vibrant Red */}
-                <div className="absolute top-2/3 right-1/5 w-52 h-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
+                <div className="absolute top-2/3 right-1/5 size-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
 
                 {/* Neon Purple */}
-                <div className="absolute top-1/6 left-2/3 w-84 h-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
-                <div className="absolute bottom-1/6 left-1/6 w-48 h-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
+                <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
+                <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
             </div>
 
             {/* Common Navbar */}
@@ -777,7 +777,7 @@ export default function AnonymousFeedPage() {
                     className="bg-gradient-to-br from-white/90 via-purple-50/40 to-blue-50/80 dark:bg-slate-800 rounded-2xl p-4 md:p-6 mb-6 md:mb-8 shadow-xl border border-purple-200/50 dark:border-white/20"
                 >
                     <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
-                        <Avatar className="w-8 h-8 md:w-10 md:h-10 shadow-lg ring-2 ring-purple-200 dark:ring-purple-800">
+                        <Avatar className="size-8 md:size-10 shadow-lg ring-2 ring-purple-200 dark:ring-purple-800">
                             <AvatarImage src={`https://avatar.vercel.sh/${currentUser?.email || userEmail}`} />
                             <AvatarFallback>
                                 {currentUser?.name?.[0] || currentUser?.email?.[0] || (typeof userEmail === 'string' ? userEmail[0] : 'U')}
@@ -794,7 +794,7 @@ export default function AnonymousFeedPage() {
                                     onClick={() => setIsAnonymous(!isAnonymous)}
                                     className="flex items-center gap-1 text-xs"
                                 >
-                                    {isAnonymous ? <EyeOff className="w-3 h-3" /> : <Eye className="w-3 h-3" />}
+                                    {isAnonymous ? <EyeOff className="size-3" /> : <Eye className="size-3" />}
                                     {isAnonymous ? 'Anonymous' : 'Public'}
                                 </Button>
                             </div>
@@ -824,7 +824,7 @@ export default function AnonymousFeedPage() {
                                         htmlFor="image-upload"
                                         className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg cursor-pointer transition-colors text-sm text-gray-600 dark:text-gray-300"
                                     >
-                                        <Image className="w-4 h-4" />
+                                        <Image className="size-4" />
                                         Add Image
                                     </label>
                                     <span className="text-xs text-gray-500 dark:text-gray-400">
@@ -843,13 +843,13 @@ export default function AnonymousFeedPage() {
                                             onClick={removeImage}
                                             className="absolute top-2 right-2 p-1 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors"
                                         >
-                                            <XIcon className="w-4 h-4" />
+                                            <XIcon className="size-4" />
                                         </button>
                                     </div>
                                     {isUploadingImage && (
                                         <div className="absolute inset-0 bg-black/50 flex items-center justify-center rounded-lg">
                                             <div className="bg-white dark:bg-gray-800 px-4 py-2 rounded-lg flex items-center gap-2">
-                                                <div className="w-4 h-4 border-2 border-bits-golden-yellow border-t-transparent rounded-full animate-spin"></div>
+                                                <div className="size-4 border-2 border-bits-golden-yellow border-t-transparent rounded-full animate-spin"></div>
                                                 <span className="text-sm">Uploading...</span>
                                             </div>
                                         </div>
@@ -867,7 +867,7 @@ export default function AnonymousFeedPage() {
                                     {topics.map((topic) => (
                                         <SelectItem key={topic.value} value={topic.value}>
                                             <div className="flex items-center gap-2">
-                                                <topic.icon className="w-4 h-4" />
+                                                <topic.icon className="size-4" />
                                                 {topic.label}
                                             </div>
                                         </SelectItem>
@@ -880,7 +880,7 @@ export default function AnonymousFeedPage() {
                                 placeholder="Company name (optional)"
                                 value={companyName}
                                 onChange={(e) => setCompanyName(e.target.value)}
-                                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 text-sm"
+                                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 text-sm"
                             />
 
                             <input
@@ -888,7 +888,7 @@ export default function AnonymousFeedPage() {
                                 placeholder="Industry (optional)"
                                 value={industry}
                                 onChange={(e) => setIndustry(e.target.value)}
-                                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 text-sm"
+                                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 text-sm"
                             />
                         </div>
 
@@ -898,7 +898,7 @@ export default function AnonymousFeedPage() {
                                 disabled={!newPost.trim()}
                                 className="bg-purple-600 hover:bg-purple-700 text-white text-sm"
                             >
-                                <Send className="w-4 h-4 mr-2" />
+                                <Send className="size-4 mr-2" />
                                 {isAnonymous ? 'Post Anonymously' : 'Post'}
                             </Button>
                         </div>
@@ -909,7 +909,7 @@ export default function AnonymousFeedPage() {
                 <div className="space-y-4 md:space-y-6">
                     {loading ? (
                         <div className="text-center py-8 md:py-12">
-                            <div className="animate-spin rounded-full h-10 w-10 md:h-12 md:w-12 border-b-2 border-purple-600 mx-auto"></div>
+                            <div className="animate-spin rounded-full size-10 md:size-12 border-b-2 border-purple-600 mx-auto"></div>
                             <p className="mt-3 md:mt-4 text-gray-600 dark:text-gray-300 text-sm md:text-base">Loading posts...</p>
                         </div>
                     ) : posts.length === 0 ? (
@@ -918,7 +918,7 @@ export default function AnonymousFeedPage() {
                             animate={{ opacity: 1 }}
                             className="text-center py-8 md:py-12"
                         >
-                            <MessageCircle className="w-12 h-12 md:w-16 md:h-16 text-gray-400 mx-auto mb-3 md:mb-4" />
+                            <MessageCircle className="size-12 md:size-16 text-gray-400 mx-auto mb-3 md:mb-4" />
                             <h3 className="text-base md:text-lg font-medium text-gray-900 dark:text-white mb-2">
                                 No posts yet
                             </h3>
@@ -938,7 +938,7 @@ export default function AnonymousFeedPage() {
                                 <CardHeader className="pb-3 md:pb-4 bg-gradient-to-r from-purple-50 via-blue-50 to-pink-50 dark:bg-transparent">
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2 md:gap-3">
-                                            <Avatar className="w-8 h-8 md:w-10 md:h-10 shadow-lg ring-2 ring-purple-200 dark:ring-purple-800">
+                                            <Avatar className="size-8 md:size-10 shadow-lg ring-2 ring-purple-200 dark:ring-purple-800">
                                                 <AvatarImage
                                                     src={post.is_anonymous && post.anonymous_avatar
                                                         ? post.anonymous_avatar
@@ -972,7 +972,7 @@ export default function AnonymousFeedPage() {
                                                         onClick={() => handleEditPost(post)}
                                                         className="text-blue-500 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/20"
                                                     >
-                                                        <Edit className="w-4 h-4" />
+                                                        <Edit className="size-4" />
                                                     </Button>
                                                     <Button
                                                         variant="ghost"
@@ -980,7 +980,7 @@ export default function AnonymousFeedPage() {
                                                         onClick={() => handleDeletePost(post.id)}
                                                         className="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
                                                     >
-                                                        <Trash2 className="w-4 h-4" />
+                                                        <Trash2 className="size-4" />
                                                     </Button>
                                                 </div>
                                             )}
@@ -990,13 +990,13 @@ export default function AnonymousFeedPage() {
                                         <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                                             {post.company_name && (
                                                 <span className="flex items-center gap-1">
-                                                    <Building2 className="w-3 h-3" />
+                                                    <Building2 className="size-3" />
                                                     {post.company_name}
                                                 </span>
                                             )}
                                             {post.industry && (
                                                 <span className="flex items-center gap-1">
-                                                    <Briefcase className="w-3 h-3" />
+                                                    <Briefcase className="size-3" />
                                                     {post.industry}
                                                 </span>
                                             )}
@@ -1031,14 +1031,14 @@ export default function AnonymousFeedPage() {
                                                     value={editCompanyName}
                                                     onChange={(e) => setEditCompanyName(e.target.value)}
                                                     placeholder="Company (optional)"
-                                                    className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                                                    className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400"
                                                 />
                                                 <input
                                                     type="text"
                                                     value={editIndustry}
                                                     onChange={(e) => setEditIndustry(e.target.value)}
                                                     placeholder="Industry (optional)"
-                                                    className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                                                    className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400"
                                                 />
                                             </div>
                                             <div className="flex items-center gap-2">
@@ -1048,7 +1048,7 @@ export default function AnonymousFeedPage() {
                                                     size="sm"
                                                     className="bg-green-600 hover:bg-green-700 text-white"
                                                 >
-                                                    <Check className="w-3 h-3 mr-1" />
+                                                    <Check className="size-3 mr-1" />
                                                     Save
                                                 </Button>
                                                 <Button
@@ -1056,7 +1056,7 @@ export default function AnonymousFeedPage() {
                                                     variant="outline"
                                                     size="sm"
                                                 >
-                                                    <X className="w-3 h-3 mr-1" />
+                                                    <X className="size-3 mr-1" />
                                                     Cancel
                                                 </Button>
                                             </div>
@@ -1093,7 +1093,7 @@ export default function AnonymousFeedPage() {
                                                 onClick={() => handleLikePost(post.id)}
                                                 className={`flex items-center gap-1 md:gap-2 text-xs md:text-sm bg-gradient-to-r from-pink-200 to-purple-200 hover:from-purple-400 hover:to-pink-400 text-purple-700 hover:text-white shadow transition-all duration-200 ${post.is_liked ? 'text-red-500' : 'text-gray-500 hover:text-red-500'}`}
                                             >
-                                                <Heart className={`w-3 h-3 md:w-4 md:h-4 ${post.is_liked ? 'fill-current' : ''}`} />
+                                                <Heart className={`size-3 md:size-4 ${post.is_liked ? 'fill-current' : ''}`} />
                                                 <span>{post.likes_count}</span>
                                             </Button>
                                             <Button
@@ -1102,7 +1102,7 @@ export default function AnonymousFeedPage() {
                                                 onClick={() => toggleComments(post.id)}
                                                 className="flex items-center gap-1 md:gap-2 bg-gradient-to-r from-blue-100 to-purple-100 hover:from-purple-400 hover:to-blue-400 text-blue-700 hover:text-white shadow text-xs md:text-sm transition-all duration-200"
                                             >
-                                                <MessageCircle className="w-3 h-3 md:w-4 md:h-4" />
+                                                <MessageCircle className="size-3 md:size-4" />
                                                 <span>{post.comments_count}</span>
                                             </Button>
                                             <Button
@@ -1111,7 +1111,7 @@ export default function AnonymousFeedPage() {
                                                 onClick={() => handleSharePost(post)}
                                                 className="flex items-center gap-1 md:gap-2 bg-gradient-to-r from-green-100 to-blue-100 hover:from-blue-400 hover:to-green-400 text-green-700 hover:text-white shadow text-xs md:text-sm transition-all duration-200"
                                             >
-                                                <Share2 className="w-3 h-3 md:w-4 md:h-4" />
+                                                <Share2 className="size-3 md:size-4" />
                                                 <span>Share</span>
                                             </Button>
                                         </div>
@@ -1128,7 +1128,7 @@ export default function AnonymousFeedPage() {
                                             >
                                                 {/* Add Comment */}
                                                 <div className="flex items-start gap-2 md:gap-3 mb-3 md:mb-4">
-                                                    <Avatar className="w-6 h-6 md:w-8 md:h-8 shadow ring-2 ring-blue-100 dark:ring-blue-800">
+                                                    <Avatar className="size-6 md:size-8 shadow ring-2 ring-blue-100 dark:ring-blue-800">
                                                         <AvatarImage src={`https://avatar.vercel.sh/${currentUser?.email || userEmail}`} />
                                                         <AvatarFallback>
                                                             {currentUser?.name?.[0] || currentUser?.email?.[0] || (typeof userEmail === 'string' ? userEmail[0] : 'U')}
@@ -1148,7 +1148,7 @@ export default function AnonymousFeedPage() {
                                                                 onClick={() => setIsAnonymous(!isAnonymous)}
                                                                 className="flex items-center gap-1 text-xs"
                                                             >
-                                                                {isAnonymous ? <EyeOff className="w-3 h-3" /> : <Eye className="w-3 h-3" />}
+                                                                {isAnonymous ? <EyeOff className="size-3" /> : <Eye className="size-3" />}
                                                                 {isAnonymous ? 'Anonymous' : 'Public'}
                                                             </Button>
                                                             <Button
@@ -1157,7 +1157,7 @@ export default function AnonymousFeedPage() {
                                                                 size="sm"
                                                                 className="bg-purple-600 hover:bg-purple-700 text-white text-xs"
                                                             >
-                                                                <Send className="w-3 h-3 mr-1" />
+                                                                <Send className="size-3 mr-1" />
                                                                 Comment
                                                             </Button>
                                                         </div>
@@ -1168,7 +1168,7 @@ export default function AnonymousFeedPage() {
                                                 <div className="space-y-2 md:space-y-3">
                                                     {comments[post.id]?.map((comment) => (
                                                         <div key={comment.id} className="flex items-start gap-2 md:gap-3">
-                                                            <Avatar className="w-6 h-6 md:w-8 md:h-8 shadow ring-2 ring-blue-100 dark:ring-blue-800">
+                                                            <Avatar className="size-6 md:size-8 shadow ring-2 ring-blue-100 dark:ring-blue-800">
                                                                 <AvatarImage
                                                                     src={comment.is_anonymous && comment.anonymous_avatar
                                                                         ? comment.anonymous_avatar
@@ -1199,7 +1199,7 @@ export default function AnonymousFeedPage() {
                                                                         onClick={() => handleLikeComment(comment.id, post.id)}
                                                                         className={`flex items-center gap-1 text-xs bg-gradient-to-r from-pink-100 to-purple-100 hover:from-purple-400 hover:to-pink-400 text-purple-700 hover:text-white shadow transition-all duration-200 ${comment.is_liked ? 'text-red-500' : 'text-gray-500 hover:text-red-500'}`}
                                                                     >
-                                                                        <Heart className={`w-3 h-3 ${comment.is_liked ? 'fill-current' : ''}`} />
+                                                                        <Heart className={`size-3 ${comment.is_liked ? 'fill-current' : ''}`} />
                                                                         <span>{comment.likes_count}</span>
                                                                     </Button>
                                                                 </div>
@@ -1228,13 +1228,13 @@ export default function AnonymousFeedPage() {
                     </AlertDialogHeader>
                     <div className="flex flex-col gap-4 mt-2">
                         <Button variant="outline" onClick={handleCopyLink} className="flex items-center gap-2">
-                            <Copy className="w-4 h-4" /> Copy Link
+                            <Copy className="size-4" /> Copy Link
                         </Button>
                         <Button variant="outline" onClick={handleShareToLinkedIn} className="flex items-center gap-2">
-                            <Linkedin className="w-4 h-4 text-blue-700" /> Share to LinkedIn
+                            <Linkedin className="size-4 text-blue-700" /> Share to LinkedIn
                         </Button>
                         <Button variant="outline" onClick={handleShareToTwitter} className="flex items-center gap-2">
-                            <Twitter className="w-4 h-4 text-blue-400" /> Share to Twitter
+                            <Twitter className="size-4 text-blue-400" /> Share to Twitter
                         </Button>
                     </div>
                     <AlertDialogFooter>

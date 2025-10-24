@@ -294,8 +294,8 @@ export default function RemoteJobsPage() {
                             onClick={() => router.push('/profile')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors group"
                         >
-                            <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-                                <Sparkles className="w-5 h-5 text-white" />
+                            <div className="size-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+                                <Sparkles className="size-5 text-white" />
                             </div>
                             <span className="text-lg font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                 Networkqy
@@ -310,7 +310,7 @@ export default function RemoteJobsPage() {
                             onClick={() => router.push('/profile')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <Home className="w-4 h-4" />
+                            <Home className="size-4" />
                             <span>Home</span>
                         </Button>
                         <Button
@@ -319,7 +319,7 @@ export default function RemoteJobsPage() {
                             onClick={() => router.push('/friends')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <Users className="w-4 h-4" />
+                            <Users className="size-4" />
                             <span>Friends</span>
                         </Button>
                         <Button
@@ -328,7 +328,7 @@ export default function RemoteJobsPage() {
                             onClick={() => router.push('/job-board')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <Briefcase className="w-4 h-4" />
+                            <Briefcase className="size-4" />
                             <span>Job Board</span>
                         </Button>
                         <Button
@@ -337,7 +337,7 @@ export default function RemoteJobsPage() {
                             onClick={() => router.push('/remote-jobs')}
                             className="flex items-center gap-2 text-purple-600 dark:text-purple-400 font-semibold"
                         >
-                            <Briefcase className="w-4 h-4" />
+                            <Briefcase className="size-4" />
                             <span>Remote Jobs</span>
                         </Button>
                     </div>
@@ -351,7 +351,7 @@ export default function RemoteJobsPage() {
                             onClick={() => router.push('/profile')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <User className="w-4 h-4" />
+                            <User className="size-4" />
                             <span className="hidden sm:inline">Profile</span>
                         </Button>
                     </div>
@@ -379,13 +379,13 @@ export default function RemoteJobsPage() {
                         {/* Search */}
                         <div className="flex-1">
                             <form onSubmit={handleSearch} className="relative">
-                                <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 size-5" />
                                 <input
                                     type="text"
                                     placeholder="Search remote jobs..."
                                     value={searchInput}
                                     onChange={(e) => setSearchInput(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-white/10 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-white/10 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                                 />
                                 <Button type="submit" className="absolute right-2 top-1/2 transform -translate-y-1/2">
                                     Search
@@ -400,9 +400,9 @@ export default function RemoteJobsPage() {
                                 onClick={() => setSortOpen(!sortOpen)}
                                 className="flex items-center gap-2 min-w-[150px]"
                             >
-                                <ListFilter className="w-4 h-4" />
+                                <ListFilter className="size-4" />
                                 {sortOptions.find(opt => opt.value === sort)?.label || 'Sort'}
-                                {sortOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                                {sortOpen ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
                             </Button>
                             {sortOpen && (
                                 <div className="absolute top-full left-0 mt-1 w-48 bg-white dark:bg-slate-800 border border-gray-200 dark:border-white/10 rounded-lg shadow-lg z-10">
@@ -428,9 +428,9 @@ export default function RemoteJobsPage() {
                             onClick={() => setFiltersOpen(!filtersOpen)}
                             className="flex items-center gap-2"
                         >
-                            <FilterIcon className="w-4 h-4" />
+                            <FilterIcon className="size-4" />
                             Filters
-                            {filtersOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                            {filtersOpen ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
                         </Button>
 
                         {/* Post Job */}
@@ -438,7 +438,7 @@ export default function RemoteJobsPage() {
                             onClick={() => setShowPostJobModal(true)}
                             className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white"
                         >
-                            <Plus className="w-4 h-4" />
+                            <Plus className="size-4" />
                             Post Remote Job
                         </Button>
                     </div>
@@ -493,7 +493,7 @@ export default function RemoteJobsPage() {
                 <div className="mb-8">
                     {loading ? (
                         <div className="flex items-center justify-center py-12">
-                            <Loader2 className="w-8 h-8 animate-spin text-purple-600" />
+                            <Loader2 className="size-8 animate-spin text-purple-600" />
                             <p className="text-lg text-gray-500 dark:text-gray-400 ml-3">Loading remote jobs...</p>
                         </div>
                     ) : paginatedJobs.length > 0 ? (
@@ -507,7 +507,7 @@ export default function RemoteJobsPage() {
                         </div>
                     ) : (
                         <div className="text-center py-12">
-                            <Briefcase className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                            <Briefcase className="size-16 text-gray-400 mx-auto mb-4" />
                             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                                 No remote jobs found
                             </h3>

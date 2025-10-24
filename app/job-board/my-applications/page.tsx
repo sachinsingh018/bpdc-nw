@@ -162,8 +162,8 @@ export default function MyApplicationsPage() {
               onClick={() => router.push('/job-board')}
               className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors group"
             >
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-                <Briefcase className="w-5 h-5 text-white" />
+              <div className="size-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+                <Briefcase className="size-5 text-white" />
               </div>
               <span className="text-lg font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent tracking-tight">
                 Networkqy
@@ -177,7 +177,7 @@ export default function MyApplicationsPage() {
               onClick={() => router.push('/job-board')}
               className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="size-4" />
               <span>Back to Jobs</span>
             </Button>
             <ThemeToggle />
@@ -187,7 +187,7 @@ export default function MyApplicationsPage() {
       {/* Main Content */}
       <div className="max-w-5xl mx-auto p-6 z-10 relative">
         <h1 className="text-4xl font-semibold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-blue-500 to-purple-400 dark:from-purple-200 dark:via-blue-300 dark:to-purple-400 flex items-center gap-4 tracking-tight leading-normal" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif' }}>
-          <FileText className="w-9 h-9 text-purple-500 dark:text-purple-300 align-middle" />
+          <FileText className="size-9 text-purple-500 dark:text-purple-300 align-middle" />
           My Job Applications
         </h1>
         {loading && <div className="text-lg text-gray-700 dark:text-gray-200">Loading...</div>}
@@ -213,7 +213,7 @@ export default function MyApplicationsPage() {
                       <img
                         src={job.logo}
                         alt={job.job_title}
-                        className="w-12 h-12 rounded-md border border-purple-100 bg-white object-cover shadow-sm"
+                        className="size-12 rounded-md border border-purple-100 bg-white object-cover shadow-sm"
                         onError={e => {
                           const target = e.target as HTMLImageElement;
                           if (target.src !== window.location.origin + '/imagetemplate.png') {
@@ -279,11 +279,11 @@ export default function MyApplicationsPage() {
                   {/* Applicant info */}
                   <div className="flex flex-col gap-1 mb-1 text-sm text-gray-700 dark:text-gray-300">
                     <div className="flex items-center gap-2">
-                      <UserIcon className="w-4 h-4 text-purple-400" />
+                      <UserIcon className="size-4 text-purple-400" />
                       <span className="font-semibold text-gray-900 dark:text-white break-words whitespace-normal">{app.name}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-purple-300" />
+                      <Mail className="size-4 text-purple-300" />
                       <span className="break-words whitespace-normal">{app.email}</span>
                     </div>
                   </div>
@@ -313,7 +313,7 @@ export default function MyApplicationsPage() {
                       <div className="mt-1 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                           <div className="flex items-center gap-2">
-                            <FileText className="w-4 h-4 text-green-600 dark:text-green-400" />
+                            <FileText className="size-4 text-green-600 dark:text-green-400" />
                             <span className="text-sm text-green-700 dark:text-green-300 font-medium">Resume uploaded</span>
                           </div>
                           <div className="flex gap-1 sm:gap-2 flex-wrap">
@@ -321,7 +321,7 @@ export default function MyApplicationsPage() {
                               className="px-2 py-1 rounded text-xs bg-green-100 dark:bg-green-900/40 border border-green-300 dark:border-green-700 text-green-700 dark:text-green-300 hover:bg-green-200 dark:hover:bg-green-900/60 transition-colors duration-150 flex items-center gap-1"
                               onClick={() => window.open(app.cvFileUrl, '_blank')}
                             >
-                              <ExternalLink className="w-3 h-3" />
+                              <ExternalLink className="size-3" />
                               <span className="hidden xs:inline">View</span>
                             </button>
                             <button
@@ -333,7 +333,7 @@ export default function MyApplicationsPage() {
                                 link.click();
                               }}
                             >
-                              <Download className="w-3 h-3" />
+                              <Download className="size-3" />
                               <span className="hidden xs:inline">Download</span>
                             </button>
                           </div>
@@ -342,7 +342,7 @@ export default function MyApplicationsPage() {
                     ) : (
                       <div className="mt-1 p-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                         <div className="flex items-center gap-2">
-                          <FileText className="w-4 h-4 text-gray-400" />
+                          <FileText className="size-4 text-gray-400" />
                           <span className="text-sm text-gray-500 dark:text-gray-400">No resume uploaded</span>
                         </div>
                       </div>

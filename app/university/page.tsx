@@ -246,7 +246,7 @@ function TestimonialsCarousel() {
                         <button
                             key={t.name}
                             type="button"
-                            className={`w-3 h-3 rounded-full ${i === index ? "bg-blue-500" : "bg-gray-300"}`}
+                            className={`size-3 rounded-full ${i === index ? "bg-blue-500" : "bg-gray-300"}`}
                             onClick={() => setIndex(i)}
                             aria-label={`Show testimonial ${i + 1}`}
                         />

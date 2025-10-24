@@ -484,7 +484,7 @@ const ProfilePage = () => {
                 <button
                     title="LinkedIn"
                     onClick={() => setIsEditing(!isEditing)}
-                    className="bg-[#2F1266] p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#44227a] transition"
+                    className="bg-[#2F1266] p-2 rounded-full size-10 flex items-center justify-center hover:bg-[#44227a] transition"
                 >
                     <FaLinkedinIn />
                 </button>
@@ -541,7 +541,7 @@ const ProfilePage = () => {
                     onClick={() => {
                         setIsEditing(!isEditing); // ✅ Just toggle edit mode
                     }}
-                    className="bg-[#2F1266] p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#44227a] transition"
+                    className="bg-[#2F1266] p-2 rounded-full size-10 flex items-center justify-center hover:bg-[#44227a] transition"
                 >
                     <FaFacebook />
                 </button>
@@ -597,7 +597,7 @@ const ProfilePage = () => {
                     onClick={() => {
                         setIsEditing(!isEditing); // ✅ Only toggles edit mode
                     }}
-                    className="bg-[#2F1266] p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#44227a] transition"
+                    className="bg-[#2F1266] p-2 rounded-full size-10 flex items-center justify-center hover:bg-[#44227a] transition"
                 >
                     <FaPhone />
                 </button>
@@ -636,7 +636,7 @@ const ProfilePage = () => {
         return (
             <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                    <div className="size-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
                     <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Loading profile...</h2>
                     <p className="text-gray-600 dark:text-gray-400">Setting up the professional hub</p>
                 </div>
@@ -686,8 +686,8 @@ const ProfilePage = () => {
                     {/* Logo and Brand */}
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300 group">
-                            <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-                                <Sparkles className="w-5 h-5 text-white" />
+                            <div className="size-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+                                <Sparkles className="size-5 text-white" />
                             </div>
                             <span className="text-lg font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                                 Networkqy
@@ -702,7 +702,7 @@ const ProfilePage = () => {
                             onClick={() => router.push('/profile')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 bg-purple-50 dark:bg-purple-900/20"
                         >
-                            <Home className="w-4 h-4" />
+                            <Home className="size-4" />
                             <span>Home</span>
                         </Button>
                         <Button
@@ -711,7 +711,7 @@ const ProfilePage = () => {
                             onClick={() => router.push('/friends')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <Users className="w-4 h-4" />
+                            <Users className="size-4" />
                             <span>Network</span>
                         </Button>
                         <Button
@@ -720,7 +720,7 @@ const ProfilePage = () => {
                             onClick={() => router.push('/chat')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <MessageSquare className="w-4 h-4" />
+                            <MessageSquare className="size-4" />
                             <span>AI Chat</span>
                         </Button>
                         <Button
@@ -729,7 +729,7 @@ const ProfilePage = () => {
                             onClick={() => router.push('/connections')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <User className="w-4 h-4" />
+                            <User className="size-4" />
                             <span>Connections</span>
                         </Button>
                         <Button
@@ -738,7 +738,7 @@ const ProfilePage = () => {
                             onClick={() => router.push('/anonymous-feed')}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                         >
-                            <MessageCircle className="w-4 h-4" />
+                            <MessageCircle className="size-4" />
                             <span>Anonymous Feed</span>
                         </Button>
                         <Button
@@ -747,7 +747,7 @@ const ProfilePage = () => {
                             onClick={() => { router.push('/job-board'); setShowMobileMenu(false); }}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
                         >
-                            <Briefcase className="w-4 h-4" />
+                            <Briefcase className="size-4" />
                             <span>Job Board</span>
                         </Button>
                     </div>
@@ -761,7 +761,7 @@ const ProfilePage = () => {
                             onClick={() => setShowMobileMenu(!showMobileMenu)}
                             className="md:hidden"
                         >
-                            <Menu className="w-5 h-5" />
+                            <Menu className="size-5" />
                         </Button>
                     </div>
                 </div>
@@ -1005,7 +1005,7 @@ const ProfilePage = () => {
                             }}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start bg-purple-50 dark:bg-purple-900/20"
                         >
-                            <Home className="w-4 h-4" />
+                            <Home className="size-4" />
                             <span>Home</span>
                         </Button>
                         <Button
@@ -1017,7 +1017,7 @@ const ProfilePage = () => {
                             }}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
                         >
-                            <Users className="w-4 h-4" />
+                            <Users className="size-4" />
                             <span>Network</span>
                         </Button>
                         <Button
@@ -1029,7 +1029,7 @@ const ProfilePage = () => {
                             }}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
                         >
-                            <User className="w-4 h-4" />
+                            <User className="size-4" />
                             <span>Connections</span>
                         </Button>
                         <Button
@@ -1041,7 +1041,7 @@ const ProfilePage = () => {
                             }}
                             className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
                         >
-                            <MessageCircle className="w-4 h-4" />
+                            <MessageCircle className="size-4" />
                             <span>Anonymous Feed</span>
                         </Button>
                     </div>

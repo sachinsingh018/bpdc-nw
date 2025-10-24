@@ -42,25 +42,25 @@ export const EnhancedChatInput = ({
 
     const quickActions = [
         {
-            icon: <Users className="w-4 h-4" />,
+            icon: <Users className="size-4" />,
             label: "Find Connections",
             action: "Find me 5 relevant professional connections in my industry",
             mode: 'connection' as const
         },
         {
-            icon: <MessageCircle className="w-4 h-4" />,
+            icon: <MessageCircle className="size-4" />,
             label: "Conversation Starters",
             action: "Generate 3 conversation starters for networking events",
             mode: 'networking' as const
         },
         {
-            icon: <Target className="w-4 h-4" />,
+            icon: <Target className="size-4" />,
             label: "Career Advice",
             action: "Give me career development advice based on my profile",
             mode: 'career' as const
         },
         {
-            icon: <TrendingUp className="w-4 h-4" />,
+            icon: <TrendingUp className="size-4" />,
             label: "Industry Insights",
             action: "What are the latest trends and opportunities in my industry?",
             mode: 'general' as const
@@ -295,7 +295,7 @@ What would you like to focus on today? I'm here to help you build meaningful pro
                         aria-label="Enhanced chat input"
                     />
                     <div className="absolute right-3 top-3">
-                        <Sparkles className="w-5 h-5 text-violet-500" />
+                        <Sparkles className="size-5 text-violet-500" />
                     </div>
                 </div>
 

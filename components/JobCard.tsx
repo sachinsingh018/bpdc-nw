@@ -315,7 +315,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                             focus:outline-none focus:ring-2 focus:ring-gray-400"
                         title="Share this job"
                     >
-                        {copied ? <Check className="w-3 h-3" /> : <Share2 className="w-3 h-3" />}
+                        {copied ? <Check className="size-3" /> : <Share2 className="size-3" />}
                         <span className="hidden sm:inline text-xs">{copied ? 'Copied!' : 'Share'}</span>
                     </button>
                 </div>
@@ -458,7 +458,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                             {error && (
                                 <div className="mt-2 p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
                                     <div className="flex items-start gap-2">
-                                        <div className="flex-shrink-0">
+                                        <div className="shrink-0">
                                             <svg className="size-5 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                                             </svg>

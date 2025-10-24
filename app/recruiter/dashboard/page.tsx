@@ -424,7 +424,7 @@ export default function RecruiterDashboard() {
                 `
             }}>
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
+                    <div className="size-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
                         borderColor: 'rgba(255, 215, 0, 0.8)',
                         borderTopColor: 'transparent'
                     }} />
@@ -458,8 +458,8 @@ export default function RecruiterDashboard() {
                     boxShadow: '0 25px 50px rgba(25, 25, 112, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
                 }}>
                     <CardHeader className="text-center">
-                        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/20">
-                            <Shield className="h-6 w-6 text-red-600 dark:text-red-400" />
+                        <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/20">
+                            <Shield className="size-6 text-red-600 dark:text-red-400" />
                         </div>
                         <CardTitle className="text-2xl">Access Denied</CardTitle>
                         <CardDescription>
@@ -469,7 +469,7 @@ export default function RecruiterDashboard() {
                     <CardContent className="text-center">
                         <div className="space-y-4">
                             <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                                <AlertTriangle className="h-4 w-4" />
+                                <AlertTriangle className="size-4" />
                                 <span>Current role: {userRole || 'Unknown'}</span>
                             </div>
                             <Button
@@ -502,7 +502,7 @@ export default function RecruiterDashboard() {
                 `
             }}>
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
+                    <div className="size-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
                         borderColor: 'rgba(255, 215, 0, 0.8)',
                         borderTopColor: 'transparent'
                     }} />
@@ -534,35 +534,35 @@ export default function RecruiterDashboard() {
             {/* Dynamic Vibrant Background Elements */}
             <div className="fixed inset-0 z-0">
                 {/* Deep Royal Blue */}
-                <div className="absolute top-10 left-5 w-96 h-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
-                <div className="absolute top-1/3 right-10 w-80 h-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
+                <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
+                <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
 
                 {/* Bright Golden Yellow */}
-                <div className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
-                <div className="absolute bottom-1/4 left-1/4 w-88 h-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
+                <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
+                <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
 
                 {/* Crimson Red */}
-                <div className="absolute bottom-20 left-1/3 w-64 h-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
-                <div className="absolute top-1/2 right-1/3 w-56 h-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
+                <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
+                <div className="absolute top-1/2 right-1/3 size-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
 
                 {/* Charcoal Black */}
-                <div className="absolute bottom-10 right-5 w-72 h-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
+                <div className="absolute bottom-10 right-5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
 
                 {/* Light Gray */}
-                <div className="absolute top-1/4 left-1/2 w-60 h-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
+                <div className="absolute top-1/4 left-1/2 size-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
 
                 {/* Mid-tone Blue */}
-                <div className="absolute bottom-1/3 right-1/4 w-68 h-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
+                <div className="absolute bottom-1/3 right-1/4 size-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
 
                 {/* Warm Golden Glow */}
-                <div className="absolute top-1/2 left-1/5 w-76 h-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
+                <div className="absolute top-1/2 left-1/5 size-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
 
                 {/* Vibrant Red */}
-                <div className="absolute top-2/3 right-1/5 w-52 h-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
+                <div className="absolute top-2/3 right-1/5 size-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
 
                 {/* Neon Purple */}
-                <div className="absolute top-1/6 left-2/3 w-84 h-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
-                <div className="absolute bottom-1/6 left-1/6 w-48 h-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
+                <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
+                <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
             </div>
 
             <div className="container mx-auto px-4 py-8 relative z-10">
@@ -575,12 +575,12 @@ export default function RecruiterDashboard() {
                             size="sm"
                             className="text-white hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-cyan-500/20 border border-white/20 backdrop-blur-md bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
                         >
-                            <ArrowLeft className="w-4 h-4 mr-2" />
+                            <ArrowLeft className="size-4 mr-2" />
                             Back
                         </Button>
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
-                                <Briefcase className="w-6 h-6 text-white" />
+                                <Briefcase className="size-6 text-white" />
                             </div>
                             <div>
                                 <div className="flex items-center gap-3">
@@ -600,7 +600,7 @@ export default function RecruiterDashboard() {
                         onClick={() => setShowPostJobModal(true)}
                         className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0"
                     >
-                        <Plus className="w-4 h-4 mr-2" />
+                        <Plus className="size-4 mr-2" />
                         Post New Job
                     </Button>
                 </div>
@@ -611,7 +611,7 @@ export default function RecruiterDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Total Applications</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
-                                <Users className="h-4 w-4 text-white" />
+                                <Users className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -624,7 +624,7 @@ export default function RecruiterDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Pending</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg">
-                                <Clock className="h-4 w-4 text-white" />
+                                <Clock className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -637,7 +637,7 @@ export default function RecruiterDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Accepted</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg">
-                                <CheckCircle className="h-4 w-4 text-white" />
+                                <CheckCircle className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -650,7 +650,7 @@ export default function RecruiterDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Rejected</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-red-500 to-pink-500 rounded-lg">
-                                <XCircle className="h-4 w-4 text-white" />
+                                <XCircle className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -663,7 +663,7 @@ export default function RecruiterDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Phone Screening</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
-                                <Phone className="h-4 w-4 text-white" />
+                                <Phone className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -676,7 +676,7 @@ export default function RecruiterDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Job Assessment</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
-                                <MessageSquare className="h-4 w-4 text-white" />
+                                <MessageSquare className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -689,7 +689,7 @@ export default function RecruiterDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">HR Interview</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg">
-                                <Users className="h-4 w-4 text-white" />
+                                <Users className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -702,7 +702,7 @@ export default function RecruiterDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Final Interview</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg">
-                                <Star className="h-4 w-4 text-white" />
+                                <Star className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -715,7 +715,7 @@ export default function RecruiterDashboard() {
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-white">Active Jobs</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
-                                <Briefcase className="h-4 w-4 text-white" />
+                                <Briefcase className="size-4 text-white" />
                             </div>
                         </CardHeader>
                         <CardContent>
@@ -729,11 +729,11 @@ export default function RecruiterDashboard() {
                 <Tabs defaultValue="applications" className="space-y-6">
                     <TabsList className="grid w-full grid-cols-2 bg-white/10 backdrop-blur-md border-white/20">
                         <TabsTrigger value="applications" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">
-                            <Users className="w-4 h-4 mr-2" />
+                            <Users className="size-4 mr-2" />
                             Applications
                         </TabsTrigger>
                         <TabsTrigger value="jobs" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">
-                            <Briefcase className="w-4 h-4 mr-2" />
+                            <Briefcase className="size-4 mr-2" />
                             My Jobs
                         </TabsTrigger>
                     </TabsList>
@@ -743,7 +743,7 @@ export default function RecruiterDashboard() {
                         <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
                             <CardHeader>
                                 <CardTitle className="text-white flex items-center gap-2">
-                                    <Users className="w-5 h-5" />
+                                    <Users className="size-5" />
                                     Job Applications
                                 </CardTitle>
                                 <CardDescription className="text-blue-200">Review and manage candidate applications</CardDescription>
@@ -795,7 +795,7 @@ export default function RecruiterDashboard() {
                                     {filteredApplications.map((application) => (
                                         <div key={application.id} className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors">
                                             <div className="flex items-center gap-4">
-                                                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
+                                                <div className="size-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
                                                     <span className="text-sm font-medium text-white">
                                                         {application.name.charAt(0).toUpperCase()}
                                                     </span>
@@ -826,7 +826,7 @@ export default function RecruiterDashboard() {
                                                     size="sm"
                                                     className="text-gray-700 dark:text-white border-white/20 hover:bg-white/10"
                                                 >
-                                                    <Eye className="w-4 h-4 mr-1" />
+                                                    <Eye className="size-4 mr-1" />
                                                     Review
                                                 </Button>
                                             </div>
@@ -847,7 +847,7 @@ export default function RecruiterDashboard() {
                         <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
                             <CardHeader>
                                 <CardTitle className="text-white flex items-center gap-2">
-                                    <Briefcase className="w-5 h-5" />
+                                    <Briefcase className="size-5" />
                                     Posted Jobs
                                 </CardTitle>
                                 <CardDescription className="text-blue-200">Manage your posted job opportunities</CardDescription>
@@ -919,14 +919,14 @@ export default function RecruiterDashboard() {
                                     {filteredJobs.length > 0 ? filteredJobs.map((job) => (
                                         <div key={job.job_id} className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors">
                                             <div className="flex items-center gap-4">
-                                                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                                                    <Briefcase className="w-6 h-6 text-white" />
+                                                <div className="size-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                                                    <Briefcase className="size-6 text-white" />
                                                 </div>
                                                 <div>
                                                     <div className="font-medium text-white">{job.job_title}</div>
                                                     <div className="text-sm text-blue-200">{job.employer_name}</div>
                                                     <div className="text-sm text-blue-300 flex items-center gap-2">
-                                                        <MapPin className="w-3 h-3" />
+                                                        <MapPin className="size-3" />
                                                         {job.job_city}, {job.job_state}, {job.job_country}
                                                         {job.job_is_remote && <Badge className="bg-green-100 text-green-800 text-xs">Remote</Badge>}
                                                     </div>
@@ -952,7 +952,7 @@ export default function RecruiterDashboard() {
                                                     size="sm"
                                                     className="text-gray-700 dark:text-white border-white/20 hover:bg-white/10"
                                                 >
-                                                    <ExternalLink className="w-4 h-4 mr-1" />
+                                                    <ExternalLink className="size-4 mr-1" />
                                                     View
                                                 </Button>
                                             </div>
@@ -1057,7 +1057,7 @@ function PostJobModal({ onClose, onSubmit, loading }: {
                 <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold">Post New Job</h2>
                     <Button onClick={onClose} variant="ghost" size="sm">
-                        <X className="w-4 h-4" />
+                        <X className="size-4" />
                     </Button>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -1265,7 +1265,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                 <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
                     <h2 className="text-2xl font-bold">Review Application</h2>
                     <Button onClick={onClose} variant="ghost" size="sm">
-                        <X className="w-4 h-4" />
+                        <X className="size-4" />
                     </Button>
                 </div>
 
@@ -1317,7 +1317,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                 <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2">
-                                            <Briefcase className="w-4 h-4 text-blue-600" />
+                                            <Briefcase className="size-4 text-blue-600" />
                                             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                                                 Resume uploaded
                                             </span>
@@ -1329,7 +1329,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                                 className="text-xs bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/40"
                                                 onClick={() => window.open(application.cvFileUrl, '_blank')}
                                             >
-                                                <ExternalLink className="w-3 h-3 mr-1" />
+                                                <ExternalLink className="size-3 mr-1" />
                                                 View Resume
                                             </Button>
                                             <Button
@@ -1343,7 +1343,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                                     link.click();
                                                 }}
                                             >
-                                                <Download className="w-3 h-3 mr-1" />
+                                                <Download className="size-3 mr-1" />
                                                 Download
                                             </Button>
                                         </div>
@@ -1352,7 +1352,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                             ) : (
                                 <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                     <div className="flex items-center gap-2">
-                                        <Briefcase className="w-4 h-4 text-gray-400" />
+                                        <Briefcase className="size-4 text-gray-400" />
                                         <span className="text-sm text-gray-500 dark:text-gray-400">
                                             No resume uploaded by candidate
                                         </span>
@@ -1413,7 +1413,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                                 variant="outline"
                                                 className="text-red-600 border-red-600 hover:bg-red-50"
                                             >
-                                                <XCircle className="w-4 h-4 mr-2" />
+                                                <XCircle className="size-4 mr-2" />
                                                 Reject
                                             </Button>
                                         );
@@ -1425,7 +1425,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                                 variant="outline"
                                                 className="text-blue-600 border-blue-600 hover:bg-blue-50"
                                             >
-                                                <Phone className="w-4 h-4 mr-2" />
+                                                <Phone className="size-4 mr-2" />
                                                 Phone Screening
                                             </Button>
                                         );
@@ -1437,7 +1437,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                                 variant="outline"
                                                 className="text-purple-600 border-purple-600 hover:bg-purple-50"
                                             >
-                                                <MessageSquare className="w-4 h-4 mr-2" />
+                                                <MessageSquare className="size-4 mr-2" />
                                                 Job Assessment
                                             </Button>
                                         );
@@ -1449,7 +1449,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                                 variant="outline"
                                                 className="text-indigo-600 border-indigo-600 hover:bg-indigo-50"
                                             >
-                                                <Users className="w-4 h-4 mr-2" />
+                                                <Users className="size-4 mr-2" />
                                                 HR Interview
                                             </Button>
                                         );
@@ -1461,7 +1461,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                                 variant="outline"
                                                 className="text-orange-600 border-orange-600 hover:bg-orange-50"
                                             >
-                                                <Star className="w-4 h-4 mr-2" />
+                                                <Star className="size-4 mr-2" />
                                                 Final Interview
                                             </Button>
                                         );
@@ -1472,7 +1472,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                                 onClick={() => setAction('accept')}
                                                 className="bg-green-600 hover:bg-green-700"
                                             >
-                                                <CheckCircle className="w-4 h-4 mr-2" />
+                                                <CheckCircle className="size-4 mr-2" />
                                                 Accept
                                             </Button>
                                         );

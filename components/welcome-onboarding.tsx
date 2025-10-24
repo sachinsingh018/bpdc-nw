@@ -32,8 +32,8 @@ const ONBOARDING_STEPS = [
         icon: Sparkles,
         content: (
             <div className="text-center space-y-4">
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center mx-auto">
-                    <Sparkles className="w-10 h-10 text-white" />
+                <div className="size-20 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center mx-auto">
+                    <Sparkles className="size-10 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
                     Let&apos;s get you started!
@@ -52,8 +52,8 @@ const ONBOARDING_STEPS = [
         content: (
             <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
-                        <Star className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                    <div className="size-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+                        <Star className="size-6 text-purple-600 dark:text-purple-400" />
                     </div>
                     <div>
                         <h4 className="font-semibold text-gray-900 dark:text-white">Why complete your profile?</h4>
@@ -92,8 +92,8 @@ const ONBOARDING_STEPS = [
         content: (
             <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
-                        <Target className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    <div className="size-12 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+                        <Target className="size-6 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
                         <h4 className="font-semibold text-gray-900 dark:text-white">How matching works</h4>
@@ -103,8 +103,8 @@ const ONBOARDING_STEPS = [
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-3">
                         <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
-                                <MapPin className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                            <div className="size-8 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+                                <MapPin className="size-4 text-purple-600 dark:text-purple-400" />
                             </div>
                             <div>
                                 <h5 className="font-medium text-gray-900 dark:text-white">Location</h5>
@@ -112,8 +112,8 @@ const ONBOARDING_STEPS = [
                             </div>
                         </div>
                         <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
-                                <Briefcase className="w-4 h-4 text-green-600 dark:text-green-400" />
+                            <div className="size-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+                                <Briefcase className="size-4 text-green-600 dark:text-green-400" />
                             </div>
                             <div>
                                 <h5 className="font-medium text-gray-900 dark:text-white">Industry</h5>
@@ -121,8 +121,8 @@ const ONBOARDING_STEPS = [
                             </div>
                         </div>
                         <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center">
-                                <Heart className="w-4 h-4 text-orange-600 dark:text-orange-400" />
+                            <div className="size-8 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center">
+                                <Heart className="size-4 text-orange-600 dark:text-orange-400" />
                             </div>
                             <div>
                                 <h5 className="font-medium text-gray-900 dark:text-white">Interests</h5>
@@ -134,19 +134,19 @@ const ONBOARDING_STEPS = [
                         <h5 className="font-medium text-purple-800 dark:text-purple-200 mb-2">Match Types:</h5>
                         <div className="space-y-2">
                             <div className="flex items-center space-x-2">
-                                <div className="w-3 h-3 bg-blue-500 rounded-full" />
+                                <div className="size-3 bg-blue-500 rounded-full" />
                                 <span className="text-sm text-gray-700 dark:text-gray-300">Industry matches</span>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <div className="w-3 h-3 bg-green-500 rounded-full" />
+                                <div className="size-3 bg-green-500 rounded-full" />
                                 <span className="text-sm text-gray-700 dark:text-gray-300">Location-based</span>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <div className="w-3 h-3 bg-purple-500 rounded-full" />
+                                <div className="size-3 bg-purple-500 rounded-full" />
                                 <span className="text-sm text-gray-700 dark:text-gray-300">Skill alignment</span>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <div className="w-3 h-3 bg-orange-500 rounded-full" />
+                                <div className="size-3 bg-orange-500 rounded-full" />
                                 <span className="text-sm text-gray-700 dark:text-gray-300">Goal-oriented</span>
                             </div>
                         </div>
@@ -163,8 +163,8 @@ const ONBOARDING_STEPS = [
         content: (
             <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
-                        <Users className="w-6 h-6 text-green-600 dark:text-green-400" />
+                    <div className="size-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+                        <Users className="size-6 text-green-600 dark:text-green-400" />
                     </div>
                     <div>
                         <h4 className="font-semibold text-gray-900 dark:text-white">How to connect</h4>
@@ -173,7 +173,7 @@ const ONBOARDING_STEPS = [
                 </div>
                 <div className="space-y-3">
                     <div className="flex items-start space-x-3">
-                        <div className="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-medium mt-1">
+                        <div className="size-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-medium mt-1">
                             1
                         </div>
                         <div>
@@ -182,7 +182,7 @@ const ONBOARDING_STEPS = [
                         </div>
                     </div>
                     <div className="flex items-start space-x-3">
-                        <div className="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-medium mt-1">
+                        <div className="size-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-medium mt-1">
                             2
                         </div>
                         <div>
@@ -191,7 +191,7 @@ const ONBOARDING_STEPS = [
                         </div>
                     </div>
                     <div className="flex items-start space-x-3">
-                        <div className="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-medium mt-1">
+                        <div className="size-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-medium mt-1">
                             3
                         </div>
                         <div>
@@ -220,8 +220,8 @@ const ONBOARDING_STEPS = [
         content: (
             <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center">
-                        <MessageSquare className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+                    <div className="size-12 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center">
+                        <MessageSquare className="size-6 text-orange-600 dark:text-orange-400" />
                     </div>
                     <div>
                         <h4 className="font-semibold text-gray-900 dark:text-white">Chat with AI Assistant</h4>
@@ -233,19 +233,19 @@ const ONBOARDING_STEPS = [
                         <h5 className="font-medium text-gray-900 dark:text-white">What you can do:</h5>
                         <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2">
                             <li className="flex items-center space-x-2">
-                                <CheckCircle className="w-4 h-4 text-green-500" />
+                                <CheckCircle className="size-4 text-green-500" />
                                 <span>Get networking advice</span>
                             </li>
                             <li className="flex items-center space-x-2">
-                                <CheckCircle className="w-4 h-4 text-green-500" />
+                                <CheckCircle className="size-4 text-green-500" />
                                 <span>Profile optimization tips</span>
                             </li>
                             <li className="flex items-center space-x-2">
-                                <CheckCircle className="w-4 h-4 text-green-500" />
+                                <CheckCircle className="size-4 text-green-500" />
                                 <span>Industry insights</span>
                             </li>
                             <li className="flex items-center space-x-2">
-                                <CheckCircle className="w-4 h-4 text-green-500" />
+                                <CheckCircle className="size-4 text-green-500" />
                                 <span>Connection suggestions</span>
                             </li>
                         </ul>
@@ -307,7 +307,7 @@ export function WelcomeOnboarding({ isOpen, onClose, onComplete }: WelcomeOnboar
                 <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
-                            <Sparkles className="w-6 h-6" />
+                            <Sparkles className="size-6" />
                             <h2 className="text-xl font-bold">Welcome to Networkqy</h2>
                         </div>
                         <button
@@ -315,7 +315,7 @@ export function WelcomeOnboarding({ isOpen, onClose, onComplete }: WelcomeOnboar
                             onClick={skipOnboarding}
                             className="text-white hover:text-gray-200 transition-colors"
                         >
-                            <X className="w-6 h-6" />
+                            <X className="size-6" />
                         </button>
                     </div>
 
@@ -369,7 +369,7 @@ export function WelcomeOnboarding({ isOpen, onClose, onComplete }: WelcomeOnboar
                             disabled={currentStep === 0}
                             className="flex items-center space-x-2 px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                         >
-                            <ArrowLeft className="w-4 h-4" />
+                            <ArrowLeft className="size-4" />
                             <span>Previous</span>
                         </button>
 
@@ -389,7 +389,7 @@ export function WelcomeOnboarding({ isOpen, onClose, onComplete }: WelcomeOnboar
                                     className="flex items-center space-x-2 px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
                                 >
                                     <span>Next</span>
-                                    <ArrowRight className="w-4 h-4" />
+                                    <ArrowRight className="size-4" />
                                 </button>
                             ) : (
                                 <button
@@ -397,7 +397,7 @@ export function WelcomeOnboarding({ isOpen, onClose, onComplete }: WelcomeOnboar
                                     onClick={handleComplete}
                                     className="flex items-center space-x-2 px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
                                 >
-                                    <CheckCircle className="w-4 h-4" />
+                                    <CheckCircle className="size-4" />
                                     <span>Get Started</span>
                                 </button>
                             )}

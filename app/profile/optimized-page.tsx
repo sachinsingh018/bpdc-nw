@@ -229,7 +229,7 @@ const OptimizedProfilePage = () => {
         return (
             <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                    <div className="size-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
                     <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         Error Loading Profile
                     </h2>
@@ -261,7 +261,7 @@ const OptimizedProfilePage = () => {
                     >
                         <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
                             {/* Avatar Section */}
-                            <div className="flex-shrink-0">
+                            <div className="shrink-0">
                                 <div className="relative">
                                     <Image
                                         src={userAvatar}
@@ -367,7 +367,7 @@ const OptimizedProfilePage = () => {
                                 className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-white/20 shadow-lg"
                             >
                                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                                    <Briefcase className="w-5 h-5 text-purple-600" />
+                                    <Briefcase className="size-5 text-purple-600" />
                                     About Me
                                 </h2>
 
@@ -393,7 +393,7 @@ const OptimizedProfilePage = () => {
                                 className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-white/20 shadow-lg"
                             >
                                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                                    <Award className="w-5 h-5 text-purple-600" />
+                                    <Award className="size-5 text-purple-600" />
                                     Goals
                                 </h2>
                                 <div className="flex flex-wrap gap-2">
@@ -416,7 +416,7 @@ const OptimizedProfilePage = () => {
                                 className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-white/20 shadow-lg"
                             >
                                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                                    <Star className="w-5 h-5 text-purple-600" />
+                                    <Star className="size-5 text-purple-600" />
                                     Skills & Expertise
                                 </h2>
                                 <div className="flex flex-wrap gap-2">

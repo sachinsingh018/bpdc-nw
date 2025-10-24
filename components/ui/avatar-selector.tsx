@@ -73,7 +73,7 @@ export function AvatarSelector({ selectedAvatar, onAvatarChange }: AvatarSelecto
 
             {/* Current Avatar Display */}
             <div className="flex justify-center">
-                <div className="w-24 h-24 rounded-full border-4 border-purple-200 dark:border-purple-800 overflow-hidden">
+                <div className="size-24 rounded-full border-4 border-purple-200 dark:border-purple-800 overflow-hidden">
                     <img
                         src={currentAvatarUrl}
                         alt="Selected avatar"
@@ -93,7 +93,7 @@ export function AvatarSelector({ selectedAvatar, onAvatarChange }: AvatarSelecto
                             onClick={prevStyle}
                             className="p-1"
                         >
-                            <ChevronLeft className="w-4 h-4" />
+                            <ChevronLeft className="size-4" />
                         </Button>
                         <Button
                             variant="outline"
@@ -101,7 +101,7 @@ export function AvatarSelector({ selectedAvatar, onAvatarChange }: AvatarSelecto
                             onClick={nextStyle}
                             className="p-1"
                         >
-                            <ChevronRight className="w-4 h-4" />
+                            <ChevronRight className="size-4" />
                         </Button>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ export function AvatarSelector({ selectedAvatar, onAvatarChange }: AvatarSelecto
                             onClick={prevColor}
                             className="p-1"
                         >
-                            <ChevronLeft className="w-4 h-4" />
+                            <ChevronLeft className="size-4" />
                         </Button>
                         <Button
                             variant="outline"
@@ -126,7 +126,7 @@ export function AvatarSelector({ selectedAvatar, onAvatarChange }: AvatarSelecto
                             onClick={nextColor}
                             className="p-1"
                         >
-                            <ChevronRight className="w-4 h-4" />
+                            <ChevronRight className="size-4" />
                         </Button>
                     </div>
                 </div>
@@ -155,7 +155,7 @@ export function AvatarSelector({ selectedAvatar, onAvatarChange }: AvatarSelecto
                                 setCurrentStyle(index);
                                 setCurrentColor(Math.floor(Math.random() * colors.length));
                             }}
-                            className="w-12 h-12 rounded-full border-2 border-gray-200 dark:border-gray-700 hover:border-purple-500 overflow-hidden transition-colors"
+                            className="size-12 rounded-full border-2 border-gray-200 dark:border-gray-700 hover:border-purple-500 overflow-hidden transition-colors"
                         >
                             <img
                                 src={generateAvatarUrl(style, colors[Math.floor(Math.random() * colors.length)])}

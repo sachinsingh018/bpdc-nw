@@ -144,8 +144,8 @@ export default function ConnectSetupPage() {
     <div className="relative min-h-screen bg-white text-black dark:bg-black dark:text-white overflow-hidden flex items-center justify-center px-4 transition-colors duration-300">
       {/* Particle Background */}
       <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-        <div className="absolute w-96 h-96 bg-purple-500 rounded-full opacity-20 blur-3xl animate-pulse top-[-100px] left-[-100px]" />
-        <div className="absolute w-72 h-72 bg-blue-400 rounded-full opacity-10 blur-2xl animate-spin-slow bottom-[-80px] right-[-60px]" />
+        <div className="absolute size-96 bg-purple-500 rounded-full opacity-20 blur-3xl animate-pulse top-[-100px] left-[-100px]" />
+        <div className="absolute size-72 bg-blue-400 rounded-full opacity-10 blur-2xl animate-spin-slow bottom-[-80px] right-[-60px]" />
       </div>
 
       <motion.form

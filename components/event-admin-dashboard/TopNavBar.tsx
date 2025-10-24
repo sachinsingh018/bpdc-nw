@@ -13,7 +13,7 @@ export default function TopNavBar() {
             <div className="flex items-center gap-6">
                 <button type="button" className="relative">
                     <Bell size={22} />
-                    <span className="absolute -top-1 -right-1 bg-red-500 rounded-full w-3 h-3 border-2 border-white" />
+                    <span className="absolute -top-1 -right-1 bg-red-500 rounded-full size-3 border-2 border-white" />
                 </button>
                 <div className="relative group">
                     <button type="button" className="flex items-center gap-2 bg-purple-800 px-2 py-1 rounded hover:bg-purple-900">
