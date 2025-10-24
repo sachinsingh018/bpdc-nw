@@ -1165,6 +1165,9 @@ function MessagesContent() {
                 <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
             </div>
 
+            {/* Common Navbar */}
+            <CommonNavbar currentPage="/messages" />
+
             <div className="max-w-7xl mx-auto p-3 md:p-6 h-[calc(100vh-180px)] md:h-[calc(100vh-200px)]">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 h-full">
                     <div className={`${selectedConversation ? 'hidden lg:block lg:col-span-1' : 'lg:col-span-1'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-white/20 shadow-lg overflow-hidden flex flex-col h-full`}>
