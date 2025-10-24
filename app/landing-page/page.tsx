@@ -241,6 +241,18 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                                     </div>
                                 </motion.div>
 
+                                {/* Login Button */}
+                                <motion.div variants={itemVariants} className="flex flex-col items-center mb-8">
+                                    <Link href="/login">
+                                        <motion.button
+                                            className="px-8 py-3 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-200"
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                        >
+                                            Login
+                                        </motion.button>
+                                    </Link>
+                                </motion.div>
 
                                 <motion.p
                                     className="text-2xl sm:text-3xl md:text-4xl font-semibold bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 bg-clip-text text-transparent min-h-[4rem] flex items-center justify-center"
@@ -269,18 +281,6 @@ export default function Home() { // Renamed from PageNew to Home, common practic
 
 
 
-                            {/* Login Button */}
-                            <motion.div variants={itemVariants} className="flex flex-col items-center">
-                                <Link href="/login">
-                                    <motion.button
-                                        className="px-8 py-3 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-200"
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        Login
-                                    </motion.button>
-                                </Link>
-                            </motion.div>
 
                             {/* <motion.div variants={itemVariants}>
                                 <motion.a
