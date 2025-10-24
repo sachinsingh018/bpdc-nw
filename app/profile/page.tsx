@@ -105,7 +105,7 @@ const CustomDropdown = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className={`absolute top-full mt-2 left-0 right-0 z-[9999] bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm rounded-lg border ${styles.content} shadow-xl max-h-60 overflow-y-auto`}
+            className={`absolute top-full mt-2 inset-x-0 z-[9999] bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm rounded-lg border ${styles.content} shadow-xl max-h-60 overflow-y-auto`}
           >
             {options.map((option) => (
               <button
@@ -623,7 +623,7 @@ const ProfilePage = () => {
                   <Sparkles className="size-4 md:size-6" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-sm md:text-lg font-semibold mb-1 text-black font-bold">Complete Your Profile</h3>
+                  <h3 className="text-sm md:text-lg font-bold mb-1 text-black">Complete Your Profile</h3>
                   <p className="text-black text-xs md:text-sm hidden sm:block font-medium">
                     Your profile is {profileCompletion}% complete. Add more details to get better matches and connections!
                   </p>
@@ -674,11 +674,10 @@ const ProfilePage = () => {
                 alt={userName}
                 width={120}
                 height={120}
-                className="size-20 md:w-[120px] md:h-[120px] rounded-full border-4 shadow-xl ring-4"
+                className="size-20 md:size-[120px] rounded-full border-4 shadow-xl ring-4"
                 style={{
                   borderColor: 'rgba(255, 215, 0, 0.8)',
-                  boxShadow: '0 10px 30px rgba(25, 25, 112, 0.3), 0 0 20px rgba(255, 215, 0, 0.4)',
-                  ringColor: 'rgba(138, 43, 226, 0.3)'
+                  boxShadow: '0 10px 30px rgba(25, 25, 112, 0.3), 0 0 20px rgba(255, 215, 0, 0.4)'
                 }}
               />
               {isEditing && (
@@ -955,9 +954,11 @@ const ProfilePage = () => {
                       <div className="flex items-center gap-3">
                         <div className="size-12 rounded-full border-2 border-gray-300 dark:border-gray-600 overflow-hidden">
                           {anonymousAvatar ? (
-                            <img
+                            <Image
                               src={anonymousAvatar}
                               alt="Current anonymous avatar"
+                              width={48}
+                              height={48}
                               className="w-full h-full object-cover"
                             />
                           ) : (
