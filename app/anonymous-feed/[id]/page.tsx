@@ -43,7 +43,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 p-4">
             <div className="max-w-xl w-full bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-purple-200/50 dark:border-white/20">
                 <h1 className="text-2xl font-bold mb-4 text-purple-700 dark:text-purple-300">Anonymous Post</h1>
-                <p className="text-gray-900 dark:text-white text-lg mb-4">{post.content}</p>
+                <p className="text-gray-900 dark:text-black text-lg mb-4">{post.content}</p>
                 {(post.company_name || post.industry) && (
                     <div className="flex gap-4 mb-4">
                         {post.company_name && <span className="text-sm text-gray-600 dark:text-gray-400">🏢 {post.company_name}</span>}

@@ -185,7 +185,7 @@ const OptimizedConnectionsPage = () => {
             <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 flex items-center justify-center">
                 <div className="text-center">
                     <div className="size-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-black mb-2">
                         Error Loading Connections
                     </h2>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -226,7 +226,7 @@ const OptimizedConnectionsPage = () => {
                                     key={tab.key}
                                     onClick={() => setActiveTab(tab.key as any)}
                                     className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${activeTab === tab.key
-                                        ? 'bg-purple-600 text-white shadow-lg'
+                                        ? 'bg-purple-600 text-black shadow-lg'
                                         : 'text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20'
                                         }`}
                                 >
@@ -234,7 +234,7 @@ const OptimizedConnectionsPage = () => {
                                     <span>{tab.label}</span>
                                     {tab.count > 0 && (
                                         <span className={`px-2 py-1 rounded-full text-xs ${activeTab === tab.key
-                                            ? 'bg-white/20 text-white'
+                                            ? 'bg-white/20 text-black'
                                             : 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400'
                                             }`}>
                                             {tab.count}
@@ -257,7 +257,7 @@ const OptimizedConnectionsPage = () => {
                                 <motion.h2
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="text-2xl font-bold text-gray-900 dark:text-white"
+                                    className="text-2xl font-bold text-gray-900 dark:text-black"
                                 >
                                     Your Connections ({connections.length})
                                 </motion.h2>
@@ -269,7 +269,7 @@ const OptimizedConnectionsPage = () => {
                                         className="text-center py-12"
                                     >
                                         <FaUserFriends className="size-16 text-gray-400 mx-auto mb-4" />
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-black mb-2">
                                             No Connections Yet
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-400 mb-6">
@@ -303,11 +303,11 @@ const OptimizedConnectionsPage = () => {
                                             >
                                                 <div className="flex items-start justify-between">
                                                     <div className="flex items-start gap-4">
-                                                        <div className="size-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold text-lg">
+                                                        <div className="size-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-black font-semibold text-lg">
                                                             {getConnectionUser(connection, currentUserId || '')?.name?.charAt(0) || 'U'}
                                                         </div>
                                                         <div className="flex-1 min-w-0">
-                                                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                                                            <h3 className="text-lg font-semibold text-gray-900 dark:text-black mb-1">
                                                                 {getConnectionUser(connection, currentUserId || '')?.name || 'Unknown User'}
                                                             </h3>
                                                             <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">
@@ -320,7 +320,7 @@ const OptimizedConnectionsPage = () => {
                                                     </div>
 
                                                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-2">
-                                                        <span className="px-3 py-1.5 bg-gradient-to-r from-green-400 to-emerald-500 text-white rounded-full text-sm font-medium shadow-sm flex items-center gap-1.5 w-fit">
+                                                        <span className="px-3 py-1.5 bg-gradient-to-r from-green-400 to-emerald-500 text-black rounded-full text-sm font-medium shadow-sm flex items-center gap-1.5 w-fit">
                                                             <div className="size-2 bg-white rounded-full animate-pulse"></div>
                                                             Connected
                                                         </span>
@@ -332,7 +332,7 @@ const OptimizedConnectionsPage = () => {
                                                                     navigateWithButtonFeedback(`/messages?email=${encodeURIComponent(user.email)}`, e.currentTarget);
                                                                 }
                                                             }}
-                                                            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 disabled:opacity-75 disabled:cursor-not-allowed"
+                                                            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-black rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 disabled:opacity-75 disabled:cursor-not-allowed"
                                                         >
                                                             <FaEnvelope className="size-3" />
                                                             Message
@@ -351,7 +351,7 @@ const OptimizedConnectionsPage = () => {
                                 <motion.h2
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="text-2xl font-bold text-gray-900 dark:text-white"
+                                    className="text-2xl font-bold text-gray-900 dark:text-black"
                                 >
                                     Pending Requests ({requests.length})
                                 </motion.h2>
@@ -363,7 +363,7 @@ const OptimizedConnectionsPage = () => {
                                         className="text-center py-12"
                                     >
                                         <FaHandshake className="size-16 text-gray-400 mx-auto mb-4" />
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-black mb-2">
                                             No Pending Requests
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-400">
@@ -390,11 +390,11 @@ const OptimizedConnectionsPage = () => {
                                                 >
                                                     <div className="flex items-start justify-between">
                                                         <div className="flex items-start gap-4">
-                                                            <div className="size-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-semibold text-lg">
+                                                            <div className="size-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-black font-semibold text-lg">
                                                                 {request.receiver?.name?.charAt(0) || 'U'}
                                                             </div>
                                                             <div className="flex-1 min-w-0">
-                                                                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                                                                <h3 className="text-lg font-semibold text-gray-900 dark:text-black mb-1">
                                                                     {request.receiver?.name || 'Unknown User'}
                                                                 </h3>
                                                                 <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">
@@ -412,7 +412,7 @@ const OptimizedConnectionsPage = () => {
                                                                     e.stopPropagation();
                                                                     handleConnectionResponse(request.id, 'accepted');
                                                                 }}
-                                                                className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+                                                                className="px-4 py-2 bg-green-600 hover:bg-green-700 text-black rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
                                                             >
                                                                 <FaCheck className="size-3" />
                                                                 Accept
@@ -422,7 +422,7 @@ const OptimizedConnectionsPage = () => {
                                                                     e.stopPropagation();
                                                                     handleConnectionResponse(request.id, 'rejected');
                                                                 }}
-                                                                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+                                                                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-black rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
                                                             >
                                                                 <FaTimes className="size-3" />
                                                                 Decline
@@ -442,7 +442,7 @@ const OptimizedConnectionsPage = () => {
                                 <motion.h2
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="text-2xl font-bold text-gray-900 dark:text-white"
+                                    className="text-2xl font-bold text-gray-900 dark:text-black"
                                 >
                                     Notifications ({notifications.length})
                                 </motion.h2>
@@ -454,7 +454,7 @@ const OptimizedConnectionsPage = () => {
                                         className="text-center py-12"
                                     >
                                         <Bell className="size-16 text-gray-400 mx-auto mb-4" />
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-black mb-2">
                                             No Notifications
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-400">
@@ -476,7 +476,7 @@ const OptimizedConnectionsPage = () => {
                                                     <div className={`size-3 rounded-full mt-2 ${notification.is_read ? 'bg-gray-300 dark:bg-gray-600' : 'bg-purple-500'
                                                         }`} />
                                                     <div className="flex-1">
-                                                        <h4 className="font-semibold text-gray-900 dark:text-white mb-1">
+                                                        <h4 className="font-semibold text-gray-900 dark:text-black mb-1">
                                                             {notification.title}
                                                         </h4>
                                                         <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">

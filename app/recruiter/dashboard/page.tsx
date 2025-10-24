@@ -573,21 +573,21 @@ export default function RecruiterDashboard() {
                             onClick={() => window.history.back()}
                             variant="ghost"
                             size="sm"
-                            className="text-white hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-cyan-500/20 border border-white/20 backdrop-blur-md bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
+                            className="text-black hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-cyan-500/20 border border-white/20 backdrop-blur-md bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
                         >
                             <ArrowLeft className="size-4 mr-2" />
                             Back
                         </Button>
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
-                                <Briefcase className="size-6 text-white" />
+                                <Briefcase className="size-6 text-black" />
                             </div>
                             <div>
                                 <div className="flex items-center gap-3">
-                                    <h1 className="text-3xl font-bold text-white">Recruiter Dashboard</h1>
+                                    <h1 className="text-3xl font-bold text-black">Recruiter Dashboard</h1>
                                     <Badge
                                         variant="secondary"
-                                        className="bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0"
+                                        className="bg-gradient-to-r from-green-500 to-emerald-500 text-black border-0"
                                     >
                                         {userRole?.toUpperCase()}
                                     </Badge>
@@ -598,7 +598,7 @@ export default function RecruiterDashboard() {
                     </div>
                     <Button
                         onClick={() => setShowPostJobModal(true)}
-                        className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0"
+                        className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-black border-0"
                     >
                         <Plus className="size-4 mr-2" />
                         Post New Job
@@ -607,119 +607,119 @@ export default function RecruiterDashboard() {
 
                 {/* Summary Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8">
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Total Applications</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Total Applications</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
-                                <Users className="size-4 text-white" />
+                                <Users className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.totalApplications}</div>
+                            <div className="text-2xl font-bold text-black">{summaryStats.totalApplications}</div>
                             <p className="text-xs text-blue-200">All time</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Pending</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Pending</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg">
-                                <Clock className="size-4 text-white" />
+                                <Clock className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.pendingApplications}</div>
+                            <div className="text-2xl font-bold text-black">{summaryStats.pendingApplications}</div>
                             <p className="text-xs text-blue-200">Awaiting review</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Accepted</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Accepted</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg">
-                                <CheckCircle className="size-4 text-white" />
+                                <CheckCircle className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.acceptedApplications}</div>
+                            <div className="text-2xl font-bold text-black">{summaryStats.acceptedApplications}</div>
                             <p className="text-xs text-blue-200">Successful candidates</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Rejected</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Rejected</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-red-500 to-pink-500 rounded-lg">
-                                <XCircle className="size-4 text-white" />
+                                <XCircle className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.rejectedApplications}</div>
+                            <div className="text-2xl font-bold text-black">{summaryStats.rejectedApplications}</div>
                             <p className="text-xs text-blue-200">Not selected</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Phone Screening</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Phone Screening</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
-                                <Phone className="size-4 text-white" />
+                                <Phone className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.phoneScreeningApplications}</div>
+                            <div className="text-2xl font-bold text-black">{summaryStats.phoneScreeningApplications}</div>
                             <p className="text-xs text-blue-200">Initial screening</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Job Assessment</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Job Assessment</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
-                                <MessageSquare className="size-4 text-white" />
+                                <MessageSquare className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.jobAssessmentApplications}</div>
+                            <div className="text-2xl font-bold text-black">{summaryStats.jobAssessmentApplications}</div>
                             <p className="text-xs text-blue-200">Skills & fit assessment</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">HR Interview</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">HR Interview</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg">
-                                <Users className="size-4 text-white" />
+                                <Users className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.hrInterviewApplications}</div>
+                            <div className="text-2xl font-bold text-black">{summaryStats.hrInterviewApplications}</div>
                             <p className="text-xs text-blue-200">HR evaluation</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Final Interview</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Final Interview</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg">
-                                <Star className="size-4 text-white" />
+                                <Star className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.finalInterviewApplications}</div>
+                            <div className="text-2xl font-bold text-black">{summaryStats.finalInterviewApplications}</div>
                             <p className="text-xs text-blue-200">Final round</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-white">Active Jobs</CardTitle>
+                            <CardTitle className="text-sm font-medium text-black">Active Jobs</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
-                                <Briefcase className="size-4 text-white" />
+                                <Briefcase className="size-4 text-black" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white">{summaryStats.totalJobs}</div>
+                            <div className="text-2xl font-bold text-black">{summaryStats.totalJobs}</div>
                             <p className="text-xs text-blue-200">Currently posted</p>
                         </CardContent>
                     </Card>
@@ -728,11 +728,11 @@ export default function RecruiterDashboard() {
                 {/* Main Content Tabs */}
                 <Tabs defaultValue="applications" className="space-y-6">
                     <TabsList className="grid w-full grid-cols-2 bg-white/10 backdrop-blur-md border-white/20">
-                        <TabsTrigger value="applications" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">
+                        <TabsTrigger value="applications" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">
                             <Users className="size-4 mr-2" />
                             Applications
                         </TabsTrigger>
-                        <TabsTrigger value="jobs" className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white">
+                        <TabsTrigger value="jobs" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">
                             <Briefcase className="size-4 mr-2" />
                             My Jobs
                         </TabsTrigger>
@@ -740,9 +740,9 @@ export default function RecruiterDashboard() {
 
                     {/* Applications Tab */}
                     <TabsContent value="applications" className="space-y-4">
-                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                             <CardHeader>
-                                <CardTitle className="text-white flex items-center gap-2">
+                                <CardTitle className="text-black flex items-center gap-2">
                                     <Users className="size-5" />
                                     Job Applications
                                 </CardTitle>
@@ -756,11 +756,11 @@ export default function RecruiterDashboard() {
                                             placeholder="Search by name, email, or job title..."
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="bg-white/10 border-white/20 text-white placeholder:text-blue-200"
+                                            className="bg-white/10 border-white/20 text-black placeholder:text-blue-200"
                                         />
                                     </div>
                                     <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                                        <SelectTrigger className="w-40 bg-white/10 border-white/20 text-white">
+                                        <SelectTrigger className="w-40 bg-white/10 border-white/20 text-black">
                                             <SelectValue placeholder="All Status" />
                                         </SelectTrigger>
                                         <SelectContent className="bg-slate-800 border-white/20">
@@ -776,7 +776,7 @@ export default function RecruiterDashboard() {
                                         </SelectContent>
                                     </Select>
                                     <Select value={selectedJob || 'all'} onValueChange={setSelectedJob}>
-                                        <SelectTrigger className="w-48 bg-white/10 border-white/20 text-white">
+                                        <SelectTrigger className="w-48 bg-white/10 border-white/20 text-black">
                                             <SelectValue placeholder="All Jobs" />
                                         </SelectTrigger>
                                         <SelectContent className="bg-slate-800 border-white/20">
@@ -796,13 +796,13 @@ export default function RecruiterDashboard() {
                                         <div key={application.id} className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors">
                                             <div className="flex items-center gap-4">
                                                 <div className="size-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
-                                                    <span className="text-sm font-medium text-white">
+                                                    <span className="text-sm font-medium text-black">
                                                         {application.name.charAt(0).toUpperCase()}
                                                     </span>
                                                 </div>
                                                 <div>
                                                     <div className="flex items-center gap-2">
-                                                        <span className="font-medium text-white">{application.name}</span>
+                                                        <span className="font-medium text-black">{application.name}</span>
                                                         <Badge className={`${getStatusColor(application.status)} bg-white/20 backdrop-blur-md border-white/20`}>
                                                             {getStatusLabel(application.status)}
                                                         </Badge>
@@ -824,7 +824,7 @@ export default function RecruiterDashboard() {
                                                     }}
                                                     variant="outline"
                                                     size="sm"
-                                                    className="text-gray-700 dark:text-white border-white/20 hover:bg-white/10"
+                                                    className="text-gray-700 dark:text-black border-white/20 hover:bg-white/10"
                                                 >
                                                     <Eye className="size-4 mr-1" />
                                                     Review
@@ -844,9 +844,9 @@ export default function RecruiterDashboard() {
 
                     {/* Jobs Tab */}
                     <TabsContent value="jobs" className="space-y-4">
-                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
                             <CardHeader>
-                                <CardTitle className="text-white flex items-center gap-2">
+                                <CardTitle className="text-black flex items-center gap-2">
                                     <Briefcase className="size-5" />
                                     Posted Jobs
                                 </CardTitle>
@@ -861,13 +861,13 @@ export default function RecruiterDashboard() {
                                             placeholder="Search jobs by title, employer, or description..."
                                             value={jobSearchTerm}
                                             onChange={(e) => setJobSearchTerm(e.target.value)}
-                                            className="bg-white/10 border-white/20 text-white placeholder:text-blue-200"
+                                            className="bg-white/10 border-white/20 text-black placeholder:text-blue-200"
                                         />
                                     </div>
 
                                     {/* Status Filter */}
                                     <Select value={jobStatusFilter} onValueChange={setJobStatusFilter}>
-                                        <SelectTrigger className="bg-white/10 border-white/20 text-white w-32">
+                                        <SelectTrigger className="bg-white/10 border-white/20 text-black w-32">
                                             <SelectValue placeholder="Status" />
                                         </SelectTrigger>
                                         <SelectContent className="bg-slate-800 border-white/20">
@@ -879,7 +879,7 @@ export default function RecruiterDashboard() {
 
                                     {/* Type Filter */}
                                     <Select value={jobTypeFilter} onValueChange={setJobTypeFilter}>
-                                        <SelectTrigger className="bg-white/10 border-white/20 text-white w-32">
+                                        <SelectTrigger className="bg-white/10 border-white/20 text-black w-32">
                                             <SelectValue placeholder="Type" />
                                         </SelectTrigger>
                                         <SelectContent className="bg-slate-800 border-white/20">
@@ -903,7 +903,7 @@ export default function RecruiterDashboard() {
                                             }}
                                             variant="outline"
                                             size="sm"
-                                            className="text-gray-700 dark:text-white border-white/20 hover:bg-white/10"
+                                            className="text-gray-700 dark:text-black border-white/20 hover:bg-white/10"
                                         >
                                             Clear Filters
                                         </Button>
@@ -920,10 +920,10 @@ export default function RecruiterDashboard() {
                                         <div key={job.job_id} className="flex items-center justify-between p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors">
                                             <div className="flex items-center gap-4">
                                                 <div className="size-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                                                    <Briefcase className="size-6 text-white" />
+                                                    <Briefcase className="size-6 text-black" />
                                                 </div>
                                                 <div>
-                                                    <div className="font-medium text-white">{job.job_title}</div>
+                                                    <div className="font-medium text-black">{job.job_title}</div>
                                                     <div className="text-sm text-blue-200">{job.employer_name}</div>
                                                     <div className="text-sm text-blue-300 flex items-center gap-2">
                                                         <MapPin className="size-3" />
@@ -950,7 +950,7 @@ export default function RecruiterDashboard() {
                                                     onClick={() => window.open(job.job_apply_link, '_blank')}
                                                     variant="outline"
                                                     size="sm"
-                                                    className="text-gray-700 dark:text-white border-white/20 hover:bg-white/10"
+                                                    className="text-gray-700 dark:text-black border-white/20 hover:bg-white/10"
                                                 >
                                                     <ExternalLink className="size-4 mr-1" />
                                                     View

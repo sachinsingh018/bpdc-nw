@@ -762,7 +762,7 @@ export default function AnonymousFeedPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-6 md:mb-8"
                 >
-                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-black mb-2">
                         Anonymous Chat Feed
                     </h1>
                     <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">
@@ -841,7 +841,7 @@ export default function AnonymousFeedPage() {
                                         />
                                         <button
                                             onClick={removeImage}
-                                            className="absolute top-2 right-2 p-1 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors"
+                                            className="absolute top-2 right-2 p-1 bg-black/50 hover:bg-black/70 text-black rounded-full transition-colors"
                                         >
                                             <XIcon className="size-4" />
                                         </button>
@@ -880,7 +880,7 @@ export default function AnonymousFeedPage() {
                                 placeholder="Company name (optional)"
                                 value={companyName}
                                 onChange={(e) => setCompanyName(e.target.value)}
-                                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 text-sm"
+                                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-black placeholder:text-gray-500 dark:placeholder:text-gray-400 text-sm"
                             />
 
                             <input
@@ -888,7 +888,7 @@ export default function AnonymousFeedPage() {
                                 placeholder="Industry (optional)"
                                 value={industry}
                                 onChange={(e) => setIndustry(e.target.value)}
-                                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 text-sm"
+                                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-black placeholder:text-gray-500 dark:placeholder:text-gray-400 text-sm"
                             />
                         </div>
 
@@ -896,7 +896,7 @@ export default function AnonymousFeedPage() {
                             <Button
                                 onClick={handleCreatePost}
                                 disabled={!newPost.trim()}
-                                className="bg-purple-600 hover:bg-purple-700 text-white text-sm"
+                                className="bg-purple-600 hover:bg-purple-700 text-black text-sm"
                             >
                                 <Send className="size-4 mr-2" />
                                 {isAnonymous ? 'Post Anonymously' : 'Post'}
@@ -919,7 +919,7 @@ export default function AnonymousFeedPage() {
                             className="text-center py-8 md:py-12"
                         >
                             <MessageCircle className="size-12 md:size-16 text-gray-400 mx-auto mb-3 md:mb-4" />
-                            <h3 className="text-base md:text-lg font-medium text-gray-900 dark:text-white mb-2">
+                            <h3 className="text-base md:text-lg font-medium text-gray-900 dark:text-black mb-2">
                                 No posts yet
                             </h3>
                             <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">
@@ -961,7 +961,7 @@ export default function AnonymousFeedPage() {
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <Badge variant="secondary" className="text-xs bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-md">
+                                            <Badge variant="secondary" className="text-xs bg-gradient-to-r from-purple-500 to-blue-500 text-black shadow-md">
                                                 {topics.find(t => t.value === post.topic)?.label}
                                             </Badge>
                                             {post.user_email === (currentUser?.email || userEmail) && (
@@ -1031,14 +1031,14 @@ export default function AnonymousFeedPage() {
                                                     value={editCompanyName}
                                                     onChange={(e) => setEditCompanyName(e.target.value)}
                                                     placeholder="Company (optional)"
-                                                    className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                                                    className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-black placeholder:text-gray-500 dark:placeholder:text-gray-400"
                                                 />
                                                 <input
                                                     type="text"
                                                     value={editIndustry}
                                                     onChange={(e) => setEditIndustry(e.target.value)}
                                                     placeholder="Industry (optional)"
-                                                    className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                                                    className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-black placeholder:text-gray-500 dark:placeholder:text-gray-400"
                                                 />
                                             </div>
                                             <div className="flex items-center gap-2">
@@ -1046,7 +1046,7 @@ export default function AnonymousFeedPage() {
                                                     onClick={() => handleSaveEdit(post.id)}
                                                     disabled={!editContent.trim()}
                                                     size="sm"
-                                                    className="bg-green-600 hover:bg-green-700 text-white"
+                                                    className="bg-green-600 hover:bg-green-700 text-black"
                                                 >
                                                     <Check className="size-3 mr-1" />
                                                     Save
@@ -1091,7 +1091,7 @@ export default function AnonymousFeedPage() {
                                                 variant="ghost"
                                                 size="sm"
                                                 onClick={() => handleLikePost(post.id)}
-                                                className={`flex items-center gap-1 md:gap-2 text-xs md:text-sm bg-gradient-to-r from-pink-200 to-purple-200 hover:from-purple-400 hover:to-pink-400 text-purple-700 hover:text-white shadow transition-all duration-200 ${post.is_liked ? 'text-red-500' : 'text-gray-500 hover:text-red-500'}`}
+                                                className={`flex items-center gap-1 md:gap-2 text-xs md:text-sm bg-gradient-to-r from-pink-200 to-purple-200 hover:from-purple-400 hover:to-pink-400 text-purple-700 hover:text-black shadow transition-all duration-200 ${post.is_liked ? 'text-red-500' : 'text-gray-500 hover:text-red-500'}`}
                                             >
                                                 <Heart className={`size-3 md:size-4 ${post.is_liked ? 'fill-current' : ''}`} />
                                                 <span>{post.likes_count}</span>
@@ -1100,7 +1100,7 @@ export default function AnonymousFeedPage() {
                                                 variant="ghost"
                                                 size="sm"
                                                 onClick={() => toggleComments(post.id)}
-                                                className="flex items-center gap-1 md:gap-2 bg-gradient-to-r from-blue-100 to-purple-100 hover:from-purple-400 hover:to-blue-400 text-blue-700 hover:text-white shadow text-xs md:text-sm transition-all duration-200"
+                                                className="flex items-center gap-1 md:gap-2 bg-gradient-to-r from-blue-100 to-purple-100 hover:from-purple-400 hover:to-blue-400 text-blue-700 hover:text-black shadow text-xs md:text-sm transition-all duration-200"
                                             >
                                                 <MessageCircle className="size-3 md:size-4" />
                                                 <span>{post.comments_count}</span>
@@ -1109,7 +1109,7 @@ export default function AnonymousFeedPage() {
                                                 variant="ghost"
                                                 size="sm"
                                                 onClick={() => handleSharePost(post)}
-                                                className="flex items-center gap-1 md:gap-2 bg-gradient-to-r from-green-100 to-blue-100 hover:from-blue-400 hover:to-green-400 text-green-700 hover:text-white shadow text-xs md:text-sm transition-all duration-200"
+                                                className="flex items-center gap-1 md:gap-2 bg-gradient-to-r from-green-100 to-blue-100 hover:from-blue-400 hover:to-green-400 text-green-700 hover:text-black shadow text-xs md:text-sm transition-all duration-200"
                                             >
                                                 <Share2 className="size-3 md:size-4" />
                                                 <span>Share</span>
@@ -1155,7 +1155,7 @@ export default function AnonymousFeedPage() {
                                                                 onClick={() => handleCreateComment(post.id)}
                                                                 disabled={!newComment[post.id]?.trim()}
                                                                 size="sm"
-                                                                className="bg-purple-600 hover:bg-purple-700 text-white text-xs"
+                                                                className="bg-purple-600 hover:bg-purple-700 text-black text-xs"
                                                             >
                                                                 <Send className="size-3 mr-1" />
                                                                 Comment
@@ -1181,7 +1181,7 @@ export default function AnonymousFeedPage() {
                                                             <div className="flex-1">
                                                                 <div className="bg-gray-50 dark:bg-slate-700 rounded-lg p-2 md:p-3">
                                                                     <div className="flex items-center justify-between mb-1 md:mb-2">
-                                                                        <p className="font-medium text-xs md:text-sm text-gray-900 dark:text-white">
+                                                                        <p className="font-medium text-xs md:text-sm text-gray-900 dark:text-black">
                                                                             {getDisplayNameComment(comment)}
                                                                         </p>
                                                                         <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -1197,7 +1197,7 @@ export default function AnonymousFeedPage() {
                                                                         variant="ghost"
                                                                         size="sm"
                                                                         onClick={() => handleLikeComment(comment.id, post.id)}
-                                                                        className={`flex items-center gap-1 text-xs bg-gradient-to-r from-pink-100 to-purple-100 hover:from-purple-400 hover:to-pink-400 text-purple-700 hover:text-white shadow transition-all duration-200 ${comment.is_liked ? 'text-red-500' : 'text-gray-500 hover:text-red-500'}`}
+                                                                        className={`flex items-center gap-1 text-xs bg-gradient-to-r from-pink-100 to-purple-100 hover:from-purple-400 hover:to-pink-400 text-purple-700 hover:text-black shadow transition-all duration-200 ${comment.is_liked ? 'text-red-500' : 'text-gray-500 hover:text-red-500'}`}
                                                                     >
                                                                         <Heart className={`size-3 ${comment.is_liked ? 'fill-current' : ''}`} />
                                                                         <span>{comment.likes_count}</span>

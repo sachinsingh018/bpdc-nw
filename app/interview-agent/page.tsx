@@ -321,7 +321,7 @@ export default function InterviewAgentPage() {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex items-center justify-between h-16">
                             <div className="flex items-center space-x-4">
-                                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                                <h1 className="text-2xl font-bold text-gray-900 dark:text-black">
                                     🎤 Interview Practice Agent
                                 </h1>
                                 <div className="flex items-center space-x-2">
@@ -396,7 +396,7 @@ export default function InterviewAgentPage() {
                                         {currentQuestion.category}
                                     </span>
                                 </div>
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                                <h2 className="text-2xl font-bold text-gray-900 dark:text-black mb-4">
                                     {currentQuestion.question}
                                 </h2>
                             </div>
@@ -408,8 +408,8 @@ export default function InterviewAgentPage() {
                                         onClick={isRecording ? stopRecording : startRecording}
                                         disabled={isProcessing}
                                         className={`flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all ${isRecording
-                                            ? 'bg-red-500 hover:bg-red-600 text-white'
-                                            : 'bg-purple-600 hover:bg-purple-700 text-white'
+                                            ? 'bg-red-500 hover:bg-red-600 text-black'
+                                            : 'bg-purple-600 hover:bg-purple-700 text-black'
                                             } disabled:opacity-50 disabled:cursor-not-allowed`}
                                     >
                                         {isRecording ? (
@@ -444,7 +444,7 @@ export default function InterviewAgentPage() {
                             {/* Answer Display */}
                             {currentAnswer && (
                                 <div className="mb-6">
-                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-black mb-3">
                                         Your Answer:
                                     </h3>
                                     <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
@@ -458,7 +458,7 @@ export default function InterviewAgentPage() {
                             {/* AI Feedback */}
                             {showFeedback && aiFeedback && (
                                 <div className="mb-6">
-                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-black mb-3">
                                         AI Feedback:
                                     </h3>
                                     <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 border border-purple-200 dark:border-purple-700">
@@ -474,7 +474,7 @@ export default function InterviewAgentPage() {
                                 <button
                                     onClick={previousQuestion}
                                     disabled={currentQuestionIndex === 0}
-                                    className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-black disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     ← Previous
                                 </button>
@@ -486,7 +486,7 @@ export default function InterviewAgentPage() {
                                 <button
                                     onClick={nextQuestion}
                                     disabled={isLastQuestion}
-                                    className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-black rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isLastQuestion ? 'Finish' : 'Next →'}
                                 </button>
@@ -503,9 +503,9 @@ export default function InterviewAgentPage() {
                 rel="noopener noreferrer"
                 className="fixed bottom-2 right-2 sm:bottom-4 sm:right-4 z-50"
             >
-                <div className="bg-white/80 dark:bg-gray-900/80 text-black dark:text-white text-xs sm:text-sm px-3 py-1 rounded-full shadow-md backdrop-blur hover:bg-white dark:hover:bg-gray-800 transition cursor-pointer">
+                <div className="bg-white/80 dark:bg-gray-900/80 text-black dark:text-black text-xs sm:text-sm px-3 py-1 rounded-full shadow-md backdrop-blur hover:bg-white dark:hover:bg-gray-800 transition cursor-pointer">
                     Powered by{' '}
-                    <span className="font-semibold text-gray-900 dark:text-white">
+                    <span className="font-semibold text-gray-900 dark:text-black">
                         Networkqy
                     </span>
                 </div>

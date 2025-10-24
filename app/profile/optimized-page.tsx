@@ -230,7 +230,7 @@ const OptimizedProfilePage = () => {
             <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 flex items-center justify-center">
                 <div className="text-center">
                     <div className="size-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-black mb-2">
                         Error Loading Profile
                     </h2>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -272,7 +272,7 @@ const OptimizedProfilePage = () => {
                                     />
                                     <button
                                         onClick={() => setShowAvatarSelector(true)}
-                                        className="absolute bottom-0 right-0 bg-purple-600 text-white p-2 rounded-full hover:bg-purple-700 transition-colors"
+                                        className="absolute bottom-0 right-0 bg-purple-600 text-black p-2 rounded-full hover:bg-purple-700 transition-colors"
                                     >
                                         <FaEdit size={16} />
                                     </button>
@@ -283,7 +283,7 @@ const OptimizedProfilePage = () => {
                             <div className="flex-1 min-w-0">
                                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                                     <div>
-                                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                                        <h1 className="text-3xl font-bold text-gray-900 dark:text-black mb-2">
                                             {userName}
                                         </h1>
                                         <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -314,7 +314,7 @@ const OptimizedProfilePage = () => {
                                         {isProfileIncomplete && (
                                             <Button
                                                 onClick={() => setShowProfileWizard(true)}
-                                                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                                                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-black"
                                             >
                                                 Complete Profile
                                             </Button>
@@ -325,7 +325,7 @@ const OptimizedProfilePage = () => {
                                                 <Button
                                                     onClick={saveProfile}
                                                     disabled={isSaving}
-                                                    className="bg-green-600 hover:bg-green-700 text-white"
+                                                    className="bg-green-600 hover:bg-green-700 text-black"
                                                 >
                                                     {isSaving ? 'Saving...' : 'Save Changes'}
                                                 </Button>
@@ -366,7 +366,7 @@ const OptimizedProfilePage = () => {
                                 transition={{ delay: 0.1 }}
                                 className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-white/20 shadow-lg"
                             >
-                                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                                <h2 className="text-xl font-semibold text-gray-900 dark:text-black mb-4 flex items-center gap-2">
                                     <Briefcase className="size-5 text-purple-600" />
                                     About Me
                                 </h2>
@@ -374,7 +374,7 @@ const OptimizedProfilePage = () => {
                                 {isEditing ? (
                                     <textarea
                                         ref={bioTextareaRef}
-                                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
+                                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-black resize-none"
                                         rows={4}
                                         placeholder="Tell us about yourself..."
                                     />
@@ -392,7 +392,7 @@ const OptimizedProfilePage = () => {
                                 transition={{ delay: 0.2 }}
                                 className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-white/20 shadow-lg"
                             >
-                                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                                <h2 className="text-xl font-semibold text-gray-900 dark:text-black mb-4 flex items-center gap-2">
                                     <Award className="size-5 text-purple-600" />
                                     Goals
                                 </h2>
@@ -415,7 +415,7 @@ const OptimizedProfilePage = () => {
                                 transition={{ delay: 0.3 }}
                                 className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-white/20 shadow-lg"
                             >
-                                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                                <h2 className="text-xl font-semibold text-gray-900 dark:text-black mb-4 flex items-center gap-2">
                                     <Star className="size-5 text-purple-600" />
                                     Skills & Expertise
                                 </h2>
@@ -441,14 +441,14 @@ const OptimizedProfilePage = () => {
                                 transition={{ delay: 0.4 }}
                                 className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-white/20 shadow-lg"
                             >
-                                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Quick Actions</h2>
+                                <h2 className="text-xl font-semibold text-gray-900 dark:text-black mb-4">Quick Actions</h2>
                                 <div className="space-y-3">
                                     <button
                                         onClick={() => {
                                             setIsNavigating(true);
                                             router.push('/chat');
                                         }}
-                                        className="w-full flex items-center gap-3 p-3 bg-purple-100 dark:bg-purple-600/20 hover:bg-purple-200 dark:hover:bg-purple-600/30 border border-purple-300 dark:border-purple-500/30 rounded-lg text-purple-800 dark:text-white transition-colors"
+                                        className="w-full flex items-center gap-3 p-3 bg-purple-100 dark:bg-purple-600/20 hover:bg-purple-200 dark:hover:bg-purple-600/30 border border-purple-300 dark:border-purple-500/30 rounded-lg text-purple-800 dark:text-black transition-colors"
                                     >
                                         <MessageSquare size={20} />
                                         <span>Start Chat</span>
@@ -458,7 +458,7 @@ const OptimizedProfilePage = () => {
                                             setIsNavigating(true);
                                             router.push('/connections');
                                         }}
-                                        className="w-full flex items-center gap-3 p-3 bg-blue-100 dark:bg-blue-600/20 hover:bg-blue-200 dark:hover:bg-blue-600/30 border border-blue-300 dark:border-blue-500/30 rounded-lg text-blue-800 dark:text-white transition-colors"
+                                        className="w-full flex items-center gap-3 p-3 bg-blue-100 dark:bg-blue-600/20 hover:bg-blue-200 dark:hover:bg-blue-600/30 border border-blue-300 dark:border-blue-500/30 rounded-lg text-blue-800 dark:text-black transition-colors"
                                     >
                                         <Users size={20} />
                                         <span>My Connections</span>
@@ -468,7 +468,7 @@ const OptimizedProfilePage = () => {
                                             setIsNavigating(true);
                                             router.push('/matches');
                                         }}
-                                        className="w-full flex items-center gap-3 p-3 bg-green-100 dark:bg-green-600/20 hover:bg-green-200 dark:hover:bg-green-600/30 border border-green-300 dark:border-green-500/30 rounded-lg text-green-800 dark:text-white transition-colors"
+                                        className="w-full flex items-center gap-3 p-3 bg-green-100 dark:bg-green-600/20 hover:bg-green-200 dark:hover:bg-green-600/30 border border-green-300 dark:border-green-500/30 rounded-lg text-green-800 dark:text-black transition-colors"
                                     >
                                         <BarChart3 size={20} />
                                         <span>View Matches</span>
@@ -483,13 +483,13 @@ const OptimizedProfilePage = () => {
                                 transition={{ delay: 0.5 }}
                                 className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-white/20 shadow-lg"
                             >
-                                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h2>
+                                <h2 className="text-xl font-semibold text-gray-900 dark:text-black mb-4">Recent Activity</h2>
                                 <div className="space-y-3">
                                     {recentActivity.map((activity) => (
                                         <div key={activity.id} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-white/5 rounded-lg">
                                             <activity.icon size={16} className="text-purple-600 dark:text-purple-400" />
                                             <div className="flex-1">
-                                                <p className="text-gray-900 dark:text-white text-sm">{activity.text}</p>
+                                                <p className="text-gray-900 dark:text-black text-sm">{activity.text}</p>
                                                 <p className="text-gray-500 dark:text-gray-400 text-xs">{activity.time}</p>
                                             </div>
                                         </div>

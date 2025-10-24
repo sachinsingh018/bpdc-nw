@@ -188,7 +188,7 @@ Cloud: AWS, Google Cloud Platform, Azure`;
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex items-center justify-between h-16">
                             <div className="flex items-center space-x-4">
-                                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                                <h1 className="text-2xl font-bold text-gray-900 dark:text-black">
                                     📄 CV Curator
                                 </h1>
                                 <div className="flex items-center space-x-2">
@@ -217,7 +217,7 @@ Cloud: AWS, Google Cloud Platform, Azure`;
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                         </svg>
                                     </div>
-                                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                                    <h2 className="text-2xl font-bold text-gray-900 dark:text-black mb-2">
                                         Upload Your Resume
                                     </h2>
                                     <p className="text-gray-600 dark:text-gray-400 mb-6">
@@ -271,9 +271,9 @@ Cloud: AWS, Google Cloud Platform, Azure`;
                 rel="noopener noreferrer"
                 className="fixed bottom-2 right-2 sm:bottom-4 sm:right-4 z-50"
             >
-                <div className="bg-white/80 dark:bg-gray-900/80 text-black dark:text-white text-xs sm:text-sm px-3 py-1 rounded-full shadow-md backdrop-blur hover:bg-white dark:hover:bg-gray-800 transition cursor-pointer">
+                <div className="bg-white/80 dark:bg-gray-900/80 text-black dark:text-black text-xs sm:text-sm px-3 py-1 rounded-full shadow-md backdrop-blur hover:bg-white dark:hover:bg-gray-800 transition cursor-pointer">
                     Powered by{' '}
-                    <span className="font-semibold text-gray-900 dark:text-white">
+                    <span className="font-semibold text-gray-900 dark:text-black">
                         Networkqy
                     </span>
                 </div>

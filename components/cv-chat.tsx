@@ -136,7 +136,7 @@ export function CVChat({ resumeText, onPromptSent, isLimitReached, dailyPromptCo
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                     </svg>
                                 </div>
-                                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                                <h3 className="text-xl font-semibold text-gray-900 dark:text-black mb-2">
                                     Your Resume is Ready!
                                 </h3>
                                 <p className="text-gray-600 dark:text-gray-400 mb-4">
@@ -181,8 +181,8 @@ export function CVChat({ resumeText, onPromptSent, isLimitReached, dailyPromptCo
                                     className={cn(
                                         'rounded-2xl px-4 py-2 text-sm',
                                         message.role === 'user'
-                                            ? 'bg-purple-600 text-white'
-                                            : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white'
+                                            ? 'bg-purple-600 text-black'
+                                            : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-black'
                                     )}
                                 >
                                     <div className="whitespace-pre-wrap">{message.content}</div>
@@ -222,7 +222,7 @@ export function CVChat({ resumeText, onPromptSent, isLimitReached, dailyPromptCo
             <form className="flex mx-auto px-4 bg-background pb-4 md:pb-6 gap-2 w-full md:max-w-3xl sticky bottom-0">
                 {isLimitReached ? (
                     <div className="w-full flex justify-center px-4">
-                        <div className="w-full max-w-3xl bg-[#0E0B1E] text-white text-center p-6 rounded-2xl shadow-xl border border-white/20 backdrop-blur-md">
+                        <div className="w-full max-w-3xl bg-[#0E0B1E] text-black text-center p-6 rounded-2xl shadow-xl border border-white/20 backdrop-blur-md">
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                                 <p className="text-sm sm:text-base font-medium tracking-wide leading-snug sm:max-w-none w-full">
                                     🚫 You&apos;ve reached your daily 5-prompt limit for CV curation. Come back tomorrow for more AI-powered resume optimization!
@@ -241,7 +241,7 @@ export function CVChat({ resumeText, onPromptSent, isLimitReached, dailyPromptCo
                                 onChange={(e) => setInput(e.target.value)}
                                 placeholder="Ask about your resume... (e.g., 'Rewrite my summary section for data science')"
                                 spellCheck={false}
-                                className="min-h-[60px] w-full resize-none bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-white/20 dark:border-gray-700/20 rounded-2xl px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                                className="min-h-[60px] w-full resize-none bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-white/20 dark:border-gray-700/20 rounded-2xl px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 dark:text-black placeholder:text-gray-500 dark:placeholder:text-gray-400"
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter' && !e.shiftKey) {
                                         e.preventDefault();
@@ -256,7 +256,7 @@ export function CVChat({ resumeText, onPromptSent, isLimitReached, dailyPromptCo
                             size="icon"
                             disabled={!input.trim() || isLoading}
                             onClick={handleSubmit}
-                            className="shrink-0 bg-purple-600 hover:bg-purple-700 text-white rounded-full size-10"
+                            className="shrink-0 bg-purple-600 hover:bg-purple-700 text-black rounded-full size-10"
                         >
                             {isLoading ? (
                                 <StopIcon size={16} />

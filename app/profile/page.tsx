@@ -1480,14 +1480,14 @@ const ProfilePage = () => {
                               value={edu.school_name}
                               onChange={(e) => updateEducation(index, 'school_name', e.target.value)}
                               placeholder="School/University"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm"
+                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
                             />
                             <input
                               type="text"
                               value={edu.degree}
                               onChange={(e) => updateEducation(index, 'degree', e.target.value)}
                               placeholder="Degree (e.g., Bachelor's)"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm"
+                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
                             />
                           </div>
                           <input
@@ -1503,14 +1503,14 @@ const ProfilePage = () => {
                               value={edu.start_year}
                               onChange={(e) => updateEducation(index, 'start_year', e.target.value)}
                               placeholder="Start Year"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm"
+                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
                             />
                             <input
                               type="text"
                               value={edu.end_year}
                               onChange={(e) => updateEducation(index, 'end_year', e.target.value)}
                               placeholder="End Year"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm"
+                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
                             />
                           </div>
                           <div className="flex justify-end">
@@ -1584,14 +1584,14 @@ const ProfilePage = () => {
                               value={exp.company_name}
                               onChange={(e) => updateExperience(index, 'company_name', e.target.value)}
                               placeholder="Company Name"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm"
+                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
                             />
                             <input
                               type="text"
                               value={exp.position_title}
                               onChange={(e) => updateExperience(index, 'position_title', e.target.value)}
                               placeholder="Position Title"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm"
+                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
                             />
                           </div>
                           <div className="grid grid-cols-2 gap-3">
@@ -1600,14 +1600,14 @@ const ProfilePage = () => {
                               value={exp.start_date}
                               onChange={(e) => updateExperience(index, 'start_date', e.target.value)}
                               placeholder="Start Date"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm"
+                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
                             />
                             <input
                               type="text"
                               value={exp.end_date}
                               onChange={(e) => updateExperience(index, 'end_date', e.target.value)}
                               placeholder="End Date (or Present)"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm"
+                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
                             />
                           </div>
                           <textarea
@@ -1615,7 +1615,7 @@ const ProfilePage = () => {
                             onChange={(e) => updateExperience(index, 'description', e.target.value)}
                             placeholder="Job description and responsibilities"
                             rows={3}
-                            className="w-full bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm resize-none"
+                            className="w-full bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black resize-none"
                           />
                           <div className="flex justify-end">
                             <Button
@@ -1741,14 +1741,14 @@ const ProfilePage = () => {
                               value={cert.certification_name}
                               onChange={(e) => updateCertification(index, 'certification_name', e.target.value)}
                               placeholder="Certification Name"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm"
+                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
                             />
                             <input
                               type="text"
                               value={cert.issuing_org}
                               onChange={(e) => updateCertification(index, 'issuing_org', e.target.value)}
                               placeholder="Issuing Organization"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm"
+                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
                             />
                           </div>
                           <div className="grid grid-cols-2 gap-3">
@@ -1757,14 +1757,14 @@ const ProfilePage = () => {
                               value={cert.issue_date}
                               onChange={(e) => updateCertification(index, 'issue_date', e.target.value)}
                               placeholder="Issue Date"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm"
+                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
                             />
                             <input
                               type="text"
                               value={cert.expiry_date}
                               onChange={(e) => updateCertification(index, 'expiry_date', e.target.value)}
                               placeholder="Expiry Date (if applicable)"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm"
+                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
                             />
                           </div>
                           <div className="flex justify-end">

@@ -268,7 +268,7 @@ export function Chat({
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 flex items-center justify-center">
         <div className="text-center">
           <div className="size-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-black mb-2">
             Loading AI Chat...
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
@@ -310,7 +310,7 @@ export function Chat({
         <form className="flex mx-auto px-4 bg-background pb-4 md:pb-6 gap-2 w-full md:max-w-3xl">
           {effectiveReadonly || isFlagged ? (
             <div className="w-full flex justify-center px-4">
-              <div className="w-full max-w-3xl bg-[#0E0B1E] text-white text-center py-6 px-6 rounded-2xl shadow-xl border border-white/20 backdrop-blur-md">
+              <div className="w-full max-w-3xl bg-[#0E0B1E] text-black text-center py-6 px-6 rounded-2xl shadow-xl border border-white/20 backdrop-blur-md">
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <p className="text-sm sm:text-base font-medium tracking-wide leading-snug sm:max-w-none w-full">
                     🚫 You&apos;ve reached your daily 7-message limit. But don&apos;t stop now — explore more features and complete your profile to unlock better connections!
@@ -318,7 +318,7 @@ export function Chat({
                 </div>
 
                 <div
-                  className="mt-4 inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold px-4 py-2 rounded-md transition shadow cursor-pointer"
+                  className="mt-4 inline-block bg-purple-600 hover:bg-purple-700 text-black font-semibold px-4 py-2 rounded-md transition shadow cursor-pointer"
                   onClick={() => router.push('/profile')}
                 >
                   🚀 Go to My Profile

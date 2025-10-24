@@ -175,7 +175,7 @@ export default function CommunitiesPage() {
             <div className="max-w-3xl mx-auto text-center py-16 px-4">
                 <div className="flex justify-center mb-4">
                     <div className="bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue p-3 rounded-full shadow-lg">
-                        <Users className="size-8 text-bits-royal-blue dark:text-bits-white" />
+                        <Users className="size-8 text-bits-royal-blue dark:text-black" />
                     </div>
                 </div>
                 <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue bg-clip-text text-transparent mb-4">
@@ -213,7 +213,7 @@ export default function CommunitiesPage() {
                                 </p>
                                 <div className="flex gap-2 w-full mt-auto">
                                     <Button
-                                        className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-bits-royal-blue dark:text-bits-white font-semibold shadow-md hover:from-bits-golden-yellow-600 hover:to-bits-royal-blue-600 rounded-lg flex items-center justify-center h-10"
+                                        className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black dark:text-black font-semibold shadow-md hover:from-bits-golden-yellow-600 hover:to-bits-royal-blue-600 rounded-lg flex items-center justify-center h-10"
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             router.push(`/communities/${community.id}`);
@@ -223,7 +223,7 @@ export default function CommunitiesPage() {
                                     </Button>
                                     {!membershipStatus ? (
                                         <Button
-                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue dark:text-bits-white font-semibold shadow-md hover:from-green-700 hover:to-green-800 rounded-lg flex items-center justify-center h-10"
+                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue dark:text-black font-semibold shadow-md hover:from-green-700 hover:to-green-800 rounded-lg flex items-center justify-center h-10"
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 handleJoinCommunity(community.id);
@@ -233,14 +233,14 @@ export default function CommunitiesPage() {
                                         </Button>
                                     ) : membershipStatus === 'approved' ? (
                                         <Button
-                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue dark:text-bits-white font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
+                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue dark:text-black font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
                                             disabled
                                         >
                                             Member
                                         </Button>
                                     ) : (
                                         <Button
-                                            className="flex-1 bg-gradient-to-r from-yellow-600 to-yellow-700 text-bits-royal-blue dark:text-bits-white font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
+                                            className="flex-1 bg-gradient-to-r from-yellow-600 to-yellow-700 text-bits-royal-blue dark:text-black font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
                                             disabled
                                         >
                                             Pending

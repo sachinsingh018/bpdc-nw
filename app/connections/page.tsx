@@ -287,8 +287,8 @@ const ConnectionsPage = () => {
                     <button
                         onClick={() => setActiveTab('connections')}
                         className={`flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-md transition-colors text-sm sm:text-base ${activeTab === 'connections'
-                            ? 'bg-purple-600 text-white'
-                            : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                            ? 'bg-purple-600 text-black'
+                            : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-black'
                             }`}
                     >
                         <FaHandshake size={16} />
@@ -301,8 +301,8 @@ const ConnectionsPage = () => {
                     <button
                         onClick={() => setActiveTab('requests')}
                         className={`flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-md transition-colors text-sm sm:text-base ${activeTab === 'requests'
-                            ? 'bg-purple-600 text-white'
-                            : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                            ? 'bg-purple-600 text-black'
+                            : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-black'
                             }`}
                     >
                         <FaClock size={16} />
@@ -323,8 +323,8 @@ const ConnectionsPage = () => {
                             });
                         }}
                         className={`flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-md transition-colors text-sm sm:text-base ${activeTab === 'notifications'
-                            ? 'bg-purple-600 text-white'
-                            : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                            ? 'bg-purple-600 text-black'
+                            : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-black'
                             }`}
                     >
                         <FaEnvelope size={16} />
@@ -344,7 +344,7 @@ const ConnectionsPage = () => {
                             animate={{ opacity: 1, y: 0 }}
                             className="space-y-4"
                         >
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Your Connections</h2>
+                            <h2 className="text-xl font-semibold text-gray-900 dark:text-black">Your Connections</h2>
                             {(!currentUserId) ? (
                                 <div className="flex justify-center items-center py-12">
                                     <span className="text-gray-500 dark:text-gray-400">Loading...</span>
@@ -352,11 +352,11 @@ const ConnectionsPage = () => {
                             ) : connections.length === 0 ? (
                                 <div className="text-center py-12">
                                     <FaUserFriends size={48} className="text-gray-400 mx-auto mb-4" />
-                                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No connections yet</h3>
+                                    <h3 className="text-lg font-medium text-gray-900 dark:text-black mb-2">No connections yet</h3>
                                     <p className="text-gray-600 dark:text-gray-400 mb-4">Start building your network by finding and connecting with other professionals.</p>
                                     <button
                                         onClick={() => router.push('/friends')}
-                                        className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                                        className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-black rounded-lg transition-colors"
                                     >
                                         Find Connections
                                     </button>
@@ -383,7 +383,7 @@ const ConnectionsPage = () => {
                                                         <FaUser className="text-purple-600 dark:text-purple-400" size={20} />
                                                     </div>
                                                     <div className="min-w-0 flex-1">
-                                                        <h3 className="font-semibold text-gray-900 dark:text-white truncate">
+                                                        <h3 className="font-semibold text-gray-900 dark:text-black truncate">
                                                             {getConnectionUser(connection, currentUserId)?.name || 'Networkqy User'}
                                                         </h3>
                                                         <p className="text-sm text-gray-600 dark:text-gray-400 truncate">
@@ -397,7 +397,7 @@ const ConnectionsPage = () => {
                                                     </div>
                                                 </div>
                                                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-2">
-                                                    <span className="px-3 py-1.5 bg-gradient-to-r from-green-400 to-emerald-500 text-white rounded-full text-sm font-medium shadow-sm flex items-center gap-1.5 w-fit">
+                                                    <span className="px-3 py-1.5 bg-gradient-to-r from-green-400 to-emerald-500 text-black rounded-full text-sm font-medium shadow-sm flex items-center gap-1.5 w-fit">
                                                         <div className="size-2 bg-white rounded-full animate-pulse"></div>
                                                         Connected
                                                     </span>
@@ -413,7 +413,7 @@ const ConnectionsPage = () => {
                                                                 console.error('User or email not found:', { user, currentUserId });
                                                             }
                                                         }}
-                                                        className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white rounded-xl transition-all duration-200 text-sm font-medium shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2 w-full sm:w-auto justify-center"
+                                                        className="px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-black rounded-xl transition-all duration-200 text-sm font-medium shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2 w-full sm:w-auto justify-center"
                                                     >
                                                         <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -438,11 +438,11 @@ const ConnectionsPage = () => {
                             animate={{ opacity: 1, y: 0 }}
                             className="space-y-4"
                         >
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Pending Requests</h2>
+                            <h2 className="text-xl font-semibold text-gray-900 dark:text-black">Pending Requests</h2>
                             {pendingRequests.length === 0 ? (
                                 <div className="text-center py-12">
                                     <FaClock size={48} className="text-gray-400 mx-auto mb-4" />
-                                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No pending requests</h3>
+                                    <h3 className="text-lg font-medium text-gray-900 dark:text-black mb-2">No pending requests</h3>
                                     <p className="text-gray-600 dark:text-gray-400">You don&apos;t have any pending connection requests.</p>
                                 </div>
                             ) : (
@@ -450,7 +450,7 @@ const ConnectionsPage = () => {
                                     {/* Received Requests */}
                                     {currentUserId && pendingRequests.filter(request => request.receiver_id === currentUserId).length > 0 && (
                                         <div>
-                                            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-3">Received Requests</h3>
+                                            <h3 className="text-lg font-medium text-gray-900 dark:text-black mb-3">Received Requests</h3>
                                             <div className="grid gap-4">
                                                 {pendingRequests
                                                     .filter(request => request.receiver_id === currentUserId)
@@ -473,7 +473,7 @@ const ConnectionsPage = () => {
                                                                         <FaUser className="text-blue-600 dark:text-blue-400" size={20} />
                                                                     </div>
                                                                     <div className="min-w-0 flex-1">
-                                                                        <h3 className="font-semibold text-gray-900 dark:text-white truncate">
+                                                                        <h3 className="font-semibold text-gray-900 dark:text-black truncate">
                                                                             {request.sender?.name || 'Networkqy User'}
                                                                         </h3>
                                                                         <p className="text-sm text-gray-600 dark:text-gray-400 truncate">
@@ -489,14 +489,14 @@ const ConnectionsPage = () => {
                                                                 <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                                                                     <button
                                                                         onClick={() => handleConnectionResponse(request.id, 'accepted')}
-                                                                        className="px-4 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:scale-105 font-medium"
+                                                                        className="px-4 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-black rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:scale-105 font-medium"
                                                                     >
                                                                         <FaCheck size={14} />
                                                                         Accept
                                                                     </button>
                                                                     <button
                                                                         onClick={() => handleConnectionResponse(request.id, 'rejected')}
-                                                                        className="px-4 py-2.5 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:scale-105 font-medium"
+                                                                        className="px-4 py-2.5 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-black rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:scale-105 font-medium"
                                                                     >
                                                                         <FaTimes size={14} />
                                                                         Decline
@@ -512,7 +512,7 @@ const ConnectionsPage = () => {
                                     {/* Sent Requests */}
                                     {currentUserId && pendingRequests.filter(request => request.sender_id === currentUserId).length > 0 && (
                                         <div>
-                                            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-3">Sent Requests</h3>
+                                            <h3 className="text-lg font-medium text-gray-900 dark:text-black mb-3">Sent Requests</h3>
                                             <div className="grid gap-4">
                                                 {pendingRequests
                                                     .filter(request => request.sender_id === currentUserId)
@@ -535,7 +535,7 @@ const ConnectionsPage = () => {
                                                                         <FaUser className="text-yellow-600 dark:text-yellow-400" size={20} />
                                                                     </div>
                                                                     <div className="min-w-0 flex-1">
-                                                                        <h3 className="font-semibold text-gray-900 dark:text-white truncate">
+                                                                        <h3 className="font-semibold text-gray-900 dark:text-black truncate">
                                                                             {request.receiver?.name || 'Networkqy User'}
                                                                         </h3>
                                                                         <p className="text-sm text-gray-600 dark:text-gray-400 truncate">
@@ -552,7 +552,7 @@ const ConnectionsPage = () => {
                                                                     </div>
                                                                 </div>
                                                                 <div className="flex items-center gap-2">
-                                                                    <span className="px-3 py-1.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full text-sm font-medium shadow-sm flex items-center gap-1.5 w-fit">
+                                                                    <span className="px-3 py-1.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-black rounded-full text-sm font-medium shadow-sm flex items-center gap-1.5 w-fit">
                                                                         <div className="size-2 bg-white rounded-full animate-pulse"></div>
                                                                         Pending
                                                                     </span>
@@ -574,11 +574,11 @@ const ConnectionsPage = () => {
                             animate={{ opacity: 1, y: 0 }}
                             className="space-y-4"
                         >
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Notifications</h2>
+                            <h2 className="text-xl font-semibold text-gray-900 dark:text-black">Notifications</h2>
                             {notifications.length === 0 ? (
                                 <div className="text-center py-12">
                                     <FaEnvelope size={48} className="text-gray-400 mx-auto mb-4" />
-                                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No notifications</h3>
+                                    <h3 className="text-lg font-medium text-gray-900 dark:text-black mb-2">No notifications</h3>
                                     <p className="text-gray-600 dark:text-gray-400">You&apos;re all caught up!</p>
                                 </div>
                             ) : (
@@ -609,7 +609,7 @@ const ConnectionsPage = () => {
                                                         } size={20} />
                                                     </div>
                                                     <div className="min-w-0 flex-1">
-                                                        <h3 className="font-semibold text-gray-900 dark:text-white">
+                                                        <h3 className="font-semibold text-gray-900 dark:text-black">
                                                             {notification.title}
                                                         </h3>
                                                         <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-3">
