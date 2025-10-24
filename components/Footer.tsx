@@ -91,12 +91,6 @@ export const Footer = () => {
                 </div>
             </div>
 
-            <div className="mt-12 grid gap-4 text-center text-zinc-400 text-sm font-medium">
-                <p>📍 in5 Tech, Dubai Internet City, Dubai, United Arab Emirates</p>
-                <p>📍 20-22, Wenlock Road, London, England, N1 7GU</p>
-                <p>📍 614 21st St S, Arlington, VA, USA</p>
-            </div>
-
             {/* Theme Toggle Icon */}
             {/* Theme Toggle with Text */}
             <div className="mt-10 flex justify-center">

@@ -31,11 +31,6 @@ const sections = [
             { icon: Zap, title: 'Accelerate Growth', text: 'Build meaningful relationships that drive your startup\'s success.' },
             { icon: Sparkles, title: 'Intent-Aware Discovery', text: 'Our AI adapts to your goals in real time, helping you connect with the right people, faster.' }
         ]
-    },
-    {
-        heading: 'Built for Builders.',
-        tagline: 'Whether you\'re fundraising, hiring, or launching something new — BITS Pilani Dubai Campus is your sidekick for serendipity.',
-        cta: 'Join the Beta'
     }
 ];
 
@@ -229,6 +224,23 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                                     BITS Pilani, Dubai Campus
                                 </motion.h1>
 
+                                {/* Logo */}
+                                <motion.div
+                                    variants={itemVariants}
+                                    className="flex justify-center mb-8"
+                                >
+                                    <div className="relative">
+                                        <div className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow/20 to-bits-royal-blue/20 rounded-3xl blur-xl"></div>
+                                        <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-2xl">
+                                            <img
+                                                src="/img.jpg"
+                                                alt="BITS Pilani Dubai Campus Logo"
+                                                className="h-24 w-auto object-contain filter drop-shadow-lg"
+                                            />
+                                        </div>
+                                    </div>
+                                </motion.div>
+
 
                                 <motion.p
                                     className="text-2xl sm:text-3xl md:text-4xl font-semibold bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 bg-clip-text text-transparent min-h-[4rem] flex items-center justify-center"
@@ -355,51 +367,6 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                         </div>
                     </section>
 
-                    {/* CTA Section */}
-                    <section className="relative py-32 px-6">
-                        <div className="max-w-5xl mx-auto">
-                            <motion.div
-                                className="relative"
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8 }}
-                                viewport={{ once: true }}
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow/25 to-bits-golden-yellow/25 rounded-3xl blur-2xl"></div>
-                                <div className="relative bg-zinc-950/60 backdrop-blur-2xl border border-zinc-800/50 rounded-3xl p-12 sm:p-16 text-center">
-                                    <h2 className="text-4xl sm:text-5xl font-black mb-6 bg-gradient-to-r from-white to-zinc-300 bg-clip-text text-transparent">
-                                        {sections[2].heading}
-                                    </h2>
-                                    <p className="text-xl text-zinc-300 mb-10 leading-relaxed font-medium max-w-3xl mx-auto">
-                                        {sections[2].tagline}
-                                    </p>
-                                    <motion.a
-                                        href="/join"
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        className="block"
-                                    >
-                                        <motion.button
-                                            className="group relative px-12 py-4 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700 rounded-2xl shadow-xl hover:shadow-bits-golden-yellow/30 transition-all duration-300 font-semibold text-lg"
-                                            whileHover={{
-                                                scale: 1.05,
-                                                y: -2,
-                                                boxShadow: "0 20px 40px rgba(139, 92, 246, 0.3)"
-                                            }}
-                                            whileTap={{ scale: 0.98 }}
-                                        >
-                                            <span className="relative z-10 flex items-center space-x-2">
-                                                <span>{sections[2].cta}</span>
-                                                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                                            </span>
-                                            <div className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 rounded-2xl blur-xl opacity-0 group-hover:opacity-25 transition-opacity duration-300"></div>
-                                        </motion.button>
-                                    </motion.a>
-
-                                </div>
-                            </motion.div>
-                        </div>
-                    </section>
 
                     {/* Partners Section */}
                     <section className="relative py-20 px-6">
