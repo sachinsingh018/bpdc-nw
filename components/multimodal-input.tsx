@@ -270,10 +270,10 @@ function PureMultimodalInput({
       </div>
 
       {/* Terms message below the input box */}
-      <div className="mt-2 text-xs text-muted-foreground text-center w-full px-4">
-        By using <span className="font-semibold">Networkqy</span>, you agree to our{' '}
-        <Link href="/privacy-policy" className="underline hover:text-white">privacy policy</Link> and{' '}
-        <Link href="/terms-of-use" className="underline hover:text-white">terms of use</Link>.
+      <div className="mt-2 text-xs text-black text-center w-full px-4">
+        By using <span className="font-semibold text-black">Networkqy</span>, you agree to our{' '}
+        <Link href="/privacy-policy" className="underline text-black hover:text-gray-700">privacy policy</Link> and{' '}
+        <Link href="/terms-of-use" className="underline text-black hover:text-gray-700">terms of use</Link>.
       </div>
 
 
@@ -361,7 +361,9 @@ function PureSendButton({
       }}
       disabled={input.length === 0 || uploadQueue.length > 0}
     >
-      <ArrowUpIcon size={14} />
+      <span className="text-black">
+        <ArrowUpIcon size={14} />
+      </span>
     </Button>
   );
 }

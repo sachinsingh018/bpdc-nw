@@ -15,25 +15,25 @@ const SUGGESTED_ACTIONS = [
     title: 'Find Startups',
     label: 'Global',
     action: 'Find Startups Worldwide',
-    icon: <Globe size={18} />,
+    icon: <Globe size={18} className="text-black" />,
   },
   {
     title: 'Connect with',
     label: 'Tech Professionals',
     action: 'Connect with Tech Professionals',
-    icon: <Users size={18} />,
+    icon: <Users size={18} className="text-black" />,
   },
   {
     title: 'Find',
     label: 'Finance Experts',
     action: 'Find Finance Experts',
-    icon: <Search size={18} />,
+    icon: <Search size={18} className="text-black" />,
   },
   {
     title: 'Find',
     label: 'Remote Work',
     action: 'Find Remote Work Opportunities',
-    icon: <Sparkles size={18} />,
+    icon: <Sparkles size={18} className="text-black" />,
   },
 ];
 
@@ -63,9 +63,9 @@ function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
         >
           <div className="flex items-center gap-2 w-full">
             {suggestedAction.icon}
-            <span className="font-medium truncate w-full">{suggestedAction.title}</span>
+            <span className="font-medium text-black truncate w-full">{suggestedAction.title}</span>
           </div>
-          <span className="text-muted-foreground text-sm truncate w-full">
+          <span className="text-black text-sm truncate w-full">
             {suggestedAction.label}
           </span>
         </Button>

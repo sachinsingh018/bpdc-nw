@@ -87,10 +87,6 @@ function PureChatHeader({
       {/* <SidebarToggle /> */}
 
 
-      <div className="absolute left-1/2 transform -translate-x-1/2 text-lg md:text-xl font-bold text-black dark:text-white pointer-events-none">
-        🤖 Networkqy Copilot
-      </div>
-
       {/* {!isReadonly && (
         <ModelSelector
           selectedModelId={selectedModelId}

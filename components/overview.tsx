@@ -46,7 +46,7 @@ export const Overview = () => {
           </div>
         )}
 
-        <p className="text-base text-muted-foreground font-mono max-w-xl leading-relaxed">
+        <p className="text-base text-black font-bold max-w-xl leading-relaxed">
   <span className="animate-multiline-typing inline-block align-top pr-1">
     This is a chatbot that helps you with Networking and enhancing user experience for modern day professional culture.
   </span>

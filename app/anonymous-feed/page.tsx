@@ -762,10 +762,10 @@ export default function AnonymousFeedPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-6 md:mb-8"
                 >
-                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-black mb-2">
+                    <h1 className="text-2xl md:text-3xl font-bold text-black dark:text-black mb-2">
                         Anonymous Chat Feed
                     </h1>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">
+                    <p className="text-black dark:text-black text-sm md:text-base font-bold">
                         Share your thoughts about workplace culture, career advice, and more - anonymously
                     </p>
                 </motion.div>
@@ -792,7 +792,7 @@ export default function AnonymousFeedPage() {
                                     variant="ghost"
                                     size="sm"
                                     onClick={() => setIsAnonymous(!isAnonymous)}
-                                    className="flex items-center gap-1 text-xs"
+                                    className="flex items-center gap-1 text-xs text-black"
                                 >
                                     {isAnonymous ? <EyeOff className="size-3" /> : <Eye className="size-3" />}
                                     {isAnonymous ? 'Anonymous' : 'Public'}
@@ -806,7 +806,7 @@ export default function AnonymousFeedPage() {
                             placeholder="Share your thoughts about workplace culture, career advice, or any work-related topic..."
                             value={newPost}
                             onChange={(e) => setNewPost(e.target.value)}
-                            className="min-h-[80px] md:min-h-[120px] resize-none text-sm"
+                            className="min-h-[80px] md:min-h-[120px] resize-none text-sm placeholder:text-black"
                         />
 
                         {/* Image Upload Section */}
@@ -822,12 +822,12 @@ export default function AnonymousFeedPage() {
                                     />
                                     <label
                                         htmlFor="image-upload"
-                                        className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg cursor-pointer transition-colors text-sm text-gray-600 dark:text-gray-300"
+                                        className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg cursor-pointer transition-colors text-sm text-black dark:text-black"
                                     >
                                         <Image className="size-4" />
                                         Add Image
                                     </label>
-                                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                                    <span className="text-xs text-black dark:text-black">
                                         Max 5MB, JPG/PNG/GIF
                                     </span>
                                 </div>
@@ -860,7 +860,7 @@ export default function AnonymousFeedPage() {
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
                             <Select value={selectedTopic} onValueChange={setSelectedTopic}>
-                                <SelectTrigger>
+                                <SelectTrigger className="text-black">
                                     <SelectValue placeholder="Select topic" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -880,7 +880,7 @@ export default function AnonymousFeedPage() {
                                 placeholder="Company name (optional)"
                                 value={companyName}
                                 onChange={(e) => setCompanyName(e.target.value)}
-                                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-black placeholder:text-gray-500 dark:placeholder:text-gray-400 text-sm"
+                                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-black dark:text-black placeholder:text-black dark:placeholder:text-black text-sm"
                             />
 
                             <input
@@ -888,7 +888,7 @@ export default function AnonymousFeedPage() {
                                 placeholder="Industry (optional)"
                                 value={industry}
                                 onChange={(e) => setIndustry(e.target.value)}
-                                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-black placeholder:text-gray-500 dark:placeholder:text-gray-400 text-sm"
+                                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-slate-700 text-black dark:text-black placeholder:text-black dark:placeholder:text-black text-sm"
                             />
                         </div>
 

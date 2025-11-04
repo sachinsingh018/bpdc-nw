@@ -1,89 +1,32 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Users, Brain, Zap, Target } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import { Moon, Sun } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Script from 'next/script';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
+import { Footer } from '@/components/Footer';
+import { Menu, X } from 'lucide-react';
 
-// Import your Header and Footer components
-import { Header } from '@/components/Header'; // Adjust path as needed
-import { Footer } from '@/components/Footer'; // Adjust path as needed
-import { ChatInput } from '@/components/ChatInput'; // Import ChatInput from its new components directory
-
-
-const sections = [
-    {
-        heading: 'Reimagine Connections.',
-        subheading: 'The First AI-Powered Professional Social Network.',
-        cta: 'Unlock Smarter Connections',
-        description: 'BITS Pilani Dubai Campus leverages artificial intelligence to help you build meaningful professional relationships faster and smarter.'
-    },
-    {
-        heading: 'Why BITS Pilani Dubai Campus?',
-        bullets: [
-            { icon: Target, title: 'Find Hidden Matches', text: 'AI surfaces connections based on your intent, values, and timing — not just keywords.' },
-            { icon: Users, title: 'Warm Intros, Always', text: 'Receive high-context intros that feel organic, not cold calls.' },
-            { icon: Brain, title: 'Smarter Follow-Ups', text: 'Get notified when it\'s the right time to reconnect or make a move.' },
-            { icon: Zap, title: 'Accelerate Growth', text: 'Build meaningful relationships that drive your startup\'s success.' },
-            { icon: Sparkles, title: 'Intent-Aware Discovery', text: 'Our AI adapts to your goals in real time, helping you connect with the right people, faster.' }
-        ]
-    }
-];
-
-const rotatingTexts = [
-    'Find your cofounder',
-    'Pitch your startup',
-    'Connect with investors',
-    'Join powerful communities',
-    'Get discovered by talent'
-];//kmk
-
-const partnerLogos = [
-    { name: 'PerplexityAI', src: '/partners/perplexity.png' },
-    { name: 'Google', src: '/partners/gcp.png' },
-    { name: 'in5 Dubai', src: '/partners/in5.png' },
-    { name: 'NVIDIA', src: '/partners/nvidea.png' },
-    { name: 'Dubai Holding', src: '/partners/dh.jpg' }
-];
-
-export default function Home() { // Renamed from PageNew to Home, common practice for homepage
-    const [displayedText, setDisplayedText] = useState('');
-    const [fullText, setFullText] = useState(rotatingTexts[0]);
-    const [textIndex, setTextIndex] = useState(0);
-    const [charIndex, setCharIndex] = useState(0);
-    const [responseGenerated, setResponseGenerated] = useState(false);
-    const { setTheme, theme } = useTheme();
+export default function Home() {
     const [hasMounted, setHasMounted] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { data: session, status } = useSession();
 
     useEffect(() => {
         setHasMounted(true);
     }, []);
-    useEffect(() => {
-        const typingSpeed = 80;
-        const delayBetweenPhrases = 1200;
 
-        if (charIndex < fullText.length) {
-            const timeout = setTimeout(() => {
-                setDisplayedText((prev) => prev + fullText.charAt(charIndex));
-                setCharIndex((prev) => prev + 1);
-            }, typingSpeed);
-            return () => clearTimeout(timeout);
-        } else {
-            const timeout = setTimeout(() => {
-                const nextIndex = (textIndex + 1) % rotatingTexts.length;
-                setFullText(rotatingTexts[nextIndex]);
-                setDisplayedText('');
-                setCharIndex(0);
-                setTextIndex(nextIndex);
-            }, delayBetweenPhrases);
-            return () => clearTimeout(timeout);
+    // Close mobile menu on escape key or outside click
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setMobileMenuOpen(false);
+        };
+        if (mobileMenuOpen) {
+            document.addEventListener('keydown', handleEscape);
+            return () => document.removeEventListener('keydown', handleEscape);
         }
-    }, [charIndex, fullText, textIndex]);
+    }, [mobileMenuOpen]);
 
 
     const containerVariants = {
@@ -150,9 +93,30 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                     <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
                     <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
 
+                    {/* White Bubbles in Upper Left */}
+                    <div className="absolute top-16 left-8 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-300" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                    <div className="absolute top-8 left-16 size-56 rounded-full blur-3xl opacity-45 animate-pulse delay-700" style={{ background: 'rgba(255, 255, 255, 0.55)' }}></div>
+                    <div className="absolute top-24 left-4 size-64 rounded-full blur-3xl opacity-48 animate-pulse delay-1100" style={{ background: 'rgba(255, 255, 255, 0.58)' }}></div>
+                    <div className="absolute top-12 left-12 size-48 rounded-full blur-3xl opacity-42 animate-pulse delay-1500" style={{ background: 'rgba(255, 255, 255, 0.52)' }}></div>
+                    <div className="absolute top-32 left-20 size-52 rounded-full blur-3xl opacity-40 animate-pulse delay-1900" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+
                     {/* Bright Golden Yellow */}
                     <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
                     <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
+
+                    {/* White Bubbles in Upper Right */}
+                    <div className="absolute top-16 right-8 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-400" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                    <div className="absolute top-8 right-16 size-56 rounded-full blur-3xl opacity-45 animate-pulse delay-800" style={{ background: 'rgba(255, 255, 255, 0.55)' }}></div>
+                    <div className="absolute top-24 right-4 size-64 rounded-full blur-3xl opacity-48 animate-pulse delay-1200" style={{ background: 'rgba(255, 255, 255, 0.58)' }}></div>
+                    <div className="absolute top-12 right-12 size-48 rounded-full blur-3xl opacity-42 animate-pulse delay-1600" style={{ background: 'rgba(255, 255, 255, 0.52)' }}></div>
+                    <div className="absolute top-32 right-20 size-52 rounded-full blur-3xl opacity-40 animate-pulse delay-2000" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+
+                    {/* White Bubbles on Right Side */}
+                    <div className="absolute top-1/3 right-8 size-68 rounded-full blur-3xl opacity-46 animate-pulse delay-2300" style={{ background: 'rgba(255, 255, 255, 0.56)' }}></div>
+                    <div className="absolute top-1/2 right-12 size-60 rounded-full blur-3xl opacity-44 animate-pulse delay-2700" style={{ background: 'rgba(255, 255, 255, 0.54)' }}></div>
+                    <div className="absolute top-2/3 right-6 size-56 rounded-full blur-3xl opacity-42 animate-pulse delay-3100" style={{ background: 'rgba(255, 255, 255, 0.52)' }}></div>
+                    <div className="absolute top-3/4 right-10 size-64 rounded-full blur-3xl opacity-40 animate-pulse delay-3500" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                    <div className="absolute top-1/4 right-4 size-52 rounded-full blur-3xl opacity-38 animate-pulse delay-3900" style={{ background: 'rgba(255, 255, 255, 0.48)' }}></div>
 
                     {/* Crimson Red */}
                     <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
@@ -176,33 +140,223 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                     {/* Neon Purple */}
                     <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
                     <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
+
+                    {/* More White Bubbles Throughout */}
+                    <div className="absolute top-1/3 left-1/3 size-96 rounded-full blur-3xl opacity-50 animate-pulse delay-500" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
+                    <div className="absolute bottom-1/3 right-1/3 size-80 rounded-full blur-3xl opacity-45 animate-pulse delay-1500" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                    <div className="absolute top-2/3 left-1/2 size-72 rounded-full blur-3xl opacity-48 animate-pulse delay-2500" style={{ background: 'rgba(255, 255, 255, 0.63)' }}></div>
+                    <div className="absolute top-1/4 right-1/4 size-88 rounded-full blur-3xl opacity-42 animate-pulse delay-3200" style={{ background: 'rgba(255, 255, 255, 0.58)' }}></div>
+                    <div className="absolute bottom-1/4 left-1/4 size-76 rounded-full blur-3xl opacity-44 animate-pulse delay-3800" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                    <div className="absolute top-1/5 left-1/5 size-84 rounded-full blur-3xl opacity-40 animate-pulse delay-4500" style={{ background: 'rgba(255, 255, 255, 0.55)' }}></div>
+                    <div className="absolute bottom-1/5 right-1/5 size-90 rounded-full blur-3xl opacity-42 animate-pulse delay-5200" style={{ background: 'rgba(255, 255, 255, 0.58)' }}></div>
+                    <div className="absolute top-1/2 right-1/2 size-100 rounded-full blur-3xl opacity-38 animate-pulse delay-6000" style={{ background: 'rgba(255, 255, 255, 0.52)' }}></div>
+                    <div className="absolute top-1/6 left-2/3 size-92 rounded-full blur-3xl opacity-36 animate-pulse delay-7000" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                    <div className="absolute bottom-1/6 right-2/3 size-86 rounded-full blur-3xl opacity-38 animate-pulse delay-8000" style={{ background: 'rgba(255, 255, 255, 0.52)' }}></div>
+                    <div className="absolute top-3/4 left-1/6 size-78 rounded-full blur-3xl opacity-40 animate-pulse delay-9000" style={{ background: 'rgba(255, 255, 255, 0.55)' }}></div>
+                    <div className="absolute bottom-3/4 right-1/6 size-82 rounded-full blur-3xl opacity-35 animate-pulse delay-10000" style={{ background: 'rgba(255, 255, 255, 0.48)' }}></div>
+                    <div className="absolute top-1/2 left-1/6 size-94 rounded-full blur-3xl opacity-37 animate-pulse delay-11000" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                    <div className="absolute bottom-1/2 right-1/6 size-88 rounded-full blur-3xl opacity-39 animate-pulse delay-12000" style={{ background: 'rgba(255, 255, 255, 0.53)' }}></div>
+                    <div className="absolute top-3/5 left-3/5 size-74 rounded-full blur-3xl opacity-41 animate-pulse delay-13000" style={{ background: 'rgba(255, 255, 255, 0.54)' }}></div>
+                    <div className="absolute bottom-2/5 right-3/5 size-70 rounded-full blur-3xl opacity-43 animate-pulse delay-14000" style={{ background: 'rgba(255, 255, 255, 0.56)' }}></div>
+                    <div className="absolute top-4/5 left-1/3 size-66 rounded-full blur-3xl opacity-39 animate-pulse delay-15000" style={{ background: 'rgba(255, 255, 255, 0.51)' }}></div>
+                    <div className="absolute bottom-1/5 left-2/5 size-68 rounded-full blur-3xl opacity-41 animate-pulse delay-16000" style={{ background: 'rgba(255, 255, 255, 0.53)' }}></div>
                 </div>
 
                 {/* Header Bar with Auth Buttons */}
-                <header className="fixed top-0 left-0 w-full z-20 flex justify-end items-center px-8 py-4 bg-white/80 dark:bg-black/80 backdrop-blur border-b border-zinc-200 dark:border-zinc-800 shadow-sm">
-                    {status === 'authenticated' ? (
-                        <div className="flex gap-2">
-                            <Link href="/profile">
-                                <button type="button" className="px-6 py-2 rounded-full bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black font-semibold shadow-lg hover:scale-105 transition-transform duration-200">
-                                    Go to Profile
-                                </button>
+                <header className="fixed top-0 left-0 w-full z-20 flex justify-between items-center px-4 sm:px-6 md:px-8 py-3 sm:py-4 bg-transparent">
+                    <Link href="/" className="flex items-center group">
+                        <motion.div
+                            className="relative"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            {/* Subtle backdrop container */}
+                            <div className="relative bg-white/30 backdrop-blur-sm border border-white/40 rounded-lg p-1.5 sm:p-2 shadow-lg group-hover:bg-white/40 group-hover:shadow-xl transition-all duration-300">
+                                <img
+                                    src="/img.jpg"
+                                    alt="BITS Pilani Dubai Campus Logo"
+                                    className="h-10 sm:h-12 md:h-14 w-auto object-contain filter drop-shadow-md"
+                                />
+                            </div>
+                        </motion.div>
+                    </Link>
+
+                    {/* Desktop Buttons - Hidden on mobile */}
+                    <div className="hidden sm:flex flex-col sm:flex-row gap-2 sm:gap-3">
+                        {status === 'authenticated' ? (
+                            <>
+                                <Link href="/profile">
+                                    <motion.div
+                                        className="relative"
+                                        whileHover={{ scale: 1.05 }}
+                                    >
+                                        {/* Glow effect */}
+                                        <motion.div
+                                            className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow via-bits-golden-yellow to-bits-royal-blue rounded-full blur-lg opacity-60"
+                                            animate={{
+                                                opacity: [0.5, 0.8, 0.5],
+                                            }}
+                                            transition={{
+                                                duration: 2,
+                                                repeat: Infinity,
+                                                ease: "easeInOut"
+                                            }}
+                                        />
+                                        <motion.button
+                                            type="button"
+                                            className="relative px-6 py-3 md:px-8 text-base md:text-lg bg-white text-black font-bold rounded-full shadow-[0_0_20px_rgba(255,215,0,0.7),0_0_40px_rgba(25,25,112,0.5)] border-2 border-bits-golden-yellow hover:border-bits-royal-blue transition-all duration-300 overflow-hidden group z-10"
+                                            whileHover={{
+                                                scale: 1.05,
+                                                boxShadow: "0 0 30px rgba(255,215,0,0.9), 0 0 60px rgba(25,25,112,0.7)",
+                                            }}
+                                            whileTap={{ scale: 0.95 }}
+                                        >
+                                            <span className="relative z-10 text-black font-bold drop-shadow-[0_2px_4px_rgba(255,215,0,0.5)] whitespace-nowrap">
+                                                Go to Profile
+                                            </span>
+                                            <motion.div
+                                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                                                initial={{ x: '-100%' }}
+                                                whileHover={{ x: '200%' }}
+                                                transition={{ duration: 0.6 }}
+                                            />
+                                        </motion.button>
+                                    </motion.div>
+                                </Link>
+                                <motion.button
+                                    type="button"
+                                    onClick={() => signOut({ callbackUrl: '/' })}
+                                    className="px-6 py-3 md:px-8 text-base md:text-lg bg-red-600 text-white font-bold rounded-full shadow-[0_0_20px_rgba(220,20,60,0.7)] border-2 border-red-700 hover:border-red-800 transition-all duration-300 hover:scale-105"
+                                    whileHover={{
+                                        scale: 1.05,
+                                        boxShadow: "0 0 30px rgba(220,20,60,0.9)",
+                                    }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    Sign Out
+                                </motion.button>
+                            </>
+                        ) : (
+                            <Link href="/login">
+                                <motion.div
+                                    className="relative"
+                                    whileHover={{ scale: 1.05 }}
+                                >
+                                    {/* Glow effect */}
+                                    <motion.div
+                                        className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow via-bits-golden-yellow to-bits-royal-blue rounded-full blur-lg opacity-60"
+                                        animate={{
+                                            opacity: [0.5, 0.8, 0.5],
+                                        }}
+                                        transition={{
+                                            duration: 2,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                    />
+                                    <motion.button
+                                        type="button"
+                                        className="relative px-6 py-3 md:px-8 text-base md:text-lg bg-white text-black font-bold rounded-full shadow-[0_0_20px_rgba(255,215,0,0.7),0_0_40px_rgba(25,25,112,0.5)] border-2 border-bits-golden-yellow hover:border-bits-royal-blue transition-all duration-300 overflow-hidden group z-10"
+                                        whileHover={{
+                                            scale: 1.05,
+                                            boxShadow: "0 0 30px rgba(255,215,0,0.9), 0 0 60px rgba(25,25,112,0.7)",
+                                        }}
+                                        whileTap={{ scale: 0.95 }}
+                                    >
+                                        <span className="relative z-10 text-black font-bold drop-shadow-[0_2px_4px_rgba(255,215,0,0.5)] whitespace-nowrap">
+                                            Recruiter Sign In
+                                        </span>
+                                        <motion.div
+                                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                                            initial={{ x: '-100%' }}
+                                            whileHover={{ x: '200%' }}
+                                            transition={{ duration: 0.6 }}
+                                        />
+                                    </motion.button>
+                                </motion.div>
                             </Link>
-                            <button
-                                type="button"
-                                onClick={() => signOut({ callbackUrl: '/' })}
-                                className="px-6 py-2 rounded-full bg-red-600 text-black font-semibold shadow-lg hover:scale-105 transition-transform duration-200"
-                            >
-                                Sign Out
-                            </button>
-                        </div>
-                    ) : (
-                        <Link href="/login">
-                            <button type="button" className="px-6 py-2 rounded-full bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black font-semibold shadow-lg hover:scale-105 transition-transform duration-200">
-                                Recruiter Sign In
-                            </button>
-                        </Link>
-                    )}
+                        )}
+                    </div>
+
+                    {/* Mobile Hamburger Menu Button */}
+                    <button
+                        type="button"
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        className="sm:hidden p-2 rounded-lg bg-white/30 backdrop-blur-sm border border-white/40 shadow-lg hover:bg-white/40 transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                        aria-label="Toggle menu"
+                    >
+                        {mobileMenuOpen ? (
+                            <X className="h-6 w-6 text-black" />
+                        ) : (
+                            <Menu className="h-6 w-6 text-black" />
+                        )}
+                    </button>
                 </header>
+
+                {/* Mobile Menu Dropdown */}
+                <AnimatePresence>
+                    {mobileMenuOpen && (
+                        <>
+                            {/* Backdrop */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[25] sm:hidden"
+                            />
+                            {/* Menu */}
+                            <motion.div
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.2 }}
+                                className="fixed top-16 left-0 right-0 z-30 sm:hidden bg-white/95 backdrop-blur-xl border-b border-white/40 shadow-xl"
+                            >
+                                <div className="flex flex-col gap-3 p-4">
+                                    {status === 'authenticated' ? (
+                                        <>
+                                            <Link href="/profile" onClick={() => setMobileMenuOpen(false)}>
+                                                <motion.button
+                                                    type="button"
+                                                    className="w-full px-6 py-4 text-base bg-white text-black font-bold rounded-full shadow-[0_0_20px_rgba(255,215,0,0.7),0_0_40px_rgba(25,25,112,0.5)] border-2 border-bits-golden-yellow transition-all duration-300 min-h-[48px]"
+                                                    whileTap={{ scale: 0.98 }}
+                                                >
+                                                    <span className="text-black font-bold drop-shadow-[0_2px_4px_rgba(255,215,0,0.5)]">
+                                                        Go to Profile
+                                                    </span>
+                                                </motion.button>
+                                            </Link>
+                                            <motion.button
+                                                type="button"
+                                                onClick={() => {
+                                                    signOut({ callbackUrl: '/' });
+                                                    setMobileMenuOpen(false);
+                                                }}
+                                                className="w-full px-6 py-4 text-base bg-red-600 text-white font-bold rounded-full shadow-[0_0_20px_rgba(220,20,60,0.7)] border-2 border-red-700 transition-all duration-300 min-h-[48px]"
+                                                whileTap={{ scale: 0.98 }}
+                                            >
+                                                Sign Out
+                                            </motion.button>
+                                        </>
+                                    ) : (
+                                        <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                                            <motion.button
+                                                type="button"
+                                                className="w-full px-6 py-4 text-base bg-white text-black font-bold rounded-full shadow-[0_0_20px_rgba(255,215,0,0.7),0_0_40px_rgba(25,25,112,0.5)] border-2 border-bits-golden-yellow transition-all duration-300 min-h-[48px]"
+                                                whileTap={{ scale: 0.98 }}
+                                            >
+                                                <span className="text-black font-bold drop-shadow-[0_2px_4px_rgba(255,215,0,0.5)]">
+                                                    Recruiter Sign In
+                                                </span>
+                                            </motion.button>
+                                        </Link>
+                                    )}
+                                </div>
+                            </motion.div>
+                        </>
+                    )}
+                </AnimatePresence>
 
                 <main className="relative z-10">
                     {/* Hero Section */}
@@ -215,200 +369,158 @@ export default function Home() { // Renamed from PageNew to Home, common practic
                             animate="visible"
                         >
                             <motion.div variants={itemVariants} className="space-y-6">
-                                <motion.h1
-                                    className="text-[clamp(2.5rem,8vw,6rem)] font-black tracking-tight break-words 
-    bg-gradient-to-r from-zinc-800 via-bits-royal-blue to-zinc-900 
-    dark:from-white dark:via-bits-golden-yellow dark:to-white 
-    bg-clip-text text-transparent"
-                                >
-                                    BITS Pilani, Dubai Campus
-                                </motion.h1>
-
-                                {/* Logo */}
-                                <motion.div
-                                    variants={itemVariants}
-                                    className="flex justify-center mb-8"
-                                >
-                                    <div className="relative">
-                                        <div className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow/20 to-bits-royal-blue/20 rounded-3xl blur-xl"></div>
-                                        <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-2xl">
-                                            <img
-                                                src="/img.jpg"
-                                                alt="BITS Pilani Dubai Campus Logo"
-                                                className="h-24 w-auto object-contain filter drop-shadow-lg"
-                                            />
-                                        </div>
-                                    </div>
-                                </motion.div>
-
-                                {/* Login Button */}
-                                <motion.div variants={itemVariants} className="flex flex-col items-center mb-8">
-                                    <Link href="/login">
-                                        <motion.button
-                                            className="px-8 py-3 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-200"
-                                            whileHover={{ scale: 1.05 }}
-                                            whileTap={{ scale: 0.95 }}
-                                        >
-                                            Login
-                                        </motion.button>
-                                    </Link>
-                                </motion.div>
-
-                                <motion.p
-                                    className="text-2xl sm:text-3xl md:text-4xl font-semibold bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 bg-clip-text text-transparent min-h-[4rem] flex items-center justify-center"
-                                    variants={itemVariants}
-                                >
-                                    {displayedText}
-                                    <motion.span
-                                        className="ml-1 w-1 h-8 bg-bits-golden-yellow"
-                                        animate={{ opacity: [0, 1, 0] }}
-                                        transition={{ duration: 1, repeat: Infinity }}
-                                    />
-                                </motion.p>
-                            </motion.div>
-
-                            <motion.div variants={itemVariants} className="w-full px-4 sm:px-8 max-w-xl mx-auto">
-                                <ChatInput onResponse={() => setResponseGenerated(true)} />
-                                {/* Now correctly imported from components/ChatInput */}
-                            </motion.div>
-
-                            <motion.p
-                                variants={itemVariants}
-                                className="text-sm sm:text-base md:text-lg text-black max-w-3xl mx-auto leading-relaxed font-medium"
-                            >
-                                {sections[0].description}
-                            </motion.p>
-
-
-
-
-                            {/* <motion.div variants={itemVariants}>
-                                <motion.a
-                                    href="/onboarding"
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    className="block"
-                                >
-                                    <motion.button
-                                        className={`group relative px-12 py-4 rounded-2xl shadow-xl font-semibold text-lg text-black transition-all duration-300 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 ${responseGenerated ? 'border-2 border-[#5B21B6]' : 'border-2 border-transparent'
-                                            }`}
-                                        animate={responseGenerated ? { scale: [1, 1.1, 1] } : {}}
-                                        transition={{ duration: 1.5 }}
-                                        whileHover={{
-                                            scale: 1.05,
-                                            y: -2,
-                                            boxShadow: "0 20px 40px rgba(139, 92, 246, 0.3)"
+                                <div className="relative inline-block">
+                                    {/* Glow effect behind text */}
+                                    <div className="absolute inset-0 blur-3xl opacity-60 animate-pulse"
+                                        style={{
+                                            background: 'radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(25,25,112,0.6) 100%)',
                                         }}
-                                        whileTap={{ scale: 0.98 }}
+                                    />
+                                    <motion.h1
+                                        className="text-[clamp(3rem,10vw,8rem)] font-black tracking-tight break-words 
+        text-white
+        dark:text-bits-golden-yellow
+        relative z-10
+        leading-tight
+        drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]
+        dark:drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]"
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 0.8, ease: "easeOut" }}
                                     >
-                                        <span className="relative z-10 flex items-center space-x-2">
-                                            <span>{sections[0].cta}</span>
-                                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                                        </span>
-                                        <div className="absolute inset-0 rounded-2xl blur-xl opacity-0 group-hover:opacity-25 transition-opacity duration-300"></div>
-                                    </motion.button>
-                                </motion.a>
-                            </motion.div> */}
+                                        <span className="block">BITS Pilani</span>
+                                        <span className="block mt-2">Dubai Campus</span>
+                                    </motion.h1>
+                                </div>
+
+                                {/* Login Button / Go to Profile Button */}
+                                <motion.div variants={itemVariants} className="flex flex-col items-center mb-8 w-full px-4">
+                                    {status === 'authenticated' ? (
+                                        <Link href="/profile" className="w-full max-w-sm">
+                                            <motion.div
+                                                className="relative w-full"
+                                                whileHover={{ scale: 1.05 }}
+                                            >
+                                                {/* Glow effect behind button */}
+                                                <motion.div
+                                                    className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow via-bits-golden-yellow to-bits-royal-blue rounded-full blur-xl opacity-75"
+                                                    animate={{
+                                                        opacity: [0.6, 0.9, 0.6],
+                                                        scale: [1, 1.1, 1],
+                                                    }}
+                                                    transition={{
+                                                        duration: 2,
+                                                        repeat: Infinity,
+                                                        ease: "easeInOut"
+                                                    }}
+                                                />
+                                                {/* Outer glow ring */}
+                                                <motion.div
+                                                    className="absolute -inset-1 bg-gradient-to-r from-bits-golden-yellow via-bits-royal-blue to-bits-golden-yellow rounded-full opacity-60 blur-sm"
+                                                    animate={{
+                                                        opacity: [0.4, 0.7, 0.4],
+                                                    }}
+                                                    transition={{
+                                                        duration: 2,
+                                                        repeat: Infinity,
+                                                        ease: "easeInOut"
+                                                    }}
+                                                />
+                                                <motion.button
+                                                    className="relative w-full px-6 py-4 sm:px-12 sm:py-5 md:px-16 text-lg sm:text-xl md:text-2xl bg-white text-black font-black rounded-full shadow-[0_0_30px_rgba(255,215,0,0.8),0_0_60px_rgba(25,25,112,0.6),inset_0_0_20px_rgba(255,255,255,0.3)] border-2 sm:border-4 border-bits-golden-yellow hover:border-bits-royal-blue transition-all duration-300 overflow-hidden group z-10 min-h-[56px] sm:min-h-[64px]"
+                                                    whileHover={{
+                                                        scale: 1.05,
+                                                        boxShadow: "0 0 50px rgba(255,215,0,1), 0 0 100px rgba(25,25,112,0.8), inset 0 0 30px rgba(255,255,255,0.5)",
+                                                    }}
+                                                    whileTap={{ scale: 0.98 }}
+                                                >
+                                                    <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-3 text-black font-black">
+                                                        <span className="text-black drop-shadow-[0_2px_4px_rgba(255,215,0,0.5)]">
+                                                            Go to Profile
+                                                        </span>
+                                                        <motion.span
+                                                            className="text-xl sm:text-2xl md:text-3xl inline-block text-black drop-shadow-[0_2px_4px_rgba(255,215,0,0.5)]"
+                                                            animate={{ x: [0, 8, 0] }}
+                                                            transition={{ duration: 1.5, repeat: Infinity }}
+                                                        >
+                                                            →
+                                                        </motion.span>
+                                                    </span>
+                                                    {/* Shimmer effect */}
+                                                    <motion.div
+                                                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                                                        initial={{ x: '-100%' }}
+                                                        whileHover={{ x: '200%' }}
+                                                        transition={{ duration: 0.8 }}
+                                                    />
+                                                </motion.button>
+                                            </motion.div>
+                                        </Link>
+                                    ) : (
+                                        <Link href="/login" className="w-full max-w-sm">
+                                            <motion.div
+                                                className="relative w-full"
+                                                whileHover={{ scale: 1.05 }}
+                                            >
+                                                {/* Glow effect behind button */}
+                                                <motion.div
+                                                    className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow via-bits-golden-yellow to-bits-royal-blue rounded-full blur-xl opacity-75"
+                                                    animate={{
+                                                        opacity: [0.6, 0.9, 0.6],
+                                                        scale: [1, 1.1, 1],
+                                                    }}
+                                                    transition={{
+                                                        duration: 2,
+                                                        repeat: Infinity,
+                                                        ease: "easeInOut"
+                                                    }}
+                                                />
+                                                {/* Outer glow ring */}
+                                                <motion.div
+                                                    className="absolute -inset-1 bg-gradient-to-r from-bits-golden-yellow via-bits-royal-blue to-bits-golden-yellow rounded-full opacity-60 blur-sm"
+                                                    animate={{
+                                                        opacity: [0.4, 0.7, 0.4],
+                                                    }}
+                                                    transition={{
+                                                        duration: 2,
+                                                        repeat: Infinity,
+                                                        ease: "easeInOut"
+                                                    }}
+                                                />
+                                                <motion.button
+                                                    className="relative w-full px-6 py-4 sm:px-12 sm:py-5 md:px-16 text-lg sm:text-xl md:text-2xl bg-white text-black font-black rounded-full shadow-[0_0_30px_rgba(255,215,0,0.8),0_0_60px_rgba(25,25,112,0.6),inset_0_0_20px_rgba(255,255,255,0.3)] border-2 sm:border-4 border-bits-golden-yellow hover:border-bits-royal-blue transition-all duration-300 overflow-hidden group z-10 min-h-[56px] sm:min-h-[64px]"
+                                                    whileHover={{
+                                                        scale: 1.05,
+                                                        boxShadow: "0 0 50px rgba(255,215,0,1), 0 0 100px rgba(25,25,112,0.8), inset 0 0 30px rgba(255,255,255,0.5)",
+                                                    }}
+                                                    whileTap={{ scale: 0.98 }}
+                                                >
+                                                    <span className="relative z-10 flex items-center justify-center gap-2 sm:gap-3 text-black font-black">
+                                                        <span className="text-black drop-shadow-[0_2px_4px_rgba(255,215,0,0.5)]">
+                                                            Login
+                                                        </span>
+                                                        <motion.span
+                                                            className="text-xl sm:text-2xl md:text-3xl inline-block text-black drop-shadow-[0_2px_4px_rgba(255,215,0,0.5)]"
+                                                            animate={{ x: [0, 8, 0] }}
+                                                            transition={{ duration: 1.5, repeat: Infinity }}
+                                                        >
+                                                            →
+                                                        </motion.span>
+                                                    </span>
+                                                    {/* Shimmer effect */}
+                                                    <motion.div
+                                                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                                                        initial={{ x: '-100%' }}
+                                                        whileHover={{ x: '200%' }}
+                                                        transition={{ duration: 0.8 }}
+                                                    />
+                                                </motion.button>
+                                            </motion.div>
+                                        </Link>
+                                    )}
+                                </motion.div>
+                            </motion.div>
                         </motion.div>
-                    </section>
-
-                    {/* Features Section */}
-                    <section className="relative py-32 px-6">
-                        <div className="max-w-7xl mx-auto">
-                            <motion.div
-                                className="text-center mb-20"
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8 }}
-                                viewport={{ once: true }}
-                            >
-                                <h2 className="text-5xl sm:text-6xl font-black mb-6 
-    bg-gradient-to-r from-zinc-700 via-zinc-500 to-zinc-700 
-    dark:from-white dark:via-zinc-300 dark:to-white 
-    bg-clip-text text-transparent">
-                                    {sections[1].heading}
-                                </h2>
-
-                            </motion.div>
-
-                            <motion.div
-                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-                                variants={containerVariants}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                            >
-                                {sections[1].bullets?.map((item, i) => {
-                                    const IconComponent = item.icon;
-                                    return (
-                                        <motion.div
-                                            key={i}
-                                            variants={itemVariants}
-                                            className="group relative"
-                                        >
-                                            <div className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow/25 to-bits-golden-yellow/25 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                                            <div className="relative bg-zinc-950/60 backdrop-blur-xl border border-zinc-800/50 rounded-3xl p-8 hover:border-zinc-700/50 transition-all duration-300 h-full">
-                                                <div className="mb-6">
-                                                    <div className="size-14 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                                                        <IconComponent size={28} className="text-black" />
-                                                    </div>
-                                                    <h3 className="text-xl font-bold text-black mb-3 group-hover:text-bits-golden-yellow-300 transition-colors">
-                                                        {item.title}
-                                                    </h3>
-                                                </div>
-                                                <p className="text-black leading-relaxed font-medium">
-                                                    {item.text}
-                                                </p>
-                                            </div>
-                                        </motion.div>
-                                    );
-                                })}
-                            </motion.div>
-                        </div>
-                    </section>
-
-
-                    {/* Partners Section */}
-                    <section className="relative py-20 px-6">
-                        <div className="max-w-7xl mx-auto">
-                            <motion.h2
-                                className="text-lg font-bold text-black uppercase tracking-wider text-center mb-12"
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6 }}
-                                viewport={{ once: true }}
-                            >
-                                Backed by Leading Innovators
-                            </motion.h2>
-
-                            <motion.div
-                                className="flex flex-wrap justify-center items-center gap-12"
-                                variants={containerVariants}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                            >
-                                {partnerLogos.map((logo, i) => (
-                                    <motion.div
-                                        key={i}
-                                        variants={itemVariants}
-                                        className="relative w-40 h-20 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300 cursor-pointer"
-                                        whileHover={{ scale: 1.1 }}
-                                    >
-                                        <img
-                                            src={logo.src}
-                                            alt={logo.name}
-                                            className="w-full h-full object-contain"
-                                            onError={(e) => {
-                                                const target = e.target as HTMLImageElement;
-                                                target.style.display = 'none';
-                                            }}
-
-                                        />
-                                    </motion.div>
-                                ))}
-                            </motion.div>
-                        </div>
                     </section>
                 </main>
 

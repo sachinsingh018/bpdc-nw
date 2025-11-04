@@ -2,12 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Sparkles, Users, Home, MessageSquare, MessageCircle, User, Menu, Briefcase, Calendar, MessageCircle as MessageCircleIcon, ArrowLeft, Plus, Clock, UserCheck, UserX } from "lucide-react";
+import { Sparkles, Users, User, Calendar, Plus, Clock, UserCheck, UserX } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { NotificationBell } from "@/components/notification-bell";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { signOut } from "next-auth/react";
+import { CommonNavbar } from "@/components/common-navbar";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 
@@ -55,7 +53,6 @@ export default function CommunityPage() {
     const communityId = params?.id as string;
 
     const [loading, setLoading] = useState(true);
-    const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [communityData, setCommunityData] = useState<CommunityData | null>(null);
     const [activeTab, setActiveTab] = useState<'overview' | 'members' | 'posts'>('overview');
     const [newPostContent, setNewPostContent] = useState('');
@@ -160,7 +157,20 @@ export default function CommunityPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white dark:from-slate-900 dark:to-slate-950 flex items-center justify-center">
+            <div className="min-h-screen relative overflow-hidden flex items-center justify-center" style={{
+                background: `
+                  radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
+                  radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
+                  radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
+                  radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
+                  radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
+                  radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
+                  linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
+                `
+            }}>
                 <div className="animate-spin rounded-full size-32 border-b-2 border-purple-600"></div>
             </div>
         );
@@ -168,7 +178,20 @@ export default function CommunityPage() {
 
     if (!communityData) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white dark:from-slate-900 dark:to-slate-950 flex items-center justify-center">
+            <div className="min-h-screen relative overflow-hidden flex items-center justify-center" style={{
+                background: `
+                  radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
+                  radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
+                  radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
+                  radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
+                  radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
+                  radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
+                  linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
+                `
+            }}>
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Community not found</h1>
                     <Button onClick={() => router.push('/communities')}>Back to Communities</Button>
@@ -193,231 +216,55 @@ export default function CommunityPage() {
     });
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white dark:from-slate-900 dark:to-slate-950">
-            {/* Enhanced Header */}
-            <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border-b border-gray-200 dark:border-white/10 sticky top-0 z-50 shadow-sm">
-                <div className="flex items-center justify-between p-4 max-w-7xl mx-auto">
-                    {/* Logo and Brand */}
-                    <div className="flex items-center gap-4">
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/communities')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
-                        >
-                            <ArrowLeft className="size-4" />
-                            <span>Back</span>
-                        </Button>
-                        <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300 group">
-                            <div className="size-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-                                <Sparkles className="size-5 text-white" />
-                            </div>
-                            <span className="text-lg font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                                Networkqy
-                            </span>
-                        </div>
-                    </div>
+        <div className="min-h-screen relative overflow-hidden" style={{
+            background: `
+              radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
+              radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
+              radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
+              radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
+              radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
+              radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
+              radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
+              linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
+            `
+        }}>
+            {/* Dynamic Vibrant Background Elements */}
+            <div className="fixed inset-0 z-0">
+                {/* Deep Royal Blue */}
+                <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
+                <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
 
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-2">
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/profile')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
-                        >
-                            <Home className="size-4" />
-                            <span>Home</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/friends')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
-                        >
-                            <Users className="size-4" />
-                            <span>Network</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/chat')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
-                        >
-                            <MessageSquare className="size-4" />
-                            <span>AI Chat</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/connections')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
-                        >
-                            <User className="size-4" />
-                            <span>Connections</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/anonymous-feed')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
-                        >
-                            <MessageCircle className="size-4" />
-                            <span>Anonymous Feed</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/messages')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
-                        >
-                            <MessageCircle className="size-4" />
-                            <span>Messages</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/job-board')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
-                        >
-                            <Briefcase className="size-4" />
-                            <span>Job Board</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/communities')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 bg-purple-50 dark:bg-purple-900/20"
-                        >
-                            <Users className="size-4" />
-                            <span>Communities</span>
-                        </Button>
-                    </div>
+                {/* Bright Golden Yellow */}
+                <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
+                <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
 
-                    {/* Right side - Notifications, Theme Toggle, and Mobile Menu */}
-                    <div className="flex items-center gap-3">
-                        <NotificationBell />
-                        <ThemeToggle />
-                        <button
-                            type="button"
-                            onClick={() => signOut({ callbackUrl: '/' })}
-                            className="p-2 rounded-full bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-300 hover:bg-red-100 dark:hover:bg-red-800 transition-all flex items-center justify-center"
-                            title="Sign Out"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M18 12h-9m0 0l3-3m-3 3l3 3" />
-                            </svg>
-                        </button>
-                        {/* Mobile Menu Button */}
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setShowMobileMenu(!showMobileMenu)}
-                            className="md:hidden"
-                        >
-                            <Menu className="size-5" />
-                        </Button>
-                    </div>
-                </div>
+                {/* Crimson Red */}
+                <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
+                <div className="absolute top-1/2 right-1/3 size-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
 
-                {/* Mobile Navigation Menu */}
-                {showMobileMenu && (
-                    <div className="md:hidden border-t border-gray-200 dark:border-white/10 bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm">
-                        <div className="flex flex-col p-4 space-y-2">
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => {
-                                    router.push('/profile');
-                                    setShowMobileMenu(false);
-                                }}
-                                className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start bg-purple-50 dark:bg-purple-900/20"
-                            >
-                                <Home className="size-4" />
-                                <span>Home</span>
-                            </Button>
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => {
-                                    router.push('/friends');
-                                    setShowMobileMenu(false);
-                                }}
-                                className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
-                            >
-                                <Users className="size-4" />
-                                <span>Network</span>
-                            </Button>
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => {
-                                    router.push('/chat');
-                                    setShowMobileMenu(false);
-                                }}
-                                className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
-                            >
-                                <MessageSquare className="size-4" />
-                                <span>AI Chat</span>
-                            </Button>
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => {
-                                    router.push('/connections');
-                                    setShowMobileMenu(false);
-                                }}
-                                className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
-                            >
-                                <User className="size-4" />
-                                <span>Connections</span>
-                            </Button>
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => {
-                                    router.push('/anonymous-feed');
-                                    setShowMobileMenu(false);
-                                }}
-                                className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
-                            >
-                                <MessageCircle className="size-4" />
-                                <span>Anonymous Feed</span>
-                            </Button>
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => {
-                                    router.push('/messages');
-                                    setShowMobileMenu(false);
-                                }}
-                                className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
-                            >
-                                <MessageCircle className="size-4" />
-                                <span>Messages</span>
-                            </Button>
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => { router.push('/job-board'); setShowMobileMenu(false); }}
-                                className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
-                            >
-                                <Briefcase className="size-4" />
-                                <span>Job Board</span>
-                            </Button>
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => { router.push('/communities'); setShowMobileMenu(false); }}
-                                className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start bg-purple-50 dark:bg-purple-900/20"
-                            >
-                                <Users className="size-4" />
-                                <span>Communities</span>
-                            </Button>
-                        </div>
-                    </div>
-                )}
+                {/* Charcoal Black */}
+                <div className="absolute bottom-10 right-5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
+
+                {/* Light Gray */}
+                <div className="absolute top-1/4 left-1/2 size-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
+
+                {/* Mid-tone Blue */}
+                <div className="absolute bottom-1/3 right-1/4 size-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
+
+                {/* Warm Golden Glow */}
+                <div className="absolute top-1/2 left-1/5 size-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
+
+                {/* Vibrant Red */}
+                <div className="absolute top-2/3 right-1/5 size-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
+
+                {/* Neon Purple */}
+                <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
+                <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
             </div>
+            {/* Common Navbar */}
+            <CommonNavbar currentPage="/communities" showSignOut={true} />
 
             <div className="max-w-7xl mx-auto px-4 py-8">
                 {/* Community Header */}
@@ -473,30 +320,33 @@ export default function CommunityPage() {
                 </motion.div>
 
                 {/* Tabs */}
-                <div className="flex border-b border-gray-200 dark:border-gray-700 mb-6">
+                <div className="flex border-b border-gray-200 dark:border-gray-700 mb-6 relative z-10">
                     <button
+                        type="button"
                         onClick={() => setActiveTab('overview')}
-                        className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${activeTab === 'overview'
-                            ? 'border-purple-600 text-purple-600 dark:text-purple-400'
-                            : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                        className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors relative z-10 pointer-events-auto ${activeTab === 'overview'
+                            ? 'border-purple-600 text-white dark:text-white'
+                            : 'border-transparent text-white dark:text-white hover:text-white dark:hover:text-white'
                             }`}
                     >
                         Overview
                     </button>
                     <button
+                        type="button"
                         onClick={() => setActiveTab('members')}
-                        className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${activeTab === 'members'
-                            ? 'border-purple-600 text-purple-600 dark:text-purple-400'
-                            : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                        className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors relative z-10 pointer-events-auto ${activeTab === 'members'
+                            ? 'border-purple-600 text-white dark:text-white'
+                            : 'border-transparent text-white dark:text-white hover:text-white dark:hover:text-white'
                             }`}
                     >
                         Members ({approvedMembers.length})
                     </button>
                     <button
+                        type="button"
                         onClick={() => setActiveTab('posts')}
-                        className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors ${activeTab === 'posts'
-                            ? 'border-purple-600 text-purple-600 dark:text-purple-400'
-                            : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                        className={`px-6 py-3 font-medium text-sm border-b-2 transition-colors relative z-10 pointer-events-auto ${activeTab === 'posts'
+                            ? 'border-purple-600 text-white dark:text-white'
+                            : 'border-transparent text-white dark:text-white hover:text-white dark:hover:text-white'
                             }`}
                     >
                         Posts ({posts.length})

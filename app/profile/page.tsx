@@ -2,7 +2,7 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react';
 import { getCookie } from 'cookies-next';
 import { FaWhatsapp, FaLinkedin, FaRegCopy, FaFacebook, FaPhone, FaEnvelope, FaEdit, FaSave, FaPlus, FaTrash, FaChevronDown } from 'react-icons/fa';
-import { TwitterIcon, Users, MessageSquare, MessageCircle, BarChart3, Calendar, Briefcase, Award, MapPin, Globe, Star, Sparkles, Menu, Heart, Home, Bell, User, Trophy } from 'lucide-react';
+import { TwitterIcon, Users, MessageSquare, MessageCircle, BarChart3, Calendar, Briefcase, Award, MapPin, Globe, Star, Sparkles, Menu, Heart, Home, Bell, User, Trophy, FileText, Bot } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -564,6 +564,9 @@ const ProfilePage = () => {
         radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
         radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
         radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
+        radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 50%),
+        radial-gradient(circle at 50% 70%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
         linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
       `
     }}>
@@ -599,6 +602,26 @@ const ProfilePage = () => {
         {/* Neon Purple */}
         <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
         <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
+
+        {/* White Bubbles */}
+        <div className="absolute top-1/5 right-1/3 size-80 rounded-full blur-3xl opacity-50 animate-pulse delay-600" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+        <div className="absolute bottom-1/5 left-1/3 size-70 rounded-full blur-3xl opacity-45 animate-pulse delay-1700" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+        <div className="absolute top-2/3 left-1/4 size-65 rounded-full blur-3xl opacity-55 animate-pulse delay-3200" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+        <div className="absolute bottom-1/3 right-1/5 size-75 rounded-full blur-3xl opacity-50 animate-pulse delay-2100" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+        <div className="absolute top-10 right-1/4 size-72 rounded-full blur-3xl opacity-40 animate-pulse delay-800" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+        <div className="absolute bottom-1/6 right-1/2 size-68 rounded-full blur-3xl opacity-50 animate-pulse delay-1400" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+        <div className="absolute top-1/3 left-10 size-90 rounded-full blur-3xl opacity-45 animate-pulse delay-2300" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+        <div className="absolute bottom-1/4 right-10 size-76 rounded-full blur-3xl opacity-55 animate-pulse delay-2600" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+        <div className="absolute top-1/2 right-1/6 size-64 rounded-full blur-3xl opacity-45 animate-pulse delay-1100" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+        <div className="absolute bottom-20 left-1/5 size-82 rounded-full blur-3xl opacity-50 animate-pulse delay-1900" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+        <div className="absolute top-1/4 right-2/3 size-74 rounded-full blur-3xl opacity-40 animate-pulse delay-2900" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+        <div className="absolute bottom-1/2 left-2/5 size-66 rounded-full blur-3xl opacity-55 animate-pulse delay-1300" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+        <div className="absolute top-3/4 right-1/2 size-70 rounded-full blur-3xl opacity-45 animate-pulse delay-3400" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+        <div className="absolute bottom-1/3 left-1/6 size-78 rounded-full blur-3xl opacity-50 animate-pulse delay-2000" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+        <div className="absolute top-1/6 left-1/2 size-68 rounded-full blur-3xl opacity-40 animate-pulse delay-3700" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+        <div className="absolute bottom-1/5 right-2/5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-1500" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+        <div className="absolute top-2/5 left-1/3 size-76 rounded-full blur-3xl opacity-45 animate-pulse delay-2400" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+        <div className="absolute bottom-2/3 right-1/4 size-64 rounded-full blur-3xl opacity-55 animate-pulse delay-3100" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
       </div>
 
       {/* Common Navbar */}
@@ -612,7 +635,7 @@ const ProfilePage = () => {
             animate={{ opacity: 1, y: 0 }}
             className="rounded-2xl p-4 md:p-6 mb-6 shadow-lg backdrop-blur-sm border-2"
             style={{
-              background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(25, 25, 112, 0.8) 50%, rgba(220, 20, 60, 0.9) 100%)',
+              background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(255, 255, 255, 0.8) 25%, rgba(25, 25, 112, 0.8) 50%, rgba(255, 255, 255, 0.7) 75%, rgba(220, 20, 60, 0.9) 100%)',
               borderColor: 'rgba(255, 215, 0, 0.6)',
               boxShadow: '0 20px 40px rgba(25, 25, 112, 0.3), 0 0 20px rgba(255, 215, 0, 0.2)'
             }}
@@ -734,7 +757,7 @@ const ProfilePage = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="flex items-center gap-1 md:gap-2 text-xs md:text-sm"
+                      className="flex items-center gap-1 md:gap-2 text-xs md:text-sm text-black"
                       disabled={uploading}
                       onClick={() => setShowUploadModal(true)}
                     >
@@ -1846,15 +1869,26 @@ const ProfilePage = () => {
                   <span>Go To Feed</span>
                 </button>
                 <button
-                  onClick={() => router.push('/reels')}
+                  onClick={() => router.push('/cv-curator')}
                   className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-black font-bold"
                   style={{
                     background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
                     boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
                   }}
                 >
-                  <Calendar size={20} />
-                  <span>Elevator Reels</span>
+                  <FileText size={20} />
+                  <span>CV Curator</span>
+                </button>
+                <button
+                  onClick={() => router.push('/interview-agent')}
+                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-black font-bold"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
+                    boxShadow: '0 5px 15px rgba(138, 43, 226, 0.3)'
+                  }}
+                >
+                  <Bot size={20} />
+                  <span>Interview Agent</span>
                 </button>
               </div>
             </motion.div>

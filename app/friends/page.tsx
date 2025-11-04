@@ -259,6 +259,9 @@ export default function FriendsPage() {
               radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
               radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
               radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
+              radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 50%),
+              radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 50%),
+              radial-gradient(circle at 50% 70%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
               linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
             `
         }}>
@@ -294,6 +297,32 @@ export default function FriendsPage() {
                 {/* Neon Purple */}
                 <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
                 <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
+
+                {/* White Bubbles */}
+                <div className="absolute top-1/5 right-1/3 size-80 rounded-full blur-3xl opacity-50 animate-pulse delay-600" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute bottom-1/5 left-1/3 size-70 rounded-full blur-3xl opacity-45 animate-pulse delay-1700" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+                <div className="absolute top-2/3 left-1/4 size-65 rounded-full blur-3xl opacity-55 animate-pulse delay-3200" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute bottom-1/3 right-1/5 size-75 rounded-full blur-3xl opacity-50 animate-pulse delay-2100" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+                <div className="absolute top-10 right-1/4 size-72 rounded-full blur-3xl opacity-40 animate-pulse delay-800" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute bottom-1/6 right-1/2 size-68 rounded-full blur-3xl opacity-50 animate-pulse delay-1400" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+                <div className="absolute top-1/3 left-10 size-90 rounded-full blur-3xl opacity-45 animate-pulse delay-2300" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+                <div className="absolute bottom-1/4 right-10 size-76 rounded-full blur-3xl opacity-55 animate-pulse delay-2600" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-1/2 right-1/6 size-64 rounded-full blur-3xl opacity-45 animate-pulse delay-1100" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+                <div className="absolute bottom-20 left-1/5 size-82 rounded-full blur-3xl opacity-50 animate-pulse delay-1900" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-1/4 right-2/3 size-74 rounded-full blur-3xl opacity-40 animate-pulse delay-2900" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+                <div className="absolute bottom-1/2 left-2/5 size-66 rounded-full blur-3xl opacity-55 animate-pulse delay-1300" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-3/4 right-1/2 size-70 rounded-full blur-3xl opacity-45 animate-pulse delay-3400" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+                <div className="absolute bottom-1/3 left-1/6 size-78 rounded-full blur-3xl opacity-50 animate-pulse delay-2000" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+                <div className="absolute top-1/6 left-1/2 size-68 rounded-full blur-3xl opacity-40 animate-pulse delay-3700" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+                <div className="absolute bottom-1/5 right-2/5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-1500" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-2/5 left-1/3 size-76 rounded-full blur-3xl opacity-45 animate-pulse delay-2400" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+                <div className="absolute bottom-2/3 right-1/4 size-64 rounded-full blur-3xl opacity-55 animate-pulse delay-3100" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-1/8 right-1/5 size-88 rounded-full blur-3xl opacity-42 animate-pulse delay-900" style={{ background: 'rgba(255, 255, 255, 0.48)' }}></div>
+                <div className="absolute bottom-1/8 left-3/4 size-71 rounded-full blur-3xl opacity-47 animate-pulse delay-2700" style={{ background: 'rgba(255, 255, 255, 0.43)' }}></div>
+                <div className="absolute top-4/5 left-1/2 size-69 rounded-full blur-3xl opacity-52 animate-pulse delay-3300" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute bottom-3/5 right-1/3 size-73 rounded-full blur-3xl opacity-48 animate-pulse delay-2200" style={{ background: 'rgba(255, 255, 255, 0.46)' }}></div>
+                <div className="absolute top-3/7 left-4/5 size-67 rounded-full blur-3xl opacity-44 animate-pulse delay-3800" style={{ background: 'rgba(255, 255, 255, 0.42)' }}></div>
+                <div className="absolute bottom-4/7 right-1/7 size-79 rounded-full blur-3xl opacity-51 animate-pulse delay-1600" style={{ background: 'rgba(255, 255, 255, 0.49)' }}></div>
             </div>
 
             {/* Common Navbar */}
@@ -303,40 +332,40 @@ export default function FriendsPage() {
             <div className="p-6 max-w-7xl mx-auto">
                 {/* Page Header */}
                 <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900 dark:text-bits-royal-blue dark:text-black mb-2">
+                    <h1 className="text-3xl font-bold text-white mb-2">
                         Find Your Network
                     </h1>
-                    <p className="text-gray-600 dark:text-gray-300">
+                    <p className="text-white">
                         Discover and connect with professionals worldwide
                     </p>
                 </div>
 
                 {/* Search and Filters */}
-                <div className="bg-gradient-to-br from-white/90 via-bits-golden-yellow/10 to-white/90 dark:from-slate-800/90 dark:via-bits-deep-purple/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20">
+                <div className="bg-gradient-to-br from-gray-200/95 via-gray-300/90 to-gray-200/95 dark:from-gray-700/95 dark:via-gray-600/90 dark:to-gray-700/95 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-gray-400/50 dark:border-gray-500/50 shadow-xl">
                     <form className="flex flex-col md:flex-row gap-4" onSubmit={handleSearch}>
                         <div className="flex-1">
                             <div className="relative">
-                                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 size-5" />
+                                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 size-5" />
                                 <input
                                     type="text"
                                     placeholder="Search by name, company, or skills..."
-                                    className="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg text-gray-900 dark:text-bits-royal-blue dark:text-black placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                                    className="w-full pl-10 pr-4 py-3 bg-white/90 dark:bg-gray-800/90 border-2 border-gray-400 dark:border-gray-500 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 shadow-md"
                                     value={searchQuery}
                                     onChange={e => setSearchQuery(e.target.value)}
                                 />
                             </div>
                         </div>
-                        <Button type="submit" variant="default" className="h-full px-6 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700 shadow-lg hover:shadow-xl transition-all duration-200">{isSearching ? 'Searching...' : 'Search'}</Button>
+                        <Button type="submit" variant="default" className="h-full px-6 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700 shadow-lg hover:shadow-xl transition-all duration-200 text-black font-semibold">{isSearching ? 'Searching...' : 'Search'}</Button>
                         <div className="flex gap-2">
-                            <Button variant="outline" size="sm" className="flex items-center gap-2">
+                            <Button variant="outline" size="sm" className="flex items-center gap-2 text-black bg-white/90 dark:bg-gray-800/90 border-2 border-gray-400 dark:border-gray-500 shadow-md font-semibold">
                                 <MapPin className="size-4" />
                                 <span>Dubai</span>
                             </Button>
-                            <Button variant="outline" size="sm" className="flex items-center gap-2">
+                            <Button variant="outline" size="sm" className="flex items-center gap-2 text-black bg-white/90 dark:bg-gray-800/90 border-2 border-gray-400 dark:border-gray-500 shadow-md font-semibold">
                                 <Briefcase className="size-4" />
                                 <span>Industry</span>
                             </Button>
-                            <Button variant="outline" size="sm" className="flex items-center gap-2">
+                            <Button variant="outline" size="sm" className="flex items-center gap-2 text-black bg-white/90 dark:bg-gray-800/90 border-2 border-gray-400 dark:border-gray-500 shadow-md font-semibold">
                                 <Filter className="size-4" />
                                 <span>Filters</span>
                             </Button>
@@ -348,7 +377,7 @@ export default function FriendsPage() {
                 {!searchQuery.trim() && (
                     <div className="mb-8">
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-2xl font-bold text-gray-900 dark:text-bits-royal-blue dark:text-black">
+                            <h2 className="text-2xl font-bold text-white">
                                 Closest Matches
                             </h2>
                             <Button
@@ -356,7 +385,7 @@ export default function FriendsPage() {
                                 size="sm"
                                 onClick={fetchRecommendations}
                                 disabled={loadingRecommendations}
-                                className="text-bits-golden-yellow border-bits-golden-yellow/20 hover:bg-bits-golden-yellow/10 dark:text-bits-golden-yellow dark:border-bits-golden-yellow/30 dark:hover:bg-bits-golden-yellow/20"
+                                className="text-black border-bits-golden-yellow/20 hover:bg-bits-golden-yellow/10 dark:text-black dark:border-bits-golden-yellow/30 dark:hover:bg-bits-golden-yellow/20"
                             >
                                 {loadingRecommendations ? 'Refreshing...' : 'Refresh'}
                             </Button>
@@ -430,16 +459,16 @@ export default function FriendsPage() {
 
                                             <div className="flex gap-2 mt-auto">
                                                 {connectionStatus === 'accepted' ? (
-                                                    <Button className="flex-1 bg-green-600 cursor-not-allowed" disabled>
+                                                    <Button className="flex-1 bg-green-600 cursor-not-allowed text-black" disabled>
                                                         Connected
                                                     </Button>
                                                 ) : isPending ? (
-                                                    <Button className="flex-1 bg-gray-400 cursor-not-allowed" disabled>
+                                                    <Button className="flex-1 bg-gray-400 cursor-not-allowed text-black" disabled>
                                                         Pending
                                                     </Button>
                                                 ) : (
                                                     <Button
-                                                        className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700 shadow-lg hover:shadow-xl transition-all duration-200"
+                                                        className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700 shadow-lg hover:shadow-xl transition-all duration-200 text-black"
                                                         onClick={(e) => {
                                                             e.stopPropagation();
                                                             handleConnect(user);
@@ -450,7 +479,7 @@ export default function FriendsPage() {
                                                     </Button>
                                                 )}
                                                 <Button
-                                                    className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-200"
+                                                    className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-200 text-black"
                                                     onClick={(e) => {
                                                         e.stopPropagation();
                                                         router.push(`/dm/${user.id}`);
@@ -466,10 +495,10 @@ export default function FriendsPage() {
                         ) : (
                             <div className="text-center py-8">
                                 <Users className="size-16 text-gray-400 mx-auto mb-4" />
-                                <h3 className="text-xl font-semibold text-gray-900 dark:text-bits-royal-blue dark:text-black mb-2">
+                                <h3 className="text-xl font-bold text-black mb-2">
                                     No recommendations available
                                 </h3>
-                                <p className="text-gray-600 dark:text-gray-300">
+                                <p className="text-black font-bold">
                                     Try refreshing to get new recommendations
                                 </p>
                             </div>
@@ -530,16 +559,16 @@ export default function FriendsPage() {
                                         {hasUser ? (
                                             <div className="flex gap-2 mt-auto">
                                                 {connectionStatus === 'accepted' ? (
-                                                    <Button className="flex-1 bg-green-600 cursor-not-allowed" disabled>
+                                                    <Button className="flex-1 bg-green-600 cursor-not-allowed text-black" disabled>
                                                         Connected
                                                     </Button>
                                                 ) : isPending ? (
-                                                    <Button className="flex-1 bg-gray-400 cursor-not-allowed" disabled>
+                                                    <Button className="flex-1 bg-gray-400 cursor-not-allowed text-black" disabled>
                                                         Pending
                                                     </Button>
                                                 ) : (
                                                     <Button
-                                                        className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700 shadow-lg hover:shadow-xl transition-all duration-200"
+                                                        className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700 shadow-lg hover:shadow-xl transition-all duration-200 text-black"
                                                         onClick={() => handleConnect(userObj)}
                                                         disabled={sendingRequest === userObj.id}
                                                     >
@@ -547,14 +576,14 @@ export default function FriendsPage() {
                                                     </Button>
                                                 )}
                                                 <Button
-                                                    className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-200"
+                                                    className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-200 text-black"
                                                     onClick={() => router.push(`/dm/${userObj.id}`)}
                                                 >
                                                     Message
                                                 </Button>
                                             </div>
                                         ) : (
-                                            <Button className="w-full bg-gray-400 cursor-not-allowed" disabled>
+                                            <Button className="w-full bg-gray-400 cursor-not-allowed text-black" disabled>
                                                 Not Available
                                             </Button>
                                         )}
@@ -564,10 +593,10 @@ export default function FriendsPage() {
                         ) : (
                             <div className="col-span-full text-center py-12">
                                 <Users className="size-16 text-gray-400 mx-auto mb-4" />
-                                <h3 className="text-xl font-semibold text-gray-900 dark:text-bits-royal-blue dark:text-black mb-2">
+                                <h3 className="text-xl font-bold text-black mb-2">
                                     No results found
                                 </h3>
-                                <p className="text-gray-600 dark:text-gray-300 mb-4">
+                                <p className="text-black font-bold mb-4">
                                     Try a different search term or check your spelling
                                 </p>
                             </div>
@@ -575,10 +604,10 @@ export default function FriendsPage() {
                     ) : (
                         <div className="col-span-full text-center py-12">
                             <Search className="size-16 text-gray-400 mx-auto mb-4" />
-                            <h3 className="text-xl font-semibold text-gray-900 dark:text-bits-royal-blue dark:text-black mb-2">
+                            <h3 className="text-xl font-bold text-black mb-2">
                                 Start Your Search
                             </h3>
-                            <p className="text-gray-600 dark:text-gray-300 mb-4">
+                            <p className="text-black font-bold mb-4">
                                 Search for professionals by name, company, or skills to find your next connection
                             </p>
                         </div>

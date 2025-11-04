@@ -174,14 +174,14 @@ export default function CommunitiesPage() {
             {/* Hero Section */}
             <div className="max-w-3xl mx-auto text-center py-16 px-4">
                 <div className="flex justify-center mb-4">
-                    <div className="bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue p-3 rounded-full shadow-lg">
+                    <div className="bg-red-500 p-3 rounded-full shadow-lg">
                         <Users className="size-8 text-bits-royal-blue dark:text-black" />
                     </div>
                 </div>
-                <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue bg-clip-text text-transparent mb-4">
+                <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-4">
                     Join Powerful Communities
                 </h1>
-                <p className="text-lg text-gray-700 dark:text-gray-200 max-w-xl mx-auto">
+                <p className="text-lg bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent font-bold max-w-xl mx-auto">
                     Explore student chapters, alumni groups, professional circles, and more – powered by AI.
                 </p>
             </div>
@@ -205,15 +205,16 @@ export default function CommunitiesPage() {
                                         <Sparkles className="size-6 text-bits-golden-yellow" />
                                     </AvatarFallback>
                                 </Avatar>
-                                <h2 className="text-xl font-semibold text-bits-golden-yellow dark:text-bits-golden-yellow text-center">
+                                <h2 className="text-xl font-bold text-black dark:text-black text-center">
                                     {community.name}
                                 </h2>
-                                <p className="text-gray-600 dark:text-gray-300 text-center text-sm mb-2 flex-1">
+                                <p className="text-black dark:text-black text-center text-sm mb-2 flex-1">
                                     {community.description || 'No description available'}
                                 </p>
-                                <div className="flex gap-2 w-full mt-auto">
+                                <div className="flex gap-2 w-full mt-auto relative z-10">
                                     <Button
-                                        className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black dark:text-black font-semibold shadow-md hover:from-bits-golden-yellow-600 hover:to-bits-royal-blue-600 rounded-lg flex items-center justify-center h-10"
+                                        type="button"
+                                        className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black dark:text-black font-semibold shadow-md hover:from-bits-golden-yellow-600 hover:to-bits-royal-blue-600 rounded-lg flex items-center justify-center h-10 relative z-10 pointer-events-auto"
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             router.push(`/communities/${community.id}`);
@@ -223,7 +224,8 @@ export default function CommunitiesPage() {
                                     </Button>
                                     {!membershipStatus ? (
                                         <Button
-                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue dark:text-black font-semibold shadow-md hover:from-green-700 hover:to-green-800 rounded-lg flex items-center justify-center h-10"
+                                            type="button"
+                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue dark:text-black font-semibold shadow-md hover:from-green-700 hover:to-green-800 rounded-lg flex items-center justify-center h-10 relative z-10 pointer-events-auto"
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 handleJoinCommunity(community.id);
@@ -233,14 +235,16 @@ export default function CommunitiesPage() {
                                         </Button>
                                     ) : membershipStatus === 'approved' ? (
                                         <Button
-                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue dark:text-black font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
+                                            type="button"
+                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue dark:text-black font-semibold shadow-md rounded-lg flex items-center justify-center h-10 relative z-10"
                                             disabled
                                         >
                                             Member
                                         </Button>
                                     ) : (
                                         <Button
-                                            className="flex-1 bg-gradient-to-r from-yellow-600 to-yellow-700 text-bits-royal-blue dark:text-black font-semibold shadow-md rounded-lg flex items-center justify-center h-10"
+                                            type="button"
+                                            className="flex-1 bg-gradient-to-r from-yellow-600 to-yellow-700 text-bits-royal-blue dark:text-black font-semibold shadow-md rounded-lg flex items-center justify-center h-10 relative z-10"
                                             disabled
                                         >
                                             Pending
