@@ -760,7 +760,7 @@ export default function AnonymousFeedPage() {
     }
 
     return (
-        <div className="min-h-screen relative" style={{
+        <div className="relative w-full" style={{
             background: `
               radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
               radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
@@ -775,7 +775,7 @@ export default function AnonymousFeedPage() {
             `
         }}>
             {/* Dynamic Vibrant Background Elements */}
-            <div className="fixed inset-0 z-0">
+            <div className="fixed inset-0 z-0 pointer-events-none">
                 {/* Deep Royal Blue */}
                 <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
                 <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
@@ -811,7 +811,7 @@ export default function AnonymousFeedPage() {
             {/* Common Navbar */}
             <CommonNavbar currentPage="/anonymous-feed" />
 
-            <div className="max-w-4xl mx-auto p-4 md:p-6">
+            <div className="relative z-10 max-w-4xl mx-auto p-4 md:p-6 pb-20 pt-4">
                 {/* Page Header */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
