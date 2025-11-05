@@ -727,7 +727,7 @@ export default function AnonymousFeedPage() {
     // Show loading state while checking authentication
     if (loading) {
         return (
-            <div className="min-h-screen relative overflow-hidden flex items-center justify-center" style={{
+            <div className="min-h-screen relative flex items-center justify-center" style={{
                 background: `
                   radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
                   radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
@@ -760,7 +760,7 @@ export default function AnonymousFeedPage() {
     }
 
     return (
-        <div className="min-h-screen relative overflow-hidden" style={{
+        <div className="min-h-screen relative" style={{
             background: `
               radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
               radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
