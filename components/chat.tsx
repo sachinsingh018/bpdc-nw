@@ -2,7 +2,7 @@
 
 import type { Attachment, UIMessage } from 'ai';
 import { useChat } from '@ai-sdk/react';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { auth } from '@/app/(auth)/auth';
 import { getCookie } from 'cookies-next';
 
@@ -21,6 +21,51 @@ import Link from 'next/link';
 import { IoMdInformation } from 'react-icons/io';
 import { AiOutlineRobot } from 'react-icons/ai';
 import { useRouter } from 'next/navigation';
+
+// Helper function to get current user ID
+const getCurrentUserId = async (): Promise<string | null> => {
+  const userEmail = getCookie('userEmail');
+  if (!userEmail) return null;
+
+  try {
+    const response = await fetch('/profile/api', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: userEmail }),
+    });
+    const data = await response.json();
+    return data?.id || null;
+  } catch (error) {
+    console.error('Error getting current user ID:', error);
+    return null;
+  }
+};
+
+// Helper function to track activity
+const trackActivity = async (actionType: string, actionCategory: string, metadata?: any) => {
+  const userId = await getCurrentUserId();
+  if (!userId) return;
+
+  try {
+    await fetch('/api/activity/track-event', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId,
+        actionType,
+        actionCategory,
+        resourceType: 'chat',
+        metadata: {
+          ...metadata,
+          pagePath: '/chat',
+          timestamp: new Date().toISOString(),
+        },
+      }),
+    }).catch(console.error);
+  } catch (error) {
+    console.error('Error tracking activity:', error);
+  }
+};
 
 
 export function Chat({
@@ -45,6 +90,7 @@ export function Chat({
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const [emaili, setEmaili] = useState<string | null>(null);
+  const previousUserMessageCountRef = useRef(0);
 
   useEffect(() => {
     const fetchEmail = async () => {
@@ -53,7 +99,10 @@ export function Chat({
     };
 
     fetchEmail();
-  }, []);
+
+    // Initialize ref with initial message count
+    previousUserMessageCountRef.current = initialMessages.filter(m => m.role === 'user').length;
+  }, [initialMessages]);
 
   const {
     messages,
@@ -78,7 +127,32 @@ export function Chat({
     onError: () => {
       toast.error('An error occurred, please try again!');
     },
-  }); const safeReload = async (
+  });
+
+  // Track user messages when they're added
+  useEffect(() => {
+    const currentUserMessageCount = messages.filter(m => m.role === 'user').length;
+
+    // Only track if a new user message was added (not initial messages)
+    if (currentUserMessageCount > previousUserMessageCountRef.current && currentUserMessageCount > initialMessages.filter(m => m.role === 'user').length) {
+      const lastUserMessage = [...messages].reverse().find(m => m.role === 'user');
+      if (lastUserMessage) {
+        trackActivity('chat_message_sent', 'content', {
+          feature: 'chat',
+          chatId: id,
+          chatModel: selectedChatModel,
+          messageLength: typeof lastUserMessage.content === 'string' ? lastUserMessage.content.length : 0,
+          messageCount: currentUserMessageCount,
+          visibilityType: selectedVisibilityType,
+        });
+      }
+    }
+
+    // Update ref for next comparison
+    previousUserMessageCountRef.current = currentUserMessageCount;
+  }, [messages, id, selectedChatModel, selectedVisibilityType, initialMessages]);
+
+  const safeReload = async (
     chatRequestOptions?: Parameters<typeof reload>[0]
   ): Promise<string | null | undefined> => {
     try {

@@ -10,6 +10,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { CommonNavbar } from "@/components/common-navbar";
 import { signOut } from "next-auth/react";
 import { toast } from "sonner";
+import { getCookie } from "cookies-next";
 
 interface Community {
     id: string;
@@ -45,6 +46,51 @@ export default function CommunitiesPage() {
     const [communities, setCommunities] = useState<Community[]>([]);
     const [userMemberships, setUserMemberships] = useState<Record<string, UserMembership>>({});
 
+    // Helper function to get current user ID
+    const getCurrentUserId = async (): Promise<string | null> => {
+        const userEmail = getCookie('userEmail');
+        if (!userEmail) return null;
+
+        try {
+            const response = await fetch('/profile/api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: userEmail }),
+            });
+            const data = await response.json();
+            return data?.id || null;
+        } catch (error) {
+            console.error('Error getting current user ID:', error);
+            return null;
+        }
+    };
+
+    // Helper function to track activity
+    const trackActivity = async (actionType: string, actionCategory: string, metadata?: any) => {
+        const userId = await getCurrentUserId();
+        if (!userId) return;
+
+        try {
+            await fetch('/api/activity/track-event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userId,
+                    actionType,
+                    actionCategory,
+                    resourceType: 'communities',
+                    metadata: {
+                        ...metadata,
+                        pagePath: '/communities',
+                        timestamp: new Date().toISOString(),
+                    },
+                }),
+            }).catch(console.error);
+        } catch (error) {
+            console.error('Error tracking activity:', error);
+        }
+    };
+
     useEffect(() => {
         const fetchCommunities = async () => {
             try {
@@ -79,6 +125,33 @@ export default function CommunitiesPage() {
         };
 
         fetchCommunities();
+
+        // Track page access
+        const trackPageAccess = async () => {
+            const userId = await getCurrentUserId();
+            if (!userId) return;
+
+            try {
+                await fetch('/api/activity/track-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userId,
+                        actionType: 'page_accessed',
+                        actionCategory: 'communities',
+                        resourceType: 'communities',
+                        metadata: {
+                            feature: 'communities',
+                            pagePath: '/communities',
+                            timestamp: new Date().toISOString(),
+                        },
+                    }),
+                }).catch(console.error);
+            } catch (error) {
+                console.error('Error tracking activity:', error);
+            }
+        };
+        trackPageAccess();
     }, []);
 
     const handleJoinCommunity = async (communityId: string) => {
@@ -106,6 +179,15 @@ export default function CommunitiesPage() {
                         joined_at: new Date().toISOString(),
                     }
                 }));
+
+                // Track community join activity
+                const community = communities.find(c => c.id === communityId);
+                trackActivity('community_joined', 'communities', {
+                    feature: 'communities',
+                    communityId: communityId,
+                    communityName: community?.name || 'Unknown',
+                    status: 'approved',
+                });
             } else {
                 toast.error(data.error || 'Failed to join community');
             }
@@ -197,7 +279,15 @@ export default function CommunitiesPage() {
                             <div
                                 key={community.id}
                                 className="bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 flex flex-col items-center gap-4 border border-bits-golden-yellow/20 dark:border-slate-700 cursor-pointer h-80"
-                                onClick={() => router.push(`/communities/${community.id}`)}
+                                onClick={() => {
+                                    // Track community view activity
+                                    trackActivity('community_viewed', 'communities', {
+                                        feature: 'communities',
+                                        communityId: community.id,
+                                        communityName: community.name,
+                                    });
+                                    router.push(`/communities/${community.id}`);
+                                }}
                             >
                                 <Avatar className="size-16 mb-2">
                                     <AvatarImage src={community.banner_image || undefined} alt={community.name} />
@@ -217,6 +307,12 @@ export default function CommunitiesPage() {
                                         className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black dark:text-black font-semibold shadow-md hover:from-bits-golden-yellow-600 hover:to-bits-royal-blue-600 rounded-lg flex items-center justify-center h-10 relative z-10 pointer-events-auto"
                                         onClick={(e) => {
                                             e.stopPropagation();
+                                            // Track community view activity
+                                            trackActivity('community_viewed', 'communities', {
+                                                feature: 'communities',
+                                                communityId: community.id,
+                                                communityName: community.name,
+                                            });
                                             router.push(`/communities/${community.id}`);
                                         }}
                                     >

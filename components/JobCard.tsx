@@ -5,6 +5,51 @@ import { ApplyButton } from './ApplyButton';
 import { Share2, Check } from 'lucide-react';
 import { toast } from 'sonner';
 
+// Helper function to get current user ID
+const getCurrentUserId = async (): Promise<string | null> => {
+    const userEmail = getCookie('userEmail');
+    if (!userEmail) return null;
+
+    try {
+        const response = await fetch('/profile/api', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userEmail }),
+        });
+        const data = await response.json();
+        return data?.id || null;
+    } catch (error) {
+        console.error('Error getting current user ID:', error);
+        return null;
+    }
+};
+
+// Helper function to track activity
+const trackActivity = async (actionType: string, actionCategory: string, metadata?: any) => {
+    const userId = await getCurrentUserId();
+    if (!userId) return;
+
+    try {
+        await fetch('/api/activity/track-event', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId,
+                actionType,
+                actionCategory,
+                resourceType: 'job_board',
+                metadata: {
+                    ...metadata,
+                    pagePath: '/job-board',
+                    timestamp: new Date().toISOString(),
+                },
+            }),
+        }).catch(console.error);
+    } catch (error) {
+        console.error('Error tracking activity:', error);
+    }
+};
+
 interface Job {
     id: string;
     title: string;
@@ -103,7 +148,17 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                 }
             };
             fetchUserData();
+
+            // Track job view activity when modal opens
+            trackActivity('job_viewed', 'jobs', {
+                feature: 'job_board',
+                jobId: job.id,
+                jobTitle: job.title,
+                company: job.company,
+                jobLocation: `${job.job_city || ''}${job.job_city && job.job_state ? ', ' : ''}${job.job_state || ''}`.trim() || job.job_country || 'Unknown',
+            });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [showModal]);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -149,6 +204,16 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                 if (onApplicationSubmitted) {
                     onApplicationSubmitted();
                 }
+
+                // Track job application activity
+                trackActivity('job_application_submitted', 'jobs', {
+                    feature: 'job_board',
+                    jobId: job.id,
+                    jobTitle: job.title,
+                    company: job.company,
+                    hasCV: !!cvFile,
+                    coverLetterLength: coverLetter.length,
+                });
             } else {
                 let data;
                 try {

@@ -1087,27 +1087,38 @@ export default function AdminDashboard() {
 
                     {/* User List Tab */}
                     <TabsContent value="userlist" className="space-y-4">
-                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
-                            <CardHeader>
-                                <CardTitle className="text-black flex items-center gap-2">
-                                    <Users className="size-5" />
-                                    Student Directory
-                                </CardTitle>
-                                <CardDescription className="text-black">Complete list of BITS Dubai students and alumni</CardDescription>
+                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black shadow-lg">
+                            <CardHeader className="pb-4">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <CardTitle className="text-black flex items-center gap-2 text-xl">
+                                            <Users className="size-5" />
+                                            Student Directory
+                                        </CardTitle>
+                                        <CardDescription className="text-black/80 mt-1">Complete list of BITS Dubai students and alumni</CardDescription>
+                                    </div>
+                                    <Badge variant="outline" className="bg-white/10 border-white/20 text-black">
+                                        {filteredStudents.length} {filteredStudents.length === 1 ? 'student' : 'students'}
+                                    </Badge>
+                                </div>
                             </CardHeader>
                             <CardContent>
                                 {/* Filters */}
-                                <div className="flex gap-4 mb-6">
-                                    <div className="flex-1">
-                                        <Input
-                                            placeholder="Search by name or email..."
-                                            value={userListSearchTerm}
-                                            onChange={(e) => setUserListSearchTerm(e.target.value)}
-                                            className="max-w-sm bg-white/10 border-white/20 text-black placeholder:text-black"
-                                        />
+                                <div className="flex flex-wrap gap-3 mb-6 pb-4 border-b border-white/10">
+                                    <div className="flex-1 min-w-[280px]">
+                                        <div className="relative">
+                                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 size-4 text-black/50" />
+                                            <Input
+                                                placeholder="Search by name or email..."
+                                                value={userListSearchTerm}
+                                                onChange={(e) => setUserListSearchTerm(e.target.value)}
+                                                className="pl-9 bg-white/10 border-white/20 text-black placeholder:text-black/50 focus:bg-white/15 focus:border-white/30 transition-colors"
+                                            />
+                                        </div>
                                     </div>
                                     <Select value={selectedBatchYear || 'all'} onValueChange={setSelectedBatchYear}>
-                                        <SelectTrigger className="w-40 bg-white/10 border-white/20 text-black">
+                                        <SelectTrigger className="w-[160px] bg-white/10 border-white/20 text-black hover:bg-white/15 transition-colors">
+                                            <Calendar className="size-4 mr-2" />
                                             <SelectValue placeholder="All Batches" />
                                         </SelectTrigger>
                                         <SelectContent className="bg-slate-800 border-white/20">
@@ -1125,7 +1136,8 @@ export default function AdminDashboard() {
                                         </SelectContent>
                                     </Select>
                                     <Select value={selectedProfile || 'all'} onValueChange={setSelectedProfile}>
-                                        <SelectTrigger className="w-40 bg-white/10 border-white/20 text-black">
+                                        <SelectTrigger className="w-[160px] bg-white/10 border-white/20 text-black hover:bg-white/15 transition-colors">
+                                            <Filter className="size-4 mr-2" />
                                             <SelectValue placeholder="All Profiles" />
                                         </SelectTrigger>
                                         <SelectContent className="bg-slate-800 border-white/20">
@@ -1138,7 +1150,7 @@ export default function AdminDashboard() {
 
                                 {/* Clear Filters Button */}
                                 {(userListSearchTerm || selectedBatchYear !== '' || selectedProfile !== '') && (
-                                    <div className="mb-4">
+                                    <div className="mb-6">
                                         <Button
                                             variant="outline"
                                             size="sm"
@@ -1147,72 +1159,97 @@ export default function AdminDashboard() {
                                                 setSelectedBatchYear('');
                                                 setSelectedProfile('');
                                             }}
-                                            className="bg-white/10 border-white/20 text-black hover:bg-white/20"
+                                            className="bg-white/10 border-white/20 text-black hover:bg-white/20 transition-colors"
                                         >
+                                            <RefreshCw className="size-3 mr-2" />
                                             Clear All Filters
                                         </Button>
                                     </div>
                                 )}
 
                                 {/* Student Statistics */}
-                                <div className="flex items-center gap-4 mb-4 text-sm text-black">
-                                    <span>Total: {students.length} students</span>
-                                    <span>•</span>
-                                    <span>Alumni: {students.filter(s => s.profile === 'alumni').length}</span>
-                                    <span>•</span>
-                                    <span>Current Students: {students.filter(s => s.profile === 'student').length}</span>
-                                    <span>•</span>
-                                    <span>Showing: {filteredStudents.length}</span>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                                    <div className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                                        <div className="text-xs text-black/60 mb-1">Total Students</div>
+                                        <div className="text-xl font-bold text-black">{students.length}</div>
+                                    </div>
+                                    <div className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                                        <div className="text-xs text-black/60 mb-1">Alumni</div>
+                                        <div className="text-xl font-bold text-green-600">{students.filter(s => s.profile === 'alumni').length}</div>
+                                    </div>
+                                    <div className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                                        <div className="text-xs text-black/60 mb-1">Current Students</div>
+                                        <div className="text-xl font-bold text-blue-600">{students.filter(s => s.profile === 'student').length}</div>
+                                    </div>
+                                    <div className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                                        <div className="text-xs text-black/60 mb-1">Showing</div>
+                                        <div className="text-xl font-bold text-purple-600">{filteredStudents.length}</div>
+                                    </div>
                                 </div>
 
                                 {/* Student Grid */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-h-96 overflow-y-auto">
-                                    {paginatedStudents.map((student, index) => (
-                                        <div key={index} className="p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-colors">
-                                            <div className="flex items-center gap-3 mb-3">
-                                                <div className="size-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                                                    <span className="text-sm font-medium text-black">
-                                                        {student.name?.charAt(0) || student.email?.charAt(0) || '?'}
-                                                    </span>
-                                                </div>
-                                                <div className="flex-1 min-w-0">
-                                                    <div className="font-medium text-black truncate">
-                                                        {student.name || 'Unknown'}
+                                {paginatedStudents.length === 0 ? (
+                                    <div className="text-center py-16 text-black/60">
+                                        <Users className="size-16 mx-auto mb-4 opacity-50" />
+                                        <p className="text-base font-medium mb-2">No students found</p>
+                                        <p className="text-sm">Try adjusting your search or filter criteria</p>
+                                    </div>
+                                ) : (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-6">
+                                        {paginatedStudents.map((student, index) => (
+                                            <div
+                                                key={index}
+                                                className="group p-5 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 hover:border-white/30 hover:shadow-lg transition-all duration-200 cursor-pointer"
+                                            >
+                                                <div className="flex items-start gap-4 mb-4">
+                                                    <div className="relative shrink-0">
+                                                        <div className="size-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-200">
+                                                            <span className="text-base font-semibold text-black">
+                                                                {student.name?.charAt(0) || student.email?.charAt(0) || '?'}
+                                                            </span>
+                                                        </div>
+                                                        {student.profile === 'alumni' && (
+                                                            <div className="absolute -bottom-1 -right-1 size-5 bg-green-500 rounded-full border-2 border-white/20 flex items-center justify-center">
+                                                                <span className="text-[8px] text-white font-bold">A</span>
+                                                            </div>
+                                                        )}
                                                     </div>
-                                                    <div className="text-xs text-black truncate">
-                                                        {student.email}
+                                                    <div className="flex-1 min-w-0">
+                                                        <div className="font-semibold text-base text-black truncate mb-1">
+                                                            {student.name || 'Unknown'}
+                                                        </div>
+                                                        <div className="text-xs text-black/70 truncate" title={student.email}>
+                                                            {student.email}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="space-y-2.5 pt-3 border-t border-white/10">
+                                                    <div className="flex items-center justify-between">
+                                                        <span className="text-xs font-medium text-black/60">Batch Year</span>
+                                                        <Badge className="bg-blue-100/80 text-blue-800 border-blue-200 text-xs font-medium px-2 py-0.5">
+                                                            {student.batch_year}
+                                                        </Badge>
+                                                    </div>
+                                                    <div className="flex items-center justify-between">
+                                                        <span className="text-xs font-medium text-black/60">Profile</span>
+                                                        <Badge className={`${student.profile === 'alumni'
+                                                            ? 'bg-green-100/80 text-green-800 border-green-200'
+                                                            : 'bg-yellow-100/80 text-yellow-800 border-yellow-200'
+                                                            } text-xs font-medium px-2 py-0.5 capitalize`}>
+                                                            {student.profile}
+                                                        </Badge>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="space-y-2">
-                                                <div className="flex items-center justify-between">
-                                                    <span className="text-xs text-black">Batch:</span>
-                                                    <Badge className="bg-blue-100 text-blue-800 text-xs">
-                                                        {student.batch_year}
-                                                    </Badge>
-                                                </div>
-                                                <div className="flex items-center justify-between">
-                                                    <span className="text-xs text-black">Profile:</span>
-                                                    <Badge className={`${student.profile === 'alumni' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'} text-xs`}>
-                                                        {student.profile}
-                                                    </Badge>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {paginatedStudents.length === 0 && (
-                                    <div className="text-center py-8 text-black">
-                                        No students found matching your criteria
+                                        ))}
                                     </div>
                                 )}
 
                                 {/* Pagination Controls */}
                                 {totalPages > 1 && (
-                                    <div className="flex items-center justify-between mt-6">
-                                        <div className="text-sm text-black">
-                                            Showing {startIndex + 1}-{Math.min(endIndex, filteredStudents.length)} of {filteredStudents.length} students
+                                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-6 border-t border-white/10">
+                                        <div className="text-sm text-black/80 font-medium">
+                                            Showing <span className="font-semibold text-black">{startIndex + 1}</span> to <span className="font-semibold text-black">{Math.min(endIndex, filteredStudents.length)}</span> of <span className="font-semibold text-black">{filteredStudents.length}</span> students
                                         </div>
                                         <div className="flex items-center gap-2">
                                             <Button
@@ -1220,7 +1257,7 @@ export default function AdminDashboard() {
                                                 disabled={currentPage === 1}
                                                 variant="outline"
                                                 size="sm"
-                                                className="text-black border-white/20 hover:bg-white/10 disabled:opacity-50"
+                                                className="text-black border-white/20 hover:bg-white/15 hover:border-white/30 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
                                             >
                                                 Previous
                                             </Button>
@@ -1243,10 +1280,10 @@ export default function AdminDashboard() {
                                                             onClick={() => setCurrentPage(pageNum)}
                                                             variant={currentPage === pageNum ? "default" : "outline"}
                                                             size="sm"
-                                                            className={`text-black border-white/20 hover:bg-white/10 ${currentPage === pageNum
-                                                                ? 'bg-gradient-to-r from-purple-500 to-pink-500'
-                                                                : ''
-                                                                }`}
+                                                            className={`${currentPage === pageNum
+                                                                ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-transparent shadow-md'
+                                                                : 'text-black border-white/20 hover:bg-white/15 hover:border-white/30'
+                                                                } transition-all min-w-[40px]`}
                                                         >
                                                             {pageNum}
                                                         </Button>
@@ -1258,7 +1295,7 @@ export default function AdminDashboard() {
                                                 disabled={currentPage === totalPages}
                                                 variant="outline"
                                                 size="sm"
-                                                className="text-black border-white/20 hover:bg-white/10 disabled:opacity-50"
+                                                className="text-black border-white/20 hover:bg-white/15 hover:border-white/30 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
                                             >
                                                 Next
                                             </Button>
@@ -1266,9 +1303,9 @@ export default function AdminDashboard() {
                                     </div>
                                 )}
 
-                                {totalPages === 1 && (
-                                    <div className="mt-4 text-sm text-black">
-                                        Showing {filteredStudents.length} of {students.length} students
+                                {totalPages === 1 && filteredStudents.length > 0 && (
+                                    <div className="mt-6 pt-6 border-t border-white/10 text-sm text-black/80 font-medium text-center">
+                                        Showing all <span className="font-semibold text-black">{filteredStudents.length}</span> of <span className="font-semibold text-black">{students.length}</span> students
                                     </div>
                                 )}
                             </CardContent>

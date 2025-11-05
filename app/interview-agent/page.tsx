@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { toast } from 'sonner';
 import { speakText, stopSpeech, isSpeechSupported } from '../../utils/speech';
+import { CommonNavbar } from '@/components/common-navbar';
+import { getCookie } from 'cookies-next';
 
 interface InterviewQuestion {
     id: number;
@@ -18,50 +20,304 @@ interface InterviewAnswer {
     aiFeedback?: string;
 }
 
-const INTERVIEW_QUESTIONS: InterviewQuestion[] = [
-    {
-        id: 1,
-        question: "Tell me about yourself and your background.",
-        category: "Introduction"
+type InterviewCategory = 'behavioral' | 'technical' | 'data-science' | 'consulting' | 'data-analyst' | 'ai-engineer';
+
+const INTERVIEW_QUESTIONS: Record<InterviewCategory, InterviewQuestion[]> = {
+    behavioral: [
+        {
+            id: 1,
+            question: "Tell me about yourself and your background.",
+            category: "Introduction"
+        },
+        {
+            id: 2,
+            question: "What are your greatest strengths and weaknesses?",
+            category: "Self-Assessment"
+        },
+        {
+            id: 3,
+            question: "Why are you interested in this position?",
+            category: "Motivation"
+        },
+        {
+            id: 4,
+            question: "Describe a challenging situation you faced and how you overcame it.",
+            category: "Problem Solving"
+        },
+        {
+            id: 5,
+            question: "Where do you see yourself in 5 years?",
+            category: "Career Goals"
+        },
+        {
+            id: 6,
+            question: "What is your leadership style?",
+            category: "Leadership"
+        },
+        {
+            id: 7,
+            question: "How do you handle stress and pressure?",
+            category: "Work Style"
+        },
+        {
+            id: 8,
+            question: "Do you have any questions for us?",
+            category: "Closing"
+        }
+    ],
+    technical: [
+        {
+            id: 1,
+            question: "Explain the difference between SQL and NoSQL databases. When would you use each?",
+            category: "Database Systems"
+        },
+        {
+            id: 2,
+            question: "Describe the concept of RESTful APIs and explain the main HTTP methods used.",
+            category: "API Design"
+        },
+        {
+            id: 3,
+            question: "What is the difference between authentication and authorization? Give examples.",
+            category: "Security"
+        },
+        {
+            id: 4,
+            question: "Explain the difference between synchronous and asynchronous programming. When would you use each approach?",
+            category: "Programming Concepts"
+        },
+        {
+            id: 5,
+            question: "What are design patterns? Explain one pattern you've used and why it was appropriate.",
+            category: "Software Architecture"
+        },
+        {
+            id: 6,
+            question: "How do you handle errors and exceptions in your code? Walk me through your approach.",
+            category: "Error Handling"
+        },
+        {
+            id: 7,
+            question: "Explain the concept of version control. How do you manage code conflicts in a team environment?",
+            category: "Development Workflow"
+        },
+        {
+            id: 8,
+            question: "Describe your approach to testing. What types of testing do you prioritize and why?",
+            category: "Quality Assurance"
+        }
+    ],
+    'data-science': [
+        {
+            id: 1,
+            question: "Explain the difference between supervised and unsupervised learning. Provide examples of each.",
+            category: "Machine Learning"
+        },
+        {
+            id: 2,
+            question: "What is overfitting in machine learning? How would you detect and prevent it?",
+            category: "Model Validation"
+        },
+        {
+            id: 3,
+            question: "Describe the bias-variance tradeoff. Why is it important in model development?",
+            category: "Statistics & Theory"
+        },
+        {
+            id: 4,
+            question: "How do you handle missing data in a dataset? Walk me through your approach.",
+            category: "Data Preprocessing"
+        },
+        {
+            id: 5,
+            question: "Explain the difference between classification and regression. When would you use each?",
+            category: "ML Concepts"
+        },
+        {
+            id: 6,
+            question: "What is cross-validation? Why is it important in machine learning?",
+            category: "Model Evaluation"
+        },
+        {
+            id: 7,
+            question: "Describe your approach to feature engineering. What factors do you consider when selecting features?",
+            category: "Feature Engineering"
+        },
+        {
+            id: 8,
+            question: "How do you evaluate model performance? What metrics would you use for a classification problem?",
+            category: "Performance Metrics"
+        }
+    ],
+    consulting: [
+        {
+            id: 1,
+            question: "Walk me through how you would structure a case interview. What framework would you use?",
+            category: "Case Frameworks"
+        },
+        {
+            id: 2,
+            question: "A client's revenue has dropped by 20% over the last quarter. How would you diagnose the problem?",
+            category: "Problem Diagnosis"
+        },
+        {
+            id: 3,
+            question: "How would you approach a situation where a client disagrees with your recommendations?",
+            category: "Client Management"
+        },
+        {
+            id: 4,
+            question: "Describe a time when you had to make a decision with incomplete information. How did you proceed?",
+            category: "Decision Making"
+        },
+        {
+            id: 5,
+            question: "How do you prioritize competing client demands when resources are limited?",
+            category: "Resource Management"
+        },
+        {
+            id: 6,
+            question: "Explain the difference between strategy and tactics. Give an example of each.",
+            category: "Strategic Thinking"
+        },
+        {
+            id: 7,
+            question: "How would you communicate a complex analysis to a non-technical client?",
+            category: "Communication"
+        },
+        {
+            id: 8,
+            question: "Describe your approach to building trust and rapport with clients.",
+            category: "Relationship Building"
+        }
+    ],
+    'data-analyst': [
+        {
+            id: 1,
+            question: "Explain the difference between INNER JOIN, LEFT JOIN, and RIGHT JOIN in SQL. When would you use each?",
+            category: "SQL Queries"
+        },
+        {
+            id: 2,
+            question: "How do you handle outliers in a dataset? Walk me through your approach.",
+            category: "Data Cleaning"
+        },
+        {
+            id: 3,
+            question: "What is the difference between descriptive and inferential statistics? Provide examples.",
+            category: "Statistics"
+        },
+        {
+            id: 4,
+            question: "How would you create a dashboard to track key business metrics? What considerations are important?",
+            category: "Data Visualization"
+        },
+        {
+            id: 5,
+            question: "Explain the concept of A/B testing. How would you design and analyze an A/B test?",
+            category: "Testing & Experimentation"
+        },
+        {
+            id: 6,
+            question: "How do you ensure data quality and accuracy in your analysis?",
+            category: "Data Quality"
+        },
+        {
+            id: 7,
+            question: "Describe your process for translating business questions into analytical queries.",
+            category: "Business Analysis"
+        },
+        {
+            id: 8,
+            question: "How do you present data findings to stakeholders? What makes an effective data presentation?",
+            category: "Reporting & Communication"
+        }
+    ],
+    'ai-engineer': [
+        {
+            id: 1,
+            question: "Explain the architecture of a transformer model. What makes it effective for NLP tasks?",
+            category: "Neural Networks"
+        },
+        {
+            id: 2,
+            question: "How would you deploy a machine learning model to production? Walk me through the pipeline.",
+            category: "Model Deployment"
+        },
+        {
+            id: 3,
+            question: "What is the difference between fine-tuning and transfer learning? When would you use each?",
+            category: "Model Training"
+        },
+        {
+            id: 4,
+            question: "How do you handle bias and fairness in AI models? What techniques would you use?",
+            category: "AI Ethics"
+        },
+        {
+            id: 5,
+            question: "Explain the concept of attention mechanisms in neural networks. Why are they important?",
+            category: "Deep Learning"
+        },
+        {
+            id: 6,
+            question: "How would you optimize a model for inference speed while maintaining accuracy?",
+            category: "Model Optimization"
+        },
+        {
+            id: 7,
+            question: "Describe your approach to versioning and monitoring ML models in production.",
+            category: "MLOps"
+        },
+        {
+            id: 8,
+            question: "What are the main differences between supervised, unsupervised, and reinforcement learning? Provide use cases for each.",
+            category: "Learning Paradigms"
+        }
+    ]
+};
+
+const CATEGORY_INFO = {
+    behavioral: {
+        title: "Behavioral Interview",
+        description: "Practice answering questions about your experience, teamwork, and problem-solving skills",
+        icon: "👥",
+        color: "purple"
     },
-    {
-        id: 2,
-        question: "What are your greatest strengths and weaknesses?",
-        category: "Self-Assessment"
+    technical: {
+        title: "Technical Interview",
+        description: "Test your knowledge of software engineering, databases, and system design",
+        icon: "💻",
+        color: "blue"
     },
-    {
-        id: 3,
-        question: "Why are you interested in this position?",
-        category: "Motivation"
+    'data-science': {
+        title: "Data Science Interview",
+        description: "Demonstrate your understanding of machine learning, statistics, and data analysis",
+        icon: "📊",
+        color: "green"
     },
-    {
-        id: 4,
-        question: "Describe a challenging situation you faced and how you overcame it.",
-        category: "Problem Solving"
+    consulting: {
+        title: "Consulting Interview",
+        description: "Master case studies, frameworks, and client management scenarios",
+        icon: "🎯",
+        color: "orange"
     },
-    {
-        id: 5,
-        question: "Where do you see yourself in 5 years?",
-        category: "Career Goals"
+    'data-analyst': {
+        title: "Data Analyst Interview",
+        description: "Showcase your SQL skills, data visualization, and analytical thinking",
+        icon: "📈",
+        color: "teal"
     },
-    {
-        id: 6,
-        question: "What is your leadership style?",
-        category: "Leadership"
-    },
-    {
-        id: 7,
-        question: "How do you handle stress and pressure?",
-        category: "Work Style"
-    },
-    {
-        id: 8,
-        question: "Do you have any questions for us?",
-        category: "Closing"
+    'ai-engineer': {
+        title: "AI Engineer Interview",
+        description: "Prove your expertise in ML models, neural networks, and AI deployment",
+        icon: "🤖",
+        color: "indigo"
     }
-];
+};
 
 export default function InterviewAgentPage() {
+    const [selectedCategory, setSelectedCategory] = useState<InterviewCategory | null>(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<InterviewAnswer[]>([]);
     const [isRecording, setIsRecording] = useState(false);
@@ -76,6 +332,51 @@ export default function InterviewAgentPage() {
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
+    // Helper function to get current user ID
+    const getCurrentUserId = async (): Promise<string | null> => {
+        const userEmail = getCookie('userEmail');
+        if (!userEmail) return null;
+
+        try {
+            const response = await fetch('/profile/api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: userEmail }),
+            });
+            const data = await response.json();
+            return data?.id || null;
+        } catch (error) {
+            console.error('Error getting current user ID:', error);
+            return null;
+        }
+    };
+
+    // Helper function to track activity
+    const trackActivity = async (actionType: string, actionCategory: string, metadata?: any) => {
+        const userId = await getCurrentUserId();
+        if (!userId) return;
+
+        try {
+            await fetch('/api/activity/track-event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userId,
+                    actionType,
+                    actionCategory,
+                    resourceType: 'interview_agent',
+                    metadata: {
+                        ...metadata,
+                        pagePath: '/interview-agent',
+                        timestamp: new Date().toISOString(),
+                    },
+                }),
+            }).catch(console.error);
+        } catch (error) {
+            console.error('Error tracking activity:', error);
+        }
+    };
+
     useEffect(() => {
         setMounted(true);
     }, []);
@@ -87,8 +388,24 @@ export default function InterviewAgentPage() {
         };
     }, []);
 
-    const currentQuestion = INTERVIEW_QUESTIONS[currentQuestionIndex];
-    const isLastQuestion = currentQuestionIndex === INTERVIEW_QUESTIONS.length - 1;
+    // Reset when category changes
+    useEffect(() => {
+        if (selectedCategory) {
+            setCurrentQuestionIndex(0);
+            setAnswers([]);
+            setShowFeedback(false);
+            setAiFeedback('');
+            stopSpeech();
+        }
+    }, [selectedCategory]);
+
+    const currentQuestions = selectedCategory ? INTERVIEW_QUESTIONS[selectedCategory] : [];
+    const currentQuestion = currentQuestions[currentQuestionIndex];
+    const isLastQuestion = selectedCategory ? currentQuestionIndex === currentQuestions.length - 1 : false;
+
+    const handleCategorySelect = (category: InterviewCategory) => {
+        setSelectedCategory(category);
+    };
 
     const startRecording = async () => {
         try {
@@ -147,16 +464,18 @@ export default function InterviewAgentPage() {
             const transcript = data.transcript || 'Could not transcribe audio';
 
             // Add answer to history
-            const newAnswer: InterviewAnswer = {
-                questionId: currentQuestion.id,
-                question: currentQuestion.question,
-                answer: transcript,
-            };
+            if (currentQuestion) {
+                const newAnswer: InterviewAnswer = {
+                    questionId: currentQuestion.id,
+                    question: currentQuestion.question,
+                    answer: transcript,
+                };
 
-            setAnswers(prev => [...prev, newAnswer]);
+                setAnswers(prev => [...prev, newAnswer]);
 
-            // Generate AI feedback
-            await generateAIFeedback([...answers, newAnswer]);
+                // Generate AI feedback
+                await generateAIFeedback([...answers, newAnswer]);
+            }
 
         } catch (error: any) {
             console.error('Error processing recording:', error);
@@ -168,6 +487,8 @@ export default function InterviewAgentPage() {
     };
 
     const generateAIFeedback = async (allAnswers: InterviewAnswer[]) => {
+        if (!currentQuestion) return;
+
         try {
             const response = await fetch('/api/interview-response', {
                 method: 'POST',
@@ -202,6 +523,15 @@ export default function InterviewAgentPage() {
                 return updated;
             });
 
+            // Track activity when user gets an answer/feedback
+            trackActivity('question_answered', 'content', {
+                feature: 'interview_agent',
+                questionId: currentQuestion.id,
+                questionCategory: selectedCategory,
+                questionText: currentQuestion.question,
+                hasFeedback: !!data.feedback,
+            });
+
         } catch (error) {
             console.error('Error generating AI feedback:', error);
             toast.error('Failed to generate feedback. Please try again.');
@@ -209,7 +539,7 @@ export default function InterviewAgentPage() {
     };
 
     const nextQuestion = () => {
-        if (currentQuestionIndex < INTERVIEW_QUESTIONS.length - 1) {
+        if (selectedCategory && currentQuestionIndex < currentQuestions.length - 1) {
             // Stop any ongoing speech when navigating
             stopSpeech();
             setCurrentQuestionIndex(prev => prev + 1);
@@ -229,6 +559,7 @@ export default function InterviewAgentPage() {
     };
 
     const getCurrentAnswer = () => {
+        if (!currentQuestion) return undefined;
         return answers.find(a => a.questionId === currentQuestion.id);
     };
 
@@ -316,182 +647,208 @@ export default function InterviewAgentPage() {
             </div>
 
             <div className="relative z-10 flex flex-col min-h-screen">
-                {/* Header */}
-                <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-white/20 dark:border-gray-700/20 shadow-sm">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex items-center justify-between h-16">
-                            <div className="flex items-center space-x-4">
-                                <h1 className="text-2xl font-bold text-gray-900 dark:text-black">
-                                    🎤 Interview Practice Agent
-                                </h1>
-                                <div className="flex items-center space-x-2">
-                                    <span className="text-sm text-gray-600 dark:text-gray-400">
-                                        Question {currentQuestionIndex + 1} of {INTERVIEW_QUESTIONS.length}
-                                    </span>
-                                    <div className="flex space-x-1">
-                                        {INTERVIEW_QUESTIONS.map((_, index) => (
-                                            <div
-                                                key={index}
-                                                className={`size-2 rounded-full ${index <= currentQuestionIndex
-                                                    ? 'bg-purple-500'
-                                                    : 'bg-gray-300 dark:bg-gray-600'
-                                                    }`}
-                                            />
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Speech Controls */}
-                            {speechSupported && (
-                                <div className="flex items-center space-x-2">
-                                    <button
-                                        onClick={() => {
-                                            if (isMuted) {
-                                                setIsMuted(false);
-                                                toast.success('Voice playback enabled');
-                                            } else {
-                                                setIsMuted(true);
-                                                stopSpeech();
-                                                toast.success('Voice playback disabled');
-                                            }
-                                        }}
-                                        className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all ${isMuted
-                                            ? 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-600'
-                                            : 'bg-purple-100 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-900/30'
-                                            }`}
-                                        title={isMuted ? 'Enable voice playback' : 'Disable voice playback'}
-                                    >
-                                        {isMuted ? (
-                                            <>
-                                                <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-                                                </svg>
-                                                <span>Muted</span>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                                                </svg>
-                                                <span>Voice On</span>
-                                            </>
-                                        )}
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
+                {/* Common Navbar */}
+                <CommonNavbar currentPage="/interview-agent" showThemeToggle={true} showSignOut={false} />
 
                 {/* Main Content */}
                 <div className="flex-1 flex flex-col h-[calc(100vh-4rem)]">
                     <div className="flex-1 flex items-center justify-center px-4 py-8">
-                        <div className="max-w-4xl w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-700/20 p-8">
-                            {/* Question */}
-                            <div className="mb-8">
-                                <div className="flex items-center space-x-2 mb-4">
-                                    <span className="text-sm font-medium text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-900/20 px-3 py-1 rounded-full">
-                                        {currentQuestion.category}
-                                    </span>
+                        {!selectedCategory ? (
+                            /* Category Selection Screen */
+                            <div className="max-w-5xl w-full">
+                                <div className="text-center mb-8">
+                                    <h1 className="text-4xl font-bold text-black dark:text-black mb-4">
+                                        🎤 Choose Your Interview Category
+                                    </h1>
+                                    <p className="text-lg text-black dark:text-black opacity-80">
+                                        Select a category to begin your practice interview
+                                    </p>
                                 </div>
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-black mb-4">
-                                    {currentQuestion.question}
-                                </h2>
+                                <div className="grid md:grid-cols-3 gap-6">
+                                    {Object.entries(CATEGORY_INFO).map(([key, info]) => {
+                                        const categoryKey = key as InterviewCategory;
+                                        const colorClasses = {
+                                            purple: 'bg-purple-300 hover:bg-purple-400 border-purple-200',
+                                            blue: 'bg-blue-300 hover:bg-blue-400 border-blue-200',
+                                            green: 'bg-green-300 hover:bg-green-400 border-green-200',
+                                            orange: 'bg-orange-300 hover:bg-orange-400 border-orange-200',
+                                            teal: 'bg-teal-300 hover:bg-teal-400 border-teal-200',
+                                            indigo: 'bg-indigo-300 hover:bg-indigo-400 border-indigo-200'
+                                        };
+                                        return (
+                                            <button
+                                                key={key}
+                                                onClick={() => handleCategorySelect(categoryKey)}
+                                                className={`${colorClasses[info.color as keyof typeof colorClasses]} text-black rounded-2xl p-8 border-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-left`}
+                                            >
+                                                <div className="text-5xl mb-4">{info.icon}</div>
+                                                <h2 className="text-2xl font-bold mb-3">{info.title}</h2>
+                                                <p className="text-black opacity-90 mb-4">{info.description}</p>
+                                                <div className="text-sm font-semibold opacity-80">
+                                                    {INTERVIEW_QUESTIONS[categoryKey].length} questions
+                                                </div>
+                                            </button>
+                                        );
+                                    })}
+                                </div>
                             </div>
+                        ) : currentQuestion ? (
+                            <div className="max-w-4xl w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-700/20 p-8">
+                                {/* Question Progress Tracker */}
+                                <div className="mb-6 pb-6 border-b border-gray-200/50 dark:border-gray-700/50">
+                                    {/* Category Tag */}
+                                    <div className="flex items-center justify-between mb-3">
+                                        <span className="text-sm font-medium text-black dark:text-black bg-purple-100 dark:bg-purple-900/20 px-3 py-1 rounded-full">
+                                            {currentQuestion.category}
+                                        </span>
+                                        <button
+                                            onClick={() => setSelectedCategory(null)}
+                                            className="flex items-center space-x-1.5 text-xs font-medium text-black dark:text-black bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 px-3 py-1.5 rounded-lg transition-all duration-200 shadow-sm hover:shadow"
+                                            title="Change interview category"
+                                        >
+                                            <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                            </svg>
+                                            <span>Change Category</span>
+                                        </button>
+                                    </div>
+                                    <div className="flex items-center justify-between mb-3">
+                                        <div className="flex items-center space-x-3">
+                                            <span className="text-sm font-semibold text-black dark:text-black">
+                                                Question {currentQuestionIndex + 1} of {currentQuestions.length}
+                                            </span>
+                                            <div className="h-1 bg-gray-200 dark:bg-gray-700 rounded-full flex-1 max-w-xs" style={{ maxWidth: '200px' }}>
+                                                <div
+                                                    className="h-full bg-purple-600 rounded-full transition-all duration-300"
+                                                    style={{ width: `${((currentQuestionIndex + 1) / currentQuestions.length) * 100}%` }}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* Progress Dots */}
+                                    <div className="flex items-center justify-center space-x-2">
+                                        {currentQuestions.map((_, index) => {
+                                            const isCompleted = answers.some(a => a.questionId === currentQuestions[index].id);
+                                            const isCurrent = index === currentQuestionIndex;
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className={`transition-all duration-300 ${isCurrent
+                                                        ? 'size-3 bg-purple-600 ring-2 ring-purple-300 dark:ring-purple-500'
+                                                        : isCompleted
+                                                            ? 'size-2.5 bg-purple-400 dark:bg-purple-500'
+                                                            : 'size-2 bg-gray-300 dark:bg-gray-600'
+                                                        } rounded-full`}
+                                                    title={`Question ${index + 1}: ${isCompleted ? 'Completed' : isCurrent ? 'Current' : 'Pending'}`}
+                                                />
+                                            );
+                                        })}
+                                    </div>
+                                </div>
 
-                            {/* Recording Controls */}
-                            <div className="flex justify-center mb-8">
-                                <div className="flex items-center space-x-4">
+                                {/* Question */}
+                                <div className="mb-8">
+                                    <h2 className="text-2xl font-bold text-black dark:text-black mb-4">
+                                        {currentQuestion.question}
+                                    </h2>
+                                </div>
+
+                                {/* Recording Controls */}
+                                <div className="flex justify-center mb-8">
+                                    <div className="flex items-center space-x-4">
+                                        <button
+                                            onClick={isRecording ? stopRecording : startRecording}
+                                            disabled={isProcessing}
+                                            className={`flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all ${isRecording
+                                                ? 'bg-red-500 hover:bg-red-600 text-black'
+                                                : 'bg-purple-600 hover:bg-purple-700 text-black'
+                                                } disabled:opacity-50 disabled:cursor-not-allowed`}
+                                        >
+                                            {isRecording ? (
+                                                <>
+                                                    <div className="size-4 bg-white rounded-full animate-pulse" />
+                                                    <span>Stop Recording</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <svg className="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                                                    </svg>
+                                                    <span>Start Recording</span>
+                                                </>
+                                            )}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Processing Indicator */}
+                                {isProcessing && (
+                                    <div className="text-center mb-6">
+                                        <div className="flex items-center justify-center space-x-2">
+                                            <div className="size-4 bg-purple-500 rounded-full animate-bounce"></div>
+                                            <div className="size-4 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                                            <div className="size-4 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                                            <span className="text-gray-600 dark:text-gray-400">Processing your response...</span>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Answer Display */}
+                                {currentAnswer && (
+                                    <div className="mb-6">
+                                        <h3 className="text-lg font-semibold text-gray-900 dark:text-black mb-3">
+                                            Your Answer:
+                                        </h3>
+                                        <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
+                                            <p className="text-gray-800 dark:text-gray-200">
+                                                {currentAnswer.answer}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* AI Feedback */}
+                                {showFeedback && aiFeedback && (
+                                    <div className="mb-6">
+                                        <h3 className="text-lg font-semibold text-gray-900 dark:text-black mb-3">
+                                            AI Feedback:
+                                        </h3>
+                                        <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 border border-purple-200 dark:border-purple-700">
+                                            <p className="text-gray-800 dark:text-gray-200">
+                                                {aiFeedback}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Navigation */}
+                                <div className="flex justify-between items-center">
                                     <button
-                                        onClick={isRecording ? stopRecording : startRecording}
-                                        disabled={isProcessing}
-                                        className={`flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all ${isRecording
-                                            ? 'bg-red-500 hover:bg-red-600 text-black'
-                                            : 'bg-purple-600 hover:bg-purple-700 text-black'
-                                            } disabled:opacity-50 disabled:cursor-not-allowed`}
+                                        onClick={previousQuestion}
+                                        disabled={currentQuestionIndex === 0}
+                                        className="px-4 py-2 text-black dark:text-black hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        {isRecording ? (
-                                            <>
-                                                <div className="size-4 bg-white rounded-full animate-pulse" />
-                                                <span>Stop Recording</span>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <svg className="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                                                </svg>
-                                                <span>Start Recording</span>
-                                            </>
-                                        )}
+                                        ← Previous
+                                    </button>
+
+                                    <div className="text-sm text-black dark:text-black">
+                                        {currentQuestionIndex + 1} of {currentQuestions.length}
+                                    </div>
+
+                                    <button
+                                        onClick={nextQuestion}
+                                        disabled={isLastQuestion}
+                                        className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-black rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {isLastQuestion ? 'Finish' : 'Next →'}
                                     </button>
                                 </div>
                             </div>
-
-                            {/* Processing Indicator */}
-                            {isProcessing && (
-                                <div className="text-center mb-6">
-                                    <div className="flex items-center justify-center space-x-2">
-                                        <div className="size-4 bg-purple-500 rounded-full animate-bounce"></div>
-                                        <div className="size-4 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                                        <div className="size-4 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                                        <span className="text-gray-600 dark:text-gray-400">Processing your response...</span>
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Answer Display */}
-                            {currentAnswer && (
-                                <div className="mb-6">
-                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-black mb-3">
-                                        Your Answer:
-                                    </h3>
-                                    <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
-                                        <p className="text-gray-800 dark:text-gray-200">
-                                            {currentAnswer.answer}
-                                        </p>
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* AI Feedback */}
-                            {showFeedback && aiFeedback && (
-                                <div className="mb-6">
-                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-black mb-3">
-                                        AI Feedback:
-                                    </h3>
-                                    <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 border border-purple-200 dark:border-purple-700">
-                                        <p className="text-gray-800 dark:text-gray-200">
-                                            {aiFeedback}
-                                        </p>
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Navigation */}
-                            <div className="flex justify-between items-center">
-                                <button
-                                    onClick={previousQuestion}
-                                    disabled={currentQuestionIndex === 0}
-                                    className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-black disabled:opacity-50 disabled:cursor-not-allowed"
-                                >
-                                    ← Previous
-                                </button>
-
-                                <div className="text-sm text-gray-500 dark:text-gray-400">
-                                    {currentQuestionIndex + 1} of {INTERVIEW_QUESTIONS.length}
-                                </div>
-
-                                <button
-                                    onClick={nextQuestion}
-                                    disabled={isLastQuestion}
-                                    className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-black rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                                >
-                                    {isLastQuestion ? 'Finish' : 'Next →'}
-                                </button>
+                        ) : (
+                            <div className="max-w-4xl w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-700/20 p-8 text-center">
+                                <p className="text-black dark:text-black">Loading questions...</p>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>

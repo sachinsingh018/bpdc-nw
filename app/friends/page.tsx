@@ -37,6 +37,51 @@ export default function FriendsPage() {
     const [recommendations, setRecommendations] = useState<any[]>([]);
     const [loadingRecommendations, setLoadingRecommendations] = useState(false);
 
+    // Helper function to get current user ID
+    const getCurrentUserId = async (): Promise<string | null> => {
+        const userEmail = getCookie('userEmail');
+        if (!userEmail) return null;
+
+        try {
+            const response = await fetch('/profile/api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: userEmail }),
+            });
+            const data = await response.json();
+            return data?.id || null;
+        } catch (error) {
+            console.error('Error getting current user ID:', error);
+            return null;
+        }
+    };
+
+    // Helper function to track activity
+    const trackActivity = async (actionType: string, actionCategory: string, metadata?: any) => {
+        const userId = await getCurrentUserId();
+        if (!userId) return;
+
+        try {
+            await fetch('/api/activity/track-event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userId,
+                    actionType,
+                    actionCategory,
+                    resourceType: 'friends',
+                    metadata: {
+                        ...metadata,
+                        pagePath: '/friends',
+                        timestamp: new Date().toISOString(),
+                    },
+                }),
+            }).catch(console.error);
+        } catch (error) {
+            console.error('Error tracking activity:', error);
+        }
+    };
+
     useEffect(() => {
         const checkAuth = () => {
             const email = getCookie('userEmail') as string;
@@ -45,6 +90,33 @@ export default function FriendsPage() {
                 return;
             }
             setIsLoading(false);
+
+            // Track page access
+            const trackPageAccess = async () => {
+                const userId = await getCurrentUserId();
+                if (!userId) return;
+
+                try {
+                    await fetch('/api/activity/track-event', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            userId,
+                            actionType: 'page_accessed',
+                            actionCategory: 'social',
+                            resourceType: 'friends',
+                            metadata: {
+                                feature: 'friends',
+                                pagePath: '/friends',
+                                timestamp: new Date().toISOString(),
+                            },
+                        }),
+                    }).catch(console.error);
+                } catch (error) {
+                    console.error('Error tracking activity:', error);
+                }
+            };
+            trackPageAccess();
         };
 
         checkAuth();
@@ -171,6 +243,13 @@ export default function FriendsPage() {
 
                 // Check connection statuses for search results
                 await checkConnectionStatuses(data || []);
+
+                // Track search activity
+                trackActivity('user_search', 'social', {
+                    feature: 'friends',
+                    searchQuery: searchQuery.trim(),
+                    resultCount: data?.length || 0,
+                });
             }
         } catch (error) {
             console.error('Error searching users:', error);
@@ -204,6 +283,14 @@ export default function FriendsPage() {
                 toast.success('Connection request sent!');
                 setSentRequests(prev => new Set(prev).add(userId));
                 setConnectionStatuses(prev => ({ ...prev, [userId]: 'pending' }));
+
+                // Track friend request activity
+                trackActivity('friend_request_sent', 'social', {
+                    feature: 'friends',
+                    receiverEmail: userEmail,
+                    receiverId: userId,
+                    receiverName: rec.name || rec.user?.name || 'Unknown',
+                });
             } else {
                 const errorData = await response.json();
                 toast.error(errorData.error || 'Failed to send connection request');
@@ -420,6 +507,14 @@ export default function FriendsPage() {
                                             className="bg-gradient-to-br from-white/90 via-purple-50/20 to-white/90 dark:from-slate-800/90 dark:via-purple-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20 hover:shadow-2xl hover:shadow-bits-golden-yellow/20 dark:hover:shadow-bits-golden-yellow/30 transition-all duration-300 flex flex-col cursor-pointer hover:ring-2 hover:ring-bits-golden-yellow hover:scale-105"
                                             onClick={() => {
                                                 if (user.email) {
+                                                    // Track profile view
+                                                    trackActivity('profile_viewed', 'social', {
+                                                        feature: 'friends',
+                                                        viewedEmail: user.email,
+                                                        viewedId: user.id,
+                                                        viewedName: user.name || 'Unknown',
+                                                        source: 'recommendations',
+                                                    });
                                                     router.push(`/friendprof?email=${encodeURIComponent(user.email)}`);
                                                 }
                                             }}
@@ -522,6 +617,14 @@ export default function FriendsPage() {
                                         onClick={e => {
                                             if ((e.target as HTMLElement).closest('button')) return;
                                             if (userObj.email) {
+                                                // Track profile view
+                                                trackActivity('profile_viewed', 'social', {
+                                                    feature: 'friends',
+                                                    viewedEmail: userObj.email,
+                                                    viewedId: userObj.id,
+                                                    viewedName: userObj.name || 'Unknown',
+                                                    source: 'search_results',
+                                                });
                                                 router.push(`/friendprof?email=${encodeURIComponent(userObj.email)}`);
                                             }
                                         }}

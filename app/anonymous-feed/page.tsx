@@ -114,6 +114,51 @@ export default function AnonymousFeedPage() {
     const [shareModalOpen, setShareModalOpen] = useState(false);
     const [sharePost, setSharePost] = useState<AnonymousPost | null>(null);
 
+    // Helper function to get current user ID
+    const getCurrentUserId = async (): Promise<string | null> => {
+        const userEmail = getCookie('userEmail');
+        if (!userEmail) return null;
+
+        try {
+            const response = await fetch('/profile/api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: userEmail }),
+            });
+            const data = await response.json();
+            return data?.id || null;
+        } catch (error) {
+            console.error('Error getting current user ID:', error);
+            return null;
+        }
+    };
+
+    // Helper function to track activity
+    const trackActivity = async (actionType: string, actionCategory: string, metadata?: any) => {
+        const userId = await getCurrentUserId();
+        if (!userId) return;
+
+        try {
+            await fetch('/api/activity/track-event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userId,
+                    actionType,
+                    actionCategory,
+                    resourceType: 'anonymous_feed',
+                    metadata: {
+                        ...metadata,
+                        pagePath: '/anonymous-feed',
+                        timestamp: new Date().toISOString(),
+                    },
+                }),
+            }).catch(console.error);
+        } catch (error) {
+            console.error('Error tracking activity:', error);
+        }
+    };
+
     useEffect(() => {
         const userEmail = getCookie('userEmail') as string;
         if (!userEmail) {
@@ -297,6 +342,17 @@ export default function AnonymousFeedPage() {
                 setSelectedImage(null);
                 setImagePreview(null);
                 toast.success('Post created successfully!');
+
+                // Track post creation activity
+                trackActivity('post_created', 'social', {
+                    feature: 'anonymous_feed',
+                    topic: selectedTopic,
+                    isAnonymous: isAnonymous,
+                    hasImage: !!imageUrl,
+                    companyName: companyName || null,
+                    industry: industry || null,
+                });
+
                 fetchPosts();
             } else {
                 const errorData = await response.json();

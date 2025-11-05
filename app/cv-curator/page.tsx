@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { CVChat } from '../../components/cv-chat';
 import { toast } from 'sonner';
+import { CommonNavbar } from '@/components/common-navbar';
+import { getCookie } from 'cookies-next';
 
 export default function CVCuratorPage() {
     const [resumeText, setResumeText] = useState<string>('');
@@ -13,8 +15,79 @@ export default function CVCuratorPage() {
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
+    // Helper function to get current user ID
+    const getCurrentUserId = async (): Promise<string | null> => {
+        const userEmail = getCookie('userEmail');
+        if (!userEmail) return null;
+
+        try {
+            const response = await fetch('/profile/api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: userEmail }),
+            });
+            const data = await response.json();
+            return data?.id || null;
+        } catch (error) {
+            console.error('Error getting current user ID:', error);
+            return null;
+        }
+    };
+
+    // Helper function to track activity
+    const trackActivity = async (actionType: string, actionCategory: string, metadata?: any) => {
+        const userId = await getCurrentUserId();
+        if (!userId) return;
+
+        try {
+            await fetch('/api/activity/track-event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userId,
+                    actionType,
+                    actionCategory,
+                    resourceType: 'cv_curator',
+                    metadata: {
+                        ...metadata,
+                        pagePath: '/cv-curator',
+                        timestamp: new Date().toISOString(),
+                    },
+                }),
+            }).catch(console.error);
+        } catch (error) {
+            console.error('Error tracking activity:', error);
+        }
+    };
+
     useEffect(() => {
         setMounted(true);
+        // Track page access
+        const trackPageAccess = async () => {
+            const userId = await getCurrentUserId();
+            if (!userId) return;
+
+            try {
+                await fetch('/api/activity/track-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userId,
+                        actionType: 'page_accessed',
+                        actionCategory: 'content',
+                        resourceType: 'cv_curator',
+                        metadata: {
+                            feature: 'cv_curator',
+                            pagePath: '/cv-curator',
+                            timestamp: new Date().toISOString(),
+                        },
+                    }),
+                }).catch(console.error);
+            } catch (error) {
+                console.error('Error tracking activity:', error);
+            }
+        };
+        trackPageAccess();
     }, []);
 
     // Check daily prompt limit on component mount
@@ -56,6 +129,13 @@ export default function CVCuratorPage() {
             setResumeText(text);
             setIsResumeUploaded(true);
             toast.success('Resume uploaded successfully! You can now ask questions about your CV.');
+
+            // Track resume upload activity
+            trackActivity('resume_uploaded', 'content', {
+                feature: 'cv_curator',
+                fileSize: file.size,
+                fileName: file.name,
+            });
         } catch (error) {
             toast.error('Error processing PDF. Please try again.');
             console.error('PDF processing error:', error);
@@ -117,7 +197,25 @@ Cloud: AWS, Google Cloud Platform, Azure`;
                   linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
                 `
             }}>
-                <div className="text-center">
+                {/* White Bubbles for Loading State */}
+                <div className="fixed inset-0 z-0">
+                    <div className="absolute top-16 left-1/4 size-32 rounded-full blur-2xl opacity-40 animate-pulse delay-500" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                    <div className="absolute top-1/3 right-1/4 size-40 rounded-full blur-2xl opacity-45 animate-pulse delay-1500" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                    <div className="absolute bottom-1/3 left-1/2 size-36 rounded-full blur-2xl opacity-35 animate-pulse delay-2000" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                    <div className="absolute top-1/2 right-1/3 size-44 rounded-full blur-2xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
+                    <div className="absolute bottom-20 left-1/3 size-28 rounded-full blur-2xl opacity-40 animate-pulse delay-3000" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                    <div className="absolute top-12 right-1/2 size-24 rounded-full blur-2xl opacity-45 animate-pulse delay-800" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                    <div className="absolute top-1/4 left-1/12 size-46 rounded-full blur-2xl opacity-40 animate-pulse delay-1200" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                    <div className="absolute bottom-1/4 right-1/3 size-34 rounded-full blur-2xl opacity-50 animate-pulse delay-1800" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
+                    <div className="absolute top-3/4 left-1/4 size-42 rounded-full blur-2xl opacity-38 animate-pulse delay-2200" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                    <div className="absolute top-1/6 right-1/8 size-50 rounded-full blur-2xl opacity-42 animate-pulse delay-2800" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                    <div className="absolute bottom-1/6 left-2/3 size-30 rounded-full blur-2xl opacity-48 animate-pulse delay-3400" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
+                    <div className="absolute top-1/2 left-1/12 size-38 rounded-full blur-2xl opacity-35 animate-pulse delay-3800" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                    <div className="absolute bottom-1/2 right-1/8 size-44 rounded-full blur-2xl opacity-45 animate-pulse delay-1000" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                    <div className="absolute top-5/6 left-1/2 size-36 rounded-full blur-2xl opacity-40 animate-pulse delay-1600" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                    <div className="absolute top-1/8 right-2/3 size-48 rounded-full blur-2xl opacity-43 animate-pulse delay-2400" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                </div>
+                <div className="relative z-10 text-center">
                     <div className="size-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
                         borderColor: 'rgba(255, 215, 0, 0.8)',
                         borderTopColor: 'transparent'
@@ -180,36 +278,107 @@ Cloud: AWS, Google Cloud Platform, Azure`;
                 {/* Neon Purple */}
                 <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
                 <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
+
+                {/* White Bubbles */}
+                <div className="absolute top-16 left-1/4 size-32 rounded-full blur-2xl opacity-40 animate-pulse delay-500" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-1/3 right-1/4 size-40 rounded-full blur-2xl opacity-45 animate-pulse delay-1500" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                <div className="absolute bottom-1/3 left-1/2 size-36 rounded-full blur-2xl opacity-35 animate-pulse delay-2000" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-1/2 right-1/3 size-44 rounded-full blur-2xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
+                <div className="absolute bottom-20 left-1/3 size-28 rounded-full blur-2xl opacity-40 animate-pulse delay-3000" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                <div className="absolute top-1/4 right-1/5 size-52 rounded-full blur-2xl opacity-35 animate-pulse delay-3500" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute bottom-1/4 left-1/5 size-48 rounded-full blur-2xl opacity-45 animate-pulse delay-4000" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                <div className="absolute top-2/3 right-1/2 size-56 rounded-full blur-2xl opacity-40 animate-pulse delay-1800" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-1/5 left-3/4 size-60 rounded-full blur-2xl opacity-35 animate-pulse delay-2200" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                <div className="absolute bottom-1/5 right-1/6 size-38 rounded-full blur-2xl opacity-50 animate-pulse delay-2800" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
+
+                {/* More White Bubbles */}
+                <div className="absolute top-12 right-1/2 size-24 rounded-full blur-2xl opacity-45 animate-pulse delay-500" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                <div className="absolute top-1/4 left-1/12 size-46 rounded-full blur-2xl opacity-40 animate-pulse delay-1200" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute bottom-1/4 right-1/3 size-34 rounded-full blur-2xl opacity-50 animate-pulse delay-1600" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
+                <div className="absolute top-3/4 left-1/4 size-42 rounded-full blur-2xl opacity-38 animate-pulse delay-2100" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-1/6 right-1/8 size-50 rounded-full blur-2xl opacity-42 animate-pulse delay-2700" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                <div className="absolute bottom-1/6 left-2/3 size-30 rounded-full blur-2xl opacity-48 animate-pulse delay-3200" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
+                <div className="absolute top-1/2 left-1/12 size-38 rounded-full blur-2xl opacity-35 animate-pulse delay-3700" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute bottom-1/2 right-1/8 size-44 rounded-full blur-2xl opacity-45 animate-pulse delay-4200" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                <div className="absolute top-5/6 left-1/2 size-36 rounded-full blur-2xl opacity-40 animate-pulse delay-1300" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-1/8 right-2/3 size-48 rounded-full blur-2xl opacity-43 animate-pulse delay-2400" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                <div className="absolute bottom-1/8 left-1/3 size-32 rounded-full blur-2xl opacity-47 animate-pulse delay-2900" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
+                <div className="absolute top-2/5 right-1/12 size-40 rounded-full blur-2xl opacity-39 animate-pulse delay-3400" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute bottom-2/5 left-5/6 size-46 rounded-full blur-2xl opacity-44 animate-pulse delay-3900" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
+                <div className="absolute top-4/5 right-1/4 size-28 rounded-full blur-2xl opacity-46 animate-pulse delay-1400" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
+                <div className="absolute top-3/8 left-4/5 size-52 rounded-full blur-2xl opacity-37 animate-pulse delay-2600" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute bottom-3/8 right-2/5 size-35 rounded-full blur-2xl opacity-49 animate-pulse delay-3100" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
             </div>
 
             <div className="relative z-10 flex flex-col min-h-screen">
-                {/* Header */}
-                <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-white/20 dark:border-gray-700/20 shadow-sm">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex items-center justify-between h-16">
-                            <div className="flex items-center space-x-4">
-                                <h1 className="text-2xl font-bold text-gray-900 dark:text-black">
-                                    📄 CV Curator
-                                </h1>
-                                <div className="flex items-center space-x-2">
-                                    <span className="text-sm text-gray-600 dark:text-gray-400">
-                                        Prompts today: {dailyPromptCount}/5
-                                    </span>
-                                    {isLimitReached && (
-                                        <span className="text-xs bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-400 px-2 py-1 rounded-full">
-                                            Limit reached
-                                        </span>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {/* Common Navbar */}
+                <CommonNavbar currentPage="/cv-curator" showThemeToggle={true} showSignOut={false} />
 
                 {/* Main Content */}
                 <div className="flex-1 flex flex-col h-[calc(100vh-4rem)]">
-                    {!isResumeUploaded ? (
-                        <div className="flex-1 flex items-center justify-center px-4">
+                    {/* Page Header with Prompt Counter */}
+                    <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-6 pb-4">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                            <div className="space-y-2.5">
+                                <div className="flex items-center gap-3">
+                                    <div className="size-11 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center shadow-md flex-shrink-0">
+                                        <span className="text-2xl">📄</span>
+                                    </div>
+                                    <h1 className="text-4xl sm:text-5xl font-extrabold text-black dark:text-black tracking-tight leading-tight">
+                                        CV Curator
+                                    </h1>
+                                </div>
+                                <p className="text-base sm:text-lg text-black dark:text-black/90 font-medium leading-relaxed ml-[56px] sm:ml-[56px] max-w-2xl">
+                                    Transform your resume with AI-powered optimization and personalized feedback
+                                </p>
+                            </div>
+
+                            {/* Prompt Usage Info Card */}
+                            <div className={`flex items-center gap-3 px-4 py-3 rounded-lg border-2 backdrop-blur-sm transition-all ${isLimitReached
+                                ? 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700'
+                                : 'bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-700'
+                                }`}>
+                                <div className="flex items-center gap-2">
+                                    <svg className={`size-5 ${isLimitReached ? 'text-red-600 dark:text-red-400' : 'text-purple-600 dark:text-purple-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <div>
+                                        <div className="text-sm font-semibold text-black dark:text-black">
+                                            Daily Prompts Used
+                                        </div>
+                                        <div className="flex items-center gap-2 mt-0.5">
+                                            <span className={`text-lg font-bold ${isLimitReached ? 'text-red-600 dark:text-red-400' : 'text-purple-600 dark:text-purple-400'}`}>
+                                                {dailyPromptCount}/5
+                                            </span>
+                                            <div className="h-2 w-24 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                                <div
+                                                    className={`h-full rounded-full transition-all duration-300 ${isLimitReached
+                                                        ? 'bg-red-500'
+                                                        : 'bg-purple-500'
+                                                        }`}
+                                                    style={{ width: `${(dailyPromptCount / 5) * 100}%` }}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {isLimitReached && (
+                                    <div className="flex items-center gap-1.5 px-2.5 py-1 bg-red-100 dark:bg-red-900/30 rounded-full">
+                                        <svg className="size-4 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                        </svg>
+                                        <span className="text-xs font-semibold text-red-700 dark:text-red-300">
+                                            Limit Reached
+                                        </span>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Main Content Area */}
+                    <div className="flex-1 flex items-center justify-center px-4 pb-6">
+                        {!isResumeUploaded ? (
                             <div className="max-w-md w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-700/20 p-8">
                                 <div className="text-center">
                                     <div className="mx-auto size-16 bg-purple-100 dark:bg-purple-900/20 rounded-full flex items-center justify-center mb-4">
@@ -252,15 +421,17 @@ Cloud: AWS, Google Cloud Platform, Azure`;
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ) : (
-                        <CVChat
-                            resumeText={resumeText}
-                            onPromptSent={handlePromptCount}
-                            isLimitReached={isLimitReached}
-                            dailyPromptCount={dailyPromptCount}
-                        />
-                    )}
+                        ) : (
+                            <div className="w-full max-w-7xl">
+                                <CVChat
+                                    resumeText={resumeText}
+                                    onPromptSent={handlePromptCount}
+                                    isLimitReached={isLimitReached}
+                                    dailyPromptCount={dailyPromptCount}
+                                />
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
 
@@ -281,30 +452,30 @@ Cloud: AWS, Google Cloud Platform, Azure`;
 
             {/* Animation styles */}
             <style jsx global>{`
-        @keyframes float {
-          0% {
-            transform: translateY(0) translateX(0);
-          }
-          50% {
-            transform: translateY(-20px) translateX(10px);
-          }
-          100% {
-            transform: translateY(0) translateX(0);
-          }
-        }
+                @keyframes float {
+                    0% {
+                        transform: translateY(0) translateX(0);
+                    }
+                    50% {
+                        transform: translateY(-20px) translateX(10px);
+                    }
+                    100% {
+                        transform: translateY(0) translateX(0);
+                    }
+                }
 
-        .animate-float-slow {
-          animation: float 12s ease-in-out infinite;
-        }
+                .animate-float-slow {
+                    animation: float 12s ease-in-out infinite;
+                }
 
-        .animate-float-medium {
-          animation: float 8s ease-in-out infinite;
-        }
+                .animate-float-medium {
+                    animation: float 8s ease-in-out infinite;
+                }
 
-        .animate-float-fast {
-          animation: float 6s ease-in-out infinite;
-        }
-      `}</style>
+                .animate-float-fast {
+                    animation: float 6s ease-in-out infinite;
+                }
+            `}</style>
         </div>
     );
 } 

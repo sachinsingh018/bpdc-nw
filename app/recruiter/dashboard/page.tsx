@@ -468,7 +468,7 @@ export default function RecruiterDashboard() {
                     </CardHeader>
                     <CardContent className="text-center">
                         <div className="space-y-4">
-                            <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                            <div className="flex items-center justify-center gap-2 text-sm text-black">
                                 <AlertTriangle className="size-4" />
                                 <span>Current role: {userRole || 'Unknown'}</span>
                             </div>
@@ -592,7 +592,7 @@ export default function RecruiterDashboard() {
                                         {userRole?.toUpperCase()}
                                     </Badge>
                                 </div>
-                                <p className="text-blue-200">Manage job applications and post new opportunities</p>
+                                <p className="text-black">Manage job applications and post new opportunities</p>
                             </div>
                         </div>
                     </div>
@@ -616,7 +616,7 @@ export default function RecruiterDashboard() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.totalApplications}</div>
-                            <p className="text-xs text-blue-200">All time</p>
+                            <p className="text-xs text-black">All time</p>
                         </CardContent>
                     </Card>
 
@@ -629,7 +629,7 @@ export default function RecruiterDashboard() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.pendingApplications}</div>
-                            <p className="text-xs text-blue-200">Awaiting review</p>
+                            <p className="text-xs text-black">Awaiting review</p>
                         </CardContent>
                     </Card>
 
@@ -642,7 +642,7 @@ export default function RecruiterDashboard() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.acceptedApplications}</div>
-                            <p className="text-xs text-blue-200">Successful candidates</p>
+                            <p className="text-xs text-black">Successful candidates</p>
                         </CardContent>
                     </Card>
 
@@ -655,7 +655,7 @@ export default function RecruiterDashboard() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.rejectedApplications}</div>
-                            <p className="text-xs text-blue-200">Not selected</p>
+                            <p className="text-xs text-black">Not selected</p>
                         </CardContent>
                     </Card>
 
@@ -668,7 +668,7 @@ export default function RecruiterDashboard() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.phoneScreeningApplications}</div>
-                            <p className="text-xs text-blue-200">Initial screening</p>
+                            <p className="text-xs text-black">Initial screening</p>
                         </CardContent>
                     </Card>
 
@@ -681,7 +681,7 @@ export default function RecruiterDashboard() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.jobAssessmentApplications}</div>
-                            <p className="text-xs text-blue-200">Skills & fit assessment</p>
+                            <p className="text-xs text-black">Skills & fit assessment</p>
                         </CardContent>
                     </Card>
 
@@ -694,7 +694,7 @@ export default function RecruiterDashboard() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.hrInterviewApplications}</div>
-                            <p className="text-xs text-blue-200">HR evaluation</p>
+                            <p className="text-xs text-black">HR evaluation</p>
                         </CardContent>
                     </Card>
 
@@ -707,7 +707,7 @@ export default function RecruiterDashboard() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.finalInterviewApplications}</div>
-                            <p className="text-xs text-blue-200">Final round</p>
+                            <p className="text-xs text-black">Final round</p>
                         </CardContent>
                     </Card>
 
@@ -720,7 +720,7 @@ export default function RecruiterDashboard() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.totalJobs}</div>
-                            <p className="text-xs text-blue-200">Currently posted</p>
+                            <p className="text-xs text-black">Currently posted</p>
                         </CardContent>
                     </Card>
                 </div>
@@ -746,7 +746,7 @@ export default function RecruiterDashboard() {
                                     <Users className="size-5" />
                                     Job Applications
                                 </CardTitle>
-                                <CardDescription className="text-blue-200">Review and manage candidate applications</CardDescription>
+                                <CardDescription className="text-black">Review and manage candidate applications</CardDescription>
                             </CardHeader>
                             <CardContent>
                                 {/* Filters */}
@@ -756,7 +756,7 @@ export default function RecruiterDashboard() {
                                             placeholder="Search by name, email, or job title..."
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="bg-white/10 border-white/20 text-black placeholder:text-blue-200"
+                                            className="bg-white/10 border-white/20 text-black placeholder:text-black"
                                         />
                                     </div>
                                     <Select value={selectedStatus} onValueChange={setSelectedStatus}>
@@ -807,11 +807,11 @@ export default function RecruiterDashboard() {
                                                             {getStatusLabel(application.status)}
                                                         </Badge>
                                                     </div>
-                                                    <div className="text-sm text-blue-200">{application.email}</div>
-                                                    <div className="text-sm text-blue-300">
+                                                    <div className="text-sm text-black">{application.email}</div>
+                                                    <div className="text-sm text-black">
                                                         {application.job?.job_title} • {application.job?.employer_name}
                                                     </div>
-                                                    <div className="text-xs text-blue-400">
+                                                    <div className="text-xs text-black">
                                                         Applied {formatDate(application.createdAt)}
                                                     </div>
                                                 </div>
@@ -824,7 +824,7 @@ export default function RecruiterDashboard() {
                                                     }}
                                                     variant="outline"
                                                     size="sm"
-                                                    className="text-gray-700 dark:text-black border-white/20 hover:bg-white/10"
+                                                    className="text-black border-white/20 hover:bg-white/10"
                                                 >
                                                     <Eye className="size-4 mr-1" />
                                                     Review
@@ -833,7 +833,7 @@ export default function RecruiterDashboard() {
                                         </div>
                                     ))}
                                     {filteredApplications.length === 0 && (
-                                        <div className="text-center py-8 text-blue-200">
+                                        <div className="text-center py-8 text-black">
                                             No applications found matching your criteria.
                                         </div>
                                     )}
@@ -850,7 +850,7 @@ export default function RecruiterDashboard() {
                                     <Briefcase className="size-5" />
                                     Posted Jobs
                                 </CardTitle>
-                                <CardDescription className="text-blue-200">Manage your posted job opportunities</CardDescription>
+                                <CardDescription className="text-black">Manage your posted job opportunities</CardDescription>
                             </CardHeader>
                             <CardContent>
                                 {/* Job Filters */}
@@ -861,7 +861,7 @@ export default function RecruiterDashboard() {
                                             placeholder="Search jobs by title, employer, or description..."
                                             value={jobSearchTerm}
                                             onChange={(e) => setJobSearchTerm(e.target.value)}
-                                            className="bg-white/10 border-white/20 text-black placeholder:text-blue-200"
+                                            className="bg-white/10 border-white/20 text-black placeholder:text-black"
                                         />
                                     </div>
 
@@ -903,7 +903,7 @@ export default function RecruiterDashboard() {
                                             }}
                                             variant="outline"
                                             size="sm"
-                                            className="text-gray-700 dark:text-black border-white/20 hover:bg-white/10"
+                                            className="text-black border-white/20 hover:bg-white/10"
                                         >
                                             Clear Filters
                                         </Button>
@@ -911,7 +911,7 @@ export default function RecruiterDashboard() {
                                 </div>
 
                                 {/* Jobs Count */}
-                                <div className="text-sm text-blue-200 mb-4">
+                                <div className="text-sm text-black mb-4">
                                     Showing {filteredJobs.length} of {jobs.length} jobs
                                 </div>
 
@@ -924,23 +924,23 @@ export default function RecruiterDashboard() {
                                                 </div>
                                                 <div>
                                                     <div className="font-medium text-black">{job.job_title}</div>
-                                                    <div className="text-sm text-blue-200">{job.employer_name}</div>
-                                                    <div className="text-sm text-blue-300 flex items-center gap-2">
+                                                    <div className="text-sm text-black">{job.employer_name}</div>
+                                                    <div className="text-sm text-black flex items-center gap-2">
                                                         <MapPin className="size-3" />
                                                         {job.job_city}, {job.job_state}, {job.job_country}
                                                         {job.job_is_remote && <Badge className="bg-green-100 text-green-800 text-xs">Remote</Badge>}
                                                     </div>
-                                                    <div className="text-sm text-blue-300">
-                                                        <Badge variant="outline" className="text-xs border-blue-300 text-blue-300">
+                                                    <div className="text-sm text-black">
+                                                        <Badge variant="outline" className="text-xs border-black text-black">
                                                             {job.job_employment_type}
                                                         </Badge>
                                                         {job.job_min_salary && job.job_max_salary && (
-                                                            <span className="ml-2 text-xs text-blue-400">
+                                                            <span className="ml-2 text-xs text-black">
                                                                 ${job.job_min_salary} - ${job.job_max_salary} {job.job_salary_period}
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <div className="text-xs text-blue-400">
+                                                    <div className="text-xs text-black">
                                                         Posted {formatDate(job.job_posted_at_datetime_utc || job.created_at)}
                                                     </div>
                                                 </div>
@@ -950,7 +950,7 @@ export default function RecruiterDashboard() {
                                                     onClick={() => window.open(job.job_apply_link, '_blank')}
                                                     variant="outline"
                                                     size="sm"
-                                                    className="text-gray-700 dark:text-black border-white/20 hover:bg-white/10"
+                                                    className="text-black border-white/20 hover:bg-white/10"
                                                 >
                                                     <ExternalLink className="size-4 mr-1" />
                                                     View
@@ -958,7 +958,7 @@ export default function RecruiterDashboard() {
                                             </div>
                                         </div>
                                     )) : (
-                                        <div className="text-center py-8 text-blue-200">
+                                        <div className="text-center py-8 text-black">
                                             {jobs.length === 0
                                                 ? "No jobs posted yet. Create your first job posting!"
                                                 : "No jobs match your current filters. Try adjusting your search or filters."
@@ -1300,7 +1300,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                             <h3 className="font-semibold mb-2">Job Details</h3>
                             <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                 <div className="font-medium">{application.job?.job_title}</div>
-                                <div className="text-sm text-gray-600 dark:text-gray-400">{application.job?.employer_name}</div>
+                                <div className="text-sm text-black">{application.job?.employer_name}</div>
                             </div>
                         </div>
 
@@ -1318,7 +1318,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2">
                                             <Briefcase className="size-4 text-blue-600" />
-                                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                            <span className="text-sm font-medium text-black">
                                                 Resume uploaded
                                             </span>
                                         </div>
@@ -1353,7 +1353,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                 <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                     <div className="flex items-center gap-2">
                                         <Briefcase className="size-4 text-gray-400" />
-                                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                                        <span className="text-sm text-black">
                                             No resume uploaded by candidate
                                         </span>
                                     </div>
