@@ -42,3 +42,4 @@ yarn-error.log*
 /playwright/*
 
 *Zone.Identifier
+.env.local.bak
