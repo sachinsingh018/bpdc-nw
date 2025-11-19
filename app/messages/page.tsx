@@ -355,7 +355,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
             </div>
             {/* Step 1: Collect timezone/working hours */}
             {showScheduleModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
                     <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl p-6 w-full max-w-md relative">
                         <button
                             className="absolute top-3 right-3 text-black hover:text-black dark:hover:text-gray-200"
@@ -432,7 +432,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
             )}
             {/* Step 2: Show slots and confirm */}
             {showSlotsModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
                     <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl p-6 w-full max-w-md relative">
                         <button
                             className="absolute top-3 right-3 text-black hover:text-black dark:hover:text-gray-200"
@@ -446,7 +446,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                             Select a Time Slot ({availableSlots.length} available)
                         </h2>
                         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                            These times respect {name}'s calendar blocks and your working hours
+                            These times respect {name}&apos;s calendar blocks and your working hours
                         </p>
                         {availableSlots.length > 5 && (
                             <div className="mb-3">
@@ -561,7 +561,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
             )}
             {/* Manual Scheduling Modal */}
             {showManualScheduling && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
                     <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl p-6 w-full max-w-md relative">
                         <button
                             className="absolute top-3 right-3 text-black hover:text-black dark:hover:text-gray-200"
@@ -603,7 +603,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
             )}
             {/* View Calendar Modal */}
             {showCalendarModal && userCalendarInfo && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto p-4">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 overflow-y-auto p-4">
                     <div className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl w-full max-w-6xl my-8 relative">
                         <button
                             className="absolute top-4 right-4 text-black hover:text-black dark:hover:text-gray-200 text-2xl z-10 bg-white dark:bg-slate-700 rounded-full size-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-600 transition"
@@ -623,7 +623,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                                 </div>
                                 <div>
                                     <h2 className="text-2xl font-semibold text-black dark:text-black">
-                                        {name}'s Calendar
+                                        {name}&apos;s Calendar
                                     </h2>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">
                                         View their availability and blocked times
@@ -651,7 +651,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                                         Calendar Not Available
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-400 mb-4">
-                                        {name} hasn't set up their calendar yet. You can still schedule a meeting manually.
+                                        {name} hasn&apos;t set up their calendar yet. You can still schedule a meeting manually.
                                     </p>
                                     <button
                                         type="button"
@@ -1651,7 +1651,7 @@ function MessagesContent() {
 
             {/* Calendar Settings Modal */}
             {showCalendarSettings && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto p-4">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 overflow-y-auto p-4">
                     <div className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl w-full max-w-7xl my-8 relative">
                         <button
                             className="absolute top-4 right-4 text-black hover:text-black dark:hover:text-gray-200 text-2xl z-10 bg-white dark:bg-slate-700 rounded-full size-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-600 transition"
@@ -1671,7 +1671,7 @@ function MessagesContent() {
                                         Your Calendar
                                     </h2>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                                        Block time slots to indicate when you're unavailable
+                                        Block time slots to indicate when you&apos;re unavailable
                                     </p>
                                 </div>
                             </div>
