@@ -55,7 +55,12 @@ export async function POST(request: NextRequest) {
             [userBId, weekStartStr, requestedDayOfWeek]
         );
 
-        const blockedSlots = blockedTimesResult.rows.map((row: any) => ({
+        interface BlockedSlot {
+            start: string;
+            end: string;
+        }
+
+        const blockedSlots: BlockedSlot[] = blockedTimesResult.rows.map((row: any) => ({
             start: row.start_time,
             end: row.end_time,
         }));
@@ -74,7 +79,7 @@ export async function POST(request: NextRequest) {
             const slotEndTime = slotEnd.toISOString().split('T')[1].substring(0, 8); // HH:MM:SS
 
             // Check if this slot overlaps with any blocked time
-            return !blockedSlots.some((blocked) => {
+            return !blockedSlots.some((blocked: BlockedSlot) => {
                 // Simple time comparison (assuming same day)
                 return (
                     (slotStartTime >= blocked.start && slotStartTime < blocked.end) ||
