@@ -29,6 +29,7 @@ import { NotificationBell } from '@/components/notification-bell';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { Calendar, Briefcase, Award, Heart, Star } from 'lucide-react';
+import { CommonNavbar } from '@/components/common-navbar';
 
 const ALL_ACTIVITIES = [
     { icon: Users, text: 'Connected with Sarah Chen', time: '2 hours ago' },
@@ -61,6 +62,116 @@ const ALL_ACTIVITIES = [
 function getRandomActivities(count = 5) {
     const shuffled = ALL_ACTIVITIES.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
+}
+
+// Format activity based on action_type and action_category
+function formatActivity(activity: {
+    action_type: string;
+    action_category: string;
+    resource_type: string | null;
+    resource_id: string | null;
+    metadata: any;
+    created_at: Date | string;
+}): { icon: any; text: string; time: string } | null {
+    const timeAgo = getTimeAgo(new Date(activity.created_at));
+
+    // Map action categories to icons
+    const categoryIconMap: { [key: string]: any } = {
+        'social': Users,
+        'content': MessageSquare,
+        'jobs': Briefcase,
+        'authentication': User,
+        'communities': Users,
+        'profile': User,
+        'connections': Users,
+        'messages': MessageSquare,
+    };
+
+    // Map action types to readable text
+    const actionTextMap: { [key: string]: string } = {
+        'connection_request_sent': 'Sent a connection request',
+        'connection_request_accepted': 'Accepted a connection request',
+        'connection_request_rejected': 'Rejected a connection request',
+        'profile_viewed': 'Viewed a profile',
+        'profile_updated': 'Updated profile',
+        'message_sent': 'Sent a message',
+        'message_received': 'Received a message',
+        'post_created': 'Created a post',
+        'post_liked': 'Liked a post',
+        'post_commented': 'Commented on a post',
+        'job_applied': 'Applied for a job',
+        'job_saved': 'Saved a job',
+        'job_viewed': 'Viewed a job',
+        'community_joined': 'Joined a community',
+        'community_post_created': 'Created a community post',
+        'login': 'Logged in',
+        'logout': 'Logged out',
+        'skill_assessment_completed': 'Completed a skill assessment',
+        'skill_badge_earned': 'Earned a skill badge',
+    };
+
+    const icon = categoryIconMap[activity.action_category] || BarChart3;
+    let text = actionTextMap[activity.action_type] || activity.action_type;
+
+    // Enhance text with metadata if available
+    if (activity.metadata) {
+        let metadata: any = {};
+        try {
+            metadata = typeof activity.metadata === 'string'
+                ? JSON.parse(activity.metadata)
+                : activity.metadata;
+        } catch (e) {
+            // If parsing fails, use empty object
+            metadata = {};
+        }
+
+        if (metadata.targetUserName) {
+            text = text.replace('a', ` ${metadata.targetUserName}`);
+        }
+        if (metadata.jobTitle) {
+            text += ` for ${metadata.jobTitle}`;
+        }
+        if (metadata.communityName) {
+            text += ` in ${metadata.communityName}`;
+        }
+        if (metadata.skillName) {
+            text += `: ${metadata.skillName}`;
+        }
+        if (metadata.postTitle) {
+            text += `: ${metadata.postTitle}`;
+        }
+    }
+
+    return {
+        icon,
+        text,
+        time: timeAgo,
+    };
+}
+
+// Helper function to calculate time ago
+function getTimeAgo(date: Date): string {
+    const now = new Date();
+    const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+    if (diffInSeconds < 60) {
+        return 'Just now';
+    } else if (diffInSeconds < 3600) {
+        const minutes = Math.floor(diffInSeconds / 60);
+        return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+    } else if (diffInSeconds < 86400) {
+        const hours = Math.floor(diffInSeconds / 3600);
+        return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+    } else if (diffInSeconds < 604800) {
+        const days = Math.floor(diffInSeconds / 86400);
+        return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+    } else if (diffInSeconds < 2592000) {
+        const weeks = Math.floor(diffInSeconds / 604800);
+        return `${weeks} ${weeks === 1 ? 'week' : 'weeks'} ago`;
+    } else {
+        const months = Math.floor(diffInSeconds / 2592000);
+        return `${months} ${months === 1 ? 'month' : 'months'} ago`;
+    }
 }
 
 const ProfilePage = () => {
@@ -177,9 +288,13 @@ const ProfilePage = () => {
 
     const [userAvatar, setUserAvatar] = useState('/avatar.png');
 
-    const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [sendingRequest, setSendingRequest] = useState(false);
     const [connectionStatus, setConnectionStatus] = useState<'none' | 'pending' | 'connected'>('none');
+    const [recentActivities, setRecentActivities] = useState<Array<{
+        icon: any;
+        text: string;
+        time: string;
+    }>>(getRandomActivities(3)); // Initialize with random activities as fallback
 
     useEffect(() => {
         // const emaili = getCookie('userEmail') || 'sachintest@gmail.com';
@@ -382,6 +497,44 @@ const ProfilePage = () => {
         };
 
         checkConnectionStatus();
+    }, [profileUserId]);
+
+    // Fetch user activities when profileUserId is available
+    useEffect(() => {
+        const fetchActivities = async () => {
+            if (!profileUserId) {
+                // Fallback to random activities if no user ID
+                setRecentActivities(getRandomActivities(3));
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/user-activities?userId=${encodeURIComponent(profileUserId)}&limit=3`);
+                if (response.ok) {
+                    const activities = await response.json();
+                    const formattedActivities = activities
+                        .map(formatActivity)
+                        .filter((activity: any) => activity !== null);
+
+                    // If we have fewer than 3 activities, fill with random ones
+                    if (formattedActivities.length < 3) {
+                        const randomActivities = getRandomActivities(3 - formattedActivities.length);
+                        setRecentActivities([...formattedActivities, ...randomActivities].slice(0, 3));
+                    } else {
+                        setRecentActivities(formattedActivities);
+                    }
+                } else {
+                    // Fallback to random activities on error
+                    setRecentActivities(getRandomActivities(3));
+                }
+            } catch (error) {
+                console.error('Error fetching activities:', error);
+                // Fallback to random activities on error
+                setRecentActivities(getRandomActivities(3));
+            }
+        };
+
+        fetchActivities();
     }, [profileUserId]);
 
     // Add a delay to show loading for 4 seconds
@@ -677,96 +830,82 @@ const ProfilePage = () => {
     //         </div>
     //     );
     // }
-    const randomActivities = getRandomActivities(3);
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900">
-            {/* Enhanced Header */}
-            <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border-b border-gray-200 dark:border-white/10 sticky top-0 z-50 shadow-sm">
-                <div className="flex items-center justify-between p-4 max-w-7xl mx-auto">
-                    {/* Logo and Brand */}
-                    <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300 group">
-                            <div className="size-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-                                <Sparkles className="size-5 text-white" />
-                            </div>
-                            <span className="text-lg font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                                Networkqy
-                            </span>
-                        </div>
-                    </div>
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-2">
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/profile')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 bg-purple-50 dark:bg-purple-900/20"
-                        >
-                            <Home className="size-4" />
-                            <span>Home</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/friends')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
-                        >
-                            <Users className="size-4" />
-                            <span>Network</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/chat')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
-                        >
-                            <MessageSquare className="size-4" />
-                            <span>AI Chat</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/connections')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
-                        >
-                            <User className="size-4" />
-                            <span>Connections</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => router.push('/anonymous-feed')}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
-                        >
-                            <MessageCircle className="size-4" />
-                            <span>Anonymous Feed</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => { router.push('/job-board'); setShowMobileMenu(false); }}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
-                        >
-                            <Briefcase className="size-4" />
-                            <span>Job Board</span>
-                        </Button>
-                    </div>
-                    {/* Right side - Notifications, Theme Toggle, and Mobile Menu */}
-                    <div className="flex items-center gap-3">
-                        <NotificationBell />
-                        <ThemeToggle />
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setShowMobileMenu(!showMobileMenu)}
-                            className="md:hidden"
-                        >
-                            <Menu className="size-5" />
-                        </Button>
-                    </div>
-                </div>
+        <div className="min-h-screen relative overflow-hidden" style={{
+            background: `
+                radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
+                radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
+                radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
+                radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
+                radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
+                radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
+                radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 50%),
+                radial-gradient(circle at 50% 70%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
+            `
+        }}>
+            {/* Dynamic Vibrant Background Elements */}
+            <div className="fixed inset-0 z-0">
+                {/* Deep Royal Blue */}
+                <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
+                <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
+
+                {/* Bright Golden Yellow */}
+                <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
+                <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
+
+                {/* Crimson Red */}
+                <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
+                <div className="absolute top-1/2 right-1/3 size-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
+
+                {/* Charcoal Black */}
+                <div className="absolute bottom-10 right-5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
+
+                {/* Light Gray */}
+                <div className="absolute top-1/4 left-1/2 size-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
+
+                {/* Mid-tone Blue */}
+                <div className="absolute bottom-1/3 right-1/4 size-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
+
+                {/* Warm Golden Glow */}
+                <div className="absolute top-1/2 left-1/5 size-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
+
+                {/* Vibrant Red */}
+                <div className="absolute top-2/3 right-1/5 size-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
+
+                {/* Neon Purple */}
+                <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
+                <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
+
+                {/* White Bubbles */}
+                <div className="absolute top-1/5 right-1/3 size-80 rounded-full blur-3xl opacity-50 animate-pulse delay-600" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute bottom-1/5 left-1/3 size-70 rounded-full blur-3xl opacity-45 animate-pulse delay-1700" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+                <div className="absolute top-2/3 left-1/4 size-65 rounded-full blur-3xl opacity-55 animate-pulse delay-3200" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute bottom-1/3 right-1/5 size-75 rounded-full blur-3xl opacity-50 animate-pulse delay-2100" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+                <div className="absolute top-10 right-1/4 size-72 rounded-full blur-3xl opacity-40 animate-pulse delay-800" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute bottom-1/6 right-1/2 size-68 rounded-full blur-3xl opacity-50 animate-pulse delay-1400" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+                <div className="absolute top-1/3 left-10 size-90 rounded-full blur-3xl opacity-45 animate-pulse delay-2300" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+                <div className="absolute bottom-1/4 right-10 size-76 rounded-full blur-3xl opacity-55 animate-pulse delay-2600" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-1/2 right-1/6 size-64 rounded-full blur-3xl opacity-45 animate-pulse delay-1100" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+                <div className="absolute bottom-20 left-1/5 size-82 rounded-full blur-3xl opacity-50 animate-pulse delay-1900" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-1/4 right-2/3 size-74 rounded-full blur-3xl opacity-40 animate-pulse delay-2900" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+                <div className="absolute bottom-1/2 left-2/5 size-66 rounded-full blur-3xl opacity-55 animate-pulse delay-1300" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-3/4 right-1/2 size-70 rounded-full blur-3xl opacity-45 animate-pulse delay-3400" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+                <div className="absolute bottom-1/3 left-1/6 size-78 rounded-full blur-3xl opacity-50 animate-pulse delay-2000" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+                <div className="absolute top-1/6 left-1/2 size-68 rounded-full blur-3xl opacity-40 animate-pulse delay-3700" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
+                <div className="absolute bottom-1/5 right-2/5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-1500" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+                <div className="absolute top-2/5 left-1/3 size-76 rounded-full blur-3xl opacity-45 animate-pulse delay-2400" style={{ background: 'rgba(255, 255, 255, 0.45)' }}></div>
+                <div className="absolute bottom-2/3 right-1/4 size-64 rounded-full blur-3xl opacity-55 animate-pulse delay-3100" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
             </div>
-            <div className="p-6 max-w-7xl mx-auto">
+
+            {/* Common Navbar */}
+            <CommonNavbar currentPage="/friendprof" />
+
+            <div className="p-3 md:p-4 lg:p-6 max-w-7xl mx-auto relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {/* Left Column - Profile Sections */}
                     <div className="lg:col-span-2 space-y-6">
@@ -774,28 +913,37 @@ const ProfilePage = () => {
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-gray-200 dark:border-white/20 shadow-lg"
+                            className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 mb-8 border-2 shadow-xl"
+                            style={{
+                                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 30%, rgba(138, 43, 226, 0.1) 70%, rgba(255, 255, 255, 0.95) 100%)',
+                                borderColor: 'rgba(255, 215, 0, 0.6)',
+                                boxShadow: '0 25px 50px rgba(25, 25, 112, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
+                            }}
                         >
-                            <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+                            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
                                 <div className="relative">
                                     <Image
                                         src={userAvatar}
                                         alt={userName}
                                         width={120}
                                         height={120}
-                                        className="rounded-full border-4 border-purple-500"
+                                        className="size-20 md:size-[120px] rounded-full border-4 shadow-xl ring-4"
+                                        style={{
+                                            borderColor: 'rgba(255, 215, 0, 0.8)',
+                                            boxShadow: '0 10px 30px rgba(25, 25, 112, 0.3), 0 0 20px rgba(255, 215, 0, 0.4)'
+                                        }}
                                     />
                                 </div>
                                 <div className="flex-1">
-                                    <div className="flex items-center justify-between mb-4">
-                                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{userName}</h1>
+                                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-3 md:mb-4">
+                                        <h1 className="text-xl md:text-3xl font-bold text-black">{userName}</h1>
                                         <div className="flex items-center gap-2">
                                             {getCookie('userEmail') !== userEmail && (
                                                 <>
                                                     {!isConnectionCheckComplete ? (
                                                         <Button
                                                             disabled
-                                                            className="bg-gray-400 cursor-not-allowed"
+                                                            className="bg-gray-400 cursor-not-allowed text-black"
                                                         >
                                                             Checking...
                                                         </Button>
@@ -803,21 +951,25 @@ const ProfilePage = () => {
                                                         <Button
                                                             onClick={handleConnect}
                                                             disabled={sendingRequest}
-                                                            className="bg-purple-600 hover:bg-purple-700 text-white"
+                                                            className="text-black font-bold"
+                                                            style={{
+                                                                background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
+                                                                boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
+                                                            }}
                                                         >
                                                             {sendingRequest ? 'Sending...' : 'Connect'}
                                                         </Button>
                                                     ) : connectionStatus === 'pending' ? (
                                                         <Button
                                                             disabled
-                                                            className="bg-gray-400 cursor-not-allowed"
+                                                            className="bg-gray-400 cursor-not-allowed text-black"
                                                         >
                                                             Pending
                                                         </Button>
                                                     ) : connectionStatus === 'connected' ? (
                                                         <Button
                                                             disabled
-                                                            className="bg-green-600 cursor-not-allowed"
+                                                            className="bg-green-600 cursor-not-allowed text-black"
                                                         >
                                                             Connected
                                                         </Button>
@@ -826,18 +978,19 @@ const ProfilePage = () => {
                                             )}
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-4 text-gray-600 dark:text-gray-300 mb-4">
+                                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-black mb-3 md:mb-4 text-xs md:text-sm font-medium">
                                         <div className="flex items-center gap-2">
-                                            <MapPin size={16} />
+                                            <MapPin size={12} className="md:size-4" />
                                             <span>Dubai, UAE</span>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <Globe size={16} />
-                                            <span>Available for opportunities</span>
+                                            <Globe size={12} className="md:size-4" />
+                                            <span className="hidden sm:inline">Available for opportunities</span>
+                                            <span className="sm:hidden">Available</span>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3 mb-4">
-                                        <span className="text-gray-500 dark:text-gray-400">{userEmail}</span>
+                                        <span className="text-black text-xs md:text-sm font-medium">{userEmail}</span>
                                     </div>
                                 </div>
                             </div>
@@ -846,83 +999,169 @@ const ProfilePage = () => {
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-gray-200 dark:border-white/20 shadow-lg"
+                            transition={{ delay: 0.1 }}
+                            className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 mb-8 border-2 shadow-xl"
+                            style={{
+                                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(25, 25, 112, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                                borderColor: 'rgba(25, 25, 112, 0.6)',
+                                boxShadow: '0 25px 50px rgba(25, 25, 112, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                                zIndex: 1
+                            }}
                         >
-                            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">About</h2>
-                            <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line">
+                            <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                                <Briefcase className="size-5 text-blue-800" />
+                                About
+                            </h2>
+                            <p className="text-black leading-relaxed text-sm md:text-base font-medium whitespace-pre-line">
                                 {userBio || 'No bio available.'}
                             </p>
                         </motion.div>
-                        {/* Skills, Interests, Goals, Metrics Sections */}
+                        {/* Skills Section */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-gray-200 dark:border-white/20 shadow-lg"
+                            transition={{ delay: 0.2 }}
+                            className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 mb-8 border-2 shadow-xl"
+                            style={{
+                                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(70, 130, 180, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                                borderColor: 'rgba(70, 130, 180, 0.6)',
+                                boxShadow: '0 25px 50px rgba(70, 130, 180, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                                zIndex: 1
+                            }}
                         >
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Skills</h3>
-                                    <div className="flex flex-wrap gap-2">
-                                        {userSkills.length > 0 ? userSkills.map((skill, idx) => (
-                                            <span key={idx} className="px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs rounded-full">
-                                                {skill}
-                                            </span>
-                                        )) : <span className="text-gray-500">No skills listed.</span>}
+                            <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                                <Star className="size-5 text-blue-600" />
+                                Skills & Expertise
+                            </h2>
+                            <div className="flex flex-wrap gap-2">
+                                {userSkills.length > 0 ? userSkills.map((skill, idx) => (
+                                    <div key={idx} className="flex items-center gap-2 px-3 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105" style={{
+                                        background: 'linear-gradient(135deg, rgba(70, 130, 180, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
+                                        boxShadow: '0 5px 15px rgba(70, 130, 180, 0.3)'
+                                    }}>
+                                        <span className="text-sm font-bold text-black">{skill}</span>
                                     </div>
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Interests</h3>
-                                    <div className="flex flex-wrap gap-2">
-                                        {interests.length > 0 ? interests.map((interest, idx) => (
-                                            <span key={idx} className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-full">
-                                                {interest}
-                                            </span>
-                                        )) : <span className="text-gray-500">No interests listed.</span>}
+                                )) : <span className="text-black font-medium">No skills listed.</span>}
+                            </div>
+                        </motion.div>
+
+                        {/* Interests Section */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 }}
+                            className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 mb-8 border-2 shadow-xl"
+                            style={{
+                                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(220, 20, 60, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                                borderColor: 'rgba(220, 20, 60, 0.6)',
+                                boxShadow: '0 25px 50px rgba(220, 20, 60, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                                zIndex: 5
+                            }}
+                        >
+                            <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                                <Heart className="size-5 text-red-600" />
+                                Interests & Industries
+                            </h2>
+                            <div className="flex flex-wrap gap-2">
+                                {interests.length > 0 ? interests.map((interest, idx) => (
+                                    <div key={idx} className="flex items-center gap-2 px-3 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105" style={{
+                                        background: 'linear-gradient(135deg, rgba(220, 20, 60, 0.9) 0%, rgba(255, 0, 0, 0.8) 100%)',
+                                        boxShadow: '0 5px 15px rgba(220, 20, 60, 0.3)'
+                                    }}>
+                                        <span className="text-sm font-bold text-black">{interest}</span>
                                     </div>
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Goals</h3>
-                                    <div className="flex flex-wrap gap-2">
-                                        {goals.length > 0 ? goals.map((goal, idx) => (
-                                            <span key={idx} className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded-full">
-                                                {goal}
-                                            </span>
-                                        )) : <span className="text-gray-500">No goals listed.</span>}
+                                )) : <span className="text-black font-medium">No interests listed.</span>}
+                            </div>
+                        </motion.div>
+
+                        {/* Goals Section */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                            className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 mb-8 border-2 shadow-xl"
+                            style={{
+                                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                                borderColor: 'rgba(255, 215, 0, 0.6)',
+                                boxShadow: '0 25px 50px rgba(255, 215, 0, 0.2), 0 0 30px rgba(138, 43, 226, 0.1)',
+                                zIndex: 1
+                            }}
+                        >
+                            <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                                <Award className="size-5 text-yellow-600" />
+                                Goals
+                            </h2>
+                            <div className="flex flex-wrap gap-2">
+                                {goals.length > 0 ? goals.map((goal, idx) => (
+                                    <div key={idx} className="flex items-center gap-2 px-3 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105" style={{
+                                        background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
+                                        boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
+                                    }}>
+                                        <span className="text-sm font-bold text-black">{goal}</span>
                                     </div>
-                                </div>
-                                <div>
-                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Metrics</h3>
-                                    <div className="flex flex-wrap gap-2">
-                                        {metrics.length > 0 ? metrics.map((metric, idx) => (
-                                            <span key={idx} className="px-2 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 text-xs rounded-full">
-                                                {metric}
-                                            </span>
-                                        )) : <span className="text-gray-500">No metrics listed.</span>}
+                                )) : <span className="text-black font-medium">No goals listed.</span>}
+                            </div>
+                        </motion.div>
+
+                        {/* Metrics Section */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5 }}
+                            className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 mb-8 border-2 shadow-xl"
+                            style={{
+                                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                                borderColor: 'rgba(255, 215, 0, 0.6)',
+                                boxShadow: '0 25px 50px rgba(255, 215, 0, 0.2), 0 0 30px rgba(138, 43, 226, 0.1)',
+                                zIndex: 1
+                            }}
+                        >
+                            <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                                <BarChart3 className="size-5 text-yellow-600" />
+                                Metrics
+                            </h2>
+                            <div className="flex flex-wrap gap-2">
+                                {metrics.length > 0 ? metrics.map((metric, idx) => (
+                                    <div key={idx} className="flex items-center gap-2 px-3 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105" style={{
+                                        background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
+                                        boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
+                                    }}>
+                                        <span className="text-sm font-bold text-black">{metric}</span>
                                     </div>
-                                </div>
+                                )) : <span className="text-black font-medium">No metrics listed.</span>}
                             </div>
                         </motion.div>
                         {/* Social Links Section */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-gray-200 dark:border-white/20 shadow-lg"
+                            transition={{ delay: 0.6 }}
+                            className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 mb-8 border-2 shadow-xl"
+                            style={{
+                                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(138, 43, 226, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                                borderColor: 'rgba(138, 43, 226, 0.6)',
+                                boxShadow: '0 25px 50px rgba(138, 43, 226, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                                zIndex: 1
+                            }}
                         >
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Social Links</h3>
+                            <h3 className="text-lg font-bold text-black mb-4 flex items-center gap-2">
+                                <Globe className="size-5 text-purple-600" />
+                                Social Links
+                            </h3>
                             <div className="flex flex-wrap gap-4">
                                 {socialData.linkedinURL && (
-                                    <a href={socialData.linkedinURL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-700 dark:text-blue-300 hover:underline">
-                                        <FaLinkedin /> LinkedIn
+                                    <a href={socialData.linkedinURL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-black font-medium hover:opacity-80 transition-opacity">
+                                        <FaLinkedin className="text-blue-600" /> LinkedIn
                                     </a>
                                 )}
                                 {socialData.FacebookURL && (
-                                    <a href={socialData.FacebookURL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-700 dark:text-blue-300 hover:underline">
-                                        <FaFacebook /> Facebook
+                                    <a href={socialData.FacebookURL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-black font-medium hover:opacity-80 transition-opacity">
+                                        <FaFacebook className="text-blue-600" /> Facebook
                                     </a>
                                 )}
                                 {socialData.phone && (
-                                    <span className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
-                                        <FaPhone /> {socialData.phone}
+                                    <span className="flex items-center gap-2 text-black font-medium">
+                                        <FaPhone className="text-green-600" /> {socialData.phone}
                                     </span>
                                 )}
                             </div>
@@ -934,55 +1173,80 @@ const ProfilePage = () => {
                         <motion.div
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.5 }}
-                            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-white/20 shadow-lg"
+                            transition={{ delay: 0.4 }}
+                            className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl"
+                            style={{
+                                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(138, 43, 226, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                                borderColor: 'rgba(138, 43, 226, 0.6)',
+                                boxShadow: '0 25px 50px rgba(138, 43, 226, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                                zIndex: 1
+                            }}
                         >
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h2>
+                            <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                                <BarChart3 className="size-5 text-purple-600" />
+                                Recent Activity
+                            </h2>
                             <div className="space-y-3">
-                                {randomActivities.map((activity, idx) => (
-                                    <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-white/5 rounded-lg">
-                                        <activity.icon size={16} className="text-purple-600 dark:text-purple-400" />
-                                        <div className="flex-1">
-                                            <p className="text-gray-900 dark:text-white text-sm">{activity.text}</p>
-                                            <p className="text-gray-500 dark:text-gray-400 text-xs">{activity.time}</p>
+                                {recentActivities.length > 0 ? recentActivities.map((activity, idx) => {
+                                    const IconComponent = activity.icon;
+                                    return (
+                                        <div key={idx} className="flex items-center gap-3 p-3 bg-white/50 dark:bg-white/5 rounded-lg border border-purple-200/30 dark:border-purple-500/30">
+                                            <IconComponent size={16} className="text-purple-600" />
+                                            <div className="flex-1">
+                                                <p className="text-black text-sm font-medium">{activity.text}</p>
+                                                <p className="text-black/70 text-xs">{activity.time}</p>
+                                            </div>
                                         </div>
+                                    );
+                                }) : (
+                                    <div className="text-center py-4">
+                                        <p className="text-black/70 text-sm">No recent activity</p>
                                     </div>
-                                ))}
+                                )}
                             </div>
                         </motion.div>
                         {/* Contact Information */}
                         <motion.div
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.6 }}
-                            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200 dark:border-white/20 shadow-lg"
+                            transition={{ delay: 0.5 }}
+                            className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl"
+                            style={{
+                                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(25, 25, 112, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
+                                borderColor: 'rgba(25, 25, 112, 0.6)',
+                                boxShadow: '0 25px 50px rgba(25, 25, 112, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
+                                zIndex: 1
+                            }}
                         >
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Contact Information</h2>
+                            <h2 className="text-xl font-bold text-black mb-4 flex items-center gap-2">
+                                <User className="size-5 text-blue-800" />
+                                Contact Information
+                            </h2>
                             <div className="space-y-3">
                                 {socialData.linkedinURL && (
-                                    <div className="flex items-center gap-3 text-gray-900 dark:text-white">
+                                    <div className="flex items-center gap-3 text-black">
                                         <FaLinkedin className="text-blue-600" />
-                                        <a href={socialData.linkedinURL} target="_blank" rel="noopener noreferrer" className="text-sm hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                                        <a href={socialData.linkedinURL} target="_blank" rel="noopener noreferrer" className="text-sm font-medium hover:opacity-80 transition-opacity">
                                             LinkedIn Profile
                                         </a>
                                     </div>
                                 )}
                                 {socialData.FacebookURL && (
-                                    <div className="flex items-center gap-3 text-gray-900 dark:text-white">
+                                    <div className="flex items-center gap-3 text-black">
                                         <FaFacebook className="text-blue-600" />
-                                        <span className="text-sm">{socialData.FacebookURL}</span>
+                                        <span className="text-sm font-medium">{socialData.FacebookURL}</span>
                                     </div>
                                 )}
                                 {socialData.phone && (
-                                    <div className="flex items-center gap-3 text-gray-900 dark:text-white">
+                                    <div className="flex items-center gap-3 text-black">
                                         <FaPhone className="text-green-600" />
-                                        <span className="text-sm">{socialData.phone}</span>
+                                        <span className="text-sm font-medium">{socialData.phone}</span>
                                     </div>
                                 )}
                                 {userEmail && (
-                                    <div className="flex items-center gap-3 text-gray-900 dark:text-white">
+                                    <div className="flex items-center gap-3 text-black">
                                         <FaEnvelope className="text-red-600" />
-                                        <a href={`mailto:${userEmail}`} className="text-sm hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                                        <a href={`mailto:${userEmail}`} className="text-sm font-medium hover:opacity-80 transition-opacity">
                                             {userEmail}
                                         </a>
                                     </div>
@@ -992,89 +1256,33 @@ const ProfilePage = () => {
                     </div>
                 </div>
             </div>
-            {/* Mobile Navigation Menu */}
-            {showMobileMenu && (
-                <div className="md:hidden border-t border-gray-200 dark:border-white/10 bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm">
-                    <div className="flex flex-col p-4 space-y-2">
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => {
-                                router.push('/profile');
-                                setShowMobileMenu(false);
-                            }}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start bg-purple-50 dark:bg-purple-900/20"
-                        >
-                            <Home className="size-4" />
-                            <span>Home</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => {
-                                router.push('/friends');
-                                setShowMobileMenu(false);
-                            }}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
-                        >
-                            <Users className="size-4" />
-                            <span>Network</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => {
-                                router.push('/connections');
-                                setShowMobileMenu(false);
-                            }}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
-                        >
-                            <User className="size-4" />
-                            <span>Connections</span>
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => {
-                                router.push('/anonymous-feed');
-                                setShowMobileMenu(false);
-                            }}
-                            className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 justify-start"
-                        >
-                            <MessageCircle className="size-4" />
-                            <span>Anonymous Feed</span>
-                        </Button>
-                    </div>
-                </div>
-            )}
+            <style jsx global>{`
+                @keyframes float {
+                  0% {
+                    transform: translateY(0) translateX(0);
+                  }
+                  50% {
+                    transform: translateY(-20px) translateX(10px);
+                  }
+                  100% {
+                    transform: translateY(0) translateX(0);
+                  }
+                }
+              
+                .animate-float-slow {
+                  animation: float 12s ease-in-out infinite;
+                }
+              
+                .animate-float-medium {
+                  animation: float 8s ease-in-out infinite;
+                }
+              
+                .animate-float-fast {
+                  animation: float 6s ease-in-out infinite;
+                }
+            `}</style>
         </div>
     );
-    <style jsx global>{`
-        @keyframes float {
-          0% {
-            transform: translateY(0) translateX(0);
-          }
-          50% {
-            transform: translateY(-20px) translateX(10px);
-          }
-          100% {
-            transform: translateY(0) translateX(0);
-          }
-        }
-      
-        .animate-float-slow {
-          animation: float 12s ease-in-out infinite;
-        }
-      
-        .animate-float-medium {
-          animation: float 8s ease-in-out infinite;
-        }
-      
-        .animate-float-fast {
-          animation: float 6s ease-in-out infinite;
-        }
-      `}</style>
-
 };
 
 export default ProfilePage;

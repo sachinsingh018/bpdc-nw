@@ -53,8 +53,10 @@ import { TimestampFsp } from 'drizzle-orm/mysql-core';
 // use the Drizzle adapter for Auth.js / NextAuth
 // https://authjs.dev/reference/adapter/drizzle
 
-// biome-ignore lint: Forbidden non-null assertion.
-const client = postgres(process.env.POSTGRES_URL!);
+import { getBpdcPostgresClient } from './connection';
+
+// Create postgres client connected to bpdc database
+const client = getBpdcPostgresClient();
 export const db = drizzle(client);
 
 export async function getUser(email: string): Promise<Array<User>> {
@@ -296,6 +298,137 @@ export async function getAllUsers() {
   }
 }
 
+/**
+ * Get users with connection statuses in a single optimized query
+ * This replaces multiple API calls with one efficient database query
+ */
+export async function getUsersWithConnectionStatuses(
+  currentUserId: string,
+  userIds: string[]
+): Promise<Record<string, string>> {
+  try {
+    if (userIds.length === 0) return {};
+
+    // Use Drizzle's inArray for better compatibility
+    const connections = await db
+      .select({
+        otherUserId: sql<string>`CASE 
+          WHEN ${connection.sender_id} = ${currentUserId} THEN ${connection.receiver_id}
+          ELSE ${connection.sender_id}
+        END`,
+        status: connection.status,
+      })
+      .from(connection)
+      .where(
+        and(
+          or(
+            eq(connection.sender_id, currentUserId),
+            eq(connection.receiver_id, currentUserId)
+          ),
+          or(
+            inArray(connection.sender_id, userIds),
+            inArray(connection.receiver_id, userIds)
+          )
+        )
+      );
+    const statuses: Record<string, string> = {};
+
+    connections.forEach((conn: any) => {
+      statuses[conn.otherUserId] = conn.status;
+    });
+
+    return statuses;
+  } catch (error) {
+    console.error('❌ Failed to get users with connection statuses:', error);
+    return {};
+  }
+}
+
+/**
+ * Get recommended users based on profile matching with PostgreSQL
+ * Uses full-text search and excludes existing connections
+ */
+export async function getRecommendedUsers(
+  currentUserEmail: string,
+  limit: number = 10,
+  randomize: boolean = true
+) {
+  try {
+    const [currentUser] = await getUser(currentUserEmail);
+    if (!currentUser) return [];
+
+    // Build search terms from user profile for matching
+    const searchTerms = [
+      currentUser.strengths || '',
+      currentUser.interests || '',
+      currentUser.goals || '',
+      currentUser.headline || '',
+    ].filter(Boolean).join(' ');
+
+    // Get users excluding current user and existing connections
+    // Use full-text search if user has profile data, otherwise random/top users
+    if (searchTerms && !randomize) {
+      const query = sql`
+        SELECT u.*,
+          ts_rank(
+            to_tsvector('english',
+              coalesce(u."name",'') || ' ' ||
+              coalesce(u."linkedinInfo",'') || ' ' ||
+              coalesce(u."goals",'') || ' ' ||
+              coalesce(u."strengths",'') || ' ' ||
+              coalesce(u."interests",'') || ' ' ||
+              coalesce(u."profilemetrics",'') || ' ' ||
+              coalesce(u."headline",'')
+            ),
+            plainto_tsquery('english', ${searchTerms})
+          ) AS match_score
+        FROM "User" u
+        WHERE u."email" != ${currentUserEmail}
+          AND u."id" NOT IN (
+            SELECT CASE 
+              WHEN c."sender_id" = ${currentUser.id} THEN c."receiver_id"
+              ELSE c."sender_id"
+            END
+            FROM "connection" c
+            WHERE (c."sender_id" = ${currentUser.id} OR c."receiver_id" = ${currentUser.id})
+              AND c."status" IN ('accepted', 'pending')
+          )
+        ORDER BY match_score DESC, u."createdAt" DESC
+        LIMIT ${limit}
+      `;
+      return await db.execute(query);
+    } else {
+      // Random or top users by creation date
+      const query = sql`
+        SELECT u.*
+        FROM "User" u
+        WHERE u."email" != ${currentUserEmail}
+          AND u."id" NOT IN (
+            SELECT CASE 
+              WHEN c."sender_id" = ${currentUser.id} THEN c."receiver_id"
+              ELSE c."sender_id"
+            END
+            FROM "connection" c
+            WHERE (c."sender_id" = ${currentUser.id} OR c."receiver_id" = ${currentUser.id})
+              AND c."status" IN ('accepted', 'pending')
+          )
+        ORDER BY ${randomize ? sql`RANDOM()` : sql`u."createdAt" DESC`}
+        LIMIT ${limit}
+      `;
+      return await db.execute(query);
+    }
+  } catch (error) {
+    console.error('❌ Failed to get recommended users:', error);
+    // Fallback to simple query
+    return await db
+      .select()
+      .from(user)
+      .where(ne(user.email, currentUserEmail))
+      .orderBy(desc(user.createdAt))
+      .limit(limit);
+  }
+}
+
 export async function getArchiveCardsByEmail(email: string): Promise<ArchiveCard[]> {
   try {
     return await db.select().from(archiveCard).where(eq(archiveCard.email, email));
@@ -399,6 +532,122 @@ export async function updateFlaggedChatExpiry(email: string, flaggedChatExpiresA
     .update(user)
     .set({ flaggedChatExpiresAt })
     .where(eq(user.email, email));
+}
+
+// Daily message limit functions
+const DAILY_MESSAGE_LIMIT = 7;
+
+/**
+ * Check if the daily message count needs to be reset (new day)
+ */
+function shouldResetDailyCount(lastResetDate: Date | null): boolean {
+  if (!lastResetDate) return true;
+
+  const today = new Date();
+  const lastReset = new Date(lastResetDate);
+
+  // Reset if it's a different day
+  return (
+    today.getFullYear() !== lastReset.getFullYear() ||
+    today.getMonth() !== lastReset.getMonth() ||
+    today.getDate() !== lastReset.getDate()
+  );
+}
+
+/**
+ * Get current daily message count for a user
+ */
+export async function getDailyMessageCount(email: string): Promise<{ count: number; canSend: boolean }> {
+  try {
+    const [result] = await db
+      .select({
+        dailyMessageCount: user.dailyMessageCount,
+        lastMessageResetDate: user.lastMessageResetDate,
+      })
+      .from(user)
+      .where(eq(user.email, email));
+
+    if (!result) {
+      return { count: 0, canSend: true };
+    }
+
+    // Reset count if it's a new day
+    if (shouldResetDailyCount(result.lastMessageResetDate)) {
+      await resetDailyMessageCount(email);
+      return { count: 0, canSend: true };
+    }
+
+    const count = result.dailyMessageCount || 0;
+    return {
+      count,
+      canSend: count < DAILY_MESSAGE_LIMIT
+    };
+  } catch (error) {
+    console.error('❌ Failed to get daily message count:', error);
+    // On error, allow sending (fail open)
+    return { count: 0, canSend: true };
+  }
+}
+
+/**
+ * Increment daily message count for a user
+ */
+export async function incrementDailyMessageCount(email: string): Promise<void> {
+  try {
+    const today = new Date();
+    const [currentUser] = await db
+      .select({
+        dailyMessageCount: user.dailyMessageCount,
+        lastMessageResetDate: user.lastMessageResetDate,
+      })
+      .from(user)
+      .where(eq(user.email, email));
+
+    if (!currentUser) {
+      console.error('User not found for email:', email);
+      return;
+    }
+
+    // Reset if it's a new day
+    if (shouldResetDailyCount(currentUser.lastMessageResetDate)) {
+      await db
+        .update(user)
+        .set({
+          dailyMessageCount: 1,
+          lastMessageResetDate: today,
+        })
+        .where(eq(user.email, email));
+    } else {
+      // Increment existing count
+      await db
+        .update(user)
+        .set({
+          dailyMessageCount: sql`${user.dailyMessageCount} + 1`,
+        })
+        .where(eq(user.email, email));
+    }
+  } catch (error) {
+    console.error('❌ Failed to increment daily message count:', error);
+    throw error;
+  }
+}
+
+/**
+ * Reset daily message count (for a new day)
+ */
+export async function resetDailyMessageCount(email: string): Promise<void> {
+  try {
+    await db
+      .update(user)
+      .set({
+        dailyMessageCount: 0,
+        lastMessageResetDate: new Date(),
+      })
+      .where(eq(user.email, email));
+  } catch (error) {
+    console.error('❌ Failed to reset daily message count:', error);
+    throw error;
+  }
 }
 
 
@@ -1612,7 +1861,7 @@ export async function getSkillQuestions(skillId: number): Promise<SkillQuestion[
       .from(skillQuestions)
       .where(eq(skillQuestions.skillId, skillId))
       .orderBy(sql`RANDOM()`)
-      .limit(2);
+      .limit(10);
   } catch (error) {
     console.error('Failed to get skill questions:', error);
     throw error;
@@ -1792,6 +2041,72 @@ export async function createCommunityPost({
     });
   } catch (error) {
     console.error('Failed to create community post:', error);
+    throw error;
+  }
+}
+
+export async function createCommunity({
+  name,
+  description,
+  bannerImage,
+  createdBy,
+}: {
+  name: string;
+  description?: string | null;
+  bannerImage?: string | null;
+  createdBy: string;
+}): Promise<Community> {
+  try {
+    const [newCommunity] = await db
+      .insert(communities)
+      .values({
+        name,
+        description: description || null,
+        banner_image: bannerImage || null,
+        created_by: createdBy,
+      })
+      .returning();
+    return newCommunity;
+  } catch (error) {
+    console.error('Failed to create community:', error);
+    throw error;
+  }
+}
+
+export async function isCommunityAdmin(userId: string, communityId: string): Promise<boolean> {
+  try {
+    const community = await getCommunityById(communityId);
+    return community?.created_by ? community.created_by === userId : false;
+  } catch (error) {
+    console.error('Failed to check community admin status:', error);
+    return false;
+  }
+}
+
+export async function removeCommunityMember(membershipId: string): Promise<void> {
+  try {
+    await db.delete(communityMemberships).where(eq(communityMemberships.id, membershipId));
+  } catch (error) {
+    console.error('Failed to remove community member:', error);
+    throw error;
+  }
+}
+
+export async function deleteCommunityPost(postId: string): Promise<void> {
+  try {
+    await db.delete(communityPosts).where(eq(communityPosts.id, postId));
+  } catch (error) {
+    console.error('Failed to delete community post:', error);
+    throw error;
+  }
+}
+
+export async function deleteCommunity(communityId: string): Promise<void> {
+  try {
+    // Cascade delete will handle memberships and posts
+    await db.delete(communities).where(eq(communities.id, communityId));
+  } catch (error) {
+    console.error('Failed to delete community:', error);
     throw error;
   }
 }

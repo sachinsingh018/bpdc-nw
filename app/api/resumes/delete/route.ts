@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import { getBpdcPostgresClient } from '@/lib/db/connection';
 import { uploads } from '@/lib/db/schema';
 import { eq, and } from 'drizzle-orm';
 import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
@@ -14,7 +14,7 @@ const s3 = new S3Client({
   },
 });
 
-const client = postgres(process.env.POSTGRES_URL!);
+const client = getBpdcPostgresClient();
 const db = drizzle(client);
 
 export async function POST(request: Request) {

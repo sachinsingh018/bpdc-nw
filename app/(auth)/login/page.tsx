@@ -105,15 +105,6 @@ export default function LoginTry() {
         <h1 className="text-3xl font-bold mb-8 text-center tracking-wide">Welcome Back</h1>
         <AuthForm action={handleSubmit} defaultEmail={email}>
           <SubmitButton isSuccessful={isSuccessful} isLoading={state.status === 'in_progress'}>Sign in</SubmitButton>
-          <div className="flex justify-end mt-2">
-            <a href="/forgot-password" className="text-sm text-purple-600 hover:underline">Forgot password?</a>
-          </div>
-          <p className="text-center text-sm text-gray-600 mt-4 dark:text-zinc-400">
-            Don&apos;t have an account?{' '}
-            <a href="/onboarding" className="font-semibold text-gray-800 hover:underline dark:text-zinc-200">
-              Sign up
-            </a>{' '}for free.
-          </p>
         </AuthForm>
       </div>
       <div className="absolute bottom-4 z-10 text-sm text-center w-full flex justify-center">

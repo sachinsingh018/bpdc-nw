@@ -554,10 +554,11 @@ function JobBoardContent() {
                         </p>
 
                         {/* Jobs Toggle */}
-                        <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 rounded-lg p-1 mb-4 w-fit">
+                        <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 rounded-lg p-1 mb-4 w-fit relative z-10 pointer-events-auto">
                             <button
+                                type="button"
                                 onClick={() => handleToggleChange('all')}
-                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${jobType === 'all'
+                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${jobType === 'all'
                                     ? 'bg-white dark:bg-gray-600 text-black dark:text-black shadow-sm'
                                     : 'text-black dark:text-black hover:text-black dark:hover:text-black'
                                     }`}
@@ -565,8 +566,9 @@ function JobBoardContent() {
                                 All Jobs
                             </button>
                             <button
+                                type="button"
                                 onClick={() => handleToggleChange('remote')}
-                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${jobType === 'remote'
+                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${jobType === 'remote'
                                     ? 'bg-white dark:bg-gray-600 text-black dark:text-black shadow-sm'
                                     : 'text-black dark:text-black hover:text-black dark:hover:text-black'
                                     }`}
@@ -574,8 +576,9 @@ function JobBoardContent() {
                                 Remote Jobs
                             </button>
                             <button
+                                type="button"
                                 onClick={() => handleToggleChange('parttime')}
-                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${jobType === 'parttime'
+                                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${jobType === 'parttime'
                                     ? 'bg-white dark:bg-gray-600 text-black dark:text-black shadow-sm'
                                     : 'text-black dark:text-black hover:text-black dark:hover:text-black'
                                     }`}

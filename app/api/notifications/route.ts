@@ -28,19 +28,32 @@ export async function GET(request: NextRequest) {
         console.log('Final email to use:', finalEmail);
 
         // Get user ID from email
+        console.log('Fetching user with email:', finalEmail);
         const [user] = await getUser(finalEmail);
+        console.log('User found:', user ? { id: user.id, email: user.email } : 'null');
         if (!user) {
+            console.log('User not found for email:', finalEmail);
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
+        console.log('Fetching notifications for user ID:', user.id);
         const notifications = await getNotifications(user.id);
+        console.log('Notifications fetched:', notifications.length);
         const unreadCount = await getUnreadNotificationCount(user.id);
+        console.log('Unread count:', unreadCount);
 
         return NextResponse.json({ notifications, unreadCount });
     } catch (error) {
         console.error('Error fetching notifications:', error);
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        const errorStack = error instanceof Error ? error.stack : undefined;
+        console.error('Error details:', { errorMessage, errorStack });
         return NextResponse.json(
-            { error: 'Failed to fetch notifications' },
+            {
+                error: 'Failed to fetch notifications',
+                details: errorMessage,
+                ...(process.env.NODE_ENV === 'development' && { stack: errorStack })
+            },
             { status: 500 }
         );
     }

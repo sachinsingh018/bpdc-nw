@@ -49,6 +49,10 @@ export const user = pgTable('User', {
   flaggedChatExpiresAt: timestamp('flaggedChatExpiresAt'),
   createdAt: timestamp('createdAt'),
 
+  // Daily message limit tracking
+  dailyMessageCount: integer('dailyMessageCount').default(0),
+  lastMessageResetDate: timestamp('lastMessageResetDate'),
+
   // Interview tracking fields
   lastInterviewDate: timestamp('lastInterviewDate'),
   interviewCount: integer('interviewCount').default(0),
@@ -514,6 +518,7 @@ export const communities = pgTable('communities', {
   name: varchar('name', { length: 255 }).notNull(),
   description: text('description'),
   banner_image: varchar('banner_image', { length: 500 }),
+  created_by: uuid('created_by').references(() => user.id, { onDelete: 'cascade' }),
   created_at: timestamp('created_at').notNull().defaultNow(),
 });
 
@@ -640,4 +645,69 @@ export type FeatureUsage = InferSelectModel<typeof featureUsage>;
 export type ActivityCategory = InferSelectModel<typeof activityCategories>;
 export type ActivityType = InferSelectModel<typeof activityTypes>;
 export type DailyActivitySummary = InferSelectModel<typeof dailyActivitySummaries>;
+
+// Weekly Calendar Blocks
+export const userCalendarBlocks = pgTable('user_calendar_blocks', {
+  id: uuid('id').primaryKey().notNull().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+  weekStartDate: timestamp('week_start_date').notNull(), // Monday of the week
+  dayOfWeek: integer('day_of_week').notNull(), // 0=Monday, 6=Sunday
+  startTime: varchar('start_time', { length: 8 }).notNull(), // Format: "HH:MM:SS"
+  endTime: varchar('end_time', { length: 8 }).notNull(), // Format: "HH:MM:SS"
+  isBlocked: boolean('is_blocked').default(true).notNull(), // true = blocked, false = available
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+}, (table) => ({
+  uniqueBlock: uniqueIndex('unique_calendar_block').on(
+    table.userId,
+    table.weekStartDate,
+    table.dayOfWeek,
+    table.startTime,
+    table.endTime
+  ),
+  userWeekIdx: index('idx_calendar_blocks_user_week').on(table.userId, table.weekStartDate),
+}));
+
+export type UserCalendarBlock = InferSelectModel<typeof userCalendarBlocks>;
+
+// Daily Interview Tracking Table
+export const dailyInterviews = pgTable('daily_interviews', {
+  id: uuid('id').primaryKey().notNull().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+  interviewDate: timestamp('interview_date').notNull(), // Date of the interview (date only, time ignored)
+  category: varchar('category', { length: 50 }), // Interview category (behavioral, technical, etc.)
+  completedAt: timestamp('completed_at'), // When the interview was completed (null if in progress)
+  isCompleted: boolean('is_completed').notNull().default(false), // Whether the interview is completed
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+}, (table) => ({
+  // Ensure one interview per user per day (only for completed interviews)
+  uniqueUserDate: uniqueIndex('unique_user_interview_date').on(table.userId, table.interviewDate),
+  userIdIdx: index('idx_daily_interviews_user_id').on(table.userId),
+  interviewDateIdx: index('idx_daily_interviews_date').on(table.interviewDate),
+  isCompletedIdx: index('idx_daily_interviews_completed').on(table.isCompleted),
+}));
+
+export type DailyInterview = InferSelectModel<typeof dailyInterviews>;
+
+// Interview Progress Table - tracks answers and progress for in-progress interviews
+export const interviewProgress = pgTable('interview_progress', {
+  id: uuid('id').primaryKey().notNull().defaultRandom(),
+  dailyInterviewId: uuid('daily_interview_id').notNull().references(() => dailyInterviews.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+  category: varchar('category', { length: 50 }).notNull(), // Interview category
+  questionId: integer('question_id').notNull(), // Question ID from the category
+  question: text('question').notNull(), // Question text
+  answer: text('answer').notNull(), // User's answer
+  aiFeedback: text('ai_feedback'), // AI feedback if available
+  answeredAt: timestamp('answered_at').notNull().defaultNow(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+}, (table) => ({
+  // Ensure one answer per question per interview
+  uniqueInterviewQuestion: uniqueIndex('unique_interview_question').on(table.dailyInterviewId, table.questionId),
+  dailyInterviewIdx: index('idx_interview_progress_daily_interview').on(table.dailyInterviewId),
+  userIdIdx: index('idx_interview_progress_user_id').on(table.userId),
+}));
+
+export type InterviewProgress = InferSelectModel<typeof interviewProgress>;
 

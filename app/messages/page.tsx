@@ -18,7 +18,9 @@ import {
     Send,
     ArrowLeft,
     Search,
-    Briefcase
+    Briefcase,
+    Calendar,
+    Clock
 } from 'lucide-react';
 import { NotificationBell } from '@/components/notification-bell';
 import { ThemeToggle } from '@/components/theme-toggle';
@@ -26,9 +28,11 @@ import { CommonNavbar } from '@/components/common-navbar';
 import { SocketDebug } from '@/components/socket-debug';
 import { FaUser, FaEnvelope } from 'react-icons/fa';
 import { useSocket } from '@/hooks/useSocket';
-import { format, parse, parseISO } from 'date-fns';
+import { format, parse, parseISO, startOfWeek, addDays } from 'date-fns';
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import { toZonedTime, formatInTimeZone } from 'date-fns-tz';
+import { WeeklyCalendar } from '@/components/weekly-calendar';
+import { ViewCalendarReadonly } from '@/components/view-calendar-readonly';
 
 interface Message {
     id: string;
@@ -89,6 +93,9 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
     const [userAName, setUserAName] = useState('');
     const [slotFilter, setSlotFilter] = useState('');
     const [showManualScheduling, setShowManualScheduling] = useState(false);
+    const [showCalendarModal, setShowCalendarModal] = useState(false);
+    const [userCalendarInfo, setUserCalendarInfo] = useState<{ timeZone: string | null; workingHours: string | null; hasCalendarInfo: boolean } | null>(null);
+    const [loadingCalendar, setLoadingCalendar] = useState(false);
 
     // Get current user's name
     useEffect(() => {
@@ -111,6 +118,40 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
         };
         fetchCurrentUserName();
     }, []);
+
+    // Fetch user's calendar information
+    const fetchUserCalendar = async () => {
+        setLoadingCalendar(true);
+        try {
+            const response = await fetch('/api/user-calendar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setUserCalendarInfo(data);
+                setShowCalendarModal(true);
+            } else {
+                toast.error('Failed to fetch calendar information');
+            }
+        } catch (error) {
+            console.error('Error fetching user calendar:', error);
+            toast.error('Failed to fetch calendar information');
+        } finally {
+            setLoadingCalendar(false);
+        }
+    };
+
+    const handleScheduleFromCalendar = () => {
+        setShowCalendarModal(false);
+        setUserCalendarInfo(null);
+        // Reset date to today when opening modal
+        const today = new Date();
+        setSelectedDate(today.toISOString().split('T')[0]);
+        setShowScheduleModal(true);
+    };
 
     // Step 1: User submits working hours, fetch slots
     const handleFindSlots = async (e: React.FormEvent) => {
@@ -136,17 +177,28 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
 
             console.log("🎯 Slot response:", data);
 
-            if (res.ok && data.slots) {
+            if (res.ok && data.slots && data.slots.length > 0) {
                 setAvailableSlots(data.slots);
                 setSlotFilter(''); // Reset filter when showing new slots
                 setShowSlotsModal(true);
                 setShowScheduleModal(false); // hide the input modal
-                // or send this in chat using `sendMessage(localTime)`
                 setUserBTimeZone(data.userB.timeZone);
                 setUserBName(data.userB.name || '');
 
+                // Show info if some slots were filtered due to blocks
+                if (data.blockedSlots && data.blockedSlots.length > 0) {
+                    toast.info(`Found ${data.slots.length} available slots (some times were blocked)`);
+                } else {
+                    toast.success(`Found ${data.slots.length} available slots`);
+                }
             } else {
                 // Show manual scheduling option instead of just an error
+                const errorMsg = data.error || 'No available slots found';
+                if (errorMsg.includes('blocked')) {
+                    toast.warning('All available times are blocked. Try a different date or schedule manually.');
+                } else {
+                    toast.info('No overlapping times found. You can schedule manually.');
+                }
                 setShowManualScheduling(true);
                 setShowScheduleModal(false);
             }
@@ -276,19 +328,31 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
 
     return (
         <>
-            <button
-                className="ml-3 bg-red-500 text-black rounded px-3 py-1 text-sm font-medium hover:bg-red-600 transition disabled:opacity-50"
-                onClick={() => {
-                    // Reset date to today when opening modal
-                    const today = new Date();
-                    setSelectedDate(today.toISOString().split('T')[0]);
-                    setShowScheduleModal(true);
-                }}
-                disabled={scheduling}
-                type="button"
-            >
-                {scheduling ? 'Scheduling...' : 'Schedule Meeting'}
-            </button>
+            <div className="flex items-center gap-2 ml-3">
+                <button
+                    className="bg-blue-500 text-black rounded px-3 py-1 text-sm font-medium hover:bg-blue-600 transition disabled:opacity-50 flex items-center gap-1"
+                    onClick={fetchUserCalendar}
+                    disabled={loadingCalendar}
+                    type="button"
+                    title="View user's calendar availability"
+                >
+                    <Calendar className="size-4" />
+                    {loadingCalendar ? 'Loading...' : 'View Calendar'}
+                </button>
+                <button
+                    className="bg-red-500 text-black rounded px-3 py-1 text-sm font-medium hover:bg-red-600 transition disabled:opacity-50"
+                    onClick={() => {
+                        // Reset date to today when opening modal
+                        const today = new Date();
+                        setSelectedDate(today.toISOString().split('T')[0]);
+                        setShowScheduleModal(true);
+                    }}
+                    disabled={scheduling}
+                    type="button"
+                >
+                    {scheduling ? 'Scheduling...' : 'Schedule Meeting'}
+                </button>
+            </div>
             {/* Step 1: Collect timezone/working hours */}
             {showScheduleModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
@@ -378,9 +442,12 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                         >
                             &times;
                         </button>
-                        <h2 className="text-lg font-semibold mb-4 text-black dark:text-black">
+                        <h2 className="text-lg font-semibold mb-2 text-black dark:text-black">
                             Select a Time Slot ({availableSlots.length} available)
                         </h2>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            These times respect {name}'s calendar blocks and your working hours
+                        </p>
                         {availableSlots.length > 5 && (
                             <div className="mb-3">
                                 <input
@@ -534,6 +601,71 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                     </div>
                 </div>
             )}
+            {/* View Calendar Modal */}
+            {showCalendarModal && userCalendarInfo && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto p-4">
+                    <div className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl w-full max-w-6xl my-8 relative">
+                        <button
+                            className="absolute top-4 right-4 text-black hover:text-black dark:hover:text-gray-200 text-2xl z-10 bg-white dark:bg-slate-700 rounded-full size-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-600 transition"
+                            onClick={() => {
+                                setShowCalendarModal(false);
+                                setUserCalendarInfo(null);
+                            }}
+                            aria-label="Close"
+                            type="button"
+                        >
+                            &times;
+                        </button>
+                        <div className="p-6">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="size-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
+                                    <Calendar className="size-6 text-white" />
+                                </div>
+                                <div>
+                                    <h2 className="text-2xl font-semibold text-black dark:text-black">
+                                        {name}'s Calendar
+                                    </h2>
+                                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                                        View their availability and blocked times
+                                    </p>
+                                </div>
+                            </div>
+                            {userCalendarInfo.hasCalendarInfo ? (
+                                <ViewCalendarReadonly
+                                    userEmail={email}
+                                    userName={name}
+                                    timezone={userCalendarInfo.timeZone || 'America/New_York'}
+                                    workingHours={userCalendarInfo.workingHours || '09:00-17:00'}
+                                    onScheduleMeeting={handleScheduleFromCalendar}
+                                    onClose={() => {
+                                        setShowCalendarModal(false);
+                                        setUserCalendarInfo(null);
+                                    }}
+                                />
+                            ) : (
+                                <div className="text-center py-12">
+                                    <div className="size-16 bg-yellow-100 dark:bg-yellow-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <Calendar className="size-8 text-yellow-600 dark:text-yellow-400" />
+                                    </div>
+                                    <h3 className="text-lg font-semibold text-black dark:text-black mb-2">
+                                        Calendar Not Available
+                                    </h3>
+                                    <p className="text-gray-600 dark:text-gray-400 mb-4">
+                                        {name} hasn't set up their calendar yet. You can still schedule a meeting manually.
+                                    </p>
+                                    <button
+                                        type="button"
+                                        className="px-6 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium hover:from-purple-600 hover:to-blue-600 transition"
+                                        onClick={handleScheduleFromCalendar}
+                                    >
+                                        Schedule Meeting Manually
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 }
@@ -553,6 +685,12 @@ function MessagesContent() {
     const [typingUsers, setTypingUsers] = useState<Set<string>>(new Set());
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const typingTimeoutRef = useRef<any>(null);
+    const [showCalendarSettings, setShowCalendarSettings] = useState(false);
+    const [calendarTimezone, setCalendarTimezone] = useState('America/New_York');
+    const [calendarStartTime, setCalendarStartTime] = useState('09:00');
+    const [calendarEndTime, setCalendarEndTime] = useState('17:00');
+    const [savingCalendar, setSavingCalendar] = useState(false);
+    const [loadingCalendarSettings, setLoadingCalendarSettings] = useState(false);
 
     const {
         socket,
@@ -1181,6 +1319,44 @@ function MessagesContent() {
             {/* Common Navbar */}
             <CommonNavbar currentPage="/messages" />
 
+            {/* Calendar Settings Button - Upper Right Corner */}
+            <div className="fixed top-20 right-4 md:right-6 z-40">
+                <button
+                    type="button"
+                    onClick={async () => {
+                        setShowCalendarSettings(true);
+                        setLoadingCalendarSettings(true);
+                        // Load current calendar settings
+                        try {
+                            const userEmail = getCookie('userEmail') as string;
+                            const response = await fetch('/api/user-calendar', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ email: userEmail }),
+                            });
+                            if (response.ok) {
+                                const data = await response.json();
+                                if (data.timeZone) setCalendarTimezone(data.timeZone);
+                                if (data.workingHours) {
+                                    const [start, end] = data.workingHours.split('-');
+                                    setCalendarStartTime(start || '09:00');
+                                    setCalendarEndTime(end || '17:00');
+                                }
+                            }
+                        } catch (error) {
+                            console.error('Error loading calendar settings:', error);
+                        } finally {
+                            setLoadingCalendarSettings(false);
+                        }
+                    }}
+                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex items-center gap-2"
+                    title="Set your calendar availability"
+                >
+                    <Calendar className="size-5" />
+                    <span className="hidden md:inline text-sm font-medium">Your Calendar</span>
+                </button>
+            </div>
+
             <div className="max-w-7xl mx-auto p-3 md:p-6 h-[calc(100vh-180px)] md:h-[calc(100vh-200px)]">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 h-full">
                     <div className={`${selectedConversation ? 'hidden lg:block lg:col-span-1' : 'lg:col-span-1'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-white/20 shadow-lg overflow-hidden flex flex-col h-full`}>
@@ -1472,6 +1648,96 @@ function MessagesContent() {
                     </div>
                 </div>
             </div>
+
+            {/* Calendar Settings Modal */}
+            {showCalendarSettings && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto p-4">
+                    <div className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl w-full max-w-7xl my-8 relative">
+                        <button
+                            className="absolute top-4 right-4 text-black hover:text-black dark:hover:text-gray-200 text-2xl z-10 bg-white dark:bg-slate-700 rounded-full size-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-600 transition"
+                            onClick={() => setShowCalendarSettings(false)}
+                            aria-label="Close"
+                            type="button"
+                        >
+                            &times;
+                        </button>
+                        <div className="p-6">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="size-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
+                                    <Calendar className="size-6 text-white" />
+                                </div>
+                                <div>
+                                    <h2 className="text-2xl font-semibold text-black dark:text-black">
+                                        Your Calendar
+                                    </h2>
+                                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                                        Block time slots to indicate when you're unavailable
+                                    </p>
+                                </div>
+                            </div>
+                            {loadingCalendarSettings ? (
+                                <div className="text-center py-12">
+                                    <div className="size-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                                    <p className="text-gray-600 dark:text-gray-400">Loading calendar...</p>
+                                </div>
+                            ) : (
+                                <WeeklyCalendar
+                                    timezone={calendarTimezone}
+                                    workingHours={`${calendarStartTime}-${calendarEndTime}`}
+                                    onSave={async (blocks, timezone, workingHours) => {
+                                        setSavingCalendar(true);
+                                        try {
+                                            const userEmail = getCookie('userEmail') as string;
+                                            const weekStart = format(startOfWeek(new Date(), { weekStartsOn: 1 }), 'yyyy-MM-dd');
+
+                                            const [startTime, endTime] = workingHours.split('-');
+
+                                            // Update timezone and working hours
+                                            await fetch('/api/user-calendar', {
+                                                method: 'POST',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({
+                                                    email: userEmail,
+                                                    timeZone: timezone,
+                                                    workingHours: workingHours,
+                                                }),
+                                            });
+
+                                            // Save calendar blocks
+                                            const response = await fetch('/api/calendar-blocks', {
+                                                method: 'POST',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({
+                                                    weekStart,
+                                                    blocks,
+                                                    timeZone: timezone,
+                                                    workingHours: workingHours,
+                                                }),
+                                            });
+
+                                            if (response.ok) {
+                                                setCalendarTimezone(timezone);
+                                                setCalendarStartTime(startTime);
+                                                setCalendarEndTime(endTime);
+                                                toast.success('Calendar updated successfully!');
+                                                setShowCalendarSettings(false);
+                                            } else {
+                                                toast.error('Failed to save calendar');
+                                            }
+                                        } catch (error) {
+                                            console.error('Error saving calendar:', error);
+                                            toast.error('Failed to save calendar');
+                                        } finally {
+                                            setSavingCalendar(false);
+                                        }
+                                    }}
+                                    onClose={() => setShowCalendarSettings(false)}
+                                />
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

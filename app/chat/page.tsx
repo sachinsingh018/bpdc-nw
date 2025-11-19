@@ -23,6 +23,8 @@ import {
 } from 'lucide-react';
 import { NotificationBell } from '@/components/notification-bell';
 import { CommonNavbar } from '@/components/common-navbar';
+import type { UIMessage } from 'ai';
+import { toast } from 'sonner';
 
 export default function ChatPage() {
     const router = useRouter();
@@ -31,7 +33,9 @@ export default function ChatPage() {
     const [isLoggedin, setIsLoggedin] = useState(false);
     const [user, setUser] = useState<any>(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const id = generateUUID();
+    const [currentChatId, setCurrentChatId] = useState<string>(generateUUID());
+    const [initialMessages, setInitialMessages] = useState<UIMessage[]>([]);
+    const [isLoadingChat, setIsLoadingChat] = useState(false);
 
     useEffect(() => {
         // Check if user is authenticated
@@ -96,6 +100,26 @@ export default function ChatPage() {
             router.push('/login');
         }
     }, [router]);
+
+    const handleChatSelect = async (chatId: string, messages: UIMessage[]) => {
+        if (chatId === currentChatId) return; // Already viewing this chat
+
+        setIsLoadingChat(true);
+        try {
+            setInitialMessages(messages);
+            setCurrentChatId(chatId);
+        } catch (error) {
+            console.error('Error loading chat:', error);
+            toast.error('Failed to load chat messages');
+        } finally {
+            setIsLoadingChat(false);
+        }
+    };
+
+    const handleNewChat = () => {
+        setCurrentChatId(generateUUID());
+        setInitialMessages([]);
+    };
 
     if (isLoading) {
         return (
@@ -184,17 +208,33 @@ export default function ChatPage() {
                     {/* Common Navbar */}
                     <CommonNavbar currentPage="/chat" showThemeToggle={false} />
 
-                    <Chat
-                        userId={userId}
-                        key={id}
-                        id={id}
-                        initialMessages={[]}
-                        selectedChatModel={DEFAULT_CHAT_MODEL}
-                        selectedVisibilityType="public"
-                        isReadonly={false}
-                        isLoggedin={isLoggedin}
-                    />
-                    <DataStreamHandler id={id} />
+                    {isLoadingChat ? (
+                        <div className="flex-1 flex items-center justify-center">
+                            <div className="text-center">
+                                <div className="size-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                                    Loading Chat...
+                                </h2>
+                            </div>
+                        </div>
+                    ) : (
+                        <>
+                            <Chat
+                                userId={userId}
+                                key={currentChatId}
+                                id={currentChatId}
+                                initialMessages={initialMessages}
+                                selectedChatModel={DEFAULT_CHAT_MODEL}
+                                selectedVisibilityType="public"
+                                isReadonly={false}
+                                isLoggedin={isLoggedin}
+                                user={user}
+                                onChatSelect={handleChatSelect}
+                                onNewChat={handleNewChat}
+                            />
+                            <DataStreamHandler id={currentChatId} />
+                        </>
+                    )}
                 </div>
             </SidebarInset>
         </SidebarProvider>

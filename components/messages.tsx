@@ -34,9 +34,9 @@ function PureMessages({
   return (
     <div
       ref={messagesContainerRef}
-      className="flex flex-col items-center w-full flex-1 overflow-y-auto pt-4 px-4"
+      className="flex flex-col items-center w-full flex-1 overflow-y-auto pt-4"
     >
-      <div className="w-full max-w-3xl bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-bits-golden-yellow/30 shadow-xl space-y-4">
+      <div className="w-full max-w-3xl mx-auto px-4 bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-bits-golden-yellow/30 shadow-xl space-y-4">
         {messages.length === 0 && (
           <div className="w-full flex justify-center">
             <Overview />

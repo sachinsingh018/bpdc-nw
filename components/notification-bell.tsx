@@ -55,7 +55,13 @@ export function NotificationBell() {
                 // Use the actual count of filtered unread notifications instead of API count
                 setUnreadCount(unreadNotifications.length);
             } else {
-                const errorData = await response.json();
+                let errorData = {};
+                try {
+                    const text = await response.text();
+                    errorData = text ? JSON.parse(text) : { error: `HTTP ${response.status}: ${response.statusText}` };
+                } catch (parseError) {
+                    errorData = { error: `HTTP ${response.status}: ${response.statusText}` };
+                }
                 console.error('Notification bell - error response:', errorData);
             }
         } catch (error) {

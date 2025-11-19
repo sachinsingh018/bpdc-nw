@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import { getBpdcPostgresClient } from '@/lib/db/connection';
 import { uploads } from '@/lib/db/schema';
 import { eq, inArray, desc, and } from 'drizzle-orm';
 
-const client = postgres(process.env.POSTGRES_URL!);
+const client = getBpdcPostgresClient();
 const db = drizzle(client);
 
 export async function GET() {

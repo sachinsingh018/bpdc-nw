@@ -18,6 +18,118 @@ import { checkUsernameNSFW, generateUsernameSuggestions } from '@/lib/utils/nsfw
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { CitySelector } from '@/components/CitySelector';
 
+// Format activity based on action_type and action_category
+function formatActivity(activity: {
+  action_type: string;
+  action_category: string;
+  resource_type: string | null;
+  resource_id: string | null;
+  metadata: any;
+  created_at: Date | string;
+}): { id: number; type: string; text: string; time: string; icon: any } | null {
+  const timeAgo = getTimeAgo(new Date(activity.created_at));
+
+  // Map action categories to icons
+  const categoryIconMap: { [key: string]: any } = {
+    'social': Users,
+    'content': MessageSquare,
+    'jobs': Briefcase,
+    'authentication': User,
+    'communities': Users,
+    'profile': User,
+    'connections': Users,
+    'messages': MessageSquare,
+  };
+
+  // Map action types to readable text
+  const actionTextMap: { [key: string]: string } = {
+    'connection_request_sent': 'Sent a connection request',
+    'connection_request_accepted': 'Accepted a connection request',
+    'connection_request_rejected': 'Rejected a connection request',
+    'profile_viewed': 'Viewed a profile',
+    'profile_updated': 'Updated profile',
+    'message_sent': 'Sent a message',
+    'message_received': 'Received a message',
+    'post_created': 'Created a post',
+    'post_liked': 'Liked a post',
+    'post_commented': 'Commented on a post',
+    'job_applied': 'Applied for a job',
+    'job_saved': 'Saved a job',
+    'job_viewed': 'Viewed a job',
+    'community_joined': 'Joined a community',
+    'community_post_created': 'Created a community post',
+    'login': 'Logged in',
+    'logout': 'Logged out',
+    'skill_assessment_completed': 'Completed a skill assessment',
+    'skill_badge_earned': 'Earned a skill badge',
+  };
+
+  const icon = categoryIconMap[activity.action_category] || BarChart3;
+  let text = actionTextMap[activity.action_type] || activity.action_type;
+
+  // Enhance text with metadata if available
+  if (activity.metadata) {
+    let metadata: any = {};
+    try {
+      metadata = typeof activity.metadata === 'string'
+        ? JSON.parse(activity.metadata)
+        : activity.metadata;
+    } catch (e) {
+      // If parsing fails, use empty object
+      metadata = {};
+    }
+
+    if (metadata.targetUserName) {
+      text = text.replace('a', ` ${metadata.targetUserName}`);
+    }
+    if (metadata.jobTitle) {
+      text += ` for ${metadata.jobTitle}`;
+    }
+    if (metadata.communityName) {
+      text += ` in ${metadata.communityName}`;
+    }
+    if (metadata.skillName) {
+      text += `: ${metadata.skillName}`;
+    }
+    if (metadata.postTitle) {
+      text += `: ${metadata.postTitle}`;
+    }
+  }
+
+  return {
+    id: Date.now() + Math.random(), // Generate unique ID
+    type: activity.action_category,
+    text,
+    time: timeAgo,
+    icon,
+  };
+}
+
+// Helper function to calculate time ago
+function getTimeAgo(date: Date): string {
+  const now = new Date();
+  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+  if (diffInSeconds < 60) {
+    return 'Just now';
+  } else if (diffInSeconds < 3600) {
+    const minutes = Math.floor(diffInSeconds / 60);
+    return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+  } else if (diffInSeconds < 86400) {
+    const hours = Math.floor(diffInSeconds / 3600);
+    return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+  } else if (diffInSeconds < 604800) {
+    const days = Math.floor(diffInSeconds / 86400);
+    return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+  } else if (diffInSeconds < 2592000) {
+    const weeks = Math.floor(diffInSeconds / 604800);
+    return `${weeks} ${weeks === 1 ? 'week' : 'weeks'} ago`;
+  } else {
+    const months = Math.floor(diffInSeconds / 2592000);
+    return `${months} ${months === 1 ? 'month' : 'months'} ago`;
+  }
+}
+
 // Define the type for an uploaded resume
 type Upload = {
   id: number;
@@ -169,6 +281,27 @@ const ProfilePage = () => {
     }
   }, [router, session, status]);
 
+  // Refresh skill badges when component mounts or when returning from skill assessment
+  useEffect(() => {
+    const refreshSkillBadges = async () => {
+      try {
+        const badgesResponse = await fetch('/api/user-skill-badges');
+        if (badgesResponse.ok) {
+          const badgesData = await badgesResponse.json();
+          setSkillBadges(badgesData.skillBadges || []);
+        }
+      } catch (error) {
+        console.error('Error fetching skill badges:', error);
+      }
+    };
+
+    // Refresh on mount and when window gains focus (user returns from skill assessment)
+    refreshSkillBadges();
+    const handleFocus = () => refreshSkillBadges();
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, []);
+
   const [fileType, setFileType] = useState<'cv' | 'cover-letter'>('cv');
   // State management
   const [isLoading, setIsLoading] = useState(true);
@@ -188,6 +321,7 @@ const ProfilePage = () => {
   const [userBio, setUserBio] = useState('');
   const [originalUserBio, setOriginalUserBio] = useState(''); // Keep original bio for reference
   const [userAvatar, setUserAvatar] = useState('/avatar.png');
+  const [userId, setUserId] = useState<string>('');
 
   // Profile sections
   const [goals, setGoals] = useState<string[]>([]);
@@ -245,7 +379,13 @@ const ProfilePage = () => {
   const bioTextareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Quick actions
-  const [recentActivity, setRecentActivity] = useState([
+  const [recentActivity, setRecentActivity] = useState<Array<{
+    id: number;
+    type: string;
+    text: string;
+    time: string;
+    icon: any;
+  }>>([
     { id: 1, type: 'connection', text: 'Connected with Sarah Chen', time: '2 hours ago', icon: Users },
     { id: 2, type: 'message', text: 'New message from Tech Startup', time: '4 hours ago', icon: MessageSquare },
     { id: 3, type: 'profile', text: 'Profile viewed by 5 people', time: '1 day ago', icon: BarChart3 },
@@ -303,6 +443,7 @@ const ProfilePage = () => {
 
       setUserName(data.name || 'Networkqy User');
       setUserEmail(data.email || email);
+      if (data.id) setUserId(data.id);
       console.log('Setting userBio from linkedinInfo:', data.linkedinInfo);
       const bioData = data.linkedinInfo || '';
       setUserBio(bioData);
@@ -359,6 +500,35 @@ const ProfilePage = () => {
       setIsLoading(false);
     }
   };
+
+  // Fetch user activities when userId is available
+  useEffect(() => {
+    const fetchActivities = async () => {
+      if (!userId) {
+        return; // Keep default activities if no user ID
+      }
+
+      try {
+        const response = await fetch(`/api/user-activities?userId=${encodeURIComponent(userId)}&limit=3`);
+        if (response.ok) {
+          const activities = await response.json();
+          const formattedActivities = activities
+            .map(formatActivity)
+            .filter((activity: any) => activity !== null);
+
+          // If we have activities, use them; otherwise keep defaults
+          if (formattedActivities.length > 0) {
+            setRecentActivity(formattedActivities);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching activities:', error);
+        // Keep default activities on error
+      }
+    };
+
+    fetchActivities();
+  }, [userId]);
 
   // Fetch uploaded resumes
   const fetchResumes = async () => {
@@ -725,13 +895,6 @@ const ProfilePage = () => {
                 ) : (
                   <h1 className="text-xl md:text-3xl font-bold text-black">{userName}</h1>
                 )}
-                <div className="flex items-center gap-2 px-3 py-1 rounded-full shadow-lg" style={{
-                  background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
-                  boxShadow: '0 5px 15px rgba(25, 25, 112, 0.3)'
-                }}>
-                  <Star size={16} className="md:size-5 text-black" />
-                  <span className="text-xs md:text-sm font-bold text-black">Premium Member</span>
-                </div>
               </div>
 
               {/* Edit Profile Buttons */}
@@ -757,7 +920,7 @@ const ProfilePage = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="flex items-center gap-1 md:gap-2 text-xs md:text-sm text-black"
+                      className="flex items-center gap-1 md:gap-2 text-xs md:text-sm text-black bg-white hover:bg-white dark:bg-white dark:hover:bg-white"
                       disabled={uploading}
                       onClick={() => setShowUploadModal(true)}
                     >

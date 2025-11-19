@@ -41,18 +41,6 @@ const PurePreviewMessage = ({
 }) => {
   const [mode, setMode] = useState<'view' | 'edit'>('view');
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-  const [cardCount, setCardCount] = useState(4);
-  const shouldShowArchiveButton = true;
-
-  const emailid = getCookie('userEmail') || 'ss@d.com';
-  useEffect(() => {
-    const updateCount = () => {
-      setCardCount(window.innerWidth < 768 ? 1 : 4);
-    };
-    updateCount();
-    window.addEventListener('resize', updateCount);
-    return () => window.removeEventListener('resize', updateCount);
-  }, []);
 
 
 
@@ -102,17 +90,6 @@ const PurePreviewMessage = ({
               {message.parts?.map((part, index) => {
                 const { type } = part;
                 const key = `message-${message.id}-part-${index}`;
-                const totalWordCount =
-                  message.parts?.reduce((acc, part) => {
-                    if (part.type === 'text') {
-                      const wordCount = part.text.trim().split(/\s+/).length;
-                      return acc + wordCount;
-                    }
-                    return acc;
-                  }, 0) ?? 0;
-
-                const shouldShowPremiumBlock = message.role === 'assistant' && totalWordCount > 100;
-
                 if (type === 'reasoning') {
                   return (
                     <MessageReasoning
@@ -274,33 +251,6 @@ const PurePreviewMessage = ({
 
                           </div>
                         </div>
-
-                        {/* Blur Overlay with Premium Message */}
-                        {shouldShowPremiumBlock && (
-                          <div className="w-full mt-4">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 blur-sm opacity-60 select-none">
-                              {Array.from({ length: cardCount }).map((_, index) => (
-                                <div
-                                  key={index}
-                                  className="rounded-xl p-5 text-black shadow-lg shadow-purple-500/50 relative"
-                                  style={{
-                                    backgroundColor: '#0E0B1E',
-                                    minHeight: '180px',
-                                  }}
-                                >
-                                  <p className="font-bold text-lg mb-1 mt-6 bg-zinc-700 h-5 w-1/2 rounded" />
-                                  <p className="text-sm text-green-400 mb-2 bg-zinc-800 h-4 w-1/4 rounded" />
-                                  <p className="text-sm text-zinc-200 bg-zinc-900 h-16 w-full rounded" />
-                                </div>
-                              ))}
-                            </div>
-                            <p className="mt-3 text-center text-sm text-zinc-500">
-                              🔒 This part of the response will be available with premium access.
-
-                            </p>
-                          </div>
-                        )}
-
                       </div>
                     );
                   }

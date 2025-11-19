@@ -94,26 +94,51 @@ const ConnectionsPage = () => {
 
             // Fetch connections
             const connectionsResponse = await fetch(`/api/connections?userEmail=${encodeURIComponent(userEmail)}`);
-            const connectionsData = await connectionsResponse.json();
-            console.log('Connections data:', connectionsData);
-            setConnections(connectionsData.connections || []);
+            if (!connectionsResponse.ok) {
+                const errorData = await connectionsResponse.json().catch(() => ({}));
+                console.error('Connections API error:', errorData);
+                toast.error(errorData.error || 'Failed to load connections');
+                setConnections([]);
+            } else {
+                const connectionsData = await connectionsResponse.json();
+                console.log('Connections data:', connectionsData);
+                setConnections(connectionsData.connections || []);
+            }
 
             // Fetch pending requests
             const requestsResponse = await fetch(`/api/connections?type=requests&userEmail=${encodeURIComponent(userEmail)}`);
-            const requestsData = await requestsResponse.json();
-            console.log('Requests data:', requestsData);
-            console.log('Requests array:', requestsData.requests);
-            console.log('Requests length:', requestsData.requests?.length);
-            setPendingRequests(requestsData.requests || []);
+            if (!requestsResponse.ok) {
+                const errorData = await requestsResponse.json().catch(() => ({}));
+                console.error('Requests API error:', errorData);
+                toast.error(errorData.error || 'Failed to load requests');
+                setPendingRequests([]);
+            } else {
+                const requestsData = await requestsResponse.json();
+                console.log('Requests data:', requestsData);
+                console.log('Requests array:', requestsData.requests);
+                console.log('Requests length:', requestsData.requests?.length);
+                setPendingRequests(requestsData.requests || []);
+            }
 
             // Fetch notifications
             const notificationsResponse = await fetch(`/api/notifications?userEmail=${encodeURIComponent(userEmail)}`);
-            const notificationsData = await notificationsResponse.json();
-            setNotifications(notificationsData.notifications || []);
+            if (!notificationsResponse.ok) {
+                const errorData = await notificationsResponse.json().catch(() => ({}));
+                console.error('Notifications API error:', errorData);
+                // Don't show toast for notifications errors as it's less critical
+                setNotifications([]);
+            } else {
+                const notificationsData = await notificationsResponse.json();
+                setNotifications(notificationsData.notifications || []);
+            }
 
         } catch (error) {
             console.error('Error fetching data:', error);
             toast.error('Failed to load connections');
+            // Set empty arrays on error to prevent UI from showing loading forever
+            setConnections([]);
+            setPendingRequests([]);
+            setNotifications([]);
         } finally {
             setLoading(false);
         }
@@ -320,11 +345,12 @@ const ConnectionsPage = () => {
             <CommonNavbar currentPage="/connections" />
 
             {/* Tab Navigation - Mobile Optimized */}
-            <div className="p-4 sm:p-6 max-w-7xl mx-auto">
-                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-1 bg-gradient-to-br from-white/90 via-bits-golden-yellow/10 to-white/90 dark:from-slate-800/90 dark:via-bits-deep-purple/20 dark:to-slate-800/90 rounded-lg p-1 mb-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20">
+            <div className="p-4 sm:p-6 max-w-7xl mx-auto relative z-10">
+                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-1 bg-gradient-to-br from-white/90 via-bits-golden-yellow/10 to-white/90 dark:from-slate-800/90 dark:via-bits-deep-purple/20 dark:to-slate-800/90 rounded-lg p-1 mb-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20 relative z-10 pointer-events-auto">
                     <button
+                        type="button"
                         onClick={() => setActiveTab('connections')}
-                        className={`flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-md transition-colors text-sm sm:text-base font-bold text-black ${activeTab === 'connections'
+                        className={`flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-md transition-colors text-sm sm:text-base font-bold text-black cursor-pointer relative z-10 ${activeTab === 'connections'
                             ? 'bg-purple-600'
                             : ''
                             }`}
@@ -337,8 +363,9 @@ const ConnectionsPage = () => {
                         </span>
                     </button>
                     <button
+                        type="button"
                         onClick={() => setActiveTab('requests')}
-                        className={`flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-md transition-colors text-sm sm:text-base font-bold text-black ${activeTab === 'requests'
+                        className={`flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-md transition-colors text-sm sm:text-base font-bold text-black cursor-pointer relative z-10 ${activeTab === 'requests'
                             ? 'bg-purple-600'
                             : ''
                             }`}
@@ -351,6 +378,7 @@ const ConnectionsPage = () => {
                         </span>
                     </button>
                     <button
+                        type="button"
                         onClick={() => {
                             setActiveTab('notifications');
                             // Mark all unread notifications as read when viewing the tab
@@ -360,7 +388,7 @@ const ConnectionsPage = () => {
                                 }
                             });
                         }}
-                        className={`flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-md transition-colors text-sm sm:text-base font-bold text-black ${activeTab === 'notifications'
+                        className={`flex items-center justify-center gap-2 px-4 py-3 sm:py-2 rounded-md transition-colors text-sm sm:text-base font-bold text-black cursor-pointer relative z-10 ${activeTab === 'notifications'
                             ? 'bg-purple-600'
                             : ''
                             }`}

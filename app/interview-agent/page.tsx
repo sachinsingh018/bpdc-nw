@@ -326,6 +326,15 @@ export default function InterviewAgentPage() {
     const [aiFeedback, setAiFeedback] = useState('');
     const [isMuted, setIsMuted] = useState(false);
     const [speechSupported] = useState(isSpeechSupported());
+    const [eligibility, setEligibility] = useState<{
+        canStart: boolean;
+        hasDoneToday?: boolean;
+        isInProgress?: boolean;
+        inProgressCategory?: string;
+        message?: string;
+        nextAvailableDate?: string;
+        isLoading: boolean;
+    }>({ canStart: false, isLoading: true });
 
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const audioChunksRef = useRef<Blob[]>([]);
@@ -379,7 +388,84 @@ export default function InterviewAgentPage() {
 
     useEffect(() => {
         setMounted(true);
+        checkEligibility();
     }, []);
+
+    // Check interview eligibility and load progress
+    const checkEligibility = async () => {
+        try {
+            const response = await fetch('/api/interview/eligibility');
+            if (response.ok) {
+                const data = await response.json();
+                setEligibility({
+                    canStart: data.canStart ?? false,
+                    hasDoneToday: data.hasDoneToday,
+                    isInProgress: data.isInProgress,
+                    inProgressCategory: data.inProgressCategory,
+                    message: data.message,
+                    nextAvailableDate: data.nextAvailableDate,
+                    isLoading: false,
+                });
+
+                // If there's an in-progress interview, load it
+                if (data.isInProgress && data.inProgressCategory) {
+                    await loadInterviewProgress(data.inProgressCategory);
+                }
+            } else {
+                setEligibility({
+                    canStart: false,
+                    isLoading: false,
+                    message: 'Unable to check eligibility. Please try again.',
+                });
+            }
+        } catch (error) {
+            console.error('Error checking eligibility:', error);
+            setEligibility({
+                canStart: false,
+                isLoading: false,
+                message: 'Error checking eligibility. Please try again.',
+            });
+        }
+    };
+
+    // Load interview progress
+    const loadInterviewProgress = async (category: InterviewCategory) => {
+        try {
+            const response = await fetch('/api/interview/progress');
+            if (response.ok) {
+                const data = await response.json();
+                if (data.hasProgress && data.category === category) {
+                    // Set the category
+                    setSelectedCategory(category);
+
+                    // Load answers
+                    const loadedAnswers: InterviewAnswer[] = data.answers.map((a: any) => ({
+                        questionId: a.questionId,
+                        question: a.question,
+                        answer: a.answer,
+                        aiFeedback: a.aiFeedback,
+                    }));
+                    setAnswers(loadedAnswers);
+
+                    // Find the first unanswered question
+                    const questions = INTERVIEW_QUESTIONS[category];
+                    const answeredQuestionIds = new Set(loadedAnswers.map(a => a.questionId));
+                    const firstUnansweredIndex = questions.findIndex(q => !answeredQuestionIds.has(q.id));
+
+                    if (firstUnansweredIndex >= 0) {
+                        setCurrentQuestionIndex(firstUnansweredIndex);
+                    } else {
+                        // All questions answered, go to last question
+                        setCurrentQuestionIndex(questions.length - 1);
+                    }
+
+                    toast.success('Resuming your interview from where you left off!');
+                }
+            }
+        } catch (error) {
+            console.error('Error loading interview progress:', error);
+        }
+    };
 
     // Cleanup speech when component unmounts
     useEffect(() => {
@@ -388,14 +474,23 @@ export default function InterviewAgentPage() {
         };
     }, []);
 
-    // Reset when category changes
+    // Initialize interview when category is selected
     useEffect(() => {
         if (selectedCategory) {
-            setCurrentQuestionIndex(0);
-            setAnswers([]);
-            setShowFeedback(false);
-            setAiFeedback('');
-            stopSpeech();
+            // Don't reset if we're loading progress
+            const initializeInterview = async () => {
+                // Start the interview in the database
+                try {
+                    await fetch('/api/interview/progress', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ category: selectedCategory }),
+                    });
+                } catch (error) {
+                    console.error('Error initializing interview:', error);
+                }
+            };
+            initializeInterview();
         }
     }, [selectedCategory]);
 
@@ -403,7 +498,42 @@ export default function InterviewAgentPage() {
     const currentQuestion = currentQuestions[currentQuestionIndex];
     const isLastQuestion = selectedCategory ? currentQuestionIndex === currentQuestions.length - 1 : false;
 
-    const handleCategorySelect = (category: InterviewCategory) => {
+    const handleCategorySelect = async (category: InterviewCategory) => {
+        // Wait for eligibility check to complete if still loading
+        if (eligibility.isLoading) {
+            toast.info('Please wait while we check your eligibility...');
+            return;
+        }
+
+        // Check eligibility before allowing category selection
+        if (!eligibility.canStart) {
+            if (eligibility.hasDoneToday) {
+                const nextDate = eligibility.nextAvailableDate 
+                    ? new Date(eligibility.nextAvailableDate).toLocaleDateString('en-US', { 
+                        weekday: 'long', 
+                        month: 'long', 
+                        day: 'numeric' 
+                    })
+                    : 'tomorrow';
+                toast.error(`You have already completed an interview today. Come back ${nextDate} for another interview!`);
+            } else {
+                toast.error(eligibility.message || 'Unable to start interview. Please try again.');
+            }
+            return;
+        }
+
+        // If there's an in-progress interview for a different category, prevent switching
+        if (eligibility.isInProgress && eligibility.inProgressCategory && eligibility.inProgressCategory !== category) {
+            toast.error(`You have an interview in progress for ${eligibility.inProgressCategory}. Please complete that interview first.`);
+            return;
+        }
+
+        // If already have a category selected and trying to switch, prevent it
+        if (selectedCategory && selectedCategory !== category) {
+            toast.error(`You have already started a ${selectedCategory} interview. Please complete it before starting a new one.`);
+            return;
+        }
+
         setSelectedCategory(category);
     };
 
@@ -471,7 +601,20 @@ export default function InterviewAgentPage() {
                     answer: transcript,
                 };
 
+                // Check if this question was already answered
+                const existingAnswer = answers.find(a => a.questionId === currentQuestion.id);
+                if (existingAnswer) {
+                    toast.warning('This question has already been answered. Moving to next question.');
+                    // Update the existing answer
+                    setAnswers(prev => prev.map(a =>
+                        a.questionId === currentQuestion.id ? newAnswer : a
+                    ));
+                } else {
                 setAnswers(prev => [...prev, newAnswer]);
+                }
+
+                // Save progress to database
+                await saveAnswerProgress(currentQuestion, transcript);
 
                 // Generate AI feedback
                 await generateAIFeedback([...answers, newAnswer]);
@@ -523,6 +666,11 @@ export default function InterviewAgentPage() {
                 return updated;
             });
 
+            // Save feedback to database
+            if (currentQuestion && data.feedback) {
+                await saveAnswerProgress(currentQuestion, answers.find(a => a.questionId === currentQuestion.id)?.answer || '', data.feedback);
+            }
+
             // Track activity when user gets an answer/feedback
             trackActivity('question_answered', 'content', {
                 feature: 'interview_agent',
@@ -538,13 +686,71 @@ export default function InterviewAgentPage() {
         }
     };
 
-    const nextQuestion = () => {
+    const nextQuestion = async () => {
         if (selectedCategory && currentQuestionIndex < currentQuestions.length - 1) {
             // Stop any ongoing speech when navigating
             stopSpeech();
             setCurrentQuestionIndex(prev => prev + 1);
             setShowFeedback(false);
             setAiFeedback('');
+        } else if (isLastQuestion) {
+            // Interview is complete - record it
+            await recordInterviewCompletion();
+        }
+    };
+
+    // Save answer progress to database
+    const saveAnswerProgress = async (question: InterviewQuestion, answer: string, aiFeedback?: string) => {
+        if (!selectedCategory) return;
+
+        try {
+            await fetch('/api/interview/progress', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    category: selectedCategory,
+                    questionId: question.id,
+                    question: question.question,
+                    answer,
+                    aiFeedback,
+                }),
+            });
+        } catch (error) {
+            console.error('Error saving answer progress:', error);
+            // Don't show error to user, just log it
+        }
+    };
+
+    // Record interview completion
+    const recordInterviewCompletion = async () => {
+        try {
+            const response = await fetch('/api/interview/eligibility', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ category: selectedCategory }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success) {
+                    toast.success('Interview completed successfully! Come back tomorrow for another interview.');
+                    // Update eligibility to prevent further interviews today
+                    setEligibility({
+                        canStart: false,
+                        hasDoneToday: true,
+                        isLoading: false,
+                        message: 'You have completed your interview for today. Come back tomorrow!',
+                    });
+                } else {
+                    toast.error(data.message || 'Failed to record interview completion');
+                }
+            } else {
+                const errorData = await response.json();
+                toast.error(errorData.message || 'Failed to record interview completion');
+            }
+        } catch (error) {
+            console.error('Error recording interview completion:', error);
+            toast.error('Failed to record interview completion. Please try again.');
         }
     };
 
@@ -648,7 +854,7 @@ export default function InterviewAgentPage() {
 
             <div className="relative z-10 flex flex-col min-h-screen">
                 {/* Common Navbar */}
-                <CommonNavbar currentPage="/interview-agent" showThemeToggle={true} showSignOut={false} />
+                <CommonNavbar currentPage="/interview-agent" showThemeToggle={true} />
 
                 {/* Main Content */}
                 <div className="flex-1 flex flex-col h-[calc(100vh-4rem)]">
@@ -679,7 +885,12 @@ export default function InterviewAgentPage() {
                                             <button
                                                 key={key}
                                                 onClick={() => handleCategorySelect(categoryKey)}
-                                                className={`${colorClasses[info.color as keyof typeof colorClasses]} text-black rounded-2xl p-8 border-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-left`}
+                                                disabled={eligibility.isLoading}
+                                                className={`${colorClasses[info.color as keyof typeof colorClasses]} text-black rounded-2xl p-8 border-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-left ${
+                                                    eligibility.isLoading 
+                                                        ? 'opacity-50 cursor-not-allowed hover:scale-100' 
+                                                        : ''
+                                                }`}
                                             >
                                                 <div className="text-5xl mb-4">{info.icon}</div>
                                                 <h2 className="text-2xl font-bold mb-3">{info.title}</h2>
@@ -701,8 +912,17 @@ export default function InterviewAgentPage() {
                                         <span className="text-sm font-medium text-black dark:text-black bg-purple-100 dark:bg-purple-900/20 px-3 py-1 rounded-full">
                                             {currentQuestion.category}
                                         </span>
+                                        {!eligibility.isInProgress && (
                                         <button
-                                            onClick={() => setSelectedCategory(null)}
+                                                onClick={() => {
+                                                    if (answers.length > 0) {
+                                                        if (confirm('Are you sure you want to change category? Your progress will be lost.')) {
+                                                            setSelectedCategory(null);
+                                                        }
+                                                    } else {
+                                                        setSelectedCategory(null);
+                                                    }
+                                                }}
                                             className="flex items-center space-x-1.5 text-xs font-medium text-black dark:text-black bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 px-3 py-1.5 rounded-lg transition-all duration-200 shadow-sm hover:shadow"
                                             title="Change interview category"
                                         >
@@ -711,6 +931,12 @@ export default function InterviewAgentPage() {
                                             </svg>
                                             <span>Change Category</span>
                                         </button>
+                                        )}
+                                        {eligibility.isInProgress && (
+                                            <div className="text-xs font-medium text-yellow-700 dark:text-yellow-300 bg-yellow-100 dark:bg-yellow-900/20 px-3 py-1.5 rounded-lg">
+                                                Interview in progress - Category locked
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="flex items-center justify-between mb-3">
                                         <div className="flex items-center space-x-3">
@@ -752,6 +978,15 @@ export default function InterviewAgentPage() {
                                         {currentQuestion.question}
                                     </h2>
                                 </div>
+
+                                {/* Show warning if question already answered */}
+                                {currentAnswer && (
+                                    <div className="mb-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg p-3">
+                                        <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                                            ⚠️ This question has already been answered. You can record a new answer to update it.
+                                        </p>
+                                    </div>
+                                )}
 
                                 {/* Recording Controls */}
                                 <div className="flex justify-center mb-8">
@@ -837,10 +1072,10 @@ export default function InterviewAgentPage() {
 
                                     <button
                                         onClick={nextQuestion}
-                                        disabled={isLastQuestion}
+                                        disabled={isLastQuestion && (!currentAnswer || !currentAnswer.answer)}
                                         className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-black rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        {isLastQuestion ? 'Finish' : 'Next →'}
+                                        {isLastQuestion ? 'Finish Interview' : 'Next →'}
                                     </button>
                                 </div>
                             </div>

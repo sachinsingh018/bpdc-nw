@@ -30,7 +30,9 @@ console.log('=====================================');
 
 
 
-const client = postgres(process.env.POSTGRES_URL!);
+import { getBpdcPostgresClient } from '@/lib/db/connection';
+
+const client = getBpdcPostgresClient();
 const db = drizzle(client);
 
 const ALLOWED_TYPES = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
@@ -144,7 +146,7 @@ export async function POST(request: Request) {
     const buffer = Buffer.from(arrayBuffer);
     const uniqueFileName = `uploads/${uuidv4()}_${file.name}`;
 
-        console.log('=== S3 UPLOAD DEBUG ===');
+    console.log('=== S3 UPLOAD DEBUG ===');
     console.log('Upload Details:');
     console.log('  Bucket:', process.env.S3_BUCKET_NAME);
     console.log('  Region:', process.env.AWS_REGION);

@@ -1,6 +1,6 @@
 // app/api/users/friends/route.ts
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/db/queries';
+import { db, getUsersWithConnectionStatuses, getUser } from '@/lib/db/queries';
 import { sql } from 'drizzle-orm';
 
 // Simple stop words/phrases removal and keyword extraction
@@ -15,48 +15,72 @@ function cleanQuery(query: string): string {
 }
 
 export async function POST(req: Request) {
-    const { query, email } = await req.json();
+    try {
+        const { query, email, page = 1, limit = 10 } = await req.json();
 
-    if (!query || !email) {
-        return NextResponse.json({ error: 'Missing query or email' }, { status: 400 });
+        if (!query || !email) {
+            return NextResponse.json({ error: 'Missing query or email' }, { status: 400 });
+        }
+
+        // Get current user ID
+        const [currentUser] = await getUser(email);
+        if (!currentUser) {
+            return NextResponse.json({ error: 'User not found' }, { status: 404 });
+        }
+
+        const cleanedQuery = cleanQuery(query);
+        const offset = (page - 1) * limit;
+
+        // Full-text search using the indexed GIN index for fast performance
+        const results = await db.execute(
+            sql`
+                SELECT *,
+                    ts_rank(
+                        to_tsvector('english',
+                            coalesce("name",'') || ' ' ||
+                            coalesce("linkedinInfo",'') || ' ' ||
+                            coalesce("goals",'') || ' ' ||
+                            coalesce("strengths",'') || ' ' ||
+                            coalesce("interests",'') || ' ' ||
+                            coalesce("profilemetrics",'') || ' ' ||
+                            coalesce("headline",'')
+                        ),
+                        plainto_tsquery('english', ${cleanedQuery})
+                    ) AS rank
+                FROM "User"
+                WHERE "email" != ${email}
+                  AND to_tsvector('english',
+                            coalesce("name",'') || ' ' ||
+                            coalesce("linkedinInfo",'') || ' ' ||
+                            coalesce("goals",'') || ' ' ||
+                            coalesce("strengths",'') || ' ' ||
+                            coalesce("interests",'') || ' ' ||
+                            coalesce("profilemetrics",'') || ' ' ||
+                            coalesce("headline",'')
+                        ) @@ plainto_tsquery('english', ${cleanedQuery})
+                ORDER BY rank DESC
+                LIMIT ${limit} OFFSET ${offset};
+            `
+        );
+
+        // Get connection statuses for all results in a single query
+        const userIds = results.map((u: any) => u.id);
+        const connectionStatuses = await getUsersWithConnectionStatuses(currentUser.id, userIds);
+
+        // Attach connection statuses to results
+        const resultsWithStatuses = results.map((u: any) => ({
+            ...u,
+            connectionStatus: connectionStatuses[u.id] || null,
+        }));
+
+        return NextResponse.json({
+            results: resultsWithStatuses,
+            page,
+            limit,
+            hasMore: results.length === limit,
+        });
+    } catch (error) {
+        console.error('Error searching users:', error);
+        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
     }
-
-    // Full-text search across relevant fields, excluding the current user
-    // Concatenate fields: name, linkedinInfo, goals, strengths, interests, profilemetrics, linkedinURL, FacebookURL, phone
-    const results = await db.execute(
-        sql`
-            SELECT *,
-                ts_rank(
-                    to_tsvector('english',
-                        coalesce("name",'') || ' ' ||
-                        coalesce("linkedinInfo",'') || ' ' ||
-                        coalesce("goals",'') || ' ' ||
-                        coalesce("strengths",'') || ' ' ||
-                        coalesce("interests",'') || ' ' ||
-                        coalesce("profilemetrics",'') || ' ' ||
-                        coalesce("linkedinURL",'') || ' ' ||
-                        coalesce("FacebookURL",'') || ' ' ||
-                        coalesce("phone",'')
-                    ),
-                    plainto_tsquery('english', ${query})
-                ) AS rank
-            FROM "User"
-            WHERE "email" != ${email}
-              AND to_tsvector('english',
-                        coalesce("name",'') || ' ' ||
-                        coalesce("linkedinInfo",'') || ' ' ||
-                        coalesce("goals",'') || ' ' ||
-                        coalesce("strengths",'') || ' ' ||
-                        coalesce("interests",'') || ' ' ||
-                        coalesce("profilemetrics",'') || ' ' ||
-                        coalesce("linkedinURL",'') || ' ' ||
-                        coalesce("FacebookURL",'') || ' ' ||
-                        coalesce("phone",'')
-                    ) @@ plainto_tsquery('english', ${query})
-            ORDER BY rank DESC
-            LIMIT 10;
-        `
-    );
-
-    return NextResponse.json(results);
 }

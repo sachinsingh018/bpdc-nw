@@ -2,12 +2,23 @@
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Sparkles, Users, User, Calendar, Plus, Clock, UserCheck, UserX } from "lucide-react";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Sparkles, Users, User, Calendar, Plus, Clock, UserCheck, UserX, Trash2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { CommonNavbar } from "@/components/common-navbar";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { getCookie } from "cookies-next";
 
 interface Community {
     id: string;
@@ -45,6 +56,7 @@ interface CommunityData {
     members: Array<{ user: User; membership: CommunityMembership }>;
     posts: Array<{ post: CommunityPost; user: User }>;
     userMembership: CommunityMembership | null;
+    isUserAdmin: boolean;
 }
 
 export default function CommunityPage() {
@@ -58,6 +70,39 @@ export default function CommunityPage() {
     const [newPostContent, setNewPostContent] = useState('');
     const [newPostType, setNewPostType] = useState<'event' | 'update'>('update');
     const [showNewPostForm, setShowNewPostForm] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+    const [deleteLoading, setDeleteLoading] = useState(false);
+    const [removingMemberId, setRemovingMemberId] = useState<string | null>(null);
+    const [deletingPostId, setDeletingPostId] = useState<string | null>(null);
+    const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+
+    // Helper function to get current user ID
+    const getCurrentUserId = async (): Promise<string | null> => {
+        const userEmail = getCookie('userEmail');
+        if (!userEmail) return null;
+
+        try {
+            const response = await fetch('/profile/api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: userEmail }),
+            });
+            const data = await response.json();
+            return data?.id || null;
+        } catch (error) {
+            console.error('Error getting current user ID:', error);
+            return null;
+        }
+    };
+
+    useEffect(() => {
+        const fetchUserId = async () => {
+            const userId = await getCurrentUserId();
+            setCurrentUserId(userId);
+        };
+        fetchUserId();
+    }, []);
 
     useEffect(() => {
         const fetchCommunityData = async () => {
@@ -155,6 +200,78 @@ export default function CommunityPage() {
         });
     };
 
+    const handleDeleteCommunity = async () => {
+        setDeleteLoading(true);
+        try {
+            const response = await fetch(`/api/communities/${communityId}`, {
+                method: 'DELETE',
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                toast.success('Community deleted successfully');
+                router.push('/communities');
+            } else {
+                toast.error(data.error || 'Failed to delete community');
+            }
+        } catch (error) {
+            console.error('Error deleting community:', error);
+            toast.error('Failed to delete community');
+        } finally {
+            setDeleteLoading(false);
+            setShowDeleteDialog(false);
+        }
+    };
+
+    const handleRemoveMember = async (membershipId: string) => {
+        setRemovingMemberId(membershipId);
+        try {
+            const response = await fetch(`/api/communities/${communityId}/members/${membershipId}`, {
+                method: 'DELETE',
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                toast.success('Member removed successfully');
+                // Refresh community data
+                window.location.reload();
+            } else {
+                toast.error(data.error || 'Failed to remove member');
+            }
+        } catch (error) {
+            console.error('Error removing member:', error);
+            toast.error('Failed to remove member');
+        } finally {
+            setRemovingMemberId(null);
+        }
+    };
+
+    const handleDeletePost = async (postId: string) => {
+        setDeletingPostId(postId);
+        try {
+            const response = await fetch(`/api/communities/${communityId}/posts/${postId}`, {
+                method: 'DELETE',
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                toast.success('Post deleted successfully');
+                // Refresh community data
+                window.location.reload();
+            } else {
+                toast.error(data.error || 'Failed to delete post');
+            }
+        } catch (error) {
+            console.error('Error deleting post:', error);
+            toast.error('Failed to delete post');
+        } finally {
+            setDeletingPostId(null);
+        }
+    };
+
     if (loading) {
         return (
             <div className="min-h-screen relative overflow-hidden flex items-center justify-center" style={{
@@ -200,11 +317,18 @@ export default function CommunityPage() {
         );
     }
 
-    const { community, members, posts, userMembership } = communityData;
+    const { community, members, posts, userMembership, isUserAdmin } = communityData;
     const approvedMembers = members.filter(m => m.membership.status === 'approved');
     const pendingMembers = members.filter(m => m.membership.status === 'pending');
     const isMember = userMembership?.status === 'approved';
     const isPending = userMembership?.status === 'pending';
+
+    // Update isAdmin state when community data is loaded
+    useEffect(() => {
+        if (communityData) {
+            setIsAdmin(isUserAdmin);
+        }
+    }, [communityData, isUserAdmin]);
 
     console.log('Community data:', {
         community,
@@ -315,6 +439,16 @@ export default function CommunityPage() {
                                     Member
                                 </Button>
                             )}
+                            {isAdmin && (
+                                <Button
+                                    onClick={() => setShowDeleteDialog(true)}
+                                    variant="destructive"
+                                    className="bg-red-600 hover:bg-red-700 text-white font-semibold shadow-md rounded-lg flex items-center gap-2"
+                                >
+                                    <Trash2 className="size-4" />
+                                    Delete Community
+                                </Button>
+                            )}
                         </div>
                     </div>
                 </motion.div>
@@ -414,25 +548,51 @@ export default function CommunityPage() {
                                 <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-xl p-6 border border-purple-200/50 dark:border-white/20">
                                     <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Members</h2>
                                     <div className="space-y-4">
-                                        {approvedMembers.map(({ user, membership }) => (
-                                            <div key={membership.id} className="flex items-center gap-4 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
-                                                <Avatar className="size-10">
-                                                    <AvatarImage src={undefined} alt={user.name || user.email} />
-                                                    <AvatarFallback>
-                                                        <User className="size-5" />
-                                                    </AvatarFallback>
-                                                </Avatar>
-                                                <div className="flex-1">
-                                                    <p className="font-medium text-gray-900 dark:text-white">
-                                                        {user.name || user.email}
-                                                    </p>
-                                                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                                                        Member since {formatDate(membership.joined_at)}
-                                                    </p>
+                                        {approvedMembers.map(({ user, membership }) => {
+                                            const isCurrentUser = user.id === currentUserId;
+                                            const canRemove = isAdmin && !isCurrentUser; // Admins can't remove themselves
+
+                                            return (
+                                                <div key={membership.id} className="flex items-center gap-4 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+                                                    <Avatar className="size-10">
+                                                        <AvatarImage src={undefined} alt={user.name || user.email} />
+                                                        <AvatarFallback>
+                                                            <User className="size-5" />
+                                                        </AvatarFallback>
+                                                    </Avatar>
+                                                    <div className="flex-1">
+                                                        <p className="font-medium text-gray-900 dark:text-white">
+                                                            {user.name || user.email}
+                                                            {isCurrentUser && (
+                                                                <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">(You)</span>
+                                                            )}
+                                                        </p>
+                                                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                                                            Member since {formatDate(membership.joined_at)}
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex items-center gap-2">
+                                                        <UserCheck className="size-5 text-green-600 dark:text-green-400" />
+                                                        {canRemove && (
+                                                            <Button
+                                                                variant="ghost"
+                                                                size="sm"
+                                                                onClick={() => handleRemoveMember(membership.id)}
+                                                                disabled={removingMemberId === membership.id}
+                                                                className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
+                                                                title="Remove member"
+                                                            >
+                                                                {removingMemberId === membership.id ? (
+                                                                    <Clock className="size-4 animate-spin" />
+                                                                ) : (
+                                                                    <UserX className="size-4" />
+                                                                )}
+                                                            </Button>
+                                                        )}
+                                                    </div>
                                                 </div>
-                                                <UserCheck className="size-5 text-green-600 dark:text-green-400" />
-                                            </div>
-                                        ))}
+                                            );
+                                        })}
                                     </div>
                                 </div>
 
@@ -533,7 +693,7 @@ export default function CommunityPage() {
                                                             </AvatarFallback>
                                                         </Avatar>
                                                         <div className="flex-1">
-                                                            <div className="flex items-center gap-2 mb-2">
+                                                            <div className="flex items-center gap-2 mb-2 flex-wrap">
                                                                 <span className="font-medium text-gray-900 dark:text-white">
                                                                     {user.name || user.email}
                                                                 </span>
@@ -546,6 +706,22 @@ export default function CommunityPage() {
                                                                     }`}>
                                                                     {post.type === 'event' ? 'Event' : 'Update'}
                                                                 </span>
+                                                                {isAdmin && (
+                                                                    <Button
+                                                                        variant="ghost"
+                                                                        size="sm"
+                                                                        onClick={() => handleDeletePost(post.id)}
+                                                                        disabled={deletingPostId === post.id}
+                                                                        className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 ml-auto"
+                                                                        title="Delete post"
+                                                                    >
+                                                                        {deletingPostId === post.id ? (
+                                                                            <Clock className="size-4 animate-spin" />
+                                                                        ) : (
+                                                                            <Trash2 className="size-4" />
+                                                                        )}
+                                                                    </Button>
+                                                                )}
                                                             </div>
                                                             <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">
                                                                 {post.content}
@@ -600,6 +776,34 @@ export default function CommunityPage() {
                     </div>
                 </div>
             </div>
+
+            {/* Delete Community Confirmation Dialog */}
+            {communityData && (
+                <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+                    <AlertDialogContent className="bg-white dark:bg-slate-800">
+                        <AlertDialogHeader>
+                            <AlertDialogTitle className="text-red-600 dark:text-red-400">
+                                Delete Community
+                            </AlertDialogTitle>
+                            <AlertDialogDescription className="text-gray-600 dark:text-gray-400">
+                                Are you sure you want to delete "{communityData.community.name}"? This action cannot be undone and will permanently delete the community, all its members, and posts.
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel disabled={deleteLoading}>
+                                Cancel
+                            </AlertDialogCancel>
+                            <AlertDialogAction
+                                onClick={handleDeleteCommunity}
+                                disabled={deleteLoading}
+                                className="bg-red-600 hover:bg-red-700 text-white"
+                            >
+                                {deleteLoading ? 'Deleting...' : 'Delete'}
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
+            )}
         </div>
     );
 } 

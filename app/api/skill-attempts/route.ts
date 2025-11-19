@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { submitSkillAttempt, getUser } from '@/lib/db/queries';
+import { submitSkillAttempt, getUser, getAllSkills } from '@/lib/db/queries';
 import { cookies } from 'next/headers';
+import { activityTracker } from '@/lib/services/activity-tracker';
 
 export async function POST(request: NextRequest) {
     try {
@@ -27,6 +28,11 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: 'Invalid request data' }, { status: 400 });
         }
 
+        // Get skill name for activity tracking
+        const skills = await getAllSkills();
+        const skill = skills.find(s => s.id === skillId);
+        const skillName = skill?.name || 'Unknown Skill';
+
         await submitSkillAttempt({
             userId,
             skillId,
@@ -34,6 +40,48 @@ export async function POST(request: NextRequest) {
             total,
             selectedAnswers,
         });
+
+        // Log activity for skill assessment completion
+        const percentage = Math.round((score / total) * 100);
+        try {
+            await activityTracker.logActivity(
+                userId,
+                'skill_assessment_completed',
+                'profile',
+                undefined, // context
+                {
+                    skillId,
+                    skillName,
+                    score,
+                    total,
+                    percentage,
+                },
+                'skill',
+                skillId.toString()
+            );
+
+            // If score is 100%, also log badge earned
+            if (percentage === 100) {
+                await activityTracker.logActivity(
+                    userId,
+                    'skill_badge_earned',
+                    'profile',
+                    undefined,
+                    {
+                        skillId,
+                        skillName,
+                        score,
+                        total,
+                        percentage: 100,
+                    },
+                    'skill',
+                    skillId.toString()
+                );
+            }
+        } catch (activityError) {
+            // Don't fail the request if activity tracking fails
+            console.error('Error logging activity:', activityError);
+        }
 
         return NextResponse.json({
             success: true,

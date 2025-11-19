@@ -18,6 +18,8 @@ import {
   getChatById,
   saveChat,
   saveMessages,
+  getDailyMessageCount,
+  incrementDailyMessageCount,
 } from '@/lib/db/queries';
 import {
   generateUUID,
@@ -98,6 +100,37 @@ export async function POST(request: Request) {
     }
     if (!userMessage) {
       return new Response('No user message found', { status: 400 });
+    }
+
+    // ✅ Server-side daily message limit enforcement
+    // Only enforce for logged-in users (skip for anonymous users)
+    if (emaili && emaili !== 'ss@d.com') {
+      try {
+        const { count, canSend } = await getDailyMessageCount(emaili);
+
+        if (!canSend) {
+          console.log(`🚫 Daily message limit reached for ${emaili}. Count: ${count}/7`);
+          return new Response(
+            JSON.stringify({
+              error: 'Daily message limit reached',
+              message: 'You have reached your daily limit of 7 messages. Please try again tomorrow.',
+              count,
+              limit: 7,
+            }),
+            {
+              status: 429, // Too Many Requests
+              headers: { 'Content-Type': 'application/json' },
+            }
+          );
+        }
+
+        // Increment the count before processing the message
+        await incrementDailyMessageCount(emaili);
+        console.log(`✅ Message count incremented for ${emaili}. New count: ${count + 1}/7`);
+      } catch (error) {
+        console.error('❌ Error checking daily message limit:', error);
+        // On error, allow the message (fail open) but log the error
+      }
     }
 
     let apiData = 11; // Default to generic handler

@@ -15,32 +15,32 @@ const SUGGESTED_ACTIONS = [
     title: 'Find Startups',
     label: 'Global',
     action: 'Find Startups Worldwide',
-    icon: <Globe size={18} className="text-black" />,
+    icon: <Globe size={18} className="text-black dark:text-white" />,
   },
   {
     title: 'Connect with',
     label: 'Tech Professionals',
     action: 'Connect with Tech Professionals',
-    icon: <Users size={18} className="text-black" />,
+    icon: <Users size={18} className="text-black dark:text-white" />,
   },
   {
     title: 'Find',
     label: 'Finance Experts',
     action: 'Find Finance Experts',
-    icon: <Search size={18} className="text-black" />,
+    icon: <Search size={18} className="text-black dark:text-white" />,
   },
   {
     title: 'Find',
     label: 'Remote Work',
     action: 'Find Remote Work Opportunities',
-    icon: <Sparkles size={18} className="text-black" />,
+    icon: <Sparkles size={18} className="text-black dark:text-white" />,
   },
 ];
 
 function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
   return (<div
     data-testid="suggested-actions"
-    className="grid grid-cols-2 gap-2 w-full"
+    className="grid grid-cols-2 gap-2 w-full bg-transparent"
   >
     {SUGGESTED_ACTIONS.map((suggestedAction, index) => (
       <motion.div
@@ -59,13 +59,13 @@ function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
               content: suggestedAction.action,
             });
           }}
-          className="text-left border rounded-xl px-4 py-3.5 text-sm flex flex-col items-start justify-start w-full h-auto gap-1"
+          className="text-left border border-white/20 dark:border-white/20 rounded-xl px-4 py-3.5 text-sm flex flex-col items-start justify-start w-full h-auto gap-1 bg-white/20 dark:bg-black/20 backdrop-blur-sm hover:bg-white/30 dark:hover:bg-black/30"
         >
           <div className="flex items-center gap-2 w-full">
             {suggestedAction.icon}
-            <span className="font-medium text-black truncate w-full">{suggestedAction.title}</span>
+            <span className="font-medium text-black dark:text-white truncate w-full">{suggestedAction.title}</span>
           </div>
-          <span className="text-black text-sm truncate w-full">
+          <span className="text-black dark:text-white text-sm truncate w-full">
             {suggestedAction.label}
           </span>
         </Button>

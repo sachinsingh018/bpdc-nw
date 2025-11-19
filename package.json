@@ -10,6 +10,7 @@
     "lint:fix": "next lint --fix && biome lint --write --unsafe",
     "format": "biome format --write",
     "db:studio": "drizzle-kit studio",
+    "db:clone": "tsx scripts/clone-database-to-bpdc.ts",
     "test": "export PLAYWRIGHT=True && npx playwright test --workers=4",
     "fetch-jobs": "node scripts/fetch-jobs.js"
   },

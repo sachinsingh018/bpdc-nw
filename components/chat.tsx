@@ -8,8 +8,11 @@ import { getCookie } from 'cookies-next';
 
 import useSWR, { useSWRConfig } from 'swr';
 import { ChatHeader } from '@/components/chat-header';
-import type { Vote } from '@/lib/db/schema';
+import type { Vote, Chat } from '@/lib/db/schema';
 import { fetcher, generateUUID } from '@/lib/utils';
+import { MessageSquare, Plus } from 'lucide-react';
+import { motion } from 'framer-motion';
+import type { User } from 'next-auth';
 import { Artifact } from './artifact';
 import { MultimodalInput } from './multimodal-input';
 import { Messages } from './messages';
@@ -21,6 +24,7 @@ import Link from 'next/link';
 import { IoMdInformation } from 'react-icons/io';
 import { AiOutlineRobot } from 'react-icons/ai';
 import { useRouter } from 'next/navigation';
+import { Button } from './ui/button';
 
 // Helper function to get current user ID
 const getCurrentUserId = async (): Promise<string | null> => {
@@ -40,6 +44,19 @@ const getCurrentUserId = async (): Promise<string | null> => {
     return null;
   }
 };
+
+// Helper function to get time ago
+function getTimeAgo(date: Date | string): string {
+  const now = new Date();
+  const past = new Date(date);
+  const diffInSeconds = Math.floor((now.getTime() - past.getTime()) / 1000);
+
+  if (diffInSeconds < 60) return 'just now';
+  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
+  if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
+  if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)}d ago`;
+  return past.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
 
 // Helper function to track activity
 const trackActivity = async (actionType: string, actionCategory: string, metadata?: any) => {
@@ -75,7 +92,10 @@ export function Chat({
   selectedVisibilityType,
   isReadonly,
   isLoggedin,
-  userId
+  userId,
+  user,
+  onChatSelect,
+  onNewChat,
 }: {
   id: string;
   initialMessages: Array<UIMessage>;
@@ -84,6 +104,9 @@ export function Chat({
   isReadonly: boolean;
   isLoggedin: boolean;
   userId: string;
+  user?: User | null;
+  onChatSelect?: (chatId: string, messages: UIMessage[]) => void;
+  onNewChat?: () => void;
 }) {
   const { mutate } = useSWRConfig();
   console.log('userId (in chat.tsx):', userId);
@@ -177,6 +200,15 @@ export function Chat({
   const { data: votes = [] } = useSWR<Array<Vote>>(
     messages.length >= 2 ? `/api/vote?chatId=${id}` : null,
     fetcher,
+  );
+
+  // Fetch chat history for the floating widget
+  const { data: chatHistory = [], isLoading: isLoadingHistory } = useSWR<Array<Chat>>(
+    user ? `/api/history?userId=${user.id}` : null,
+    fetcher,
+    {
+      fallbackData: [],
+    }
   );
   const [flaggedExpiresAt, setFlaggedExpiresAt] = useState<Date | null>(null);
   const [isFlagged, setIsFlagged] = useState(false);
@@ -339,15 +371,68 @@ export function Chat({
   // Above is just a placeholder till demo
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="size-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-black mb-2">
-            Loading AI Chat...
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400">
-            Preparing your AI assistant
-          </p>
+      <div className="relative flex flex-col min-w-0 h-dvh overflow-hidden" style={{
+        background: `
+          radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
+          radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
+          radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
+          radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
+          radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
+          radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
+          radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
+          radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
+          linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
+        `
+      }}>
+        {/* Dynamic Vibrant Background Elements */}
+        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+          {/* Deep Royal Blue */}
+          <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
+          <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
+
+          {/* Bright Golden Yellow */}
+          <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
+          <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
+
+          {/* Crimson Red */}
+          <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
+          <div className="absolute top-1/2 right-1/3 size-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
+
+          {/* Charcoal Black */}
+          <div className="absolute bottom-10 right-5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
+
+          {/* Light Gray */}
+          <div className="absolute top-1/4 left-1/2 size-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
+
+          {/* Mid-tone Blue */}
+          <div className="absolute bottom-1/3 right-1/4 size-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
+
+          {/* Warm Golden Glow */}
+          <div className="absolute top-1/2 left-1/5 size-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
+
+          {/* Vibrant Red */}
+          <div className="absolute top-2/3 right-1/5 size-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
+
+          {/* Neon Purple */}
+          <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
+          <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
+        </div>
+
+        {/* Loading Content */}
+        <div className="relative z-10 flex items-center justify-center h-full">
+          <div className="text-center">
+            <div className="size-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
+              borderColor: 'rgba(255, 215, 0, 0.8)',
+              borderTopColor: 'transparent'
+            }} />
+            <h2 className="text-xl font-bold text-black mb-2">
+              Loading AI Chat...
+            </h2>
+            <p className="text-black font-medium">
+              Preparing your AI assistant
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -420,7 +505,7 @@ export function Chat({
           isArtifactVisible={isArtifactVisible}
         />
 
-        <form className="flex mx-auto px-4 bg-background pb-4 md:pb-6 gap-2 w-full md:max-w-3xl">
+        <form className="flex mx-auto px-4 pb-4 md:pb-6 gap-2 w-full md:max-w-3xl">
           {effectiveReadonly || isFlagged ? (
             <div className="w-full flex justify-center px-4">
               <div className="w-full max-w-3xl bg-[#0E0B1E] text-black text-center py-6 px-6 rounded-2xl shadow-xl border border-white/20 backdrop-blur-md">
@@ -476,6 +561,113 @@ export function Chat({
         isReadonly={isReadonly}
       />
 
+      {/* Chat History Floating Widget */}
+      {user && (
+        <div className="hidden lg:block fixed right-4 top-24 w-80 z-40 max-h-[70vh]">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="backdrop-blur-md rounded-2xl p-4 border-2 shadow-2xl overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 248, 220, 0.25) 50%, rgba(255, 255, 255, 0.3) 100%)',
+              borderColor: 'rgba(70, 130, 180, 0.3)',
+              boxShadow: '0 25px 50px rgba(0, 0, 0, 0.1), 0 0 30px rgba(255, 215, 0, 0.05)',
+            }}
+          >
+            <h2 className="text-lg font-bold text-black dark:text-white mb-4 flex items-center gap-2">
+              <MessageSquare className="size-5 text-blue-600" />
+              Chat History
+            </h2>
+            <div className="overflow-y-auto max-h-[calc(70vh-80px)] space-y-2 pr-2 scrollbar-hide" style={{
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+            }}>
+              {isLoadingHistory ? (
+                <div className="space-y-2">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="animate-pulse">
+                      <div className="h-16 bg-gray-200 dark:bg-gray-700 rounded-lg" />
+                    </div>
+                  ))}
+                </div>
+              ) : chatHistory.length === 0 ? (
+                <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-4">
+                  No chat history yet
+                </p>
+              ) : (
+                chatHistory.map((chat) => {
+                  const isSelected = id === chat.id;
+                  const timeAgo = getTimeAgo(chat.createdAt);
+
+                  return (
+                    <motion.div
+                      key={chat.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all duration-200 ${isSelected
+                        ? 'bg-blue-100 dark:bg-blue-900/30 border-blue-400 dark:border-blue-600'
+                        : 'bg-white/80 dark:bg-gray-800/80 border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-500'
+                        }`}
+                      style={{
+                        background: isSelected
+                          ? 'linear-gradient(135deg, rgba(70, 130, 180, 0.15) 0%, rgba(70, 130, 180, 0.1) 100%)'
+                          : 'linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 248, 220, 0.15) 100%)',
+                        borderColor: isSelected ? 'rgba(70, 130, 180, 0.4)' : 'rgba(70, 130, 180, 0.15)',
+                      }}
+                      onClick={async () => {
+                        if (onChatSelect) {
+                          try {
+                            const response = await fetch(`/api/chat/${chat.id}/messages`);
+                            if (response.ok) {
+                              const data = await response.json();
+                              onChatSelect(chat.id, data.messages || []);
+                            } else {
+                              toast.error('Failed to load chat messages');
+                            }
+                          } catch (error) {
+                            console.error('Error loading chat:', error);
+                            toast.error('Failed to load chat messages');
+                          }
+                        }
+                      }}
+                    >
+                      <div
+                        className="p-2 rounded-full flex-shrink-0"
+                        style={{
+                          background: 'linear-gradient(135deg, rgba(70, 130, 180, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
+                        }}
+                      >
+                        <MessageSquare size={16} className="text-white" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-bold text-black dark:text-white truncate">
+                          {chat.title}
+                        </p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">
+                          {timeAgo}
+                        </p>
+                      </div>
+                    </motion.div>
+                  );
+                })
+              )}
+            </div>
+            {onNewChat && (
+              <div className="mt-3 pt-3 border-t border-white/20 dark:border-white/10">
+                <Button
+                  onClick={onNewChat}
+                  className="w-full bg-white/20 dark:bg-black/20 backdrop-blur-sm border border-white/20 dark:border-white/20 hover:bg-white/30 dark:hover:bg-black/30 text-black dark:text-white text-sm font-medium"
+                  variant="ghost"
+                >
+                  <Plus className="size-4 mr-2" />
+                  New Chat
+                </Button>
+              </div>
+            )}
+          </motion.div>
+        </div>
+      )}
+
       {/* Floating "Powered by Networkqy" Bubble */}
       <a
         href="https://www.networkqy.com/about"
@@ -494,28 +686,32 @@ export function Chat({
       {/* Style for streaming text */}
       <style jsx global>{`
   @keyframes float {
-    0% {
-      transform: translateY(0) translateX(0);
-    }
-    50% {
-      transform: translateY(-20px) translateX(10px);
-    }
-    100% {
-      transform: translateY(0) translateX(0);
-    }
-  }
+   0% {
+     transform: translateY(0) translateX(0);
+   }
+   50% {
+     transform: translateY(-20px) translateX(10px);
+   }
+   100% {
+     transform: translateY(0) translateX(0);
+   }
+ }
 
-  .animate-float-slow {
-    animation: float 12s ease-in-out infinite;
-  }
+ .animate-float-slow {
+   animation: float 12s ease-in-out infinite;
+ }
 
-  .animate-float-medium {
-    animation: float 8s ease-in-out infinite;
-  }
+ .animate-float-medium {
+   animation: float 8s ease-in-out infinite;
+ }
 
-  .animate-float-fast {
-    animation: float 6s ease-in-out infinite;
-  }
+ .animate-float-fast {
+   animation: float 6s ease-in-out infinite;
+ }
+
+ .scrollbar-hide::-webkit-scrollbar {
+   display: none;
+ }
 `}</style>
       <style jsx>{`
         .streaming-text {

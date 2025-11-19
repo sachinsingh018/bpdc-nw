@@ -12,7 +12,8 @@ import {
     Bell,
     Menu,
     Sparkles,
-    Briefcase
+    Briefcase,
+    Eye
 } from 'lucide-react';
 import { NotificationBell } from '@/components/notification-bell';
 import { signOut, useSession } from 'next-auth/react';
@@ -24,7 +25,7 @@ interface CommonNavbarProps {
     hideForPublic?: boolean;
 }
 
-export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut = false, hideForPublic = false }: CommonNavbarProps) {
+export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut = true, hideForPublic = false }: CommonNavbarProps) {
     const router = useRouter();
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const { data: session, status } = useSession();
@@ -39,7 +40,7 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
         { path: '/friends', label: 'Network', icon: Users },
         { path: '/chat', label: 'AI Chat', icon: MessageSquare },
         { path: '/connections', label: 'Connections', icon: User },
-        { path: '/anonymous-feed', label: 'Anonymous Feed', icon: MessageCircle },
+        { path: '/anonymous-feed', label: 'Anonymous Feed', icon: Eye },
         { path: '/messages', label: 'Messages', icon: MessageCircle },
         { path: '/job-board', label: 'Job Board', icon: Briefcase },
         { path: '/communities', label: 'Communities', icon: Users },

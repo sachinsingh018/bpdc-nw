@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { getCookie } from 'cookies-next';
 import { Button } from '@/components/ui/button';
@@ -31,11 +31,13 @@ export default function FriendsPage() {
     const [searchResults, setSearchResults] = useState<any[]>([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [isSearching, setIsSearching] = useState(false);
+    const [hasSearched, setHasSearched] = useState(false); // Track if search has been performed
     const [sendingRequest, setSendingRequest] = useState<string | null>(null);
     const [sentRequests, setSentRequests] = useState<Set<string>>(new Set());
     const [connectionStatuses, setConnectionStatuses] = useState<Record<string, string>>({});
     const [recommendations, setRecommendations] = useState<any[]>([]);
     const [loadingRecommendations, setLoadingRecommendations] = useState(false);
+    const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     // Helper function to get current user ID
     const getCurrentUserId = async (): Promise<string | null> => {
@@ -128,7 +130,8 @@ export default function FriendsPage() {
             const email = getCookie('userEmail') as string;
             if (!email) return;
 
-            const response = await fetch(`/api/users/recommendations?email=${encodeURIComponent(email)}`);
+            // Get 10 random recommendations (connection statuses already included)
+            const response = await fetch(`/api/users/recommendations?email=${encodeURIComponent(email)}&limit=10&randomize=true`);
             if (response.ok) {
                 const data = await response.json();
                 const users = data.users || [];
@@ -139,8 +142,21 @@ export default function FriendsPage() {
 
                 setRecommendations(selectedUsers);
 
-                // Check connection statuses for recommendations
-                await checkConnectionStatuses(selectedUsers);
+                // Connection statuses are already included in the API response
+                const statuses: Record<string, string> = {};
+                const sentRequestsSet = new Set<string>();
+
+                selectedUsers.forEach((user: any) => {
+                    if (user.connectionStatus) {
+                        statuses[user.id] = user.connectionStatus;
+                        if (user.connectionStatus === 'pending') {
+                            sentRequestsSet.add(user.id);
+                        }
+                    }
+                });
+
+                setConnectionStatuses(statuses);
+                setSentRequests(sentRequestsSet);
             }
         } catch (error) {
             console.error('Error fetching recommendations:', error);
@@ -155,74 +171,19 @@ export default function FriendsPage() {
         }
     }, [isLoading]);
 
-    const checkConnectionStatuses = async (users: any[]) => {
-        try {
-            const currentUserEmail = getCookie('userEmail') as string;
-            if (!currentUserEmail) return;
+    // Removed checkConnectionStatuses - now handled by optimized API endpoints
+    // Connection statuses are included in the API responses
 
-            // Get current user's ID
-            const currentUserRes = await fetch('/profile/api', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: currentUserEmail }),
-            });
-            const currentUserData = await currentUserRes.json();
-            if (!currentUserData?.id) return;
-
-            // Get all connections for current user
-            const allConnectionsRes = await fetch(`/api/connections/all?userEmail=${encodeURIComponent(currentUserEmail)}`);
-            if (!allConnectionsRes.ok) return;
-
-            const allConnectionsData = await allConnectionsRes.json();
-            const allConnections = allConnectionsData.connections || [];
-
-            // Check connection status for each user
-            const statuses: Record<string, string> = {};
-
-            for (const user of users) {
-                const userObj = user.user || user;
-                if (!userObj?.id || !userObj?.email) continue;
-
-                // Get target user's ID
-                const targetUserRes = await fetch('/profile/api', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: userObj.email }),
-                });
-                const targetUserData = await targetUserRes.json();
-                if (!targetUserData?.id) continue;
-
-                // Check if connection already exists
-                const existingConnection = allConnections.find(
-                    (conn: any) =>
-                        (conn.sender_id === currentUserData.id && conn.receiver_id === targetUserData.id) ||
-                        (conn.sender_id === targetUserData.id && conn.receiver_id === currentUserData.id)
-                );
-
-                if (existingConnection) {
-                    statuses[userObj.id] = existingConnection.status;
-                    if (existingConnection.status === 'pending') {
-                        setSentRequests(prev => new Set(prev).add(userObj.id));
-                    }
-                }
-            }
-
-            setConnectionStatuses(statuses);
-        } catch (error) {
-            console.error('Error checking connection statuses:', error);
-        }
-    };
-
-    const handleSearch = async (e: React.FormEvent) => {
-        e.preventDefault();
-
-        if (!searchQuery.trim()) {
+    // Debounced search function
+    const performSearch = useCallback(async (query: string) => {
+        if (!query.trim()) {
             setSearchResults([]);
+            setHasSearched(false);
             return;
         }
 
         setIsSearching(true);
-        setSearchResults([]);
+        setHasSearched(true);
 
         try {
             const email = getCookie('userEmail') as string;
@@ -234,28 +195,93 @@ export default function FriendsPage() {
             const response = await fetch('/api/users/friends', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ query: searchQuery, email }),
+                body: JSON.stringify({ query: query.trim(), email, page: 1, limit: 10 }),
             });
 
             if (response.ok) {
                 const data = await response.json();
-                setSearchResults(data || []);
+                const results = data.results || [];
+                setSearchResults(results);
 
-                // Check connection statuses for search results
-                await checkConnectionStatuses(data || []);
+                // Connection statuses are already included in the API response
+                const statuses: Record<string, string> = {};
+                const sentRequestsSet = new Set<string>();
+
+                results.forEach((user: any) => {
+                    const userObj = user.user || user;
+                    if (userObj.connectionStatus) {
+                        statuses[userObj.id] = userObj.connectionStatus;
+                        if (userObj.connectionStatus === 'pending') {
+                            sentRequestsSet.add(userObj.id);
+                        }
+                    }
+                });
+
+                setConnectionStatuses(statuses);
+                setSentRequests(sentRequestsSet);
 
                 // Track search activity
                 trackActivity('user_search', 'social', {
                     feature: 'friends',
-                    searchQuery: searchQuery.trim(),
-                    resultCount: data?.length || 0,
+                    searchQuery: query.trim(),
+                    resultCount: results.length,
                 });
+            } else {
+                const errorData = await response.json().catch(() => ({}));
+                toast.error(errorData.error || 'Failed to search users');
+                setSearchResults([]);
             }
         } catch (error) {
             console.error('Error searching users:', error);
+            toast.error('Failed to search users');
+            setSearchResults([]);
         } finally {
             setIsSearching(false);
         }
+    }, [router]);
+
+    // Debounced search effect - triggers search 500ms after user stops typing
+    useEffect(() => {
+        // Clear previous timeout
+        if (searchTimeoutRef.current) {
+            clearTimeout(searchTimeoutRef.current);
+        }
+
+        // If query is empty, clear results immediately
+        if (!searchQuery.trim()) {
+            setSearchResults([]);
+            setHasSearched(false);
+            setIsSearching(false);
+            return;
+        }
+
+        // Set loading state immediately when user types
+        setIsSearching(true);
+
+        // Debounce the search
+        searchTimeoutRef.current = setTimeout(() => {
+            performSearch(searchQuery);
+        }, 500); // Wait 500ms after user stops typing
+
+        // Cleanup
+        return () => {
+            if (searchTimeoutRef.current) {
+                clearTimeout(searchTimeoutRef.current);
+            }
+        };
+    }, [searchQuery, performSearch]);
+
+    // Handle manual search button click (immediate search)
+    const handleSearch = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        // Clear any pending debounced search
+        if (searchTimeoutRef.current) {
+            clearTimeout(searchTimeoutRef.current);
+        }
+
+        // Perform search immediately
+        await performSearch(searchQuery);
     };
 
     const handleConnect = async (rec: any) => {
@@ -498,7 +524,8 @@ export default function FriendsPage() {
                         ) : recommendations.length > 0 ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                 {recommendations.map((user) => {
-                                    const connectionStatus = connectionStatuses[user.id];
+                                    // Use connectionStatus from API response, fallback to state
+                                    const connectionStatus = user.connectionStatus || connectionStatuses[user.id];
                                     const isPending = sentRequests.has(user.id) || connectionStatus === 'pending';
 
                                     return (
@@ -604,11 +631,32 @@ export default function FriendsPage() {
                 {/* Results Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {searchQuery.trim() ? (
-                        searchResults.length > 0 ? (
+                        isSearching ? (
+                            // Loading state while searching
+                            <div className="col-span-full">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {[1, 2, 3].map((i) => (
+                                        <div key={i} className="bg-gradient-to-br from-white/90 via-purple-50/20 to-white/90 dark:from-slate-800/90 dark:via-purple-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl animate-pulse">
+                                            <div className="flex items-center gap-3 mb-4">
+                                                <div className="size-12 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+                                                <div className="flex-1">
+                                                    <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-2"></div>
+                                                    <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-2/3"></div>
+                                                </div>
+                                            </div>
+                                            <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded mb-2"></div>
+                                            <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
+                                            <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded"></div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ) : hasSearched && searchResults.length > 0 ? (
                             searchResults.map((rec: any) => {
                                 const userObj = rec.user || rec;
                                 const hasUser = userObj?.id && userObj?.email;
-                                const connectionStatus = connectionStatuses[userObj.id];
+                                // Use connectionStatus from API response, fallback to state
+                                const connectionStatus = userObj.connectionStatus || connectionStatuses[userObj.id];
                                 const isPending = hasUser && (sentRequests.has(userObj.id) || connectionStatus === 'pending');
                                 return (
                                     <div
@@ -693,7 +741,8 @@ export default function FriendsPage() {
                                     </div>
                                 );
                             })
-                        ) : (
+                        ) : hasSearched && searchResults.length === 0 ? (
+                            // No results found - only show after search has completed
                             <div className="col-span-full text-center py-12">
                                 <Users className="size-16 text-gray-400 mx-auto mb-4" />
                                 <h3 className="text-xl font-bold text-black mb-2">
@@ -701,6 +750,17 @@ export default function FriendsPage() {
                                 </h3>
                                 <p className="text-black font-bold mb-4">
                                     Try a different search term or check your spelling
+                                </p>
+                            </div>
+                        ) : (
+                            // Typing state - show helpful message while user is typing
+                            <div className="col-span-full text-center py-12">
+                                <Search className="size-16 text-gray-400 mx-auto mb-4 animate-pulse" />
+                                <h3 className="text-xl font-bold text-black mb-2">
+                                    Searching...
+                                </h3>
+                                <p className="text-black font-bold">
+                                    Finding matches for &quot;{searchQuery}&quot;
                                 </p>
                             </div>
                         )

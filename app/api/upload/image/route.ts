@@ -72,7 +72,10 @@ export async function POST(request: Request) {
 
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
-        const uniqueFileName = `anonymous-feed-images/${uuidv4()}_${file.name}`;
+
+        // Get folder from formData, default to anonymous-feed-images for backward compatibility
+        const folder = (formData.get('folder') as string) || 'anonymous-feed-images';
+        const uniqueFileName = `${folder}/${uuidv4()}_${file.name}`;
 
         console.log('=== S3 IMAGE UPLOAD DEBUG ===');
         console.log('Upload Details:');

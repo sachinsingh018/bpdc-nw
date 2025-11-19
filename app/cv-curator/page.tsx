@@ -312,7 +312,7 @@ Cloud: AWS, Google Cloud Platform, Azure`;
 
             <div className="relative z-10 flex flex-col min-h-screen">
                 {/* Common Navbar */}
-                <CommonNavbar currentPage="/cv-curator" showThemeToggle={true} showSignOut={false} />
+                <CommonNavbar currentPage="/cv-curator" showThemeToggle={true} />
 
                 {/* Main Content */}
                 <div className="flex-1 flex flex-col h-[calc(100vh-4rem)]">

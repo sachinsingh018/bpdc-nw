@@ -2,7 +2,18 @@
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Sparkles, Users, Home, MessageSquare, MessageCircle, User, Menu, Briefcase, Calendar, MessageCircle as MessageCircleIcon } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog";
+import { Sparkles, Users, Home, MessageSquare, MessageCircle, User, Menu, Briefcase, Calendar, MessageCircle as MessageCircleIcon, Plus, Upload, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { NotificationBell } from "@/components/notification-bell";
@@ -45,6 +56,14 @@ export default function CommunitiesPage() {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [communities, setCommunities] = useState<Community[]>([]);
     const [userMemberships, setUserMemberships] = useState<Record<string, UserMembership>>({});
+    const [showCreateModal, setShowCreateModal] = useState(false);
+    const [createLoading, setCreateLoading] = useState(false);
+    const [newCommunityName, setNewCommunityName] = useState("");
+    const [newCommunityDescription, setNewCommunityDescription] = useState("");
+    const [newCommunityBannerImage, setNewCommunityBannerImage] = useState("");
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const [uploadingImage, setUploadingImage] = useState(false);
 
     // Helper function to get current user ID
     const getCurrentUserId = async (): Promise<string | null> => {
@@ -201,6 +220,118 @@ export default function CommunitiesPage() {
         return userMemberships[communityId]?.status || null;
     };
 
+    const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                toast.error('Please select an image file');
+                return;
+            }
+            // Validate file size (5MB max)
+            if (file.size > 5 * 1024 * 1024) {
+                toast.error('Image size must be less than 5MB');
+                return;
+            }
+            setSelectedImage(file);
+            // Create preview
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleRemoveImage = () => {
+        setSelectedImage(null);
+        setImagePreview(null);
+    };
+
+    const handleImageUpload = async (): Promise<string | null> => {
+        if (!selectedImage) return null;
+
+        setUploadingImage(true);
+        try {
+            const formData = new FormData();
+            formData.append('file', selectedImage);
+            formData.append('folder', 'community-images');
+
+            const response = await fetch('/api/upload/image', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                return data.fileUrl;
+            } else {
+                const errorData = await response.json();
+                toast.error(errorData.error || 'Failed to upload image');
+                return null;
+            }
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            toast.error('Failed to upload image');
+            return null;
+        } finally {
+            setUploadingImage(false);
+        }
+    };
+
+    const handleCreateCommunity = async () => {
+        if (!newCommunityName.trim()) {
+            toast.error('Community name is required');
+            return;
+        }
+
+        setCreateLoading(true);
+        try {
+            // Upload image first if one is selected
+            let bannerImageUrl = null;
+            if (selectedImage) {
+                bannerImageUrl = await handleImageUpload();
+                if (!bannerImageUrl) {
+                    setCreateLoading(false);
+                    return; // Error already shown in handleImageUpload
+                }
+            }
+
+            const response = await fetch('/api/communities', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: newCommunityName.trim(),
+                    description: newCommunityDescription.trim() || null,
+                    bannerImage: bannerImageUrl || newCommunityBannerImage.trim() || null,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                toast.success('Community created successfully!');
+                setShowCreateModal(false);
+                setNewCommunityName("");
+                setNewCommunityDescription("");
+                setNewCommunityBannerImage("");
+                setSelectedImage(null);
+                setImagePreview(null);
+                // Refresh communities list
+                window.location.reload();
+            } else {
+                toast.error(data.error || 'Failed to create community');
+            }
+        } catch (error) {
+            console.error('Error creating community:', error);
+            toast.error('Failed to create community');
+        } finally {
+            setCreateLoading(false);
+        }
+    };
+
     return (
         <div className="min-h-screen relative overflow-hidden" style={{
             background: `
@@ -253,8 +384,19 @@ export default function CommunitiesPage() {
             {/* Common Navbar */}
             <CommonNavbar currentPage="/communities" showSignOut={true} />
 
+            {/* Create Community Button - Upper Right */}
+            <div className="max-w-6xl mx-auto px-4 pt-4 flex justify-end relative z-10">
+                <Button
+                    onClick={() => setShowCreateModal(true)}
+                    className="bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold shadow-md hover:from-purple-700 hover:to-blue-700 rounded-lg flex items-center gap-2"
+                >
+                    <Plus className="size-4" />
+                    Create Community
+                </Button>
+            </div>
+
             {/* Hero Section */}
-            <div className="max-w-3xl mx-auto text-center py-16 px-4">
+            <div className="max-w-3xl mx-auto text-center pt-10 pb-16 px-4">
                 <div className="flex justify-center mb-4">
                     <div className="bg-red-500 p-3 rounded-full shadow-lg">
                         <Users className="size-8 text-bits-royal-blue dark:text-black" />
@@ -351,6 +493,138 @@ export default function CommunitiesPage() {
                         );
                     })}
             </div>
+
+            {/* Create Community Modal */}
+            <Dialog open={showCreateModal} onOpenChange={setShowCreateModal}>
+                <DialogContent className="sm:max-w-[500px] bg-white dark:bg-slate-800">
+                    <DialogHeader>
+                        <DialogTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+                            Create New Community
+                        </DialogTitle>
+                        <DialogDescription className="text-gray-600 dark:text-gray-400">
+                            Fill in the details to create a new community for your network.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4 py-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="name" className="text-gray-900 dark:text-white font-semibold">
+                                Community Name <span className="text-red-500">*</span>
+                            </Label>
+                            <Input
+                                id="name"
+                                placeholder="e.g., BITS Dubai Alumni Network"
+                                value={newCommunityName}
+                                onChange={(e) => setNewCommunityName(e.target.value)}
+                                className="bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="description" className="text-gray-900 dark:text-white font-semibold">
+                                Description
+                            </Label>
+                            <Textarea
+                                id="description"
+                                placeholder="Describe what this community is about..."
+                                value={newCommunityDescription}
+                                onChange={(e) => setNewCommunityDescription(e.target.value)}
+                                rows={4}
+                                className="bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="bannerImage" className="text-gray-900 dark:text-white font-semibold">
+                                Banner Image (Optional)
+                            </Label>
+                            {!imagePreview ? (
+                                <div className="flex items-center gap-4">
+                                    <label
+                                        htmlFor="image-upload"
+                                        className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+                                    >
+                                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <Upload className="size-8 text-gray-400 mb-2" />
+                                            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                <span className="font-semibold">Click to upload</span> or drag and drop
+                                            </p>
+                                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                                                PNG, JPG, GIF, WEBP (MAX. 5MB)
+                                            </p>
+                                        </div>
+                                        <input
+                                            id="image-upload"
+                                            type="file"
+                                            className="hidden"
+                                            accept="image/*"
+                                            onChange={handleImageSelect}
+                                            disabled={uploadingImage || createLoading}
+                                        />
+                                    </label>
+                                </div>
+                            ) : (
+                                <div className="relative">
+                                    <div className="relative w-full h-48 rounded-lg overflow-hidden border border-gray-300 dark:border-gray-600">
+                                        <img
+                                            src={imagePreview}
+                                            alt="Preview"
+                                            className="w-full h-full object-cover"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={handleRemoveImage}
+                                            disabled={uploadingImage || createLoading}
+                                            className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-1.5 transition-colors disabled:opacity-50"
+                                        >
+                                            <X className="size-4" />
+                                        </button>
+                                    </div>
+                                    {uploadingImage && (
+                                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                                            Uploading image...
+                                        </p>
+                                    )}
+                                </div>
+                            )}
+                            {!imagePreview && (
+                                <div className="mt-2">
+                                    <Label htmlFor="bannerImageUrl" className="text-gray-900 dark:text-white font-semibold text-sm">
+                                        Or enter image URL:
+                                    </Label>
+                                    <Input
+                                        id="bannerImageUrl"
+                                        placeholder="https://example.com/image.jpg"
+                                        value={newCommunityBannerImage}
+                                        onChange={(e) => setNewCommunityBannerImage(e.target.value)}
+                                        className="bg-white dark:bg-slate-700 text-gray-900 dark:text-white mt-1"
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <DialogFooter>
+                        <Button
+                            variant="outline"
+                            onClick={() => {
+                                setShowCreateModal(false);
+                                setNewCommunityName("");
+                                setNewCommunityDescription("");
+                                setNewCommunityBannerImage("");
+                                setSelectedImage(null);
+                                setImagePreview(null);
+                            }}
+                            disabled={createLoading || uploadingImage}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            onClick={handleCreateCommunity}
+                            disabled={createLoading || uploadingImage || !newCommunityName.trim()}
+                            className="bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700"
+                        >
+                            {createLoading ? (uploadingImage ? 'Uploading...' : 'Creating...') : 'Create Community'}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
 
         </div>
     );

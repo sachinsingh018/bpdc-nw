@@ -180,11 +180,17 @@ function PureMultimodalInput({
   );
 
   return (
-    <div className="relative w-full flex flex-col gap-0">
+    <div className="relative w-full flex flex-col gap-0 bg-transparent">
       {messages.length === 0 &&
         attachments.length === 0 &&
         uploadQueue.length === 0 && (
           <SuggestedActions append={append} chatId={chatId} />
+        )}
+
+      {messages.length === 0 &&
+        attachments.length === 0 &&
+        uploadQueue.length === 0 && (
+          <div className="h-4" />
         )}
 
       <input
@@ -199,7 +205,7 @@ function PureMultimodalInput({
       {(attachments.length > 0 || uploadQueue.length > 0) && (
         <div
           data-testid="attachments-preview"
-          className="flex flex-row gap-2 overflow-x-scroll items-end"
+          className="flex flex-row gap-2 overflow-x-scroll items-end bg-transparent"
         >
           {attachments.map((attachment) => (
             <PreviewAttachment key={attachment.url} attachment={attachment} />
@@ -219,7 +225,7 @@ function PureMultimodalInput({
         </div>
       )}
       {/* Wrapper for Textarea + Send Button */}
-      <div className="relative w-full">
+      <div className="relative w-full bg-transparent">
 
         <Textarea
           data-testid="multimodal-input"
@@ -228,7 +234,7 @@ function PureMultimodalInput({
           value={input}
           onChange={handleInput}
           className={cx(
-            'min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-2xl !text-base bg-muted pr-12 pb-10 dark:border-zinc-700 text-black !text-black',
+            'min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-2xl !text-base bg-white dark:bg-gray-900 backdrop-blur-xl border border-white/30 dark:border-white/20 pr-12 pb-10 text-black dark:text-white',
             className,
           )}
           rows={2}
@@ -270,10 +276,10 @@ function PureMultimodalInput({
       </div>
 
       {/* Terms message below the input box */}
-      <div className="mt-2 text-xs text-black text-center w-full px-4">
-        By using <span className="font-semibold text-black">Networkqy</span>, you agree to our{' '}
-        <Link href="/privacy-policy" className="underline text-black hover:text-gray-700">privacy policy</Link> and{' '}
-        <Link href="/terms-of-use" className="underline text-black hover:text-gray-700">terms of use</Link>.
+      <div className="mt-2 text-xs text-black/80 dark:text-white/80 text-center w-full px-4">
+        By using <span className="font-semibold text-black dark:text-white">Networkqy</span>, you agree to our{' '}
+        <Link href="/privacy-policy" className="underline text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white">privacy policy</Link> and{' '}
+        <Link href="/terms-of-use" className="underline text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white">terms of use</Link>.
       </div>
 
 
@@ -303,7 +309,7 @@ function PureAttachmentsButton({
   return (
     <Button
       data-testid="attachments-button"
-      className="rounded-md rounded-bl-lg p-[7px] h-fit dark:border-zinc-700 hover:dark:bg-zinc-900 hover:bg-zinc-200"
+      className="rounded-md rounded-bl-lg p-[7px] h-fit bg-white/20 dark:bg-black/20 backdrop-blur-sm border border-white/20 dark:border-white/20 hover:bg-white/30 dark:hover:bg-black/30"
       onClick={(event) => {
         event.preventDefault();
         fileInputRef.current?.click();
@@ -328,7 +334,7 @@ function PureStopButton({
   return (
     <Button
       data-testid="stop-button"
-      className="rounded-full p-1.5 h-fit border dark:border-zinc-600"
+      className="rounded-full p-1.5 h-fit bg-white/20 dark:bg-black/20 backdrop-blur-sm border border-white/20 dark:border-white/20 hover:bg-white/30 dark:hover:bg-black/30"
       onClick={(event) => {
         event.preventDefault();
         stop();
@@ -354,14 +360,14 @@ function PureSendButton({
   return (
     <Button
       data-testid="send-button"
-      className="rounded-full p-1.5 h-fit border dark:border-zinc-600"
+      className="rounded-full p-1.5 h-fit bg-white/20 dark:bg-black/20 backdrop-blur-sm border border-white/20 dark:border-white/20 hover:bg-white/30 dark:hover:bg-black/30 disabled:opacity-50"
       onClick={(event) => {
         event.preventDefault();
         submitForm();
       }}
       disabled={input.length === 0 || uploadQueue.length > 0}
     >
-      <span className="text-black">
+      <span className="text-black dark:text-white">
         <ArrowUpIcon size={14} />
       </span>
     </Button>

@@ -2,11 +2,10 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { eq } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import { getBpdcPostgresClient } from '@/lib/db/connection';
 import { user } from '@/lib/db/schema';
 
-// biome-ignore lint: Forbidden non-null assertion.
-const client = postgres(process.env.POSTGRES_URL!);
+const client = getBpdcPostgresClient();
 const db = drizzle(client);
 
 export async function GET(

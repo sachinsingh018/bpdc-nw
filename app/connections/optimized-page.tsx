@@ -214,7 +214,7 @@ const OptimizedConnectionsPage = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-2 border border-gray-200 dark:border-white/20 shadow-lg mb-8"
+                        className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-2 border border-gray-200 dark:border-white/20 shadow-lg mb-8 relative z-10 pointer-events-auto"
                     >
                         <div className="flex space-x-1">
                             {[
@@ -224,8 +224,9 @@ const OptimizedConnectionsPage = () => {
                             ].map((tab) => (
                                 <button
                                     key={tab.key}
+                                    type="button"
                                     onClick={() => setActiveTab(tab.key as any)}
-                                    className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${activeTab === tab.key
+                                    className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer relative z-10 ${activeTab === tab.key
                                         ? 'bg-purple-600 text-black shadow-lg'
                                         : 'text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20'
                                         }`}

@@ -21,11 +21,9 @@ config({
   path: '.env.local',
 });
 
-if (!process.env.POSTGRES_URL) {
-  throw new Error('POSTGRES_URL environment variable is not set');
-}
+import { getBpdcPostgresClient } from '../connection';
 
-const client = postgres(process.env.POSTGRES_URL);
+const client = getBpdcPostgresClient();
 const db = drizzle(client);
 
 const BATCH_SIZE = 50; // Process 10 chats at a time
