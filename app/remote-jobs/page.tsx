@@ -379,7 +379,7 @@ export default function RemoteJobsPage() {
                         {/* Search */}
                         <div className="flex-1">
                             <form onSubmit={handleSearch} className="relative">
-                                <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 size-5" />
+                                <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 size-5" />
                                 <input
                                     type="text"
                                     placeholder="Search remote jobs..."
@@ -387,7 +387,7 @@ export default function RemoteJobsPage() {
                                     onChange={(e) => setSearchInput(e.target.value)}
                                     className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-white/10 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                                 />
-                                <Button type="submit" className="absolute right-2 top-1/2 transform -translate-y-1/2">
+                                <Button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2">
                                     Search
                                 </Button>
                             </form>

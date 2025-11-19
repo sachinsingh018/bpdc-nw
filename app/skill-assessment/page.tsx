@@ -327,7 +327,7 @@ export default function SkillAssessmentPage() {
                                 <Button
                                     onClick={handleSubmit}
                                     disabled={!allQuestionsAnswered || isSubmitting}
-                                    className={`px-8 py-3 text-lg font-semibold text-black font-bold ${allQuestionsAnswered && !isSubmitting
+                                    className={`px-8 py-3 text-lg font-bold text-black ${allQuestionsAnswered && !isSubmitting
                                         ? 'shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105'
                                         : 'bg-gray-400 text-gray-600 cursor-not-allowed'
                                         }`}

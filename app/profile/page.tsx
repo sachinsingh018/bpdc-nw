@@ -1145,10 +1145,10 @@ const ProfilePage = () => {
                               alt="Current anonymous avatar"
                               width={48}
                               height={48}
-                              className="w-full h-full object-cover"
+                              className="size-full object-cover"
                             />
                           ) : (
-                            <div className="w-full h-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                            <div className="size-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
                               <MessageCircle className="size-4 text-black" />
                             </div>
                           )}
@@ -1166,10 +1166,12 @@ const ProfilePage = () => {
                       <div className="flex items-center gap-2">
                         <div className="size-8 rounded-full bg-bits-golden-yellow/10 dark:bg-bits-golden-yellow/30 flex items-center justify-center">
                           {anonymousAvatar ? (
-                            <img
+                            <Image
                               src={anonymousAvatar}
                               alt="Anonymous avatar"
-                              className="w-full h-full rounded-full object-cover"
+                              width={32}
+                              height={32}
+                              className="size-full rounded-full object-cover"
                             />
                           ) : (
                             <MessageCircle className="size-3 text-bits-golden-yellow dark:text-bits-golden-yellow" />
