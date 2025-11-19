@@ -128,6 +128,13 @@ export default function CommunityPage() {
         }
     }, [communityId, router]);
 
+    // Update isAdmin state when community data is loaded
+    useEffect(() => {
+        if (communityData) {
+            setIsAdmin(communityData.isUserAdmin);
+        }
+    }, [communityData]);
+
     const handleJoinCommunity = async () => {
         try {
             const response = await fetch('/api/communities', {
@@ -322,13 +329,6 @@ export default function CommunityPage() {
     const pendingMembers = members.filter(m => m.membership.status === 'pending');
     const isMember = userMembership?.status === 'approved';
     const isPending = userMembership?.status === 'pending';
-
-    // Update isAdmin state when community data is loaded
-    useEffect(() => {
-        if (communityData) {
-            setIsAdmin(isUserAdmin);
-        }
-    }, [communityData, isUserAdmin]);
 
     console.log('Community data:', {
         community,
@@ -786,7 +786,7 @@ export default function CommunityPage() {
                                 Delete Community
                             </AlertDialogTitle>
                             <AlertDialogDescription className="text-gray-600 dark:text-gray-400">
-                                Are you sure you want to delete "{communityData.community.name}"? This action cannot be undone and will permanently delete the community, all its members, and posts.
+                                Are you sure you want to delete &quot;{communityData.community.name}&quot;? This action cannot be undone and will permanently delete the community, all its members, and posts.
                             </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
