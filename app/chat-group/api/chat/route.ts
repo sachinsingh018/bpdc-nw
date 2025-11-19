@@ -59,7 +59,8 @@ export async function POST(request: Request) {
     const userId = session?.user?.id || '1a17769c-5827-4325-94da-71ddeb5b6279'; // Default to 'anonymous' if no session
     let questioned = ''; // Default empty string
     let linkedindata = '';
-    const emaili = getCookie('userEmail') || 'ss@d.com';
+    const emailiCookie = getCookie('userEmail');
+    const emaili = (typeof emailiCookie === 'string' ? emailiCookie : 'ss@d.com') || 'ss@d.com';
 
     try {
       const res = await fetch('http://localhost:3000/profile/api', {
