@@ -217,20 +217,17 @@ export default function RecruiterDashboard() {
                 setUserRole(role);
 
                 // Check if user has recruiter or admin role
-                // Temporary: Allow access if role is undefined (for testing)
-                if (!role) {
-                    console.log('Role is undefined - allowing access for testing');
-                    setUserRole('admin'); // Set a default role for display
-                    return true;
-                }
-
-                if (!['recruiter', 'admin'].includes(role)) {
-                    console.log('Access denied - role not in allowed list');
+                if (!role || !['recruiter', 'admin'].includes(role)) {
+                    console.log('Access denied - role not in allowed list. Role:', role);
                     setAccessDenied(true);
                     toast.error('Access denied. Recruiter or Admin role required.');
+                    // Redirect to home page after 2 seconds
+                    setTimeout(() => {
+                        router.push('/');
+                    }, 2000);
                     return false;
                 }
-                console.log('Access granted - role is valid');
+                console.log('Access granted - role is valid:', role);
                 return true;
             } else {
                 const errorData = await response.json();

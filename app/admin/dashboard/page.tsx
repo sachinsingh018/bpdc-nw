@@ -30,6 +30,8 @@ import {
     Monitor,
     Zap,
     UserPlus,
+    Upload,
+    Building2,
 
 } from 'lucide-react';
 import jsPDF from 'jspdf';
@@ -104,6 +106,10 @@ export default function AdminDashboard() {
     const [selectedProfile, setSelectedProfile] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [generatingPdf, setGeneratingPdf] = useState(false);
+    const [uploadingCompanies, setUploadingCompanies] = useState(false);
+    const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+    const [companyFiles, setCompanyFiles] = useState<Array<{ key: string; fileName: string; fileUrl: string; size: number; lastModified: string }>>([]);
+    const [loadingFiles, setLoadingFiles] = useState(true);
 
     // Pagination constants
     const USERS_PER_PAGE = 50;
@@ -122,7 +128,23 @@ export default function AdminDashboard() {
 
     useEffect(() => {
         loadDashboardData();
+        loadCompanyFiles();
     }, [dateRange]);
+
+    const loadCompanyFiles = async () => {
+        setLoadingFiles(true);
+        try {
+            const response = await fetch('/api/admin/upload-companies');
+            if (response.ok) {
+                const data = await response.json();
+                setCompanyFiles(data.files || []);
+            }
+        } catch (error) {
+            console.error('Error loading company files:', error);
+        } finally {
+            setLoadingFiles(false);
+        }
+    };
 
     const loadDashboardData = async () => {
         setLoading(true);
@@ -892,12 +914,13 @@ export default function AdminDashboard() {
 
                 {/* Main Content Tabs */}
                 <Tabs defaultValue="activity" className="space-y-6">
-                    <TabsList className="grid w-full grid-cols-5 bg-white/10 backdrop-blur-md border-white/20">
+                    <TabsList className="grid w-full grid-cols-6 bg-white/10 backdrop-blur-md border-white/20">
                         <TabsTrigger value="activity" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">Recent Activity</TabsTrigger>
                         <TabsTrigger value="users" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">User Engagement</TabsTrigger>
                         <TabsTrigger value="trends" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">Daily Trends</TabsTrigger>
                         <TabsTrigger value="features" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">Feature Usage</TabsTrigger>
                         <TabsTrigger value="userlist" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">User List</TabsTrigger>
+                        <TabsTrigger value="companies" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">Companies</TabsTrigger>
                     </TabsList>
 
                     {/* Recent Activity Tab */}
@@ -1308,6 +1331,209 @@ export default function AdminDashboard() {
                                         Showing all <span className="font-semibold text-black">{filteredStudents.length}</span> of <span className="font-semibold text-black">{students.length}</span> students
                                     </div>
                                 )}
+                            </CardContent>
+                        </Card>
+                    </TabsContent>
+
+                    {/* Companies Upload Tab */}
+                    <TabsContent value="companies" className="space-y-4">
+                        <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black shadow-lg">
+                            <CardHeader className="pb-4">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <CardTitle className="text-black flex items-center gap-2 text-xl">
+                                            <Building2 className="size-5" />
+                                            Upload Companies
+                                        </CardTitle>
+                                        <CardDescription className="text-black/80 mt-1">
+                                            Upload an Excel (.xlsx, .xls) or CSV file with company information
+                                        </CardDescription>
+                                    </div>
+                                </div>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-6">
+                                    {/* File Upload Section */}
+                                    <div className="border-2 border-dashed border-white/30 rounded-lg p-8 text-center bg-white/5">
+                                        <Upload className="size-12 text-black/50 mx-auto mb-4" />
+                                        <h3 className="text-lg font-semibold text-black mb-2">Upload Company File</h3>
+                                        <p className="text-sm text-black/70 mb-4">
+                                            Supported formats: Excel (.xlsx, .xls) or CSV (.csv)
+                                        </p>
+                                        <p className="text-xs text-black/60 mb-6">
+                                            Expected columns: Company Name (required), Industry (optional), Location (optional), Website (optional), Description (optional)
+                                        </p>
+                                        <div className="flex flex-col items-center gap-4">
+                                            <input
+                                                type="file"
+                                                id="company-file-upload"
+                                                accept=".xlsx,.xls,.csv"
+                                                onChange={(e) => {
+                                                    const file = e.target.files?.[0];
+                                                    if (file) {
+                                                        setUploadedFile(file);
+                                                    }
+                                                }}
+                                                className="hidden"
+                                            />
+                                            <label
+                                                htmlFor="company-file-upload"
+                                                className="cursor-pointer px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-purple-500 hover:to-blue-500 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                                            >
+                                                <Upload className="size-4 inline mr-2" />
+                                                Select File
+                                            </label>
+                                            {uploadedFile && (
+                                                <div className="mt-4 p-4 bg-white/10 rounded-lg">
+                                                    <div className="flex items-center gap-3">
+                                                        <FileText className="size-5 text-black" />
+                                                        <div className="text-left">
+                                                            <p className="font-semibold text-black">{uploadedFile.name}</p>
+                                                            <p className="text-sm text-black/70">
+                                                                {(uploadedFile.size / 1024).toFixed(2)} KB
+                                                            </p>
+                                                        </div>
+                                                        <Button
+                                                            variant="ghost"
+                                                            size="sm"
+                                                            onClick={() => {
+                                                                setUploadedFile(null);
+                                                            }}
+                                                            className="text-black hover:text-red-500"
+                                                        >
+                                                            Remove
+                                                        </Button>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* Upload Button */}
+                                    {uploadedFile && (
+                                        <div className="flex justify-center">
+                                            <Button
+                                                onClick={async () => {
+                                                    if (!uploadedFile) return;
+
+                                                    setUploadingCompanies(true);
+
+                                                    try {
+                                                        const formData = new FormData();
+                                                        formData.append('file', uploadedFile);
+
+                                                        const response = await fetch('/api/admin/upload-companies', {
+                                                            method: 'POST',
+                                                            body: formData,
+                                                        });
+
+                                                        const result = await response.json();
+
+                                                        if (response.ok) {
+                                                            toast.success(result.message || 'File uploaded successfully!');
+                                                            setUploadedFile(null);
+                                                            // Reload the file list
+                                                            loadCompanyFiles();
+                                                        } else {
+                                                            toast.error(result.error || 'Failed to upload file');
+                                                        }
+                                                    } catch (error) {
+                                                        console.error('Error uploading companies:', error);
+                                                        toast.error('An error occurred while uploading the file');
+                                                    } finally {
+                                                        setUploadingCompanies(false);
+                                                    }
+                                                }}
+                                                disabled={uploadingCompanies || !uploadedFile}
+                                                className="px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-emerald-500 hover:to-green-500 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                            >
+                                                {uploadingCompanies ? (
+                                                    <>
+                                                        <RefreshCw className="size-4 inline mr-2 animate-spin" />
+                                                        Uploading...
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Upload className="size-4 inline mr-2" />
+                                                        Upload Companies
+                                                    </>
+                                                )}
+                                            </Button>
+                                        </div>
+                                    )}
+
+                                    {/* Uploaded Files List */}
+                                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black shadow-lg">
+                                        <CardHeader className="pb-4">
+                                            <div className="flex items-center justify-between">
+                                                <div>
+                                                    <CardTitle className="text-black flex items-center gap-2 text-xl">
+                                                        <FileText className="size-5" />
+                                                        Uploaded Company Files
+                                                    </CardTitle>
+                                                    <CardDescription className="text-black/80 mt-1">
+                                                        {companyFiles.length} {companyFiles.length === 1 ? 'file' : 'files'} available for download
+                                                    </CardDescription>
+                                                </div>
+                                                <Button
+                                                    onClick={loadCompanyFiles}
+                                                    variant="outline"
+                                                    size="sm"
+                                                    className="text-black border-white/20 hover:bg-white/10"
+                                                    disabled={loadingFiles}
+                                                >
+                                                    <RefreshCw className={`size-4 ${loadingFiles ? 'animate-spin' : ''}`} />
+                                                </Button>
+                                            </div>
+                                        </CardHeader>
+                                        <CardContent>
+                                            {loadingFiles ? (
+                                                <div className="text-center py-8">
+                                                    <RefreshCw className="size-8 animate-spin mx-auto mb-2 text-black/50" />
+                                                    <p className="text-black/70">Loading files...</p>
+                                                </div>
+                                            ) : companyFiles.length === 0 ? (
+                                                <div className="text-center py-8">
+                                                    <FileText className="size-12 mx-auto mb-4 text-black/30" />
+                                                    <p className="text-black/70">No files uploaded yet</p>
+                                                    <p className="text-sm text-black/50 mt-1">Upload a file to get started</p>
+                                                </div>
+                                            ) : (
+                                                <div className="space-y-3">
+                                                    {companyFiles.map((file, index) => (
+                                                        <div
+                                                            key={file.key}
+                                                            className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors"
+                                                        >
+                                                            <div className="flex items-center gap-3 flex-1 min-w-0">
+                                                                <div className="p-2 bg-blue-500/20 rounded-lg">
+                                                                    <FileText className="size-5 text-blue-600" />
+                                                                </div>
+                                                                <div className="flex-1 min-w-0">
+                                                                    <p className="font-semibold text-black truncate">{file.fileName}</p>
+                                                                    <div className="flex items-center gap-4 mt-1 text-xs text-black/60">
+                                                                        <span>{(file.size / 1024).toFixed(2)} KB</span>
+                                                                        <span>•</span>
+                                                                        <span>{new Date(file.lastModified).toLocaleDateString()}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <Button
+                                                                onClick={() => window.open(file.fileUrl, '_blank')}
+                                                                variant="outline"
+                                                                size="sm"
+                                                                className="ml-4 text-black border-white/20 hover:bg-white/10"
+                                                            >
+                                                                <Download className="size-4 mr-2" />
+                                                                Download
+                                                            </Button>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </CardContent>
+                                    </Card>
+                                </div>
                             </CardContent>
                         </Card>
                     </TabsContent>

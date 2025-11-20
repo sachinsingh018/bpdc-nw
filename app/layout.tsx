@@ -3,8 +3,6 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { AuraProvider } from '@/components/aura/useAuraContext';
-import { AuraBotWidget } from '@/components/aura/AuraBotWidget';
-import { AuraBotWidgetConditional } from '@/components/aura/AuraBotWidgetConditional';
 import { SessionProvider } from 'next-auth/react';
 import Script from 'next/script';
 
@@ -137,8 +135,6 @@ export default async function RootLayout({
             >
               <Toaster position="top-center" />
               {children}
-              {/* Only show AuraBotWidget on platform pages */}
-              <AuraBotWidgetConditional />
             </ThemeProvider>
           </AuraProvider>
         </SessionProvider>

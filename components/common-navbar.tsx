@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,7 +13,7 @@ import {
     Menu,
     Sparkles,
     Briefcase,
-    Eye
+    Rss
 } from 'lucide-react';
 import { NotificationBell } from '@/components/notification-bell';
 import { signOut, useSession } from 'next-auth/react';
@@ -29,22 +29,58 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
     const router = useRouter();
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const { data: session, status } = useSession();
+    const [userRole, setUserRole] = useState<string>('');
+    const [roleLoading, setRoleLoading] = useState(true);
+
+    // Fetch user role
+    useEffect(() => {
+        const fetchUserRole = async () => {
+            setRoleLoading(true);
+            try {
+                const response = await fetch('/api/user/profile');
+                if (response.ok) {
+                    const profileData = await response.json();
+                    setUserRole(profileData.role || '');
+                }
+            } catch (error) {
+                console.error('Error fetching user role:', error);
+            } finally {
+                setRoleLoading(false);
+            }
+        };
+
+        if (status === 'authenticated') {
+            fetchUserRole();
+        } else {
+            setRoleLoading(false);
+        }
+    }, [status]);
 
     // Hide navbar for public users if hideForPublic is true
     if (hideForPublic && status !== 'loading' && !session) {
         return null;
     }
 
-    const navigationItems = [
+    // Filter out AI Chat for recruiters
+    const allNavigationItems = [
         { path: '/profile', label: 'Home', icon: Home },
         { path: '/friends', label: 'Network', icon: Users },
-        { path: '/chat', label: 'AI Chat', icon: MessageSquare },
+        { path: '/chat', label: 'AI Chat', icon: MessageSquare, hideForRecruiters: true },
         { path: '/connections', label: 'Connections', icon: User },
-        { path: '/anonymous-feed', label: 'Anonymous Feed', icon: Eye },
+        { path: '/anonymous-feed', label: 'Feed', icon: Rss },
         { path: '/messages', label: 'Messages', icon: MessageCircle },
         { path: '/job-board', label: 'Job Board', icon: Briefcase },
         { path: '/communities', label: 'Communities', icon: Users },
     ];
+
+    const navigationItems = allNavigationItems.filter(item => {
+        // Hide AI Chat for recruiters and admins
+        // Only filter when role is loaded (not during loading state)
+        if (!roleLoading && item.hideForRecruiters && (userRole === 'recruiter' || userRole === 'admin')) {
+            return false;
+        }
+        return true;
+    });
 
     const handleNavigation = (path: string) => {
         router.push(path);
@@ -97,7 +133,12 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                     {showSignOut && (
                         <button
                             type="button"
-                            onClick={() => signOut({ callbackUrl: '/' })}
+                            onClick={async () => {
+                                await signOut({
+                                    callbackUrl: '/',
+                                    redirect: true
+                                });
+                            }}
                             className="p-2 rounded-full bg-red-50 dark:bg-red-900/20 text-black dark:text-black font-bold hover:opacity-80 transition-opacity flex items-center justify-center"
                             title="Sign Out"
                         >

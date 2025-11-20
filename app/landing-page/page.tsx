@@ -237,7 +237,7 @@ export default function Home() {
                                 </motion.button>
                             </>
                         ) : (
-                            <Link href="/login">
+                            <Link href="/signup">
                                 <motion.div
                                     className="relative"
                                     whileHover={{ scale: 1.05 }}
@@ -264,7 +264,7 @@ export default function Home() {
                                         whileTap={{ scale: 0.95 }}
                                     >
                                         <span className="relative z-10 text-black font-bold drop-shadow-[0_2px_4px_rgba(255,215,0,0.5)] whitespace-nowrap">
-                                            Recruiter Sign In
+                                            Recruiter Sign Up
                                         </span>
                                         <motion.div
                                             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
@@ -340,14 +340,14 @@ export default function Home() {
                                             </motion.button>
                                         </>
                                     ) : (
-                                        <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                                        <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
                                             <motion.button
                                                 type="button"
                                                 className="w-full px-6 py-4 text-base bg-white text-black font-bold rounded-full shadow-[0_0_20px_rgba(255,215,0,0.7),0_0_40px_rgba(25,25,112,0.5)] border-2 border-bits-golden-yellow transition-all duration-300 min-h-[48px]"
                                                 whileTap={{ scale: 0.98 }}
                                             >
                                                 <span className="text-black font-bold drop-shadow-[0_2px_4px_rgba(255,215,0,0.5)]">
-                                                    Recruiter Sign In
+                                                    Recruiter Sign Up
                                                 </span>
                                             </motion.button>
                                         </Link>

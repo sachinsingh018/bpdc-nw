@@ -11,10 +11,8 @@ import { NotificationBell } from '@/components/notification-bell';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { ProfileCompletionWizard } from '@/components/profile-completion-wizard';
 import { CommonNavbar } from '@/components/common-navbar';
-import { AvatarSelector } from '@/components/ui/avatar-selector';
 import { Button } from '@/components/ui/button';
 import { signOut, useSession } from 'next-auth/react';
-import { checkUsernameNSFW, generateUsernameSuggestions } from '@/lib/utils/nsfw-filter';
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { CitySelector } from '@/components/CitySelector';
 
@@ -361,20 +359,11 @@ const ProfilePage = () => {
     expiry_date: string;
   }>>([]);
 
-  // Anonymous identity
-  const [anonymousUsername, setAnonymousUsername] = useState('');
-  const [anonymousAvatar, setAnonymousAvatar] = useState('');
-  const [showAvatarSelector, setShowAvatarSelector] = useState(false);
 
   // Location
   const [location, setLocation] = useState('');
-  const [usernameValidation, setUsernameValidation] = useState<{
-    isValid: boolean;
-    reason?: string;
-    suggestions?: string[];
-  }>({ isValid: true });
-  const [showUsernameSuggestions, setShowUsernameSuggestions] = useState(false);
   const [skillBadges, setSkillBadges] = useState<Array<{ skillName: string; score: number; total: number; percentage: number; createdAt: Date }>>([]);
+  const [userRole, setUserRole] = useState<string>('');
 
   const bioTextareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -460,12 +449,7 @@ const ProfilePage = () => {
         email: data.email || ''
       });
 
-      // Set anonymous identity data
       console.log('Fetched user data:', data);
-      console.log('Anonymous username:', data.anonymous_username);
-      console.log('Anonymous avatar:', data.anonymous_avatar);
-      setAnonymousUsername(data.anonymous_username || '');
-      setAnonymousAvatar(data.anonymous_avatar || '');
 
       // Set LinkedIn-style professional fields
       setHeadline(data.headline || '');
@@ -483,7 +467,7 @@ const ProfilePage = () => {
         certifications: data.certifications
       });
 
-      // Fetch skill badges
+      // Fetch skill badges (only for non-recruiters)
       try {
         const badgesResponse = await fetch('/api/user-skill-badges');
         if (badgesResponse.ok) {
@@ -492,6 +476,17 @@ const ProfilePage = () => {
         }
       } catch (error) {
         console.error('Error fetching skill badges:', error);
+      }
+
+      // Fetch user role
+      try {
+        const profileResponse = await fetch('/api/user/profile');
+        if (profileResponse.ok) {
+          const profileData = await profileResponse.json();
+          setUserRole(profileData.role || '');
+        }
+      } catch (error) {
+        console.error('Error fetching user role:', error);
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -556,12 +551,6 @@ const ProfilePage = () => {
 
   // Save profile data
   const saveProfile = async () => {
-    // Validate username before saving
-    if (anonymousUsername && !validateUsername(anonymousUsername)) {
-      toast.error('Please fix the username issues before saving');
-      return;
-    }
-
     setIsSaving(true);
     try {
       const saveData = {
@@ -575,8 +564,6 @@ const ProfilePage = () => {
         linkedinURL: socialLinks.linkedin,
         FacebookURL: socialLinks.facebook,
         phone: socialLinks.phone,
-        anonymous_username: anonymousUsername,
-        anonymous_avatar: anonymousAvatar,
         headline,
         education,
         experience,
@@ -679,19 +666,6 @@ const ProfilePage = () => {
     setCertifications(prev => prev.filter((_, i) => i !== index));
   };
 
-  // Validate anonymous username
-  const validateUsername = (username: string) => {
-    const result = checkUsernameNSFW(username);
-    setUsernameValidation(result);
-
-    if (!result.isValid) {
-      setShowUsernameSuggestions(true);
-    } else {
-      setShowUsernameSuggestions(false);
-    }
-
-    return result.isValid;
-  };
 
   // Loading state
   if (isLoading) {
@@ -893,7 +867,24 @@ const ProfilePage = () => {
                     className="text-lg md:text-xl lg:text-3xl font-bold bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-black dark:text-black w-full max-w-full"
                   />
                 ) : (
-                  <h1 className="text-xl md:text-3xl font-bold text-black">{userName}</h1>
+                  <div className="flex items-center gap-2 md:gap-3 flex-wrap">
+                    <h1 className="text-xl md:text-3xl font-bold text-black">{userName}</h1>
+                    {userRole === 'recruiter' && (
+                      <span className="px-2 py-1 md:px-3 md:py-1.5 text-xs md:text-sm font-bold rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-black shadow-lg">
+                        RECRUITER
+                      </span>
+                    )}
+                    {userRole === 'admin' && (
+                      <span className="px-2 py-1 md:px-3 md:py-1.5 text-xs md:text-sm font-bold rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-black shadow-lg">
+                        ADMIN
+                      </span>
+                    )}
+                    {(userRole === 'user' || !userRole || userRole === '') && (
+                      <span className="px-2 py-1 md:px-3 md:py-1.5 text-xs md:text-sm font-bold rounded-full bg-gradient-to-r from-green-500 to-emerald-500 text-black shadow-lg">
+                        Networkqy User
+                      </span>
+                    )}
+                  </div>
                 )}
               </div>
 
@@ -1054,137 +1045,6 @@ const ProfilePage = () => {
                 )}
               </div>
 
-              {/* Anonymous Identity Section */}
-              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                <div className="flex items-center gap-2 mb-3">
-                  <MessageCircle size={16} className="text-yellow-500" />
-                  <h3 className="text-sm font-bold text-black">Anonymous Identity</h3>
-                  <span className="text-xs text-black font-medium">(for anonymous chat feed)</span>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                  {/* Anonymous Username */}
-                  <div>
-                    <label className="block text-xs font-bold text-black mb-1">
-                      Anonymous Username
-                    </label>
-                    {isEditing ? (
-                      <div className="space-y-2">
-                        <input
-                          type="text"
-                          value={anonymousUsername}
-                          onChange={(e) => {
-                            setAnonymousUsername(e.target.value);
-                            if (e.target.value) {
-                              validateUsername(e.target.value);
-                            } else {
-                              setUsernameValidation({ isValid: true });
-                              setShowUsernameSuggestions(false);
-                            }
-                          }}
-                          placeholder="Enter anonymous username..."
-                          maxLength={50}
-                          className={`w-full bg-white/50 dark:bg-slate-700/80 border rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black dark:text-black placeholder:text-black dark:placeholder:text-black max-w-full ${anonymousUsername && !usernameValidation.isValid
-                            ? 'border-red-500 dark:border-red-400'
-                            : 'border-gray-300 dark:border-white/20'
-                            }`}
-                        />
-
-                        {/* Validation Error */}
-                        {anonymousUsername && !usernameValidation.isValid && (
-                          <div className="text-xs text-red-600 dark:text-red-400">
-                            {usernameValidation.reason}
-                          </div>
-                        )}
-
-                        {/* Username Suggestions */}
-                        {showUsernameSuggestions && usernameValidation.suggestions && (
-                          <div className="space-y-2">
-                            <div className="text-xs text-black dark:text-black">
-                              Suggested usernames:
-                            </div>
-                            <div className="flex flex-wrap gap-1">
-                              {usernameValidation.suggestions?.slice(0, 5).map((suggestion, index) => (
-                                <button
-                                  key={index}
-                                  type="button"
-                                  onClick={() => {
-                                    setAnonymousUsername(suggestion);
-                                    setUsernameValidation({ isValid: true });
-                                    setShowUsernameSuggestions(false);
-                                  }}
-                                  className="text-xs bg-bits-golden-yellow/10 dark:bg-bits-golden-yellow/30 text-bits-golden-yellow dark:text-bits-golden-yellow px-2 py-1 rounded hover:bg-bits-golden-yellow/20 dark:hover:bg-bits-golden-yellow/50 transition-colors"
-                                >
-                                  {suggestion}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm text-black dark:text-black font-medium">
-                          {anonymousUsername || 'Not set'}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Anonymous Avatar */}
-                  <div>
-                    <label className="block text-xs font-bold text-black mb-1">
-                      Anonymous Avatar
-                    </label>
-                    {isEditing ? (
-                      <div className="flex items-center gap-3">
-                        <div className="size-12 rounded-full border-2 border-gray-300 dark:border-gray-600 overflow-hidden">
-                          {anonymousAvatar ? (
-                            <Image
-                              src={anonymousAvatar}
-                              alt="Current anonymous avatar"
-                              width={48}
-                              height={48}
-                              className="size-full object-cover"
-                            />
-                          ) : (
-                            <div className="size-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
-                              <MessageCircle className="size-4 text-black" />
-                            </div>
-                          )}
-                        </div>
-                        <Button
-                          onClick={() => setShowAvatarSelector(true)}
-                          variant="outline"
-                          size="sm"
-                          className="bg-bits-golden-yellow hover:bg-bits-golden-yellow-600 text-black border-purple-600 text-xs"
-                        >
-                          Choose Avatar
-                        </Button>
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-2">
-                        <div className="size-8 rounded-full bg-bits-golden-yellow/10 dark:bg-bits-golden-yellow/30 flex items-center justify-center">
-                          {anonymousAvatar ? (
-                            <Image
-                              src={anonymousAvatar}
-                              alt="Anonymous avatar"
-                              width={32}
-                              height={32}
-                              className="size-full rounded-full object-cover"
-                            />
-                          ) : (
-                            <MessageCircle className="size-3 text-bits-golden-yellow dark:text-bits-golden-yellow" />
-                          )}
-                        </div>
-                        <span className="text-xs text-black font-medium">
-                          {anonymousAvatar ? 'Custom avatar set' : 'Default avatar'}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </motion.div>
@@ -1435,8 +1295,8 @@ const ProfilePage = () => {
               </div>
             </motion.div>
 
-            {/* Skill Assessment Badges Section */}
-            {skillBadges.length > 0 && (
+            {/* Skill Assessment Badges Section - Only show for non-recruiters */}
+            {userRole !== 'recruiter' && skillBadges.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -1532,8 +1392,8 @@ const ProfilePage = () => {
               </motion.div>
             )}
 
-            {/* Empty State for Skill Badges */}
-            {skillBadges.length === 0 && (
+            {/* Empty State for Skill Badges - Only show for non-recruiters */}
+            {userRole !== 'recruiter' && skillBadges.length === 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -2034,27 +1894,60 @@ const ProfilePage = () => {
                   <span>Go To Feed</span>
                 </button>
                 <button
-                  onClick={() => router.push('/cv-curator')}
-                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-black font-bold"
+                  onClick={() => {
+                    if (userRole === 'recruiter' || userRole === 'admin') {
+                      toast.info('Feature only available for students');
+                      return;
+                    }
+                    router.push('/cv-curator');
+                  }}
+                  className={`w-full flex items-center gap-3 p-3 rounded-lg shadow-lg transition-all duration-200 text-black font-bold relative ${userRole === 'recruiter' || userRole === 'admin'
+                    ? 'blur-sm opacity-50 cursor-not-allowed'
+                    : 'hover:shadow-xl hover:scale-105'
+                    }`}
                   style={{
                     background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
                     boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
                   }}
+                  disabled={userRole === 'recruiter' || userRole === 'admin'}
                 >
                   <FileText size={20} />
                   <span>CV Curator</span>
                 </button>
                 <button
-                  onClick={() => router.push('/interview-agent')}
-                  className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-black font-bold"
+                  onClick={() => {
+                    if (userRole === 'recruiter' || userRole === 'admin') {
+                      toast.info('Feature only available for students');
+                      return;
+                    }
+                    router.push('/interview-agent');
+                  }}
+                  className={`w-full flex items-center gap-3 p-3 rounded-lg shadow-lg transition-all duration-200 text-black font-bold relative ${userRole === 'recruiter' || userRole === 'admin'
+                    ? 'blur-sm opacity-50 cursor-not-allowed'
+                    : 'hover:shadow-xl hover:scale-105'
+                    }`}
                   style={{
                     background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
                     boxShadow: '0 5px 15px rgba(138, 43, 226, 0.3)'
                   }}
+                  disabled={userRole === 'recruiter' || userRole === 'admin'}
                 >
                   <Bot size={20} />
                   <span>Interview Agent</span>
                 </button>
+                {(userRole === 'recruiter' || userRole === 'admin') && (
+                  <button
+                    onClick={() => router.push('/recruiter/dashboard')}
+                    className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-black font-bold"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(70, 130, 180, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
+                      boxShadow: '0 5px 15px rgba(70, 130, 180, 0.3)'
+                    }}
+                  >
+                    <Briefcase size={20} />
+                    <span>Recruiter Dashboard</span>
+                  </button>
+                )}
               </div>
             </motion.div>
 
@@ -2187,29 +2080,6 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      {/* Avatar Selector Modal */}
-      {showAvatarSelector && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <AvatarSelector
-              selectedAvatar={anonymousAvatar}
-              onAvatarChange={(avatar) => {
-                setAnonymousAvatar(avatar);
-                setShowAvatarSelector(false);
-              }}
-            />
-            <div className="mt-4 flex justify-end">
-              <Button
-                variant="outline"
-                onClick={() => setShowAvatarSelector(false)}
-                className="mr-2"
-              >
-                Cancel
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Profile Completion Wizard */}
       <ProfileCompletionWizard

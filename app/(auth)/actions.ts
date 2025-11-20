@@ -202,3 +202,60 @@ export const register = async (
     return { status: 'failed' };
   }
 };
+
+export interface RecruiterSignUpActionState {
+  status:
+  | 'idle'
+  | 'in_progress'
+  | 'success'
+  | 'failed'
+  | 'user_exists'
+  | 'invalid_data';
+  email?: string;
+}
+
+export const recruiterSignUp = async (
+  _: RecruiterSignUpActionState,
+  formData: FormData,
+): Promise<RecruiterSignUpActionState> => {
+  try {
+    const validatedData = authFormSchema.parse({
+      name: formData.get('name'),
+      email: formData.get('email'),
+      password: formData.get('password'),
+    });
+
+    const [user] = await getUser(validatedData.email);
+
+    if (user) {
+      return { status: 'user_exists' } as RecruiterSignUpActionState;
+    }
+
+    // Create recruiter user with basic data only, role set to "recruiter"
+    await createUser({
+      name: validatedData.name,
+      email: validatedData.email,
+      password: validatedData.password,
+      role: 'recruiter', // Set role to recruiter
+      createdAt: new Date(),
+    });
+
+    console.log('Recruiter user creation completed.');
+
+    // Sign in the recruiter after successful registration
+    await signIn('credentials', {
+      email: validatedData.email,
+      password: validatedData.password,
+      redirect: false,
+    });
+
+    return { status: 'success', email: validatedData.email };
+
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return { status: 'invalid_data' };
+    }
+
+    return { status: 'failed' };
+  }
+};

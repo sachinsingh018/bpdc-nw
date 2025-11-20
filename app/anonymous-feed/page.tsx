@@ -10,8 +10,6 @@ import {
     Share2,
     MoreHorizontal,
     Send,
-    Eye,
-    EyeOff,
     Building2,
     Users,
     TrendingUp,
@@ -91,7 +89,6 @@ export default function AnonymousFeedPage() {
     const [comments, setComments] = useState<{ [postId: string]: AnonymousComment[] }>({});
     const [newPost, setNewPost] = useState('');
     const [newComment, setNewComment] = useState<{ [postId: string]: string }>({});
-    const [isAnonymous, setIsAnonymous] = useState(true);
     const [selectedTopic, setSelectedTopic] = useState('general');
     const [companyName, setCompanyName] = useState('');
     const [industry, setIndustry] = useState('');
@@ -101,10 +98,6 @@ export default function AnonymousFeedPage() {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [loading, setLoading] = useState(true);
     const [showComments, setShowComments] = useState<{ [postId: string]: boolean }>({});
-    const [currentUserAnonymousData, setCurrentUserAnonymousData] = useState<{
-        anonymous_username?: string;
-        anonymous_avatar?: string;
-    }>({});
     const [editingPost, setEditingPost] = useState<string | null>(null);
     const [editContent, setEditContent] = useState('');
     const [editTopic, setEditTopic] = useState('general');
@@ -190,31 +183,8 @@ export default function AnonymousFeedPage() {
         // User is authenticated, fetch data
         fetchUserData();
         fetchPosts();
-        fetchCurrentUserAnonymousData();
     }, [router]);
 
-    const fetchCurrentUserAnonymousData = async () => {
-        const userEmail = getCookie('userEmail') as string;
-        if (!userEmail) return;
-
-        try {
-            const response = await fetch('/profile/api', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: userEmail }),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                setCurrentUserAnonymousData({
-                    anonymous_username: data.anonymous_username,
-                    anonymous_avatar: data.anonymous_avatar,
-                });
-            }
-        } catch (error) {
-            console.error('Error fetching anonymous data:', error);
-        }
-    };
 
     const fetchPosts = async () => {
         try {
@@ -327,7 +297,7 @@ export default function AnonymousFeedPage() {
                 body: JSON.stringify({
                     content: newPost,
                     image_url: imageUrl,
-                    is_anonymous: isAnonymous,
+                    is_anonymous: false,
                     topic: selectedTopic,
                     company_name: companyName || null,
                     industry: industry || null,
@@ -347,7 +317,7 @@ export default function AnonymousFeedPage() {
                 trackActivity('post_created', 'social', {
                     feature: 'anonymous_feed',
                     topic: selectedTopic,
-                    isAnonymous: isAnonymous,
+                    isAnonymous: false,
                     hasImage: !!imageUrl,
                     companyName: companyName || null,
                     industry: industry || null,
@@ -385,14 +355,12 @@ export default function AnonymousFeedPage() {
         const optimisticComment: AnonymousComment = {
             id: `temp-${Date.now()}`,
             content: commentContent,
-            is_anonymous: isAnonymous,
+            is_anonymous: false,
             likes_count: 0,
             created_at: new Date().toISOString(),
             user_id: userEmail,
             user_name: currentUser?.name || undefined,
             user_email: userEmail,
-            anonymous_username: isAnonymous ? currentUserAnonymousData.anonymous_username : undefined,
-            anonymous_avatar: isAnonymous ? currentUserAnonymousData.anonymous_avatar : undefined,
             is_liked: false,
         };
 
@@ -418,7 +386,7 @@ export default function AnonymousFeedPage() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     content: commentContent,
-                    is_anonymous: isAnonymous,
+                    is_anonymous: false,
                 }),
             });
 
@@ -679,16 +647,10 @@ export default function AnonymousFeedPage() {
     };
 
     const getDisplayName = (post: AnonymousPost) => {
-        if (post.is_anonymous) {
-            return post.anonymous_username || `Anonymous User`;
-        }
         return post.user_name || post.user_email?.split('@')[0] || 'Unknown User';
     };
 
     const getDisplayNameComment = (comment: AnonymousComment) => {
-        if (comment.is_anonymous) {
-            return comment.anonymous_username || `Anonymous User`;
-        }
         return comment.user_name || comment.user_email?.split('@')[0] || 'Unknown User';
     };
 
@@ -843,17 +805,6 @@ export default function AnonymousFeedPage() {
                             <p className="font-medium text-black text-sm md:text-base">
                                 {currentUser?.name || currentUser?.email || userEmail}
                             </p>
-                            <div className="flex items-center gap-2">
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => setIsAnonymous(!isAnonymous)}
-                                    className="flex items-center gap-1 text-xs text-black"
-                                >
-                                    {isAnonymous ? <EyeOff className="size-3" /> : <Eye className="size-3" />}
-                                    {isAnonymous ? 'Anonymous' : 'Public'}
-                                </Button>
-                            </div>
                         </div>
                     </div>
 
@@ -955,7 +906,7 @@ export default function AnonymousFeedPage() {
                                 className="bg-purple-600 hover:bg-purple-700 text-black text-sm"
                             >
                                 <Send className="size-4 mr-2" />
-                                {isAnonymous ? 'Post Anonymously' : 'Post'}
+                                Post
                             </Button>
                         </div>
                     </div>
@@ -979,7 +930,7 @@ export default function AnonymousFeedPage() {
                                 No posts yet
                             </h3>
                             <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">
-                                Be the first to share your thoughts anonymously!
+                                Be the first to share your thoughts!
                             </p>
                         </motion.div>
                     ) : (
@@ -996,9 +947,7 @@ export default function AnonymousFeedPage() {
                                         <div className="flex items-center gap-2 md:gap-3">
                                             <Avatar className="size-8 md:size-10 shadow-lg ring-2 ring-purple-200 dark:ring-purple-800">
                                                 <AvatarImage
-                                                    src={post.is_anonymous && post.anonymous_avatar
-                                                        ? post.anonymous_avatar
-                                                        : `https://avatar.vercel.sh/${post.user_email}`}
+                                                    src={post.user_email ? `https://avatar.vercel.sh/${post.user_email}` : undefined}
                                                 />
                                                 <AvatarFallback>
                                                     {getDisplayName(post)[0]}
@@ -1199,15 +1148,6 @@ export default function AnonymousFeedPage() {
                                                         />
                                                         <div className="flex items-center justify-between mt-2">
                                                             <Button
-                                                                variant="ghost"
-                                                                size="sm"
-                                                                onClick={() => setIsAnonymous(!isAnonymous)}
-                                                                className="flex items-center gap-1 text-xs"
-                                                            >
-                                                                {isAnonymous ? <EyeOff className="size-3" /> : <Eye className="size-3" />}
-                                                                {isAnonymous ? 'Anonymous' : 'Public'}
-                                                            </Button>
-                                                            <Button
                                                                 onClick={() => handleCreateComment(post.id)}
                                                                 disabled={!newComment[post.id]?.trim()}
                                                                 size="sm"
@@ -1226,9 +1166,7 @@ export default function AnonymousFeedPage() {
                                                         <div key={comment.id} className="flex items-start gap-2 md:gap-3">
                                                             <Avatar className="size-6 md:size-8 shadow ring-2 ring-blue-100 dark:ring-blue-800">
                                                                 <AvatarImage
-                                                                    src={comment.is_anonymous && comment.anonymous_avatar
-                                                                        ? comment.anonymous_avatar
-                                                                        : `https://avatar.vercel.sh/${comment.user_email}`}
+                                                                    src={comment.user_email ? `https://avatar.vercel.sh/${comment.user_email}` : undefined}
                                                                 />
                                                                 <AvatarFallback>
                                                                     {getDisplayNameComment(comment)[0]}
