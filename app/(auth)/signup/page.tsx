@@ -1,8 +1,6 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import { useTheme } from 'next-themes';
-import { Moon, Sun } from 'lucide-react';
 import { AuthForm } from '@/components/auth-form';
 import { useState, useEffect } from 'react';
 import { SubmitButton } from '@/components/submit-button';
@@ -13,7 +11,6 @@ import { recruiterSignUp, type RecruiterSignUpActionState } from '../actions';
 
 export default function RecruiterSignUp() {
     const router = useRouter();
-    const { setTheme, theme } = useTheme();
 
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
@@ -118,25 +115,6 @@ export default function RecruiterSignUp() {
                 <AuthForm action={handleSubmit} defaultEmail={email} defaultName={name} showNameField={true}>
                     <SubmitButton isSuccessful={isSuccessful} isLoading={state.status === 'in_progress'}>Sign up</SubmitButton>
                 </AuthForm>
-            </div>
-            <div className="absolute bottom-4 z-10 text-sm text-center w-full flex justify-center">
-                <button
-                    type="button"
-                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                    className="flex items-center gap-2 px-4 py-2 bg-zinc-200 dark:bg-zinc-800 text-black dark:text-white rounded-full shadow-md hover:scale-105 transition-all"
-                >
-                    {theme === 'dark' ? (
-                        <>
-                            <Sun size={16} className="text-yellow-400" />
-                            Light Mode
-                        </>
-                    ) : (
-                        <>
-                            <Moon size={16} className="text-purple-600" />
-                            Dark Mode
-                        </>
-                    )}
-                </button>
             </div>
             <style jsx global>{`
         .animate-fade-in {
