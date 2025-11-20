@@ -11,7 +11,7 @@ async function checkS3Configuration() {
   console.log('🔍 S3 Configuration Check Script');
   console.log('================================\n');
 
-  // Check environment variables
+  // Check environment variablesaa
   console.log('📋 Environment Variables:');
   console.log('  AWS_REGION:', process.env.AWS_REGION);
   console.log('  AWS_DEFAULT_REGION:', process.env.AWS_DEFAULT_REGION);
