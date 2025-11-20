@@ -95,7 +95,7 @@ export function SidebarUserNav({ user }: { user: User }) {
                 type="button"
                 className="w-full cursor-pointer"
                 onClick={() => {
-                  signOut({ redirectTo: '/' });
+                  signOut({ callbackUrl: 'https://www.careerservicesbitspilani.com/' });
                 }}
               >
                 Sign out

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Script from 'next/script';
 import Link from 'next/link';
-import { useSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { Footer } from '@/components/Footer';
 import { Menu, X } from 'lucide-react';
 
@@ -223,18 +223,6 @@ export default function Home() {
                                         </motion.button>
                                     </motion.div>
                                 </Link>
-                                <motion.button
-                                    type="button"
-                                    onClick={() => signOut({ callbackUrl: '/' })}
-                                    className="px-6 py-3 md:px-8 text-base md:text-lg bg-red-600 text-white font-bold rounded-full shadow-[0_0_20px_rgba(220,20,60,0.7)] border-2 border-red-700 hover:border-red-800 transition-all duration-300 hover:scale-105"
-                                    whileHover={{
-                                        scale: 1.05,
-                                        boxShadow: "0 0 30px rgba(220,20,60,0.9)",
-                                    }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    Sign Out
-                                </motion.button>
                             </>
                         ) : (
                             <Link href="/signup">
@@ -327,17 +315,6 @@ export default function Home() {
                                                     </span>
                                                 </motion.button>
                                             </Link>
-                                            <motion.button
-                                                type="button"
-                                                onClick={() => {
-                                                    signOut({ callbackUrl: '/' });
-                                                    setMobileMenuOpen(false);
-                                                }}
-                                                className="w-full px-6 py-4 text-base bg-red-600 text-white font-bold rounded-full shadow-[0_0_20px_rgba(220,20,60,0.7)] border-2 border-red-700 transition-all duration-300 min-h-[48px]"
-                                                whileTap={{ scale: 0.98 }}
-                                            >
-                                                Sign Out
-                                            </motion.button>
                                         </>
                                     ) : (
                                         <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>

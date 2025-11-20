@@ -135,7 +135,7 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                             type="button"
                             onClick={async () => {
                                 await signOut({
-                                    callbackUrl: '/',
+                                    callbackUrl: 'https://www.careerservicesbitspilani.com/',
                                     redirect: true
                                 });
                             }}

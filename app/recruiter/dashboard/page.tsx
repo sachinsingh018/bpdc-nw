@@ -821,7 +821,7 @@ export default function RecruiterDashboard() {
                                                     }}
                                                     variant="outline"
                                                     size="sm"
-                                                    className="text-black border-white/20 hover:bg-white/10"
+                                                    className="bg-white text-black border-white/20 hover:bg-white hover:text-black"
                                                 >
                                                     <Eye className="size-4 mr-1" />
                                                     Review
