@@ -13,10 +13,17 @@ import {
     Menu,
     Sparkles,
     Briefcase,
-    Rss
+    Rss,
+    LogOut
 } from 'lucide-react';
 import { NotificationBell } from '@/components/notification-bell';
 import { signOut, useSession } from 'next-auth/react';
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+} from '@/components/ui/sheet';
 
 interface CommonNavbarProps {
     currentPage?: string;
@@ -130,6 +137,7 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                 {/* Right side - Notifications, Sign Out, and Mobile Menu */}
                 <div className="flex items-center gap-3 flex-shrink-0 ml-auto">
                     <NotificationBell />
+                    {/* Sign Out Button - Hidden on mobile, visible on desktop */}
                     {showSignOut && (
                         <button
                             type="button"
@@ -139,7 +147,7 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                                     redirect: true
                                 });
                             }}
-                            className="p-2 rounded-full bg-red-50 dark:bg-red-900/20 text-black dark:text-black font-bold hover:opacity-80 transition-opacity flex items-center justify-center"
+                            className="hidden md:flex p-2 rounded-full bg-red-50 dark:bg-red-900/20 text-black dark:text-black font-bold hover:opacity-80 transition-opacity items-center justify-center"
                             title="Sign Out"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-black dark:text-black">
@@ -154,16 +162,22 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                         size="sm"
                         onClick={() => setShowMobileMenu(!showMobileMenu)}
                         className="md:hidden text-black dark:text-black font-bold hover:opacity-80 transition-opacity"
+                        aria-label="Open menu"
                     >
                         <Menu className="size-5 text-black dark:text-black" />
                     </Button>
                 </div>
             </div>
 
-            {/* Mobile Navigation Menu */}
-            {showMobileMenu && (
-                <div className="md:hidden border-t border-gray-200/50 dark:border-white/10 bg-white/10 dark:bg-slate-800/10 backdrop-blur-sm">
-                    <div className="flex flex-col p-4 space-y-2">
+            {/* Mobile Navigation Menu - Sheet Component */}
+            <Sheet open={showMobileMenu} onOpenChange={setShowMobileMenu}>
+                <SheetContent side="right" className="w-[85vw] sm:w-[400px] bg-white dark:bg-slate-800">
+                    <SheetHeader>
+                        <SheetTitle className="text-left text-black dark:text-white font-bold">
+                            Menu
+                        </SheetTitle>
+                    </SheetHeader>
+                    <div className="flex flex-col mt-6 space-y-1">
                         {navigationItems.map((item) => {
                             const Icon = item.icon;
                             const isActive = currentPage === item.path;
@@ -171,19 +185,40 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                                 <Button
                                     key={item.path}
                                     variant="ghost"
-                                    size="sm"
+                                    size="lg"
                                     onClick={() => handleNavigation(item.path)}
-                                    className={`flex items-center gap-2 text-black dark:text-black font-bold hover:opacity-80 transition-opacity justify-start ${isActive ? 'opacity-90' : 'opacity-100'
+                                    className={`flex items-center gap-3 justify-start text-black dark:text-white font-semibold hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors w-full ${isActive ? 'bg-gray-100 dark:bg-slate-700' : ''
                                         }`}
                                 >
-                                    <Icon className="size-4 text-black dark:text-black" />
+                                    <Icon className="size-5" />
                                     <span>{item.label}</span>
                                 </Button>
                             );
                         })}
+
+                        {/* Sign Out in Mobile Menu */}
+                        {showSignOut && (
+                            <>
+                                <div className="border-t border-gray-200 dark:border-white/10 my-2" />
+                                <Button
+                                    variant="ghost"
+                                    size="lg"
+                                    onClick={async () => {
+                                        await signOut({
+                                            callbackUrl: 'https://www.careerservicesbitspilani.com/',
+                                            redirect: true
+                                        });
+                                    }}
+                                    className="flex items-center gap-3 justify-start text-red-600 dark:text-red-400 font-semibold hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors w-full"
+                                >
+                                    <LogOut className="size-5" />
+                                    <span>Sign Out</span>
+                                </Button>
+                            </>
+                        )}
                     </div>
-                </div>
-            )}
+                </SheetContent>
+            </Sheet>
         </div>
     );
 }
