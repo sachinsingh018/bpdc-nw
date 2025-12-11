@@ -25,7 +25,6 @@ export const Footer = () => {
                     <h3 className="text-white font-semibold mb-6 uppercase tracking-wider text-sm">Quick Links</h3>
                     <ul className="space-y-3 text-white">
                         {[
-                            { label: 'FAQs', path: '/faq' },
                             { label: 'Privacy Policy', path: '/privacy-policy' },
                             { label: 'Terms of Use', path: '/terms-of-use' }
                         ].map(({ label, path }) => (

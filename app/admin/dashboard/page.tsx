@@ -85,10 +85,14 @@ interface FeatureUsage {
 }
 
 interface Student {
+    id: string;
     email: string;
     name: string;
     batch_year: string;
     profile: string;
+    headline?: string;
+    avatarUrl?: string;
+    createdAt?: string;
 }
 
 export default function AdminDashboard() {
@@ -115,6 +119,8 @@ export default function AdminDashboard() {
     const [userRole, setUserRole] = useState<string>('');
     const [roleLoading, setRoleLoading] = useState(true);
     const [accessDenied, setAccessDenied] = useState(false);
+    const [totalUsers, setTotalUsers] = useState(0);
+    const [totalPages, setTotalPages] = useState(1);
 
     // Pagination constants
     const USERS_PER_PAGE = 50;
@@ -225,6 +231,13 @@ export default function AdminDashboard() {
         }
     }, [dateRange]);
 
+    // Reload users when filters or page changes
+    useEffect(() => {
+        if (!roleLoading && !accessDenied) {
+            loadStudentData();
+        }
+    }, [currentPage, userListSearchTerm, selectedBatchYear, selectedProfile]);
+
     const loadCompanyFiles = async () => {
         setLoadingFiles(true);
         try {
@@ -268,7 +281,7 @@ export default function AdminDashboard() {
             const features = await featureResponse.json();
             setFeatureUsage(features);
 
-            // Load student data from CSV
+            // Load user data from database
             await loadStudentData();
         } catch (error) {
             console.error('Error loading dashboard data:', error);
@@ -279,53 +292,46 @@ export default function AdminDashboard() {
 
     const loadStudentData = async () => {
         try {
-            const response = await fetch('/bits_dubai_directory.csv');
-            const csvText = await response.text();
-            const lines = csvText.split('\n');
+            const params = new URLSearchParams({
+                page: currentPage.toString(),
+                limit: USERS_PER_PAGE.toString(),
+            });
 
-            // Skip header line and filter out empty lines
-            const dataLines = lines.slice(1).filter(line => line.trim());
-
-            const studentData: Student[] = dataLines.map(line => {
-                // Parse CSV line properly handling commas within quoted fields
-                const values = parseCSVLine(line);
-                return {
-                    email: values[0]?.trim() || '',
-                    name: values[1]?.trim() || '',
-                    batch_year: values[2]?.trim() || '',
-                    profile: values[3]?.trim() || ''
-                };
-            }).filter(student => student.email && student.name); // Filter out invalid entries
-
-            console.log(`Loaded ${studentData.length} students from CSV`);
-            setStudents(studentData);
-        } catch (error) {
-            console.error('Error loading student data:', error);
-            toast.error('Failed to load student directory data');
-        }
-    };
-
-    // Helper function to parse CSV line properly
-    const parseCSVLine = (line: string): string[] => {
-        const result: string[] = [];
-        let current = '';
-        let inQuotes = false;
-
-        for (let i = 0; i < line.length; i++) {
-            const char = line[i];
-
-            if (char === '"') {
-                inQuotes = !inQuotes;
-            } else if (char === ',' && !inQuotes) {
-                result.push(current);
-                current = '';
-            } else {
-                current += char;
+            if (userListSearchTerm) {
+                params.append('search', userListSearchTerm);
             }
-        }
+            if (selectedBatchYear && selectedBatchYear !== 'all') {
+                params.append('batchYear', selectedBatchYear);
+            }
+            if (selectedProfile && selectedProfile !== 'all') {
+                params.append('profile', selectedProfile);
+            }
 
-        result.push(current);
-        return result;
+            const response = await fetch(`/api/admin/users?${params.toString()}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch users');
+            }
+
+            const data = await response.json();
+            const studentData: Student[] = (data.users || []).map((u: any) => ({
+                id: u.id,
+                email: u.email || '',
+                name: u.name || '',
+                batch_year: u.batch_year || '',
+                profile: u.profile || 'student',
+                headline: u.headline,
+                avatarUrl: u.avatarUrl,
+                createdAt: u.createdAt,
+            }));
+
+            console.log(`Loaded ${studentData.length} users from database`);
+            setStudents(studentData);
+            setTotalUsers(data.total || 0);
+            setTotalPages(data.totalPages || 1);
+        } catch (error) {
+            console.error('Error loading user data:', error);
+            toast.error('Failed to load user directory data');
+        }
     };
 
     const filteredActivityLogs = activityLogs.filter(log => {
@@ -339,20 +345,9 @@ export default function AdminDashboard() {
         return matchesUser && matchesCategory && matchesSearch;
     });
 
-    const filteredStudents = students.filter(student => {
-        const matchesSearch = !userListSearchTerm ||
-            student.name?.toLowerCase().includes(userListSearchTerm.toLowerCase()) ||
-            student.email?.toLowerCase().includes(userListSearchTerm.toLowerCase());
-        const matchesBatch = !selectedBatchYear || selectedBatchYear === 'all' || student.batch_year === selectedBatchYear;
-        const matchesProfile = !selectedProfile || selectedProfile === 'all' || student.profile === selectedProfile;
-        return matchesSearch && matchesBatch && matchesProfile;
-    });
-
-    // Pagination logic
-    const totalPages = Math.ceil(filteredStudents.length / USERS_PER_PAGE);
-    const startIndex = (currentPage - 1) * USERS_PER_PAGE;
-    const endIndex = startIndex + USERS_PER_PAGE;
-    const paginatedStudents = filteredStudents.slice(startIndex, endIndex);
+    // Users are already filtered and paginated by the API
+    const filteredStudents = students;
+    const paginatedStudents = students;
 
     // Reset to first page when filters change
     useEffect(() => {
@@ -729,23 +724,25 @@ export default function AdminDashboard() {
             <div
                 className="min-h-screen relative overflow-x-hidden flex items-center justify-center"
                 style={{
-                    background: `
-                      radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
-                      radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
-                      radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
-                      radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
-                      radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
-                      radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
-                      radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
-                      radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
-                      linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
-                    `,
                     touchAction: 'pan-y',
                     overscrollBehavior: 'auto'
                 }}
             >
-                <div className="text-center">
+                {/* Blurred Background - matching admin dashboard */}
+                <div
+                    className="fixed inset-0 z-0"
+                    style={{
+                        backgroundImage: 'url(/bpdcbg.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundAttachment: 'scroll',
+                        filter: 'blur(4px)',
+                        transform: 'translateZ(0)',
+                        backfaceVisibility: 'hidden'
+                    }}
+                />
+                <div className="text-center relative z-10">
                     <div className="size-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
                         borderColor: 'rgba(255, 215, 0, 0.8)',
                         borderTopColor: 'transparent'
@@ -763,23 +760,25 @@ export default function AdminDashboard() {
             <div
                 className="min-h-screen relative overflow-x-hidden flex items-center justify-center"
                 style={{
-                    background: `
-                      radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
-                      radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
-                      radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
-                      radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
-                      radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
-                      radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
-                      radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
-                      radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
-                      linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
-                    `,
                     touchAction: 'pan-y',
                     overscrollBehavior: 'auto'
                 }}
             >
-                <Card className="w-full max-w-md backdrop-blur-sm border-2 shadow-xl" style={{
+                {/* Blurred Background - matching admin dashboard */}
+                <div
+                    className="fixed inset-0 z-0"
+                    style={{
+                        backgroundImage: 'url(/bpdcbg.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundAttachment: 'scroll',
+                        filter: 'blur(4px)',
+                        transform: 'translateZ(0)',
+                        backfaceVisibility: 'hidden'
+                    }}
+                />
+                <Card className="w-full max-w-md backdrop-blur-sm border-2 shadow-xl relative z-10" style={{
                     background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 30%, rgba(138, 43, 226, 0.1) 70%, rgba(255, 255, 255, 0.95) 100%)',
                     borderColor: 'rgba(255, 215, 0, 0.6)',
                     boxShadow: '0 25px 50px rgba(25, 25, 112, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
@@ -1306,12 +1305,12 @@ export default function AdminDashboard() {
                                     <div>
                                         <CardTitle className="text-black flex items-center gap-2 text-xl">
                                             <Users className="size-5" />
-                                            Student Directory
+                                            User Directory
                                         </CardTitle>
-                                        <CardDescription className="text-black/80 mt-1">Complete list of BITS Dubai students and alumni</CardDescription>
+                                        <CardDescription className="text-black/80 mt-1">Complete list of all registered users</CardDescription>
                                     </div>
                                     <Badge variant="outline" className="bg-white/10 border-white/20 text-black">
-                                        {filteredStudents.length} {filteredStudents.length === 1 ? 'student' : 'students'}
+                                        {filteredStudents.length} {filteredStudents.length === 1 ? 'user' : 'users'}
                                     </Badge>
                                 </div>
                             </CardHeader>
@@ -1383,8 +1382,8 @@ export default function AdminDashboard() {
                                 {/* Student Statistics */}
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
                                     <div className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                                        <div className="text-xs text-black/60 mb-1">Total Students</div>
-                                        <div className="text-xl font-bold text-black">{students.length}</div>
+                                        <div className="text-xs text-black/60 mb-1">Total Users</div>
+                                        <div className="text-xl font-bold text-black">{totalUsers || students.length}</div>
                                     </div>
                                     <div className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
                                         <div className="text-xs text-black/60 mb-1">Alumni</div>
@@ -1404,57 +1403,69 @@ export default function AdminDashboard() {
                                 {paginatedStudents.length === 0 ? (
                                     <div className="text-center py-16 text-black/60">
                                         <Users className="size-16 mx-auto mb-4 opacity-50" />
-                                        <p className="text-base font-medium mb-2">No students found</p>
+                                        <p className="text-base font-medium mb-2">No users found</p>
                                         <p className="text-sm">Try adjusting your search or filter criteria</p>
                                     </div>
                                 ) : (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-6">
-                                        {paginatedStudents.map((student, index) => (
-                                            <div
-                                                key={index}
-                                                className="group p-5 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 hover:border-white/30 hover:shadow-lg transition-all duration-200 cursor-pointer"
-                                            >
-                                                <div className="flex items-start gap-4 mb-4">
-                                                    <div className="relative shrink-0">
-                                                        <div className="size-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-200">
-                                                            <span className="text-base font-semibold text-black">
-                                                                {student.name?.charAt(0) || student.email?.charAt(0) || '?'}
-                                                            </span>
-                                                        </div>
-                                                        {student.profile === 'alumni' && (
-                                                            <div className="absolute -bottom-1 -right-1 size-5 bg-green-500 rounded-full border-2 border-white/20 flex items-center justify-center">
-                                                                <span className="text-[8px] text-white font-bold">A</span>
+                                    <div
+                                        className="overflow-y-auto overflow-x-hidden mb-6"
+                                        style={{
+                                            maxHeight: 'calc(100vh - 600px)',
+                                            minHeight: '400px',
+                                            scrollBehavior: 'smooth',
+                                            WebkitOverflowScrolling: 'touch',
+                                            overscrollBehavior: 'contain',
+                                            touchAction: 'pan-y',
+                                            willChange: 'scroll-position'
+                                        }}
+                                    >
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pr-2">
+                                            {paginatedStudents.map((student, index) => (
+                                                <div
+                                                    key={student.id || index}
+                                                    className="group p-5 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 hover:border-white/30 hover:shadow-lg transition-all duration-200 cursor-pointer"
+                                                    onClick={() => {
+                                                        if (student.email) {
+                                                            router.push(`/friendprof?email=${encodeURIComponent(student.email)}`);
+                                                        }
+                                                    }}
+                                                >
+                                                    <div className="flex items-start gap-4 mb-4">
+                                                        <div className="relative shrink-0">
+                                                            <div className="size-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-200">
+                                                                <span className="text-base font-semibold text-black">
+                                                                    {student.name?.charAt(0) || student.email?.charAt(0) || '?'}
+                                                                </span>
                                                             </div>
-                                                        )}
-                                                    </div>
-                                                    <div className="flex-1 min-w-0">
-                                                        <div className="font-semibold text-base text-black truncate mb-1">
-                                                            {student.name || 'Unknown'}
+                                                            {student.profile === 'alumni' && (
+                                                                <div className="absolute -bottom-1 -right-1 size-5 bg-green-500 rounded-full border-2 border-white/20 flex items-center justify-center">
+                                                                    <span className="text-[8px] text-white font-bold">A</span>
+                                                                </div>
+                                                            )}
                                                         </div>
-                                                        <div className="text-xs text-black/70 truncate" title={student.email}>
-                                                            {student.email}
+                                                        <div className="flex-1 min-w-0">
+                                                            <div className="font-semibold text-base text-black truncate mb-1">
+                                                                {student.name || 'Unknown'}
+                                                            </div>
+                                                            <div className="text-xs text-black/70 truncate" title={student.email}>
+                                                                {student.email}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="space-y-2.5 pt-3 border-t border-white/10">
+                                                        <div className="flex items-center justify-between">
+                                                            <span className="text-xs font-medium text-black/60">Profile</span>
+                                                            <Badge className={`${student.profile === 'alumni'
+                                                                ? 'bg-green-100/80 text-green-800 border-green-200'
+                                                                : 'bg-yellow-100/80 text-yellow-800 border-yellow-200'
+                                                                } text-xs font-medium px-2 py-0.5 capitalize`}>
+                                                                {student.profile}
+                                                            </Badge>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="space-y-2.5 pt-3 border-t border-white/10">
-                                                    <div className="flex items-center justify-between">
-                                                        <span className="text-xs font-medium text-black/60">Batch Year</span>
-                                                        <Badge className="bg-blue-100/80 text-blue-800 border-blue-200 text-xs font-medium px-2 py-0.5">
-                                                            {student.batch_year}
-                                                        </Badge>
-                                                    </div>
-                                                    <div className="flex items-center justify-between">
-                                                        <span className="text-xs font-medium text-black/60">Profile</span>
-                                                        <Badge className={`${student.profile === 'alumni'
-                                                            ? 'bg-green-100/80 text-green-800 border-green-200'
-                                                            : 'bg-yellow-100/80 text-yellow-800 border-yellow-200'
-                                                            } text-xs font-medium px-2 py-0.5 capitalize`}>
-                                                            {student.profile}
-                                                        </Badge>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
+                                            ))}
+                                        </div>
                                     </div>
                                 )}
 
@@ -1462,7 +1473,7 @@ export default function AdminDashboard() {
                                 {totalPages > 1 && (
                                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-6 border-t border-white/10">
                                         <div className="text-sm text-black/80 font-medium">
-                                            Showing <span className="font-semibold text-black">{startIndex + 1}</span> to <span className="font-semibold text-black">{Math.min(endIndex, filteredStudents.length)}</span> of <span className="font-semibold text-black">{filteredStudents.length}</span> students
+                                            Showing <span className="font-semibold text-black">{(currentPage - 1) * USERS_PER_PAGE + 1}</span> to <span className="font-semibold text-black">{Math.min(currentPage * USERS_PER_PAGE, totalUsers)}</span> of <span className="font-semibold text-black">{totalUsers}</span> users
                                         </div>
                                         <div className="flex items-center gap-2">
                                             <Button
@@ -1518,7 +1529,7 @@ export default function AdminDashboard() {
 
                                 {totalPages === 1 && filteredStudents.length > 0 && (
                                     <div className="mt-6 pt-6 border-t border-white/10 text-sm text-black/80 font-medium text-center">
-                                        Showing all <span className="font-semibold text-black">{filteredStudents.length}</span> of <span className="font-semibold text-black">{students.length}</span> students
+                                        Showing all <span className="font-semibold text-black">{filteredStudents.length}</span> of <span className="font-semibold text-black">{totalUsers}</span> users
                                     </div>
                                 )}
                             </CardContent>
