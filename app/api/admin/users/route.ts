@@ -13,21 +13,8 @@ export async function GET(request: NextRequest) {
         const limit = parseInt(searchParams.get('limit') || '50');
         const offset = (page - 1) * limit;
 
-        // Build query conditions
-        let conditions: any[] = [];
-
-        // Search filter
-        if (search) {
-            conditions.push(
-                or(
-                    ilike(user.name, `%${search}%`),
-                    ilike(user.email, `%${search}%`)
-                )!
-            );
-        }
-
-        // Get all users with education field parsed
-        let query = db
+        // Build base query
+        const baseQuery = db
             .select({
                 id: user.id,
                 email: user.email,
@@ -39,13 +26,15 @@ export async function GET(request: NextRequest) {
             })
             .from(user);
 
-        // Apply search conditions
-        if (conditions.length > 0) {
-            query = query.where(or(...conditions)!);
-        }
-
-        // Get total count for pagination
-        const allUsers = await query;
+        // Apply search conditions if search term exists
+        const allUsers = search
+            ? await baseQuery.where(
+                or(
+                    ilike(user.name, `%${search}%`),
+                    ilike(user.email, `%${search}%`)
+                )!
+            )
+            : await baseQuery;
         
         // Filter by batch year and profile from education JSONB
         let filteredUsers = allUsers.map(u => {
