@@ -91,7 +91,7 @@ async function generateCVResponse(resumeText: string, userMessage: string): Prom
 
 **FORMATTING REQUIREMENTS:**
 - DO NOT use markdown formatting (no asterisks, no bold, no italics, no code blocks)
-- DO NOT use special characters for formatting (**, __, `, #, etc.)
+- DO NOT use special characters for formatting (**, __, backticks, #, etc.)
     - Use plain text only with clear line breaks
         - Use numbered lists(1., 2., 3.) or bullet points with dashes(-) for lists
             - Use line breaks(double newlines) to separate sections
