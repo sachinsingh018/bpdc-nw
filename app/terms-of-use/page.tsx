@@ -27,7 +27,7 @@ const TermsOfUse = () => {
         <div className="relative z-10 max-w-4xl mx-auto px-6 py-14">
           <div className="border border-white/10 bg-white/80 backdrop-blur-xl p-8 md:p-12 rounded-3xl shadow-2xl">
 
-            <h1 className="text-4xl md:text-5xl font-bold text-center bg-gradient-to-r from-violet-400 to-purple-500 bg-clip-text text-transparent mb-4 text-black">
+            <h1 className="text-4xl md:text-5xl font-bold text-center bg-gradient-to-r from-violet-400 to-purple-500 bg-clip-text text-transparent mb-4">
               Terms of Use
             </h1>
             <p className="text-center italic text-sm text-zinc-600 mb-10">

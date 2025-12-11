@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -219,7 +219,7 @@ export default function RecruiterDashboard() {
     }, []);
 
     // Check user role and permissions
-    const checkUserRole = async () => {
+    const checkUserRole = useCallback(async () => {
         setRoleLoading(true);
         try {
             console.log('=== FRONTEND ROLE CHECK DEBUG ===');
@@ -268,7 +268,7 @@ export default function RecruiterDashboard() {
         } finally {
             setRoleLoading(false);
         }
-    };
+    }, [router]);
 
     useEffect(() => {
         const initializeDashboard = async () => {
@@ -278,7 +278,7 @@ export default function RecruiterDashboard() {
             }
         };
         initializeDashboard();
-    }, []);
+    }, [checkUserRole]);
 
     const loadDashboardData = async () => {
         setLoading(true);
