@@ -77,7 +77,8 @@ interface ScheduleMeetingButtonProps {
 }
 
 function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButtonProps) {
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
+    const router = useRouter();
     const [showScheduleModal, setShowScheduleModal] = useState(false);
     const [timezone, setTimezone] = useState('America/New_York');
     const [startTime, setStartTime] = useState('09:00');
