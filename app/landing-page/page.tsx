@@ -11,10 +11,49 @@ import { Menu, X } from 'lucide-react';
 export default function Home() {
     const [hasMounted, setHasMounted] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [imageLoaded, setImageLoaded] = useState(false);
     const { data: session, status } = useSession();
 
     useEffect(() => {
         setHasMounted(true);
+    }, []);
+
+    // Set body background to white immediately to prevent purple flash
+    useEffect(() => {
+        const originalBackground = document.body.style.background;
+
+        document.body.style.background = 'white';
+        // Hide pseudo-elements that create the purple overlay
+        const style = document.createElement('style');
+        style.id = 'landing-page-body-override';
+        style.textContent = `
+            body::before,
+            body::after {
+                display: none !important;
+            }
+        `;
+        document.head.appendChild(style);
+
+        return () => {
+            document.body.style.background = originalBackground;
+            const styleElement = document.getElementById('landing-page-body-override');
+            if (styleElement) {
+                styleElement.remove();
+            }
+        };
+    }, []);
+
+    // Preload background image
+    useEffect(() => {
+        const img = new Image();
+        img.src = '/bpdcbg.png';
+        img.onload = () => {
+            setImageLoaded(true);
+        };
+        img.onerror = () => {
+            // If image fails to load, still show the page after a delay
+            setTimeout(() => setImageLoaded(true), 1000);
+        };
     }, []);
 
     // Close mobile menu on escape key or outside click
@@ -72,98 +111,73 @@ export default function Home() {
                 }}
             />
 
+            {/* Loading Screen */}
+            <AnimatePresence>
+                {!imageLoaded && (
+                    <motion.div
+                        initial={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="fixed inset-0 z-[100] bg-white flex items-center justify-center"
+                    >
+                        <div className="text-center">
+                            <motion.div
+                                className="mb-8"
+                                animate={{
+                                    scale: [1, 1.1, 1],
+                                    opacity: [0.7, 1, 0.7],
+                                }}
+                                transition={{
+                                    duration: 1.5,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                            >
+                                <img
+                                    src="/img.jpg"
+                                    alt="BITS Pilani Dubai Campus Logo"
+                                    className="h-24 w-auto mx-auto object-contain"
+                                />
+                            </motion.div>
+                            <motion.div
+                                className="w-16 h-16 border-4 border-bits-royal-blue border-t-transparent rounded-full mx-auto"
+                                animate={{ rotate: 360 }}
+                                transition={{
+                                    duration: 1,
+                                    repeat: Infinity,
+                                    ease: "linear"
+                                }}
+                            />
+                            <motion.p
+                                className="mt-6 text-bits-royal-blue font-semibold text-lg"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.3 }}
+                            >
+                                Loading...
+                            </motion.p>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Main Content */}
-            <div className="relative overflow-hidden font-sans antialiased transition-colors duration-300" style={{
-                background: `
-                  radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
-                  radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
-                  radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
-                  radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
-                  radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
-                  radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
-                  radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
-                  linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
-                `
-            }}>
-                {/* Dynamic Vibrant Background Elements */}
-                <div className="fixed inset-0 z-0">
-                    {/* Deep Royal Blue */}
-                    <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
-                    <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
-
-                    {/* White Bubbles in Upper Left */}
-                    <div className="absolute top-16 left-8 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-300" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                    <div className="absolute top-8 left-16 size-56 rounded-full blur-3xl opacity-45 animate-pulse delay-700" style={{ background: 'rgba(255, 255, 255, 0.55)' }}></div>
-                    <div className="absolute top-24 left-4 size-64 rounded-full blur-3xl opacity-48 animate-pulse delay-1100" style={{ background: 'rgba(255, 255, 255, 0.58)' }}></div>
-                    <div className="absolute top-12 left-12 size-48 rounded-full blur-3xl opacity-42 animate-pulse delay-1500" style={{ background: 'rgba(255, 255, 255, 0.52)' }}></div>
-                    <div className="absolute top-32 left-20 size-52 rounded-full blur-3xl opacity-40 animate-pulse delay-1900" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
-
-                    {/* Bright Golden Yellow */}
-                    <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
-                    <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
-
-                    {/* White Bubbles in Upper Right */}
-                    <div className="absolute top-16 right-8 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-400" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                    <div className="absolute top-8 right-16 size-56 rounded-full blur-3xl opacity-45 animate-pulse delay-800" style={{ background: 'rgba(255, 255, 255, 0.55)' }}></div>
-                    <div className="absolute top-24 right-4 size-64 rounded-full blur-3xl opacity-48 animate-pulse delay-1200" style={{ background: 'rgba(255, 255, 255, 0.58)' }}></div>
-                    <div className="absolute top-12 right-12 size-48 rounded-full blur-3xl opacity-42 animate-pulse delay-1600" style={{ background: 'rgba(255, 255, 255, 0.52)' }}></div>
-                    <div className="absolute top-32 right-20 size-52 rounded-full blur-3xl opacity-40 animate-pulse delay-2000" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
-
-                    {/* White Bubbles on Right Side */}
-                    <div className="absolute top-1/3 right-8 size-68 rounded-full blur-3xl opacity-46 animate-pulse delay-2300" style={{ background: 'rgba(255, 255, 255, 0.56)' }}></div>
-                    <div className="absolute top-1/2 right-12 size-60 rounded-full blur-3xl opacity-44 animate-pulse delay-2700" style={{ background: 'rgba(255, 255, 255, 0.54)' }}></div>
-                    <div className="absolute top-2/3 right-6 size-56 rounded-full blur-3xl opacity-42 animate-pulse delay-3100" style={{ background: 'rgba(255, 255, 255, 0.52)' }}></div>
-                    <div className="absolute top-3/4 right-10 size-64 rounded-full blur-3xl opacity-40 animate-pulse delay-3500" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
-                    <div className="absolute top-1/4 right-4 size-52 rounded-full blur-3xl opacity-38 animate-pulse delay-3900" style={{ background: 'rgba(255, 255, 255, 0.48)' }}></div>
-
-                    {/* Crimson Red */}
-                    <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
-                    <div className="absolute top-1/2 right-1/3 size-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
-
-                    {/* Charcoal Black */}
-                    <div className="absolute bottom-10 right-5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
-
-                    {/* Light Gray */}
-                    <div className="absolute top-1/4 left-1/2 size-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
-
-                    {/* Mid-tone Blue */}
-                    <div className="absolute bottom-1/3 right-1/4 size-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
-
-                    {/* Warm Golden Glow */}
-                    <div className="absolute top-1/2 left-1/5 size-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
-
-                    {/* Vibrant Red */}
-                    <div className="absolute top-2/3 right-1/5 size-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
-
-                    {/* Neon Purple */}
-                    <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
-                    <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
-
-                    {/* More White Bubbles Throughout */}
-                    <div className="absolute top-1/3 left-1/3 size-96 rounded-full blur-3xl opacity-50 animate-pulse delay-500" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                    <div className="absolute bottom-1/3 right-1/3 size-80 rounded-full blur-3xl opacity-45 animate-pulse delay-1500" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                    <div className="absolute top-2/3 left-1/2 size-72 rounded-full blur-3xl opacity-48 animate-pulse delay-2500" style={{ background: 'rgba(255, 255, 255, 0.63)' }}></div>
-                    <div className="absolute top-1/4 right-1/4 size-88 rounded-full blur-3xl opacity-42 animate-pulse delay-3200" style={{ background: 'rgba(255, 255, 255, 0.58)' }}></div>
-                    <div className="absolute bottom-1/4 left-1/4 size-76 rounded-full blur-3xl opacity-44 animate-pulse delay-3800" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                    <div className="absolute top-1/5 left-1/5 size-84 rounded-full blur-3xl opacity-40 animate-pulse delay-4500" style={{ background: 'rgba(255, 255, 255, 0.55)' }}></div>
-                    <div className="absolute bottom-1/5 right-1/5 size-90 rounded-full blur-3xl opacity-42 animate-pulse delay-5200" style={{ background: 'rgba(255, 255, 255, 0.58)' }}></div>
-                    <div className="absolute top-1/2 right-1/2 size-100 rounded-full blur-3xl opacity-38 animate-pulse delay-6000" style={{ background: 'rgba(255, 255, 255, 0.52)' }}></div>
-                    <div className="absolute top-1/6 left-2/3 size-92 rounded-full blur-3xl opacity-36 animate-pulse delay-7000" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
-                    <div className="absolute bottom-1/6 right-2/3 size-86 rounded-full blur-3xl opacity-38 animate-pulse delay-8000" style={{ background: 'rgba(255, 255, 255, 0.52)' }}></div>
-                    <div className="absolute top-3/4 left-1/6 size-78 rounded-full blur-3xl opacity-40 animate-pulse delay-9000" style={{ background: 'rgba(255, 255, 255, 0.55)' }}></div>
-                    <div className="absolute bottom-3/4 right-1/6 size-82 rounded-full blur-3xl opacity-35 animate-pulse delay-10000" style={{ background: 'rgba(255, 255, 255, 0.48)' }}></div>
-                    <div className="absolute top-1/2 left-1/6 size-94 rounded-full blur-3xl opacity-37 animate-pulse delay-11000" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
-                    <div className="absolute bottom-1/2 right-1/6 size-88 rounded-full blur-3xl opacity-39 animate-pulse delay-12000" style={{ background: 'rgba(255, 255, 255, 0.53)' }}></div>
-                    <div className="absolute top-3/5 left-3/5 size-74 rounded-full blur-3xl opacity-41 animate-pulse delay-13000" style={{ background: 'rgba(255, 255, 255, 0.54)' }}></div>
-                    <div className="absolute bottom-2/5 right-3/5 size-70 rounded-full blur-3xl opacity-43 animate-pulse delay-14000" style={{ background: 'rgba(255, 255, 255, 0.56)' }}></div>
-                    <div className="absolute top-4/5 left-1/3 size-66 rounded-full blur-3xl opacity-39 animate-pulse delay-15000" style={{ background: 'rgba(255, 255, 255, 0.51)' }}></div>
-                    <div className="absolute bottom-1/5 left-2/5 size-68 rounded-full blur-3xl opacity-41 animate-pulse delay-16000" style={{ background: 'rgba(255, 255, 255, 0.53)' }}></div>
-                </div>
+            <div className="relative overflow-hidden font-sans antialiased transition-colors duration-300 min-h-screen bg-white" data-landing-page>
+                {/* Blurred Background */}
+                <div
+                    className="fixed inset-0 z-0 bg-white"
+                    style={{
+                        backgroundImage: 'url(/bpdcbg.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundAttachment: 'fixed',
+                        filter: 'blur(4px)'
+                    }}
+                />
 
                 {/* Header Bar with Auth Buttons */}
-                <header className="fixed top-0 left-0 w-full z-20 flex justify-between items-center px-4 sm:px-6 md:px-8 py-3 sm:py-4 bg-transparent">
+                <header className="relative z-20 flex justify-between items-center px-4 sm:px-6 md:px-8 py-3 sm:py-4 bg-transparent">
                     <Link href="/" className="flex items-center group">
                         <motion.div
                             className="relative"
@@ -171,11 +185,11 @@ export default function Home() {
                             whileTap={{ scale: 0.95 }}
                         >
                             {/* Subtle backdrop container */}
-                            <div className="relative bg-white/30 backdrop-blur-sm border border-white/40 rounded-lg p-1.5 sm:p-2 shadow-lg group-hover:bg-white/40 group-hover:shadow-xl transition-all duration-300">
+                            <div className="relative bg-white/50 backdrop-blur-md border-2 border-white/60 rounded-lg p-2 sm:p-3 md:p-4 shadow-2xl group-hover:bg-white/60 group-hover:shadow-2xl transition-all duration-300">
                                 <img
                                     src="/img.jpg"
                                     alt="BITS Pilani Dubai Campus Logo"
-                                    className="h-10 sm:h-12 md:h-14 w-auto object-contain filter drop-shadow-md"
+                                    className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain filter drop-shadow-lg"
                                 />
                             </div>
                         </motion.div>
@@ -337,16 +351,16 @@ export default function Home() {
 
                 <main className="relative z-10">
                     {/* Hero Section */}
-                    <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20 sm:pt-28 lg:pt-32
+                    <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-2 sm:pt-4 lg:pt-6
  pb-20 overflow-hidden">
                         <motion.div
-                            className="max-w-6xl mx-auto space-y-8"
+                            className="max-w-6xl mx-auto space-y-6 sm:space-y-8"
                             variants={containerVariants}
                             initial="hidden"
                             animate="visible"
                         >
-                            <motion.div variants={itemVariants} className="space-y-6">
-                                <div className="relative inline-block">
+                            <motion.div variants={itemVariants} className="space-y-6 sm:space-y-8 max-w-4xl mx-auto text-center">
+                                <div className="relative inline-block w-full">
                                     {/* Glow effect behind text */}
                                     <div className="absolute inset-0 blur-3xl opacity-60 animate-pulse"
                                         style={{
@@ -354,24 +368,46 @@ export default function Home() {
                                         }}
                                     />
                                     <motion.h1
-                                        className="text-[clamp(3rem,10vw,8rem)] font-black tracking-tight break-words 
+                                        className="text-[clamp(2.5rem,6vw,4.5rem)] font-bold tracking-tight break-words 
         text-white
         dark:text-bits-golden-yellow
         relative z-10
-        leading-tight
+        leading-[1.1]
         drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]
-        dark:drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]"
-                                        initial={{ opacity: 0, scale: 0.9 }}
-                                        animate={{ opacity: 1, scale: 1 }}
+        dark:drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]
+        mb-4 sm:mb-6"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.8, ease: "easeOut" }}
                                     >
-                                        <span className="block">BITS Pilani</span>
-                                        <span className="block mt-2">Dubai Campus</span>
+                                        Your Gateway to Internships, Jobs & Career Growth
                                     </motion.h1>
                                 </div>
 
+                                {/* Subheading with enhanced visibility */}
+                                <motion.div
+                                    className="relative z-10 max-w-3xl mx-auto px-4"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                                >
+                                    {/* Backdrop for better visibility */}
+                                    <div className="absolute inset-0 bg-black/40 dark:bg-black/50 backdrop-blur-md rounded-2xl -mx-2 sm:-mx-4"></div>
+                                    <motion.p
+                                        className="relative z-10 text-[clamp(1.1rem,2.5vw,1.4rem)] font-medium sm:font-semibold leading-relaxed sm:leading-loose
+        text-white
+        dark:text-white
+        py-4 sm:py-6 px-4 sm:px-6
+        drop-shadow-[0_2px_4px_rgba(0,0,0,0.9),0_4px_8px_rgba(0,0,0,0.7)]
+        dark:drop-shadow-[0_2px_4px_rgba(0,0,0,0.9),0_4px_8px_rgba(0,0,0,0.7)]
+        shadow-[0_0_20px_rgba(0,0,0,0.3)]"
+                                    >
+                                        Discover opportunities tailored for our first year Higher Degree Students. Connect with top employers, access exclusive roles, and take the next confident step in your professional journey.
+                                    </motion.p>
+                                </motion.div>
+
                                 {/* Login Button / Go to Profile Button */}
-                                <motion.div variants={itemVariants} className="flex flex-col items-center mb-8 w-full px-4">
+                                <motion.div variants={itemVariants} className="flex flex-col items-center mb-4 sm:mb-8 w-full px-4 mt-2 sm:mt-4">
                                     {status === 'authenticated' ? (
                                         <Link href="/profile" className="w-full max-w-sm">
                                             <motion.div

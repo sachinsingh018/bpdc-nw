@@ -189,17 +189,27 @@
     body {
         @apply text-foreground;
         /* BITS Pilani Dubai Campus Ultra-Vibrant Gradient Background */
-        background: linear-gradient(135deg, 
-            var(--bits-royal-blue) 0%, 
-            #1a3a7a 10%, 
-            #2d1b69 25%, 
-            var(--bits-deep-purple) 40%, 
-            #2a0a3a 60%,
-            #1a0a2e 80%,
-            #0f0518 100%);
+        background: linear-gradient(135deg,
+                var(--bits-royal-blue) 0%,
+                #1a3a7a 10%,
+                #2d1b69 25%,
+                var(--bits-deep-purple) 40%,
+                #2a0a3a 60%,
+                #1a0a2e 80%,
+                #0f0518 100%);
         background-attachment: fixed;
         min-height: 100vh;
         position: relative;
+    }
+
+    /* Override body background for landing page to prevent purple flash */
+    body:has([data-landing-page]) {
+        background: white !important;
+    }
+
+    body:has([data-landing-page])::before,
+    body:has([data-landing-page])::after {
+        display: none !important;
     }
 
     /* Ultra-Vibrant luminous overlay for maximum BITS branding impact */
@@ -210,7 +220,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: 
+        background:
             radial-gradient(circle at 20% 80%, rgba(242, 179, 0, 0.35) 0%, transparent 70%),
             radial-gradient(circle at 80% 20%, rgba(193, 18, 31, 0.25) 0%, transparent 70%),
             radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.15) 0%, transparent 60%),

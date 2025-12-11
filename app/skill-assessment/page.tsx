@@ -9,6 +9,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
+import { CommonNavbar } from '@/components/common-navbar';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { getCookie } from 'cookies-next';
 
 interface Skill {
     id: number;
@@ -24,6 +28,8 @@ interface SkillQuestion {
 }
 
 export default function SkillAssessmentPage() {
+    const router = useRouter();
+    const { data: session, status } = useSession();
     const [skills, setSkills] = useState<Skill[]>([]);
     const [selectedSkill, setSelectedSkill] = useState<string>('');
     const [questions, setQuestions] = useState<SkillQuestion[]>([]);
@@ -34,9 +40,41 @@ export default function SkillAssessmentPage() {
     const [score, setScore] = useState(0);
     const [total, setTotal] = useState(0);
 
+    // Authentication check
+    useEffect(() => {
+        const initialize = async () => {
+            // Check for NextAuth session first
+            if (session?.user?.email) {
+                // Set up userEmail cookie for Google users
+                try {
+                    const response = await fetch('/api/auth/google-setup');
+                    if (response.ok) {
+                        loadSkills();
+                        return;
+                    }
+                } catch (error) {
+                    console.error('Error setting up Google session:', error);
+                }
+            }
+
+            // Fallback to cookie-based authentication
+            const userEmail = await getCookie('userEmail');
+            if (!userEmail) {
+                router.push('/login');
+            } else {
+                loadSkills();
+            }
+        };
+
+        // Only initialize after session status is determined
+        if (status !== 'loading') {
+            initialize();
+        }
+    }, [router, session, status]);
+
     // Load skills on component mount
     useEffect(() => {
-        loadSkills();
+        // Skills will be loaded in the authentication check
     }, []);
 
     const loadSkills = async () => {
@@ -131,47 +169,46 @@ export default function SkillAssessmentPage() {
 
     const allQuestionsAnswered = answers.length > 0 && !answers.includes(-1);
 
-    return (
-        <div className="relative min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 overflow-hidden" style={{
-            background: `
-                radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
-                radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
-                radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
-                radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
-                radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
-                radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
-                radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
-                radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
-                radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 50%),
-                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 50%),
-                radial-gradient(circle at 50% 70%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
-                linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
-            `
-        }}>
-            {/* Dynamic Vibrant Background Elements */}
-            <div className="fixed inset-0 z-0">
-                {/* Deep Royal Blue */}
-                <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
-                <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
-
-                {/* Bright Golden Yellow */}
-                <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
-                <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
-
-                {/* Crimson Red */}
-                <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
-                <div className="absolute top-1/2 right-1/3 size-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
-
-                {/* Neon Purple */}
-                <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
-                <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
-
-                {/* White Bubbles */}
-                <div className="absolute top-1/5 right-1/3 size-80 rounded-full blur-3xl opacity-50 animate-pulse delay-600" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
-                <div className="absolute bottom-1/5 left-1/3 size-70 rounded-full blur-3xl opacity-45 animate-pulse delay-1700" style={{ background: 'rgba(255, 255, 255, 0.4)' }}></div>
-                <div className="absolute top-2/3 left-1/4 size-65 rounded-full blur-3xl opacity-55 animate-pulse delay-3200" style={{ background: 'rgba(255, 255, 255, 0.5)' }}></div>
+    // Show loading state while checking authentication
+    if (status === 'loading') {
+        return (
+            <div className="relative min-h-screen overflow-hidden flex items-center justify-center">
+                <div
+                    className="fixed inset-0 z-0"
+                    style={{
+                        backgroundImage: 'url(/bpdcbg.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundAttachment: 'fixed',
+                        filter: 'blur(4px)'
+                    }}
+                />
+                <div className="relative z-10 text-center">
+                    <Loader2 className="size-8 text-purple-600 animate-spin mx-auto mb-4" />
+                    <p className="text-black font-medium">Loading...</p>
+                </div>
             </div>
+        );
+    }
+
+    return (
+        <div className="relative min-h-screen overflow-hidden">
+            {/* Blurred Background */}
+            <div
+                className="fixed inset-0 z-0"
+                style={{
+                    backgroundImage: 'url(/bpdcbg.png)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundAttachment: 'fixed',
+                    filter: 'blur(4px)'
+                }}
+            />
+
+            {/* Common Navbar */}
+            <CommonNavbar currentPage="/skill-assessment" />
 
             {/* Main Content */}
             <div className="relative z-10 container mx-auto px-4 py-8 min-h-screen">
@@ -324,30 +361,44 @@ export default function SkillAssessmentPage() {
                                 transition={{ duration: 0.5, delay: 0.3 }}
                                 className="flex justify-center pt-6"
                             >
-                                <Button
-                                    onClick={handleSubmit}
-                                    disabled={!allQuestionsAnswered || isSubmitting}
-                                    className={`px-8 py-3 text-lg font-bold text-black ${allQuestionsAnswered && !isSubmitting
-                                        ? 'shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105'
-                                        : 'bg-gray-400 text-gray-600 cursor-not-allowed'
-                                        }`}
-                                    style={allQuestionsAnswered && !isSubmitting ? {
-                                        background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
-                                        boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
-                                    } : {}}
-                                >
-                                    {isSubmitting ? (
-                                        <>
-                                            <Loader2 className="size-5 mr-2 animate-spin" />
-                                            Submitting...
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Trophy className="size-5 mr-2" />
-                                            Submit Assessment
-                                        </>
-                                    )}
-                                </Button>
+                                <div className="relative">
+                                    {/* Glow effect behind button */}
+                                    <div
+                                        className="absolute inset-0 blur-xl opacity-70 rounded-full"
+                                        style={{
+                                            background: 'linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%)',
+                                            transform: 'scale(1.2)'
+                                        }}
+                                    />
+                                    <Button
+                                        onClick={handleSubmit}
+                                        disabled={!allQuestionsAnswered || isSubmitting}
+                                        className={`relative px-12 py-5 text-xl font-extrabold transition-all duration-200 hover:scale-105 ${allQuestionsAnswered && !isSubmitting
+                                            ? 'shadow-2xl hover:shadow-3xl'
+                                            : 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-60'
+                                            }`}
+                                        style={allQuestionsAnswered && !isSubmitting ? {
+                                            background: 'linear-gradient(135deg, #1a237e 0%, #283593 30%, #3949ab 60%, #5c6bc0 100%)',
+                                            color: '#FFFFFF',
+                                            border: '4px solid rgba(255, 255, 255, 0.9)',
+                                            boxShadow: '0 10px 40px rgba(26, 35, 126, 0.8), 0 0 60px rgba(40, 53, 147, 0.6), 0 0 80px rgba(57, 73, 171, 0.4), inset 0 2px 6px rgba(255, 255, 255, 0.2), inset 0 -2px 6px rgba(0, 0, 0, 0.3)',
+                                            textShadow: '0 3px 6px rgba(0, 0, 0, 0.7), 0 0 10px rgba(255, 255, 255, 0.2)',
+                                            filter: 'brightness(0.95)'
+                                        } : {}}
+                                    >
+                                        {isSubmitting ? (
+                                            <>
+                                                <Loader2 className="size-6 mr-2 animate-spin text-white" />
+                                                <span className="text-white">Submitting...</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Trophy className="size-6 mr-2 text-white" />
+                                                <span className="text-white">Submit Assessment</span>
+                                            </>
+                                        )}
+                                    </Button>
+                                </div>
                             </motion.div>
                         </motion.div>
                     )}
@@ -464,21 +515,35 @@ export default function SkillAssessmentPage() {
                                         >
                                             Retry Assessment
                                         </Button>
-                                        <Button
-                                            onClick={() => {
-                                                setSelectedSkill('');
-                                                setQuestions([]);
-                                                setAnswers([]);
-                                                setShowResults(false);
-                                            }}
-                                            className="text-black font-bold hover:shadow-xl transition-all duration-200 hover:scale-105"
-                                            style={{
-                                                background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
-                                                boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
-                                            }}
-                                        >
-                                            Choose Different Skill
-                                        </Button>
+                                        <div className="relative">
+                                            {/* Glow effect behind button */}
+                                            <div
+                                                className="absolute inset-0 blur-lg opacity-70 rounded-full"
+                                                style={{
+                                                    background: 'linear-gradient(135deg, #FFD700 0%, #FF6B35 50%, #C2185B 100%)',
+                                                    transform: 'scale(1.15)'
+                                                }}
+                                            />
+                                            <Button
+                                                onClick={() => {
+                                                    setSelectedSkill('');
+                                                    setQuestions([]);
+                                                    setAnswers([]);
+                                                    setShowResults(false);
+                                                }}
+                                                className="relative font-extrabold hover:shadow-2xl transition-all duration-200 hover:scale-105 px-8 py-4 text-lg"
+                                                style={{
+                                                    background: 'linear-gradient(135deg, #FFD700 0%, #FF8C42 30%, #FF6B35 60%, #C2185B 100%)',
+                                                    color: '#FFFFFF',
+                                                    border: '4px solid #FFFFFF',
+                                                    boxShadow: '0 10px 40px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 107, 53, 0.6), 0 0 80px rgba(194, 24, 91, 0.4), inset 0 2px 6px rgba(255, 255, 255, 0.4), inset 0 -2px 6px rgba(0, 0, 0, 0.2)',
+                                                    textShadow: '0 3px 6px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.3)',
+                                                    filter: 'brightness(1.1) saturate(1.2)'
+                                                }}
+                                            >
+                                                Choose Different Skill
+                                            </Button>
+                                        </div>
                                     </div>
                                 </CardContent>
                             </Card>

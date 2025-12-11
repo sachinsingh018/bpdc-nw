@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { Briefcase, ArrowLeft, FileText, Mail, User as UserIcon, Download, ExternalLink } from 'lucide-react';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { FileText, Mail, User as UserIcon, Download, ExternalLink } from 'lucide-react';
+import { CommonNavbar } from '@/components/common-navbar';
 
 interface Application {
   id: string;
@@ -150,53 +150,38 @@ export default function MyApplicationsPage() {
   };
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden bg-gradient-to-br from-purple-100 via-blue-50 to-white dark:from-purple-900 dark:via-slate-900 dark:to-black">
-      {/* Decorative background pattern */}
-      <div className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-purple-200/30 via-transparent to-transparent dark:from-purple-900/40" />
-      {/* Header */}
-      <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-white/10 sticky top-0 z-10 shadow-sm">
-        <div className="flex items-center justify-between p-4 max-w-7xl mx-auto">
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={() => router.push('/job-board')}
-              className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors group"
-            >
-              <div className="size-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-                <Briefcase className="size-5 text-white" />
-              </div>
-              <span className="text-lg font-extrabold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent tracking-tight">
-                Networkqy
-              </span>
-            </button>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => router.push('/job-board')}
-              className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
-            >
-              <ArrowLeft className="size-4" />
-              <span>Back to Jobs</span>
-            </Button>
-            <ThemeToggle />
-          </div>
-        </div>
-      </div>
+    <div className="relative min-h-screen w-full overflow-x-hidden font-sans">
+      {/* Blurred Background */}
+      <div
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: 'url(/bpdcbg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          filter: 'blur(4px)'
+        }}
+      />
+      {/* Navbar */}
+      <CommonNavbar currentPage="job-board" />
       {/* Main Content */}
       <div className="max-w-5xl mx-auto p-6 z-10 relative">
-        <h1 className="text-4xl font-semibold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-blue-500 to-purple-400 dark:from-purple-200 dark:via-blue-300 dark:to-purple-400 flex items-center gap-4 tracking-tight leading-normal" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif' }}>
-          <FileText className="size-9 text-purple-500 dark:text-purple-300 align-middle" />
-          My Job Applications
+        <h1 className="text-5xl md:text-6xl font-bold mb-8 md:mb-12 text-gray-900 dark:text-white flex items-center gap-4 tracking-tight leading-tight relative z-10 drop-shadow-lg" style={{ fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif' }}>
+          <div className="p-3 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl shadow-lg">
+            <FileText className="size-8 md:size-10 text-white align-middle" />
+          </div>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-100 dark:to-white">
+            My Job Applications
+          </span>
         </h1>
-        {loading && <div className="text-lg text-gray-700 dark:text-gray-200">Loading...</div>}
-        {error && <div className="text-red-500 mb-4">{error}</div>}
+        {loading && <div className="text-lg text-gray-700 dark:text-gray-200 relative z-10">Loading...</div>}
+        {error && <div className="text-red-500 mb-4 relative z-10">{error}</div>}
         {!loading && !error && applications.length === 0 && (
-          <div className="text-gray-700 dark:text-gray-200">No job applications found.</div>
+          <div className="text-gray-700 dark:text-gray-200 relative z-10">No job applications found.</div>
         )}
         {!loading && !error && applications.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 relative z-10">
             {applications.map(app => {
               // Updated: match on job.job_id (string) and app.jobId (string/number)
               const job = jobs.find(j => String(j.job_id) === String(app.jobId));
@@ -205,7 +190,7 @@ export default function MyApplicationsPage() {
               return (
                 <div
                   key={app.id}
-                  className="relative bg-white/95 dark:bg-slate-900/95 rounded-xl p-5 flex flex-col gap-3 border border-black dark:border-white shadow-md hover:shadow-xl hover:scale-[1.025] transition-all duration-150 min-h-[15rem] h-full max-w-md w-full mx-auto font-sans"
+                  className="relative bg-white/95 dark:bg-slate-900/95 rounded-xl p-5 flex flex-col gap-3 border border-black dark:border-white shadow-md hover:shadow-xl hover:scale-[1.025] transition-all duration-150 min-h-[15rem] h-full max-w-md w-full mx-auto font-sans z-10"
                 >
                   {/* Header: logo, job title, company */}
                   <div className="flex items-center gap-3 mb-1">
@@ -256,16 +241,16 @@ export default function MyApplicationsPage() {
                   {/* Status and feedback badges */}
                   <div className="flex gap-2 mb-1 flex-wrap">
                     <span className={`px-2 py-0.5 rounded-full text-xs font-medium border shadow-sm tracking-wide ${app.withdrawn
-                        ? 'bg-gray-50 dark:bg-gray-900/40 text-gray-700 dark:text-gray-200 border-gray-100 dark:border-gray-700'
-                        : app.status === 'pending'
-                          ? 'bg-yellow-50 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-200 border-yellow-100 dark:border-yellow-700'
-                          : app.status === 'reviewed'
-                            ? 'bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-200 border-blue-100 dark:border-blue-700'
-                            : app.status === 'accepted'
-                              ? 'bg-green-50 dark:bg-green-900/40 text-green-700 dark:text-green-200 border-green-100 dark:border-green-700'
-                              : app.status === 'rejected'
-                                ? 'bg-red-50 dark:bg-red-900/40 text-red-700 dark:text-red-200 border-red-100 dark:border-red-700'
-                                : 'bg-gray-50 dark:bg-gray-900/40 text-gray-700 dark:text-gray-200 border-gray-100 dark:border-gray-700'
+                      ? 'bg-gray-50 dark:bg-gray-900/40 text-gray-700 dark:text-gray-200 border-gray-100 dark:border-gray-700'
+                      : app.status === 'pending'
+                        ? 'bg-yellow-50 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-200 border-yellow-100 dark:border-yellow-700'
+                        : app.status === 'reviewed'
+                          ? 'bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-200 border-blue-100 dark:border-blue-700'
+                          : app.status === 'accepted'
+                            ? 'bg-green-50 dark:bg-green-900/40 text-green-700 dark:text-green-200 border-green-100 dark:border-green-700'
+                            : app.status === 'rejected'
+                              ? 'bg-red-50 dark:bg-red-900/40 text-red-700 dark:text-red-200 border-red-100 dark:border-red-700'
+                              : 'bg-gray-50 dark:bg-gray-900/40 text-gray-700 dark:text-gray-200 border-gray-100 dark:border-gray-700'
                       }`}>
                       {app.withdrawn ? 'Withdrawn' : app.status.charAt(0).toUpperCase() + app.status.slice(1)}
                     </span>

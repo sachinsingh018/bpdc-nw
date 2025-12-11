@@ -1863,7 +1863,7 @@ export async function getSkillQuestions(skillId: number): Promise<SkillQuestion[
       .from(skillQuestions)
       .where(eq(skillQuestions.skillId, skillId))
       .orderBy(sql`RANDOM()`)
-      .limit(10);
+      .limit(20);
   } catch (error) {
     console.error('Failed to get skill questions:', error);
     throw error;

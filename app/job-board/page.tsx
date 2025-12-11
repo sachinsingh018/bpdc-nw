@@ -5,6 +5,7 @@ import JobCard from '@/components/JobCard';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { useSession } from 'next-auth/react';
+import { getCookie } from 'cookies-next';
 import {
     Home,
     Users,
@@ -78,8 +79,37 @@ function JobBoardContent() {
     const [postingJob, setPostingJob] = useState(false);
     const [auraBotApplying, setAuraBotApplying] = useState(false);
     const [userApplications, setUserApplications] = useState<any[]>([]);
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const searchParams = useSearchParams();
+
+    // Authentication check
+    useEffect(() => {
+        const initialize = async () => {
+            // Check for NextAuth session first
+            if (session?.user?.email) {
+                // Set up userEmail cookie for Google users
+                try {
+                    const response = await fetch('/api/auth/google-setup');
+                    if (response.ok) {
+                        return;
+                    }
+                } catch (error) {
+                    console.error('Error setting up Google session:', error);
+                }
+            }
+
+            // Fallback to cookie-based authentication
+            const userEmail = await getCookie('userEmail');
+            if (!userEmail) {
+                router.push('/login');
+            }
+        };
+
+        // Only initialize after session status is determined
+        if (status !== 'loading') {
+            initialize();
+        }
+    }, [router, session, status]);
     const [highlightedJobId, setHighlightedJobId] = useState<string | null>(null);
 
     // Toggle state for switching between All Jobs, Remote Jobs, and Part-time Jobs
@@ -395,150 +425,47 @@ function JobBoardContent() {
         }
     };
 
+    // Show loading state while checking authentication
+    if (status === 'loading') {
+        return (
+            <div className="relative min-h-screen overflow-hidden flex items-center justify-center">
+                <div
+                    className="fixed inset-0 z-0"
+                    style={{
+                        backgroundImage: 'url(/bpdcbg.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundAttachment: 'fixed',
+                        filter: 'blur(4px)'
+                    }}
+                />
+                <div className="relative z-10 text-center">
+                    <Loader2 className="size-8 text-purple-600 animate-spin mx-auto mb-4" />
+                    <p className="text-black font-medium">Loading...</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div
             className="relative min-h-screen w-full overflow-x-hidden font-sans"
-            style={{
-                background: `
-                  radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
-                  radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
-                  radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
-                  radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
-                  radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
-                  radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
-                  radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
-                  linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
-                `
-            }}
         >
+            {/* Blurred Background */}
+            <div
+                className="fixed inset-0 z-0"
+                style={{
+                    backgroundImage: 'url(/bpdcbg.png)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundAttachment: 'fixed',
+                    filter: 'blur(4px)'
+                }}
+            />
             {/* Navbar */}
             <CommonNavbar currentPage="job-board" />
-            {/* Dynamic Vibrant Background Elements */}
-            <div className="fixed inset-0 z-0">
-                {/* Deep Royal Blue */}
-                <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
-                <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
-
-                {/* Bright Golden Yellow */}
-                <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
-                <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
-
-                {/* Crimson Red */}
-                <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
-                <div className="absolute top-1/2 right-1/3 size-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
-
-                {/* Charcoal Black */}
-                <div className="absolute bottom-10 right-5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
-
-                {/* Light Gray */}
-                <div className="absolute top-1/4 left-1/2 size-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
-
-                {/* Mid-tone Blue */}
-                <div className="absolute bottom-1/3 right-1/4 size-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
-
-                {/* Warm Golden Glow */}
-                <div className="absolute top-1/2 left-1/5 size-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
-
-                {/* Vibrant Red */}
-                <div className="absolute top-2/3 right-1/5 size-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
-
-                {/* Neon Purple */}
-                <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
-                <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
-
-                {/* White Bubbles */}
-                <div className="absolute top-5 left-1/4 size-32 rounded-full blur-2xl opacity-40 animate-pulse delay-500" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute top-16 right-1/3 size-40 rounded-full blur-2xl opacity-50 animate-pulse delay-800" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-1/4 left-10 size-28 rounded-full blur-2xl opacity-45 animate-pulse delay-1200" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-1/3 right-20 size-36 rounded-full blur-2xl opacity-55 animate-pulse delay-1600" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute top-2/5 left-2/5 size-44 rounded-full blur-2xl opacity-40 animate-pulse delay-2000" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute top-1/2 right-1/5 size-32 rounded-full blur-2xl opacity-50 animate-pulse delay-2400" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-3/5 left-1/6 size-38 rounded-full blur-2xl opacity-45 animate-pulse delay-2800" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-2/3 right-1/4 size-42 rounded-full blur-2xl opacity-55 animate-pulse delay-3200" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute top-3/4 left-1/3 size-30 rounded-full blur-2xl opacity-40 animate-pulse delay-3600" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute top-4/5 right-1/6 size-34 rounded-full blur-2xl opacity-50 animate-pulse delay-4000" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-5/6 left-2/3 size-40 rounded-full blur-2xl opacity-45 animate-pulse delay-4400" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-1/5 right-2/5 size-26 rounded-full blur-2xl opacity-40 animate-pulse delay-4800" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute bottom-1/4 left-3/4 size-36 rounded-full blur-2xl opacity-50 animate-pulse delay-5200" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute bottom-1/5 right-3/5 size-32 rounded-full blur-2xl opacity-45 animate-pulse delay-5600" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-1/10 left-1/2 size-28 rounded-full blur-2xl opacity-40 animate-pulse delay-6000" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute bottom-1/3 left-1/5 size-34 rounded-full blur-2xl opacity-50 animate-pulse delay-6400" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-4/5 right-2/3 size-38 rounded-full blur-2xl opacity-45 animate-pulse delay-6800" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-1/7 left-3/5 size-30 rounded-full blur-2xl opacity-40 animate-pulse delay-7200" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute bottom-1/6 right-4/5 size-36 rounded-full blur-2xl opacity-50 animate-pulse delay-7600" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-1/8 left-1/8 size-24 rounded-full blur-2xl opacity-40 animate-pulse delay-8000" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute top-1/12 right-1/12 size-35 rounded-full blur-2xl opacity-50 animate-pulse delay-8400" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-1/9 left-4/5 size-27 rounded-full blur-2xl opacity-45 animate-pulse delay-8800" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-1/11 right-1/7 size-33 rounded-full blur-2xl opacity-55 animate-pulse delay-9200" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute top-2/7 left-7/10 size-29 rounded-full blur-2xl opacity-40 animate-pulse delay-9600" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute top-3/8 right-7/10 size-41 rounded-full blur-2xl opacity-50 animate-pulse delay-10000" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-4/9 left-1/9 size-25 rounded-full blur-2xl opacity-45 animate-pulse delay-10400" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-5/11 right-1/9 size-37 rounded-full blur-2xl opacity-55 animate-pulse delay-10800" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute top-6/13 left-8/10 size-31 rounded-full blur-2xl opacity-40 animate-pulse delay-11200" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute top-7/15 right-8/10 size-39 rounded-full blur-2xl opacity-50 animate-pulse delay-11600" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-8/17 left-1/11 size-23 rounded-full blur-2xl opacity-45 animate-pulse delay-12000" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-9/19 right-1/11 size-35 rounded-full blur-2xl opacity-55 animate-pulse delay-12400" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute bottom-1/7 left-1/7 size-27 rounded-full blur-2xl opacity-40 animate-pulse delay-12800" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute bottom-1/8 right-1/8 size-43 rounded-full blur-2xl opacity-50 animate-pulse delay-13200" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute bottom-1/9 left-9/10 size-29 rounded-full blur-2xl opacity-45 animate-pulse delay-13600" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute bottom-1/10 right-9/10 size-33 rounded-full blur-2xl opacity-55 animate-pulse delay-14000" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute top-1/13 left-1/13 size-26 rounded-full blur-2xl opacity-40 animate-pulse delay-14400" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute top-2/15 right-1/13 size-38 rounded-full blur-2xl opacity-50 animate-pulse delay-14800" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-3/17 left-11/12 size-24 rounded-full blur-2xl opacity-45 animate-pulse delay-15200" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-4/19 right-11/12 size-36 rounded-full blur-2xl opacity-55 animate-pulse delay-15600" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute bottom-2/7 left-1/12 size-28 rounded-full blur-2xl opacity-40 animate-pulse delay-16000" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute bottom-2/8 right-1/12 size-40 rounded-full blur-2xl opacity-50 animate-pulse delay-16400" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute bottom-2/9 left-11/12 size-32 rounded-full blur-2xl opacity-45 animate-pulse delay-16800" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute bottom-2/10 right-11/12 size-34 rounded-full blur-2xl opacity-55 animate-pulse delay-17200" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute top-5/12 left-5/12 size-30 rounded-full blur-2xl opacity-40 animate-pulse delay-17600" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute top-6/13 right-5/12 size-42 rounded-full blur-2xl opacity-50 animate-pulse delay-18000" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-7/14 left-6/13 size-26 rounded-full blur-2xl opacity-45 animate-pulse delay-18400" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-8/15 right-6/13 size-38 rounded-full blur-2xl opacity-55 animate-pulse delay-18800" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute bottom-3/8 left-6/13 size-28 rounded-full blur-2xl opacity-40 animate-pulse delay-19200" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute bottom-3/9 right-6/13 size-36 rounded-full blur-2xl opacity-50 animate-pulse delay-19600" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-10/21 left-2/11 size-27 rounded-full blur-2xl opacity-40 animate-pulse delay-20000" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute top-11/22 right-2/11 size-39 rounded-full blur-2xl opacity-50 animate-pulse delay-20400" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-12/23 left-10/11 size-25 rounded-full blur-2xl opacity-45 animate-pulse delay-20800" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-13/24 right-10/11 size-41 rounded-full blur-2xl opacity-55 animate-pulse delay-21200" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute bottom-4/11 left-2/11 size-29 rounded-full blur-2xl opacity-40 animate-pulse delay-21600" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute bottom-4/12 right-2/11 size-37 rounded-full blur-2xl opacity-50 animate-pulse delay-22000" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute bottom-4/13 left-10/11 size-31 rounded-full blur-2xl opacity-45 animate-pulse delay-22400" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute bottom-4/14 right-10/11 size-35 rounded-full blur-2xl opacity-55 animate-pulse delay-22800" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute top-14/25 left-3/11 size-24 rounded-full blur-2xl opacity-40 animate-pulse delay-23200" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute top-15/26 right-3/11 size-40 rounded-full blur-2xl opacity-50 animate-pulse delay-23600" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-16/27 left-8/11 size-28 rounded-full blur-2xl opacity-45 animate-pulse delay-24000" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-17/28 right-8/11 size-38 rounded-full blur-2xl opacity-55 animate-pulse delay-24400" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute bottom-5/15 left-3/11 size-26 rounded-full blur-2xl opacity-40 animate-pulse delay-24800" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute bottom-5/16 right-3/11 size-42 rounded-full blur-2xl opacity-50 animate-pulse delay-25200" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute bottom-5/17 left-8/11 size-30 rounded-full blur-2xl opacity-45 animate-pulse delay-25600" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute bottom-5/18 right-8/11 size-34 rounded-full blur-2xl opacity-55 animate-pulse delay-26000" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute top-18/29 left-4/11 size-32 rounded-full blur-2xl opacity-40 animate-pulse delay-26400" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute top-19/30 right-4/11 size-36 rounded-full blur-2xl opacity-50 animate-pulse delay-26800" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-20/31 left-7/11 size-22 rounded-full blur-2xl opacity-45 animate-pulse delay-27200" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-21/32 right-7/11 size-44 rounded-full blur-2xl opacity-55 animate-pulse delay-27600" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute bottom-6/19 left-4/11 size-28 rounded-full blur-2xl opacity-40 animate-pulse delay-28000" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute bottom-6/20 right-4/11 size-39 rounded-full blur-2xl opacity-50 animate-pulse delay-28400" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute bottom-6/21 left-7/11 size-33 rounded-full blur-2xl opacity-45 animate-pulse delay-28800" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute bottom-6/22 right-7/11 size-27 rounded-full blur-2xl opacity-55 animate-pulse delay-29200" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute top-22/33 left-5/11 size-29 rounded-full blur-2xl opacity-40 animate-pulse delay-29600" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute top-23/34 right-5/11 size-41 rounded-full blur-2xl opacity-50 animate-pulse delay-30000" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-24/35 left-6/11 size-25 rounded-full blur-2xl opacity-45 animate-pulse delay-30400" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-25/36 right-6/11 size-37 rounded-full blur-2xl opacity-55 animate-pulse delay-30800" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute bottom-7/23 left-5/11 size-31 rounded-full blur-2xl opacity-40 animate-pulse delay-31200" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute bottom-7/24 right-5/11 size-43 rounded-full blur-2xl opacity-50 animate-pulse delay-31600" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute bottom-7/25 left-6/11 size-23 rounded-full blur-2xl opacity-45 animate-pulse delay-32000" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute bottom-7/26 right-6/11 size-35 rounded-full blur-2xl opacity-55 animate-pulse delay-32400" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute top-1/3 left-1/4 size-26 rounded-full blur-2xl opacity-40 animate-pulse delay-32800" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute top-1/3 right-1/4 size-38 rounded-full blur-2xl opacity-50 animate-pulse delay-33200" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute top-1/3 left-3/4 size-30 rounded-full blur-2xl opacity-45 animate-pulse delay-33600" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute top-1/3 right-3/4 size-40 rounded-full blur-2xl opacity-55 animate-pulse delay-34000" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-                <div className="absolute bottom-1/3 left-1/4 size-28 rounded-full blur-2xl opacity-40 animate-pulse delay-34400" style={{ background: 'rgba(255, 255, 255, 0.6)' }}></div>
-                <div className="absolute bottom-1/3 right-1/4 size-36 rounded-full blur-2xl opacity-50 animate-pulse delay-34800" style={{ background: 'rgba(255, 255, 255, 0.7)' }}></div>
-                <div className="absolute bottom-1/3 left-3/4 size-32 rounded-full blur-2xl opacity-45 animate-pulse delay-35200" style={{ background: 'rgba(255, 255, 255, 0.65)' }}></div>
-                <div className="absolute bottom-1/3 right-3/4 size-42 rounded-full blur-2xl opacity-55 animate-pulse delay-35600" style={{ background: 'rgba(255, 255, 255, 0.75)' }}></div>
-            </div>
             {/* 1. Wrap all main content (including heading, search, job grid, etc.) in the blur wrapper: */}
             <div className="transition-all duration-200">
                 <div className="flex flex-col gap-6 max-w-7xl mx-auto py-12 px-4">
@@ -648,7 +575,7 @@ function JobBoardContent() {
                         <div className="flex flex-col sm:flex-row flex-wrap items-center gap-2 mb-4 w-full">
                             {/* View My Applications */}
                             <Button
-                                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-black font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 border-0"
+                                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-black font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 border-0 relative z-10"
                                 onClick={() => router.push('/job-board/my-applications')}
                             >
                                 View My Applications
@@ -731,7 +658,7 @@ function JobBoardContent() {
                                 Post {jobType === 'remote' ? 'Remote ' : jobType === 'parttime' ? 'Part-time ' : ''}Job
                             </Button> */}
                             {/* Category Filter Dropdown */}
-                            <label htmlFor="category-filter" className="font-semibold text-sm text-black dark:text-black ml-2">Category:</label>
+                            <label htmlFor="category-filter" className="font-semibold text-sm text-black dark:text-white ml-2 whitespace-nowrap relative z-10 bg-white/70 dark:bg-slate-800/70 px-2 py-1 rounded backdrop-blur-sm">Category:</label>
                             <select
                                 id="category-filter"
                                 value={categoryFilter}
@@ -745,7 +672,7 @@ function JobBoardContent() {
                                 <option value="external">External</option>
                             </select>
                             {/* Country Filter Dropdown */}
-                            <label htmlFor="country-filter" className="font-semibold text-sm text-black dark:text-black ml-2">Country:</label>
+                            <label htmlFor="country-filter" className="font-semibold text-sm text-black dark:text-white ml-2 whitespace-nowrap relative z-10 bg-white/70 dark:bg-slate-800/70 px-2 py-1 rounded backdrop-blur-sm">Country:</label>
                             <select
                                 id="country-filter"
                                 value={countryFilter}

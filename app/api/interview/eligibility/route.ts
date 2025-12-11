@@ -11,20 +11,23 @@ async function getUserId(request: NextRequest): Promise<string | null> {
     try {
         // Try NextAuth session first
         const session = await auth();
+        console.log('[Eligibility API] NextAuth session:', session?.user?.id ? 'Found' : 'Not found');
         if (session?.user?.id) {
             return session.user.id;
         }
 
         // Fallback to cookie-based authentication
         const userEmail = getCookie('userEmail', { req: request as any });
+        console.log('[Eligibility API] Cookie userEmail:', userEmail ? 'Found' : 'Not found');
         if (userEmail && typeof userEmail === 'string') {
             const [userData] = await getUser(userEmail);
+            console.log('[Eligibility API] User data from DB:', userData?.id ? 'Found' : 'Not found');
             return userData?.id || null;
         }
 
         return null;
     } catch (error) {
-        console.error('Error getting user ID:', error);
+        console.error('[Eligibility API] Error getting user ID:', error);
         return null;
     }
 }
@@ -43,8 +46,12 @@ function normalizeToDayStart(date: Date): Date {
 
 export async function GET(request: NextRequest) {
     try {
+        console.log('[Eligibility API] Starting eligibility check...');
         const userId = await getUserId(request);
+        console.log('[Eligibility API] User ID:', userId);
+
         if (!userId) {
+            console.log('[Eligibility API] No user ID found - returning 401');
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
@@ -54,18 +61,28 @@ export async function GET(request: NextRequest) {
         const tomorrowStart = new Date(todayStart);
         tomorrowStart.setUTCDate(tomorrowStart.getUTCDate() + 1);
 
+        console.log('[Eligibility API] Querying daily_interviews table...');
         // Check if user has an interview today (completed or in progress)
-        const todayInterview = await db
-            .select()
-            .from(dailyInterviews)
-            .where(
-                and(
-                    eq(dailyInterviews.userId, userId),
-                    gte(dailyInterviews.interviewDate, todayStart),
-                    lt(dailyInterviews.interviewDate, tomorrowStart)
+        let todayInterview;
+        try {
+            todayInterview = await db
+                .select()
+                .from(dailyInterviews)
+                .where(
+                    and(
+                        eq(dailyInterviews.userId, userId),
+                        gte(dailyInterviews.interviewDate, todayStart),
+                        lt(dailyInterviews.interviewDate, tomorrowStart)
+                    )
                 )
-            )
-            .limit(1);
+                .limit(1);
+
+            console.log('[Eligibility API] Found interviews today:', todayInterview.length);
+        } catch (dbError: any) {
+            console.error('[Eligibility API] Database query error:', dbError);
+            // If table doesn't exist or other DB error, return error with details
+            throw new Error(`Database error: ${dbError.message || 'Unknown error'}`);
+        }
 
         if (todayInterview.length > 0) {
             const interview = todayInterview[0];
@@ -111,10 +128,21 @@ export async function GET(request: NextRequest) {
             message: 'Ready for your interview!'
         });
 
-    } catch (error) {
-        console.error('Error checking interview eligibility:', error);
+    } catch (error: any) {
+        console.error('[Eligibility API] Error checking interview eligibility:', error);
+        console.error('[Eligibility API] Error details:', {
+            message: error?.message,
+            code: error?.code,
+            detail: error?.detail,
+            hint: error?.hint,
+            stack: error?.stack,
+        });
         return NextResponse.json(
-            { error: 'Internal server error' },
+            {
+                error: 'Internal server error',
+                message: error?.message || 'Unknown error',
+                code: error?.code,
+            },
             { status: 500 }
         );
     }

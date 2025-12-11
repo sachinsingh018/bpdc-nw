@@ -18,14 +18,8 @@ const API_LIMIT = 10; // jobs per query (set to match actual API response)
 const NUM_QUERIES = 10; // number of random queries per update (reduced for API plan)
 
 const COUNTRIES: { name: string; code: string }[] = [
-  { name: 'United States', code: 'us' },
-  { name: 'Canada', code: 'ca' },
-  { name: 'United Kingdom', code: 'gb' },
-  { name: 'Germany', code: 'de' },
+
   { name: 'India', code: 'in' },
-  { name: 'Australia', code: 'au' },
-  { name: 'Netherlands', code: 'nl' },
-  { name: 'Singapore', code: 'sg' },
   { name: 'United Arab Emirates', code: 'ae' },
   { name: 'Global', code: '' }, // No country filter
 ];

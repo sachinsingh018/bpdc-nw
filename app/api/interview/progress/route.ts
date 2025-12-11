@@ -153,18 +153,54 @@ export async function POST(request: NextRequest) {
 
             dailyInterviewId = interview.id;
         } else {
-            // Create new interview record
-            const [newInterview] = await db
-                .insert(dailyInterviews)
-                .values({
-                    userId,
-                    interviewDate: todayStart,
-                    category,
-                    isCompleted: false,
-                })
-                .returning({ id: dailyInterviews.id });
+            // Create new interview record when user starts an interview
+            console.log('[Progress API] Creating new daily_interviews record for user:', userId);
+            try {
+                const [newInterview] = await db
+                    .insert(dailyInterviews)
+                    .values({
+                        userId,
+                        interviewDate: todayStart,
+                        category,
+                        isCompleted: false,
+                    })
+                    .returning({ id: dailyInterviews.id });
 
-            dailyInterviewId = newInterview.id;
+                dailyInterviewId = newInterview.id;
+                console.log('[Progress API] Created daily_interviews record:', dailyInterviewId);
+            } catch (insertError: any) {
+                console.error('[Progress API] Error creating daily_interviews record:', insertError);
+                // If it's a unique constraint violation, try to get the existing record
+                if (insertError?.code === '23505' || insertError?.message?.includes('unique_user_interview_date')) {
+                    console.log('[Progress API] Unique constraint violation, fetching existing record...');
+                    const existing = await db
+                        .select()
+                        .from(dailyInterviews)
+                        .where(
+                            and(
+                                eq(dailyInterviews.userId, userId),
+                                gte(dailyInterviews.interviewDate, todayStart),
+                                lt(dailyInterviews.interviewDate, tomorrowStart)
+                            )
+                        )
+                        .limit(1);
+
+                    if (existing.length > 0) {
+                        dailyInterviewId = existing[0].id;
+                        // Update category if it's different
+                        if (existing[0].category !== category) {
+                            await db
+                                .update(dailyInterviews)
+                                .set({ category, updatedAt: now })
+                                .where(eq(dailyInterviews.id, dailyInterviewId));
+                        }
+                    } else {
+                        throw insertError;
+                    }
+                } else {
+                    throw insertError;
+                }
+            }
         }
 
         // If saving an answer

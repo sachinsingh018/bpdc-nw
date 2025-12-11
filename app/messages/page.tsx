@@ -28,6 +28,8 @@ import { CommonNavbar } from '@/components/common-navbar';
 import { SocketDebug } from '@/components/socket-debug';
 import { FaUser, FaEnvelope } from 'react-icons/fa';
 import { useSocket } from '@/hooks/useSocket';
+import { useSession } from 'next-auth/react';
+import { Loader2 } from 'lucide-react';
 import { format, parse, parseISO, startOfWeek, addDays } from 'date-fns';
 // biome-ignore lint/correctness/noUnusedImports: <explanation>
 import { toZonedTime, formatInTimeZone } from 'date-fns-tz';
@@ -96,6 +98,35 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
     const [showCalendarModal, setShowCalendarModal] = useState(false);
     const [userCalendarInfo, setUserCalendarInfo] = useState<{ timeZone: string | null; workingHours: string | null; hasCalendarInfo: boolean } | null>(null);
     const [loadingCalendar, setLoadingCalendar] = useState(false);
+
+    // Authentication check
+    useEffect(() => {
+        const initialize = async () => {
+            // Check for NextAuth session first
+            if (session?.user?.email) {
+                // Set up userEmail cookie for Google users
+                try {
+                    const response = await fetch('/api/auth/google-setup');
+                    if (response.ok) {
+                        return;
+                    }
+                } catch (error) {
+                    console.error('Error setting up Google session:', error);
+                }
+            }
+
+            // Fallback to cookie-based authentication
+            const userEmail = await getCookie('userEmail');
+            if (!userEmail) {
+                router.push('/login');
+            }
+        };
+
+        // Only initialize after session status is determined
+        if (status !== 'loading') {
+            initialize();
+        }
+    }, [router, session, status]);
 
     // Get current user's name
     useEffect(() => {
@@ -672,6 +703,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
 
 function MessagesContent() {
     const router = useRouter();
+    const { data: session, status } = useSession();
     const searchParams = useSearchParams();
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -1252,69 +1284,43 @@ function MessagesContent() {
         return null;
     }
 
-
+    // Show loading state while checking authentication
+    if (status === 'loading') {
+        return (
+            <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
+                <div
+                    className="fixed inset-0 z-0"
+                    style={{
+                        backgroundImage: 'url(/bpdcbg.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundAttachment: 'fixed',
+                        filter: 'blur(4px)'
+                    }}
+                />
+                <div className="relative z-10 text-center">
+                    <Loader2 className="size-8 text-purple-600 animate-spin mx-auto mb-4" />
+                    <p className="text-black font-medium">Loading...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
-        <div className="min-h-screen relative overflow-hidden" style={{
-            background: `
-              radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
-              radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
-              radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
-              radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
-              radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
-              radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
-              radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
-              radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
-              linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
-            `
-        }}>
-            {/* Dynamic Vibrant Background Elements */}
-            <div className="fixed inset-0 z-0">
-                {/* Deep Royal Blue */}
-                <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
-                <div className="absolute top-10 left-5 size-96 rounded-full border-4 border-white/30 blur-xl opacity-50 animate-pulse"></div>
-                <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
-                <div className="absolute top-1/3 right-10 size-80 rounded-full border-4 border-white/30 blur-xl opacity-40 animate-pulse delay-1000"></div>
-
-                {/* Bright Golden Yellow */}
-                <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
-                <div className="absolute top-20 right-20 size-72 rounded-full border-4 border-white/40 blur-xl opacity-60 animate-pulse delay-2000"></div>
-                <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
-                <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full border-4 border-white/40 blur-xl opacity-55 animate-pulse delay-1500"></div>
-
-                {/* Crimson Red */}
-                <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
-                <div className="absolute bottom-20 left-1/3 size-64 rounded-full border-4 border-white/35 blur-xl opacity-50 animate-pulse delay-500"></div>
-                <div className="absolute top-1/2 right-1/3 size-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
-                <div className="absolute top-1/2 right-1/3 size-56 rounded-full border-4 border-white/35 blur-xl opacity-45 animate-pulse delay-3000"></div>
-
-                {/* Charcoal Black */}
-                <div className="absolute bottom-10 right-5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
-                <div className="absolute bottom-10 right-5 size-72 rounded-full border-4 border-white/30 blur-xl opacity-30 animate-pulse delay-2500"></div>
-
-                {/* Light Gray */}
-                <div className="absolute top-1/4 left-1/2 size-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
-                <div className="absolute top-1/4 left-1/2 size-60 rounded-full border-4 border-white/30 blur-xl opacity-25 animate-pulse delay-4000"></div>
-
-                {/* Mid-tone Blue */}
-                <div className="absolute bottom-1/3 right-1/4 size-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
-                <div className="absolute bottom-1/3 right-1/4 size-68 rounded-full border-4 border-white/35 blur-xl opacity-40 animate-pulse delay-3500"></div>
-
-                {/* Warm Golden Glow */}
-                <div className="absolute top-1/2 left-1/5 size-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
-                <div className="absolute top-1/2 left-1/5 size-76 rounded-full border-4 border-white/40 blur-xl opacity-65 animate-pulse delay-1800"></div>
-
-                {/* Vibrant Red */}
-                <div className="absolute top-2/3 right-1/5 size-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
-                <div className="absolute top-2/3 right-1/5 size-52 rounded-full border-4 border-white/35 blur-xl opacity-55 animate-pulse delay-2200"></div>
-
-                {/* Neon Purple */}
-                <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
-                <div className="absolute top-1/6 left-2/3 size-84 rounded-full border-4 border-white/35 blur-xl opacity-45 animate-pulse delay-2800"></div>
-                <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
-                <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full border-4 border-white/35 blur-xl opacity-50 animate-pulse delay-1200"></div>
-            </div>
+        <div className="min-h-screen relative overflow-hidden">
+            {/* Blurred Background */}
+            <div
+                className="fixed inset-0 z-0"
+                style={{
+                    backgroundImage: 'url(/bpdcbg.png)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundAttachment: 'fixed',
+                    filter: 'blur(4px)'
+                }}
+            />
 
             {/* Common Navbar */}
             <CommonNavbar currentPage="/messages" />

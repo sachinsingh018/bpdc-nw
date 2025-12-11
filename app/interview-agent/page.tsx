@@ -6,6 +6,9 @@ import { toast } from 'sonner';
 import { speakText, stopSpeech, isSpeechSupported } from '../../utils/speech';
 import { CommonNavbar } from '@/components/common-navbar';
 import { getCookie } from 'cookies-next';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
 
 interface InterviewQuestion {
     id: number;
@@ -20,7 +23,7 @@ interface InterviewAnswer {
     aiFeedback?: string;
 }
 
-type InterviewCategory = 'behavioral' | 'technical' | 'data-science' | 'consulting' | 'data-analyst' | 'ai-engineer';
+type InterviewCategory = 'behavioral' | 'technical' | 'data-science' | 'consulting' | 'data-analyst' | 'ai-engineer' | 'mechanical-engineering' | 'electrical-engineering' | 'software-engineering' | 'civil-architecture-engineering' | 'cybersecurity' | 'hr' | 'marketing' | 'operations' | 'logistics-supply-chain';
 
 const INTERVIEW_QUESTIONS: Record<InterviewCategory, InterviewQuestion[]> = {
     behavioral: [
@@ -274,6 +277,384 @@ const INTERVIEW_QUESTIONS: Record<InterviewCategory, InterviewQuestion[]> = {
             question: "What are the main differences between supervised, unsupervised, and reinforcement learning? Provide use cases for each.",
             category: "Learning Paradigms"
         }
+    ],
+    'mechanical-engineering': [
+        {
+            id: 1,
+            question: "Explain the difference between stress and strain. How are they related in material mechanics?",
+            category: "Material Science"
+        },
+        {
+            id: 2,
+            question: "Describe the working principle of a heat engine. What is the Carnot efficiency?",
+            category: "Thermodynamics"
+        },
+        {
+            id: 3,
+            question: "What is the difference between static and dynamic analysis in mechanical systems? When would you use each?",
+            category: "Mechanical Analysis"
+        },
+        {
+            id: 4,
+            question: "Explain the concept of gear ratios. How would you calculate the output speed of a gear train?",
+            category: "Mechanisms"
+        },
+        {
+            id: 5,
+            question: "What is the purpose of a CAD software in mechanical design? Describe your experience with any CAD tools.",
+            category: "Design Tools"
+        },
+        {
+            id: 6,
+            question: "How do you approach troubleshooting a mechanical system that is not performing as expected?",
+            category: "Problem Solving"
+        },
+        {
+            id: 7,
+            question: "Explain the importance of material selection in mechanical design. What factors do you consider?",
+            category: "Design Principles"
+        },
+        {
+            id: 8,
+            question: "Describe your understanding of manufacturing processes. How does the choice of process affect design?",
+            category: "Manufacturing"
+        }
+    ],
+    'electrical-engineering': [
+        {
+            id: 1,
+            question: "Explain Ohm's Law and Kirchhoff's Laws. How do you apply them in circuit analysis?",
+            category: "Circuit Theory"
+        },
+        {
+            id: 2,
+            question: "What is the difference between AC and DC power? When would you use each in practical applications?",
+            category: "Power Systems"
+        },
+        {
+            id: 3,
+            question: "Describe the working principle of a transformer. What are the key parameters that affect its efficiency?",
+            category: "Electrical Machines"
+        },
+        {
+            id: 4,
+            question: "Explain the concept of power factor. Why is it important in electrical systems?",
+            category: "Power Quality"
+        },
+        {
+            id: 5,
+            question: "What safety considerations are critical when working with electrical systems?",
+            category: "Safety"
+        },
+        {
+            id: 6,
+            question: "How do you approach designing a control system? What are the key components?",
+            category: "Control Systems"
+        },
+        {
+            id: 7,
+            question: "Explain the difference between analog and digital signals. When would you use each?",
+            category: "Signal Processing"
+        },
+        {
+            id: 8,
+            question: "Describe your understanding of microcontrollers and embedded systems. What experience do you have?",
+            category: "Embedded Systems"
+        }
+    ],
+    'software-engineering': [
+        {
+            id: 1,
+            question: "Explain the software development lifecycle (SDLC). Which methodology do you prefer and why?",
+            category: "Development Process"
+        },
+        {
+            id: 2,
+            question: "What is object-oriented programming? Explain the key principles: encapsulation, inheritance, and polymorphism.",
+            category: "Programming Concepts"
+        },
+        {
+            id: 3,
+            question: "How do you approach debugging a complex software issue? Walk me through your debugging process.",
+            category: "Problem Solving"
+        },
+        {
+            id: 4,
+            question: "Explain the concept of version control. How do you handle merge conflicts in a team environment?",
+            category: "Collaboration"
+        },
+        {
+            id: 5,
+            question: "What is the difference between unit testing and integration testing? How do you ensure code quality?",
+            category: "Testing"
+        },
+        {
+            id: 6,
+            question: "Describe your experience with databases. What is the difference between SQL and NoSQL databases?",
+            category: "Data Management"
+        },
+        {
+            id: 7,
+            question: "How do you handle performance optimization in software applications? What tools and techniques do you use?",
+            category: "Performance"
+        },
+        {
+            id: 8,
+            question: "Explain the concept of APIs. How would you design a RESTful API?",
+            category: "System Design"
+        }
+    ],
+    'civil-architecture-engineering': [
+        {
+            id: 1,
+            question: "Explain the difference between dead load and live load in structural design. How do you calculate them?",
+            category: "Structural Analysis"
+        },
+        {
+            id: 2,
+            question: "What factors do you consider when selecting building materials for a construction project?",
+            category: "Materials"
+        },
+        {
+            id: 3,
+            question: "Describe the importance of building codes and regulations in construction. How do you ensure compliance?",
+            category: "Compliance"
+        },
+        {
+            id: 4,
+            question: "Explain the concept of sustainable design. How do you incorporate sustainability into your projects?",
+            category: "Sustainability"
+        },
+        {
+            id: 5,
+            question: "What is the role of a structural engineer in the design process? How do you collaborate with architects?",
+            category: "Collaboration"
+        },
+        {
+            id: 6,
+            question: "How do you approach site analysis before starting a construction project? What factors are critical?",
+            category: "Site Planning"
+        },
+        {
+            id: 7,
+            question: "Describe your understanding of foundation design. What types of foundations are used in different soil conditions?",
+            category: "Geotechnical Engineering"
+        },
+        {
+            id: 8,
+            question: "Explain the importance of project management in construction. How do you handle timelines and budgets?",
+            category: "Project Management"
+        }
+    ],
+    'cybersecurity': [
+        {
+            id: 1,
+            question: "Explain the CIA triad in cybersecurity. Why is it fundamental to information security?",
+            category: "Security Fundamentals"
+        },
+        {
+            id: 2,
+            question: "What is the difference between authentication and authorization? Give examples of each.",
+            category: "Access Control"
+        },
+        {
+            id: 3,
+            question: "Describe common types of cyber attacks. How would you protect against SQL injection attacks?",
+            category: "Threats & Vulnerabilities"
+        },
+        {
+            id: 4,
+            question: "Explain the concept of encryption. What is the difference between symmetric and asymmetric encryption?",
+            category: "Cryptography"
+        },
+        {
+            id: 5,
+            question: "What is a firewall and how does it work? What are the different types of firewalls?",
+            category: "Network Security"
+        },
+        {
+            id: 6,
+            question: "How do you approach conducting a security audit? What steps would you take?",
+            category: "Security Assessment"
+        },
+        {
+            id: 7,
+            question: "Explain the importance of incident response planning. What should be included in an incident response plan?",
+            category: "Incident Response"
+        },
+        {
+            id: 8,
+            question: "Describe your understanding of penetration testing. What is the difference between white-box and black-box testing?",
+            category: "Security Testing"
+        }
+    ],
+    'hr': [
+        {
+            id: 1,
+            question: "Explain the recruitment and selection process. What steps are involved in hiring a new employee?",
+            category: "Recruitment"
+        },
+        {
+            id: 2,
+            question: "How do you handle employee conflicts in the workplace? Walk me through your approach to conflict resolution.",
+            category: "Conflict Resolution"
+        },
+        {
+            id: 3,
+            question: "What is the importance of performance management? How would you conduct an effective performance review?",
+            category: "Performance Management"
+        },
+        {
+            id: 4,
+            question: "Describe your understanding of employment law. What are the key legal considerations in HR?",
+            category: "Legal Compliance"
+        },
+        {
+            id: 5,
+            question: "How do you approach employee onboarding? What makes an effective onboarding program?",
+            category: "Onboarding"
+        },
+        {
+            id: 6,
+            question: "Explain the concept of employee engagement. How would you measure and improve engagement in an organization?",
+            category: "Employee Engagement"
+        },
+        {
+            id: 7,
+            question: "What is the role of HR in organizational development? How do you support change management?",
+            category: "Organizational Development"
+        },
+        {
+            id: 8,
+            question: "Describe your approach to talent management. How do you identify and develop high-potential employees?",
+            category: "Talent Management"
+        }
+    ],
+    'marketing': [
+        {
+            id: 1,
+            question: "Explain the 4 Ps of marketing (Product, Price, Place, Promotion). How do they work together?",
+            category: "Marketing Fundamentals"
+        },
+        {
+            id: 2,
+            question: "What is the difference between B2B and B2C marketing? How do your strategies differ for each?",
+            category: "Marketing Strategy"
+        },
+        {
+            id: 3,
+            question: "Describe your understanding of digital marketing. What channels are most effective and why?",
+            category: "Digital Marketing"
+        },
+        {
+            id: 4,
+            question: "How do you measure marketing campaign effectiveness? What key metrics do you track?",
+            category: "Analytics"
+        },
+        {
+            id: 5,
+            question: "Explain the concept of brand positioning. How would you develop a brand positioning strategy?",
+            category: "Branding"
+        },
+        {
+            id: 6,
+            question: "What is content marketing? How do you create content that engages your target audience?",
+            category: "Content Strategy"
+        },
+        {
+            id: 7,
+            question: "Describe your approach to market research. What methods do you use to understand customer needs?",
+            category: "Market Research"
+        },
+        {
+            id: 8,
+            question: "How do you handle a marketing crisis or negative publicity? Walk me through your crisis management approach.",
+            category: "Crisis Management"
+        }
+    ],
+    'operations': [
+        {
+            id: 1,
+            question: "Explain the concept of operations management. What are the key objectives of operations?",
+            category: "Operations Fundamentals"
+        },
+        {
+            id: 2,
+            question: "What is lean manufacturing? How do you identify and eliminate waste in operations?",
+            category: "Process Improvement"
+        },
+        {
+            id: 3,
+            question: "Describe your understanding of supply chain management. How do you ensure efficient supply chain operations?",
+            category: "Supply Chain"
+        },
+        {
+            id: 4,
+            question: "How do you approach capacity planning? What factors do you consider when determining production capacity?",
+            category: "Capacity Planning"
+        },
+        {
+            id: 5,
+            question: "Explain the importance of quality control in operations. What methods do you use to ensure quality?",
+            category: "Quality Management"
+        },
+        {
+            id: 6,
+            question: "What is inventory management? How do you balance inventory costs with service levels?",
+            category: "Inventory Management"
+        },
+        {
+            id: 7,
+            question: "Describe your approach to process optimization. How do you identify bottlenecks and improve efficiency?",
+            category: "Process Optimization"
+        },
+        {
+            id: 8,
+            question: "How do you handle operational disruptions or unexpected challenges? Give an example of how you've managed such situations.",
+            category: "Problem Solving"
+        }
+    ],
+    'logistics-supply-chain': [
+        {
+            id: 1,
+            question: "Explain the difference between logistics and supply chain management. How are they related?",
+            category: "Fundamentals"
+        },
+        {
+            id: 2,
+            question: "What is the importance of inventory management in supply chains? How do you optimize inventory levels?",
+            category: "Inventory Management"
+        },
+        {
+            id: 3,
+            question: "Describe your understanding of transportation modes. How do you select the appropriate mode for different shipments?",
+            category: "Transportation"
+        },
+        {
+            id: 4,
+            question: "How do you approach warehouse management? What factors are critical for efficient warehouse operations?",
+            category: "Warehouse Management"
+        },
+        {
+            id: 5,
+            question: "Explain the concept of supply chain visibility. How do you track and monitor supply chain performance?",
+            category: "Supply Chain Visibility"
+        },
+        {
+            id: 6,
+            question: "What is the role of technology in modern supply chains? How have you used technology to improve logistics?",
+            category: "Technology"
+        },
+        {
+            id: 7,
+            question: "Describe your approach to supplier relationship management. How do you select and manage suppliers?",
+            category: "Supplier Management"
+        },
+        {
+            id: 8,
+            question: "How do you handle supply chain disruptions or risks? What strategies do you use for risk mitigation?",
+            category: "Risk Management"
+        }
     ]
 };
 
@@ -313,10 +694,66 @@ const CATEGORY_INFO = {
         description: "Prove your expertise in ML models, neural networks, and AI deployment",
         icon: "🤖",
         color: "indigo"
+    },
+    'mechanical-engineering': {
+        title: "Mechanical Engineering Trainee",
+        description: "Test your knowledge of mechanics, thermodynamics, and mechanical design",
+        icon: "⚙️",
+        color: "red"
+    },
+    'electrical-engineering': {
+        title: "Electrical Engineering Trainee",
+        description: "Demonstrate your understanding of circuits, power systems, and electrical design",
+        icon: "⚡",
+        color: "yellow"
+    },
+    'software-engineering': {
+        title: "Software Engineering Trainee",
+        description: "Showcase your programming skills, software design, and development practices",
+        icon: "💻",
+        color: "blue"
+    },
+    'civil-architecture-engineering': {
+        title: "Civil & Architecture Engineering Trainee",
+        description: "Prove your expertise in structural design, construction, and building systems",
+        icon: "🏗️",
+        color: "gray"
+    },
+    'cybersecurity': {
+        title: "Cybersecurity Trainee",
+        description: "Test your knowledge of security threats, encryption, and network protection",
+        icon: "🔒",
+        color: "purple"
+    },
+    'hr': {
+        title: "HR Trainee",
+        description: "Demonstrate your understanding of recruitment, employee relations, and HR management",
+        icon: "👔",
+        color: "pink"
+    },
+    'marketing': {
+        title: "Marketing Trainee",
+        description: "Showcase your skills in digital marketing, branding, and campaign management",
+        icon: "📢",
+        color: "orange"
+    },
+    'operations': {
+        title: "Operations Trainee",
+        description: "Prove your expertise in process optimization, quality control, and operations management",
+        icon: "📦",
+        color: "green"
+    },
+    'logistics-supply-chain': {
+        title: "Logistics & Supply Chain Trainee",
+        description: "Test your knowledge of supply chain management, logistics, and inventory control",
+        icon: "🚚",
+        color: "teal"
     }
 };
 
 export default function InterviewAgentPage() {
+    const router = useRouter();
+    const { data: session, status } = useSession();
     const [selectedCategory, setSelectedCategory] = useState<InterviewCategory | null>(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [answers, setAnswers] = useState<InterviewAnswer[]>([]);
@@ -385,6 +822,35 @@ export default function InterviewAgentPage() {
             console.error('Error tracking activity:', error);
         }
     };
+
+    // Authentication check
+    useEffect(() => {
+        const initialize = async () => {
+            // Check for NextAuth session first
+            if (session?.user?.email) {
+                // Set up userEmail cookie for Google users
+                try {
+                    const response = await fetch('/api/auth/google-setup');
+                    if (response.ok) {
+                        return;
+                    }
+                } catch (error) {
+                    console.error('Error setting up Google session:', error);
+                }
+            }
+
+            // Fallback to cookie-based authentication
+            const userEmail = await getCookie('userEmail');
+            if (!userEmail) {
+                router.push('/login');
+            }
+        };
+
+        // Only initialize after session status is determined
+        if (status !== 'loading') {
+            initialize();
+        }
+    }, [router, session, status]);
 
     useEffect(() => {
         setMounted(true);
@@ -479,15 +945,26 @@ export default function InterviewAgentPage() {
         if (selectedCategory) {
             // Don't reset if we're loading progress
             const initializeInterview = async () => {
-                // Start the interview in the database
+                // Start the interview in the database - this creates the daily_interviews record
                 try {
-                    await fetch('/api/interview/progress', {
+                    console.log('Initializing interview for category:', selectedCategory);
+                    const response = await fetch('/api/interview/progress', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ category: selectedCategory }),
                     });
+
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({}));
+                        console.error('Error initializing interview:', errorData);
+                        toast.error(errorData.message || 'Failed to start interview. Please try again.');
+                    } else {
+                        const data = await response.json();
+                        console.log('Interview initialized successfully:', data);
+                    }
                 } catch (error) {
                     console.error('Error initializing interview:', error);
+                    toast.error('Failed to start interview. Please try again.');
                 }
             };
             initializeInterview();
@@ -508,18 +985,19 @@ export default function InterviewAgentPage() {
         // Check eligibility before allowing category selection
         if (!eligibility.canStart) {
             if (eligibility.hasDoneToday) {
-                const nextDate = eligibility.nextAvailableDate 
-                    ? new Date(eligibility.nextAvailableDate).toLocaleDateString('en-US', { 
-                        weekday: 'long', 
-                        month: 'long', 
-                        day: 'numeric' 
+                const nextDate = eligibility.nextAvailableDate
+                    ? new Date(eligibility.nextAvailableDate).toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        month: 'long',
+                        day: 'numeric'
                     })
                     : 'tomorrow';
                 toast.error(`You have already completed an interview today. Come back ${nextDate} for another interview!`);
             } else {
-                toast.error(eligibility.message || 'Unable to start interview. Please try again.');
+                // If eligibility check failed but not because they've done today, 
+                // still allow them to try starting (will create record when category is selected)
+                console.log('Eligibility check failed, but allowing category selection to create record');
             }
-            return;
         }
 
         // If there's an in-progress interview for a different category, prevent switching
@@ -534,6 +1012,7 @@ export default function InterviewAgentPage() {
             return;
         }
 
+        // Set category - this will trigger the useEffect that creates the daily_interviews record
         setSelectedCategory(category);
     };
 
@@ -610,7 +1089,7 @@ export default function InterviewAgentPage() {
                         a.questionId === currentQuestion.id ? newAnswer : a
                     ));
                 } else {
-                setAnswers(prev => [...prev, newAnswer]);
+                    setAnswers(prev => [...prev, newAnswer]);
                 }
 
                 // Save progress to database
@@ -773,21 +1252,20 @@ export default function InterviewAgentPage() {
 
     if (!mounted) {
         return (
-            <div className="min-h-screen relative overflow-hidden flex items-center justify-center" style={{
-                background: `
-                  radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
-                  radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
-                  radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
-                  radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
-                  radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
-                  radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
-                  radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
-                  linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
-                `
-            }}>
-                <div className="text-center">
+            <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
+                {/* Blurred Background */}
+                <div
+                    className="fixed inset-0 z-0"
+                    style={{
+                        backgroundImage: 'url(/bpdcbg.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundAttachment: 'fixed',
+                        filter: 'blur(4px)'
+                    }}
+                />
+                <div className="text-center relative z-10">
                     <div className="size-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
                         borderColor: 'rgba(255, 215, 0, 0.8)',
                         borderTopColor: 'transparent'
@@ -804,53 +1282,19 @@ export default function InterviewAgentPage() {
     }
 
     return (
-        <div className="min-h-screen relative overflow-hidden" style={{
-            background: `
-              radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
-              radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
-              radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
-              radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
-              radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
-              radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
-              radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
-              radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
-              linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
-            `
-        }}>
-            {/* Dynamic Vibrant Background Elements */}
-            <div className="fixed inset-0 z-0">
-                {/* Deep Royal Blue */}
-                <div className="absolute top-10 left-5 size-96 rounded-full blur-3xl opacity-70 animate-pulse" style={{ background: 'rgba(25, 25, 112, 0.6)' }}></div>
-                <div className="absolute top-1/3 right-10 size-80 rounded-full blur-3xl opacity-60 animate-pulse delay-1000" style={{ background: 'rgba(25, 25, 112, 0.5)' }}></div>
-
-                {/* Bright Golden Yellow */}
-                <div className="absolute top-20 right-20 size-72 rounded-full blur-3xl opacity-80 animate-pulse delay-2000" style={{ background: 'rgba(255, 215, 0, 0.7)' }}></div>
-                <div className="absolute bottom-1/4 left-1/4 size-88 rounded-full blur-3xl opacity-75 animate-pulse delay-1500" style={{ background: 'rgba(255, 215, 0, 0.6)' }}></div>
-
-                {/* Crimson Red */}
-                <div className="absolute bottom-20 left-1/3 size-64 rounded-full blur-3xl opacity-70 animate-pulse delay-500" style={{ background: 'rgba(220, 20, 60, 0.6)' }}></div>
-                <div className="absolute top-1/2 right-1/3 size-56 rounded-full blur-3xl opacity-65 animate-pulse delay-3000" style={{ background: 'rgba(220, 20, 60, 0.5)' }}></div>
-
-                {/* Charcoal Black */}
-                <div className="absolute bottom-10 right-5 size-72 rounded-full blur-3xl opacity-50 animate-pulse delay-2500" style={{ background: 'rgba(47, 79, 79, 0.6)' }}></div>
-
-                {/* Light Gray */}
-                <div className="absolute top-1/4 left-1/2 size-60 rounded-full blur-3xl opacity-40 animate-pulse delay-4000" style={{ background: 'rgba(128, 128, 128, 0.4)' }}></div>
-
-                {/* Mid-tone Blue */}
-                <div className="absolute bottom-1/3 right-1/4 size-68 rounded-full blur-3xl opacity-55 animate-pulse delay-3500" style={{ background: 'rgba(70, 130, 180, 0.5)' }}></div>
-
-                {/* Warm Golden Glow */}
-                <div className="absolute top-1/2 left-1/5 size-76 rounded-full blur-3xl opacity-85 animate-pulse delay-1800" style={{ background: 'rgba(255, 223, 0, 0.7)' }}></div>
-
-                {/* Vibrant Red */}
-                <div className="absolute top-2/3 right-1/5 size-52 rounded-full blur-3xl opacity-75 animate-pulse delay-2200" style={{ background: 'rgba(255, 0, 0, 0.6)' }}></div>
-
-                {/* Neon Purple */}
-                <div className="absolute top-1/6 left-2/3 size-84 rounded-full blur-3xl opacity-60 animate-pulse delay-2800" style={{ background: 'rgba(138, 43, 226, 0.5)' }}></div>
-                <div className="absolute bottom-1/6 left-1/6 size-48 rounded-full blur-3xl opacity-70 animate-pulse delay-1200" style={{ background: 'rgba(138, 43, 226, 0.6)' }}></div>
-            </div>
+        <div className="min-h-screen relative overflow-hidden">
+            {/* Blurred Background */}
+            <div
+                className="fixed inset-0 z-0"
+                style={{
+                    backgroundImage: 'url(/bpdcbg.png)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundAttachment: 'fixed',
+                    filter: 'blur(4px)'
+                }}
+            />
 
             <div className="relative z-10 flex flex-col min-h-screen">
                 {/* Common Navbar */}
@@ -870,7 +1314,7 @@ export default function InterviewAgentPage() {
                                         Select a category to begin your practice interview
                                     </p>
                                 </div>
-                                <div className="grid md:grid-cols-3 gap-6">
+                                <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
                                     {Object.entries(CATEGORY_INFO).map(([key, info]) => {
                                         const categoryKey = key as InterviewCategory;
                                         const colorClasses = {
@@ -879,18 +1323,21 @@ export default function InterviewAgentPage() {
                                             green: 'bg-green-300 hover:bg-green-400 border-green-200',
                                             orange: 'bg-orange-300 hover:bg-orange-400 border-orange-200',
                                             teal: 'bg-teal-300 hover:bg-teal-400 border-teal-200',
-                                            indigo: 'bg-indigo-300 hover:bg-indigo-400 border-indigo-200'
+                                            indigo: 'bg-indigo-300 hover:bg-indigo-400 border-indigo-200',
+                                            red: 'bg-red-300 hover:bg-red-400 border-red-200',
+                                            yellow: 'bg-yellow-300 hover:bg-yellow-400 border-yellow-200',
+                                            gray: 'bg-gray-300 hover:bg-gray-400 border-gray-200',
+                                            pink: 'bg-pink-300 hover:bg-pink-400 border-pink-200'
                                         };
                                         return (
                                             <button
                                                 key={key}
                                                 onClick={() => handleCategorySelect(categoryKey)}
                                                 disabled={eligibility.isLoading}
-                                                className={`${colorClasses[info.color as keyof typeof colorClasses]} text-black rounded-2xl p-8 border-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-left ${
-                                                    eligibility.isLoading 
-                                                        ? 'opacity-50 cursor-not-allowed hover:scale-100' 
-                                                        : ''
-                                                }`}
+                                                className={`${colorClasses[info.color as keyof typeof colorClasses]} text-black rounded-2xl p-8 border-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-left ${eligibility.isLoading
+                                                    ? 'opacity-50 cursor-not-allowed hover:scale-100'
+                                                    : ''
+                                                    }`}
                                             >
                                                 <div className="text-5xl mb-4">{info.icon}</div>
                                                 <h2 className="text-2xl font-bold mb-3">{info.title}</h2>
@@ -913,7 +1360,7 @@ export default function InterviewAgentPage() {
                                             {currentQuestion.category}
                                         </span>
                                         {!eligibility.isInProgress && (
-                                        <button
+                                            <button
                                                 onClick={() => {
                                                     if (answers.length > 0) {
                                                         if (confirm('Are you sure you want to change category? Your progress will be lost.')) {
@@ -923,14 +1370,14 @@ export default function InterviewAgentPage() {
                                                         setSelectedCategory(null);
                                                     }
                                                 }}
-                                            className="flex items-center space-x-1.5 text-xs font-medium text-black dark:text-black bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 px-3 py-1.5 rounded-lg transition-all duration-200 shadow-sm hover:shadow"
-                                            title="Change interview category"
-                                        >
-                                            <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                            </svg>
-                                            <span>Change Category</span>
-                                        </button>
+                                                className="flex items-center space-x-1.5 text-xs font-medium text-black dark:text-black bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 px-3 py-1.5 rounded-lg transition-all duration-200 shadow-sm hover:shadow"
+                                                title="Change interview category"
+                                            >
+                                                <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                                </svg>
+                                                <span>Change Category</span>
+                                            </button>
                                         )}
                                         {eligibility.isInProgress && (
                                             <div className="text-xs font-medium text-yellow-700 dark:text-yellow-300 bg-yellow-100 dark:bg-yellow-900/20 px-3 py-1.5 rounded-lg">

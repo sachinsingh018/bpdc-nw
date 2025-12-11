@@ -335,6 +335,7 @@ const OptimizedProfilePage = () => {
                                                         setUserBio(originalUserBio);
                                                     }}
                                                     variant="outline"
+                                                    className="text-black"
                                                 >
                                                     Cancel
                                                 </Button>
