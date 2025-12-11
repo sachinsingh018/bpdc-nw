@@ -187,11 +187,27 @@ const ProfilePage = () => {
     const [isConnectionCheckComplete, setIsConnectionCheckComplete] = useState(false);
     const streak = getCookie('userStreak');
 
-    // Enable smooth scrolling globally
+    // Enable smooth scrolling globally and optimize for all devices
     useEffect(() => {
+        // Set smooth scrolling on html element
         document.documentElement.style.scrollBehavior = 'smooth';
+        document.body.style.scrollBehavior = 'smooth';
+
+        // Optimize for touch devices (Surface, tablets, etc.)
+        document.documentElement.style.touchAction = 'pan-y';
+        document.body.style.touchAction = 'pan-y';
+
+        // Prevent scroll chaining issues
+        document.documentElement.style.overscrollBehavior = 'auto';
+        document.body.style.overscrollBehavior = 'auto';
+
         return () => {
             document.documentElement.style.scrollBehavior = 'auto';
+            document.body.style.scrollBehavior = 'auto';
+            document.documentElement.style.touchAction = '';
+            document.body.style.touchAction = '';
+            document.documentElement.style.overscrollBehavior = '';
+            document.body.style.overscrollBehavior = '';
         };
     }, []);
 
@@ -851,11 +867,13 @@ const ProfilePage = () => {
     // }
     return (
         <div
-            className="min-h-screen relative overflow-hidden scroll-smooth"
+            className="min-h-screen relative overflow-x-hidden"
             style={{
                 scrollBehavior: 'smooth',
                 WebkitOverflowScrolling: 'touch',
-                overscrollBehavior: 'contain'
+                overscrollBehavior: 'auto',
+                touchAction: 'pan-y',
+                willChange: 'scroll-position'
             }}
         >
             {/* Blurred Background */}
@@ -866,8 +884,10 @@ const ProfilePage = () => {
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
-                    backgroundAttachment: 'fixed',
-                    filter: 'blur(4px)'
+                    backgroundAttachment: 'scroll',
+                    filter: 'blur(4px)',
+                    transform: 'translateZ(0)',
+                    backfaceVisibility: 'hidden'
                 }}
             />
 
@@ -875,10 +895,13 @@ const ProfilePage = () => {
             <CommonNavbar currentPage="/friendprof" />
 
             <div
-                className="p-3 md:p-4 lg:p-6 max-w-7xl mx-auto relative z-10"
+                className="p-3 md:p-4 lg:p-6 max-w-7xl mx-auto relative z-10 pb-20"
                 style={{
                     scrollBehavior: 'smooth',
-                    WebkitOverflowScrolling: 'touch'
+                    WebkitOverflowScrolling: 'touch',
+                    touchAction: 'pan-y',
+                    willChange: 'scroll-position',
+                    minHeight: 'calc(100vh - 80px)'
                 }}
             >
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

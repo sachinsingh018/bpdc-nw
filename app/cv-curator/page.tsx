@@ -20,6 +20,30 @@ export default function CVCuratorPage() {
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
+    // Enable smooth scrolling globally and optimize for all devices
+    useEffect(() => {
+        // Set smooth scrolling on html element
+        document.documentElement.style.scrollBehavior = 'smooth';
+        document.body.style.scrollBehavior = 'smooth';
+
+        // Optimize for touch devices (Surface, tablets, etc.)
+        document.documentElement.style.touchAction = 'pan-y';
+        document.body.style.touchAction = 'pan-y';
+
+        // Prevent scroll chaining issues
+        document.documentElement.style.overscrollBehavior = 'auto';
+        document.body.style.overscrollBehavior = 'auto';
+
+        return () => {
+            document.documentElement.style.scrollBehavior = 'auto';
+            document.body.style.scrollBehavior = 'auto';
+            document.documentElement.style.touchAction = '';
+            document.body.style.touchAction = '';
+            document.documentElement.style.overscrollBehavior = '';
+            document.body.style.overscrollBehavior = '';
+        };
+    }, []);
+
     // Authentication check
     useEffect(() => {
         const initialize = async () => {
@@ -217,7 +241,13 @@ Cloud: AWS, Google Cloud Platform, Azure`;
 
     if (!mounted) {
         return (
-            <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
+            <div
+                className="min-h-screen relative overflow-x-hidden flex items-center justify-center"
+                style={{
+                    touchAction: 'pan-y',
+                    overscrollBehavior: 'auto'
+                }}
+            >
                 {/* Blurred Background */}
                 <div
                     className="fixed inset-0 z-0"
@@ -226,8 +256,10 @@ Cloud: AWS, Google Cloud Platform, Azure`;
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
-                        backgroundAttachment: 'fixed',
-                        filter: 'blur(4px)'
+                        backgroundAttachment: 'scroll',
+                        filter: 'blur(4px)',
+                        transform: 'translateZ(0)',
+                        backfaceVisibility: 'hidden'
                     }}
                 />
                 <div className="relative z-10 text-center">
@@ -249,7 +281,13 @@ Cloud: AWS, Google Cloud Platform, Azure`;
     // Show loading state while checking authentication
     if (status === 'loading') {
         return (
-            <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
+            <div
+                className="min-h-screen relative overflow-x-hidden flex items-center justify-center"
+                style={{
+                    touchAction: 'pan-y',
+                    overscrollBehavior: 'auto'
+                }}
+            >
                 <div
                     className="fixed inset-0 z-0"
                     style={{
@@ -257,8 +295,10 @@ Cloud: AWS, Google Cloud Platform, Azure`;
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
-                        backgroundAttachment: 'fixed',
-                        filter: 'blur(4px)'
+                        backgroundAttachment: 'scroll',
+                        filter: 'blur(4px)',
+                        transform: 'translateZ(0)',
+                        backfaceVisibility: 'hidden'
                     }}
                 />
                 <div className="relative z-10 text-center">
@@ -270,7 +310,16 @@ Cloud: AWS, Google Cloud Platform, Azure`;
     }
 
     return (
-        <div className="min-h-screen relative overflow-hidden">
+        <div
+            className="min-h-screen relative overflow-x-hidden"
+            style={{
+                scrollBehavior: 'smooth',
+                WebkitOverflowScrolling: 'touch',
+                overscrollBehavior: 'auto',
+                touchAction: 'pan-y',
+                willChange: 'scroll-position'
+            }}
+        >
             {/* Blurred Background */}
             <div
                 className="fixed inset-0 z-0"
@@ -291,7 +340,15 @@ Cloud: AWS, Google Cloud Platform, Azure`;
                 {/* Main Content */}
                 <div className="flex-1 flex flex-col h-[calc(100vh-4rem)]">
                     {/* Page Header with Prompt Counter */}
-                    <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-6 pb-4">
+                    <div
+                        className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-6 pb-20"
+                        style={{
+                            scrollBehavior: 'smooth',
+                            WebkitOverflowScrolling: 'touch',
+                            touchAction: 'pan-y',
+                            willChange: 'scroll-position'
+                        }}
+                    >
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                             <div className="space-y-2.5">
                                 <div className="flex items-center gap-3">

@@ -152,6 +152,30 @@ export default function AnonymousFeedPage() {
         }
     };
 
+    // Enable smooth scrolling globally and optimize for all devices
+    useEffect(() => {
+        // Set smooth scrolling on html element
+        document.documentElement.style.scrollBehavior = 'smooth';
+        document.body.style.scrollBehavior = 'smooth';
+
+        // Optimize for touch devices (Surface, tablets, etc.)
+        document.documentElement.style.touchAction = 'pan-y';
+        document.body.style.touchAction = 'pan-y';
+
+        // Prevent scroll chaining issues
+        document.documentElement.style.overscrollBehavior = 'auto';
+        document.body.style.overscrollBehavior = 'auto';
+
+        return () => {
+            document.documentElement.style.scrollBehavior = 'auto';
+            document.body.style.scrollBehavior = 'auto';
+            document.documentElement.style.touchAction = '';
+            document.body.style.touchAction = '';
+            document.documentElement.style.overscrollBehavior = '';
+            document.body.style.overscrollBehavior = '';
+        };
+    }, []);
+
     useEffect(() => {
         const userEmail = getCookie('userEmail') as string;
         if (!userEmail) {
@@ -689,7 +713,13 @@ export default function AnonymousFeedPage() {
     // Show loading state while checking authentication
     if (loading) {
         return (
-            <div className="min-h-screen relative flex items-center justify-center">
+            <div
+                className="min-h-screen relative overflow-x-hidden flex items-center justify-center"
+                style={{
+                    touchAction: 'pan-y',
+                    overscrollBehavior: 'auto'
+                }}
+            >
                 {/* Blurred Background */}
                 <div
                     className="fixed inset-0 z-0"
@@ -698,8 +728,10 @@ export default function AnonymousFeedPage() {
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
-                        backgroundAttachment: 'fixed',
-                        filter: 'blur(4px)'
+                        backgroundAttachment: 'scroll',
+                        filter: 'blur(4px)',
+                        transform: 'translateZ(0)',
+                        backfaceVisibility: 'hidden'
                     }}
                 />
                 <div className="text-center relative z-10">
@@ -721,7 +753,16 @@ export default function AnonymousFeedPage() {
     }
 
     return (
-        <div className="relative w-full min-h-screen">
+        <div
+            className="relative w-full min-h-screen overflow-x-hidden"
+            style={{
+                scrollBehavior: 'smooth',
+                WebkitOverflowScrolling: 'touch',
+                overscrollBehavior: 'auto',
+                touchAction: 'pan-y',
+                willChange: 'scroll-position'
+            }}
+        >
             {/* Blurred Background */}
             <div
                 className="fixed inset-0 z-0"
@@ -730,15 +771,25 @@ export default function AnonymousFeedPage() {
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
-                    backgroundAttachment: 'fixed',
-                    filter: 'blur(4px)'
+                    backgroundAttachment: 'scroll',
+                    filter: 'blur(4px)',
+                    transform: 'translateZ(0)',
+                    backfaceVisibility: 'hidden'
                 }}
             />
 
             {/* Common Navbar */}
             <CommonNavbar currentPage="/anonymous-feed" />
 
-            <div className="relative z-10 max-w-4xl mx-auto p-4 md:p-6 pb-20 pt-4">
+            <div
+                className="relative z-10 max-w-4xl mx-auto p-4 md:p-6 pb-20 pt-4"
+                style={{
+                    scrollBehavior: 'smooth',
+                    WebkitOverflowScrolling: 'touch',
+                    touchAction: 'pan-y',
+                    willChange: 'scroll-position'
+                }}
+            >
                 {/* Page Header */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}

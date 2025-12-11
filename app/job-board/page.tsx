@@ -82,6 +82,30 @@ function JobBoardContent() {
     const { data: session, status } = useSession();
     const searchParams = useSearchParams();
 
+    // Enable smooth scrolling globally and optimize for all devices
+    useEffect(() => {
+        // Set smooth scrolling on html element
+        document.documentElement.style.scrollBehavior = 'smooth';
+        document.body.style.scrollBehavior = 'smooth';
+
+        // Optimize for touch devices (Surface, tablets, etc.)
+        document.documentElement.style.touchAction = 'pan-y';
+        document.body.style.touchAction = 'pan-y';
+
+        // Prevent scroll chaining issues
+        document.documentElement.style.overscrollBehavior = 'auto';
+        document.body.style.overscrollBehavior = 'auto';
+
+        return () => {
+            document.documentElement.style.scrollBehavior = 'auto';
+            document.body.style.scrollBehavior = 'auto';
+            document.documentElement.style.touchAction = '';
+            document.body.style.touchAction = '';
+            document.documentElement.style.overscrollBehavior = '';
+            document.body.style.overscrollBehavior = '';
+        };
+    }, []);
+
     // Authentication check
     useEffect(() => {
         const initialize = async () => {
@@ -428,7 +452,13 @@ function JobBoardContent() {
     // Show loading state while checking authentication
     if (status === 'loading') {
         return (
-            <div className="relative min-h-screen overflow-hidden flex items-center justify-center">
+            <div
+                className="relative min-h-screen overflow-x-hidden flex items-center justify-center"
+                style={{
+                    touchAction: 'pan-y',
+                    overscrollBehavior: 'auto'
+                }}
+            >
                 <div
                     className="fixed inset-0 z-0"
                     style={{
@@ -436,8 +466,10 @@ function JobBoardContent() {
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
-                        backgroundAttachment: 'fixed',
-                        filter: 'blur(4px)'
+                        backgroundAttachment: 'scroll',
+                        filter: 'blur(4px)',
+                        transform: 'translateZ(0)',
+                        backfaceVisibility: 'hidden'
                     }}
                 />
                 <div className="relative z-10 text-center">
@@ -451,6 +483,13 @@ function JobBoardContent() {
     return (
         <div
             className="relative min-h-screen w-full overflow-x-hidden font-sans"
+            style={{
+                scrollBehavior: 'smooth',
+                WebkitOverflowScrolling: 'touch',
+                overscrollBehavior: 'auto',
+                touchAction: 'pan-y',
+                willChange: 'scroll-position'
+            }}
         >
             {/* Blurred Background */}
             <div
@@ -460,15 +499,25 @@ function JobBoardContent() {
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
-                    backgroundAttachment: 'fixed',
-                    filter: 'blur(4px)'
+                    backgroundAttachment: 'scroll',
+                    filter: 'blur(4px)',
+                    transform: 'translateZ(0)',
+                    backfaceVisibility: 'hidden'
                 }}
             />
             {/* Navbar */}
             <CommonNavbar currentPage="job-board" />
             {/* 1. Wrap all main content (including heading, search, job grid, etc.) in the blur wrapper: */}
             <div className="transition-all duration-200">
-                <div className="flex flex-col gap-6 max-w-7xl mx-auto py-12 px-4">
+                <div
+                    className="flex flex-col gap-6 max-w-7xl mx-auto py-12 px-4 pb-20 relative z-10"
+                    style={{
+                        scrollBehavior: 'smooth',
+                        WebkitOverflowScrolling: 'touch',
+                        touchAction: 'pan-y',
+                        willChange: 'scroll-position'
+                    }}
+                >
                     <div className="flex-1 space-y-4">
                         <h1
                             className="text-5xl font-extrabold tracking-normal text-black dark:text-black mb-2 z-[60] pointer-events-auto relative"
@@ -796,20 +845,25 @@ function JobBoardContent() {
 export default function JobBoardPage() {
     return (
         <Suspense fallback={
-            <div className="min-h-screen relative overflow-hidden flex items-center justify-center" style={{
-                background: `
-                  radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
-                  radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
-                  radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
-                  radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
-                  radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
-                  radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
-                  radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
-                  linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
-                `
-            }}>
+            <div
+                className="min-h-screen relative overflow-x-hidden flex items-center justify-center"
+                style={{
+                    background: `
+                      radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
+                      radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
+                      radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
+                      radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
+                      radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
+                      radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
+                      radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
+                      radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
+                      linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
+                    `,
+                    touchAction: 'pan-y',
+                    overscrollBehavior: 'auto'
+                }}
+            >
                 <div className="text-center">
                     <div className="size-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
                         borderColor: 'rgba(255, 215, 0, 0.8)',

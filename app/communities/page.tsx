@@ -67,6 +67,30 @@ export default function CommunitiesPage() {
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [uploadingImage, setUploadingImage] = useState(false);
 
+    // Enable smooth scrolling globally and optimize for all devices
+    useEffect(() => {
+        // Set smooth scrolling on html element
+        document.documentElement.style.scrollBehavior = 'smooth';
+        document.body.style.scrollBehavior = 'smooth';
+
+        // Optimize for touch devices (Surface, tablets, etc.)
+        document.documentElement.style.touchAction = 'pan-y';
+        document.body.style.touchAction = 'pan-y';
+
+        // Prevent scroll chaining issues
+        document.documentElement.style.overscrollBehavior = 'auto';
+        document.body.style.overscrollBehavior = 'auto';
+
+        return () => {
+            document.documentElement.style.scrollBehavior = 'auto';
+            document.body.style.scrollBehavior = 'auto';
+            document.documentElement.style.touchAction = '';
+            document.body.style.touchAction = '';
+            document.documentElement.style.overscrollBehavior = '';
+            document.body.style.overscrollBehavior = '';
+        };
+    }, []);
+
     // Authentication check
     useEffect(() => {
         const initialize = async () => {
@@ -387,7 +411,16 @@ export default function CommunitiesPage() {
     }
 
     return (
-        <div className="min-h-screen relative overflow-hidden">
+        <div
+            className="min-h-screen relative overflow-x-hidden"
+            style={{
+                scrollBehavior: 'smooth',
+                WebkitOverflowScrolling: 'touch',
+                overscrollBehavior: 'auto',
+                touchAction: 'pan-y',
+                willChange: 'scroll-position'
+            }}
+        >
             {/* Blurred Background */}
             <div
                 className="fixed inset-0 z-0"
@@ -396,8 +429,10 @@ export default function CommunitiesPage() {
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
-                    backgroundAttachment: 'fixed',
-                    filter: 'blur(4px)'
+                    backgroundAttachment: 'scroll',
+                    filter: 'blur(4px)',
+                    transform: 'translateZ(0)',
+                    backfaceVisibility: 'hidden'
                 }}
             />
 
@@ -431,7 +466,16 @@ export default function CommunitiesPage() {
             </div>
 
             {/* Community Cards Grid */}
-            <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-16">
+            <div
+                className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-20 relative z-10"
+                style={{
+                    scrollBehavior: 'smooth',
+                    WebkitOverflowScrolling: 'touch',
+                    touchAction: 'pan-y',
+                    willChange: 'scroll-position',
+                    minHeight: 'calc(100vh - 80px)'
+                }}
+            >
                 {loading
                     ? Array.from({ length: 6 }).map((_, i) => <ShimmerCard key={i} />)
                     : communities.map((community) => {

@@ -39,11 +39,27 @@ export default function FriendsPage() {
     const [loadingRecommendations, setLoadingRecommendations] = useState(false);
     const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-    // Enable smooth scrolling globally
+    // Enable smooth scrolling globally and optimize for all devices
     useEffect(() => {
+        // Set smooth scrolling on html element
         document.documentElement.style.scrollBehavior = 'smooth';
+        document.body.style.scrollBehavior = 'smooth';
+
+        // Optimize for touch devices (Surface, tablets, etc.)
+        document.documentElement.style.touchAction = 'pan-y';
+        document.body.style.touchAction = 'pan-y';
+
+        // Prevent scroll chaining issues
+        document.documentElement.style.overscrollBehavior = 'auto';
+        document.body.style.overscrollBehavior = 'auto';
+
         return () => {
             document.documentElement.style.scrollBehavior = 'auto';
+            document.body.style.scrollBehavior = 'auto';
+            document.documentElement.style.touchAction = '';
+            document.body.style.touchAction = '';
+            document.documentElement.style.overscrollBehavior = '';
+            document.body.style.overscrollBehavior = '';
         };
     }, []);
 
@@ -369,11 +385,13 @@ export default function FriendsPage() {
 
     return (
         <div
-            className="min-h-screen relative overflow-hidden scroll-smooth"
+            className="min-h-screen relative overflow-x-hidden"
             style={{
                 scrollBehavior: 'smooth',
                 WebkitOverflowScrolling: 'touch',
-                overscrollBehavior: 'contain'
+                overscrollBehavior: 'auto',
+                touchAction: 'pan-y',
+                willChange: 'scroll-position'
             }}
         >
             {/* Blurred Background */}
@@ -384,8 +402,10 @@ export default function FriendsPage() {
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
-                    backgroundAttachment: 'fixed',
-                    filter: 'blur(4px)'
+                    backgroundAttachment: 'scroll',
+                    filter: 'blur(4px)',
+                    transform: 'translateZ(0)',
+                    backfaceVisibility: 'hidden'
                 }}
             />
 
@@ -394,10 +414,13 @@ export default function FriendsPage() {
 
             {/* Main Content */}
             <div
-                className="p-6 max-w-7xl mx-auto"
+                className="p-6 max-w-7xl mx-auto pb-20"
                 style={{
                     scrollBehavior: 'smooth',
-                    WebkitOverflowScrolling: 'touch'
+                    WebkitOverflowScrolling: 'touch',
+                    touchAction: 'pan-y',
+                    willChange: 'scroll-position',
+                    minHeight: 'calc(100vh - 80px)'
                 }}
             >
                 {/* Page Header */}
