@@ -28,6 +28,9 @@ function getBpdcConnectionUrl(url: string): string {
 }
 
 async function createTables() {
+    if (!POSTGRES_URL) {
+        throw new Error('POSTGRES_URL is not set');
+    }
     const connectionUrl = getBpdcConnectionUrl(POSTGRES_URL);
     const sql = postgres(connectionUrl);
 
