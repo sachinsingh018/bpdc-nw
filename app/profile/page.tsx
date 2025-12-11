@@ -2,7 +2,7 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react';
 import { getCookie } from 'cookies-next';
 import { FaWhatsapp, FaLinkedin, FaRegCopy, FaFacebook, FaPhone, FaEnvelope, FaEdit, FaSave, FaPlus, FaTrash, FaChevronDown } from 'react-icons/fa';
-import { TwitterIcon, Users, MessageSquare, MessageCircle, BarChart3, Calendar, Briefcase, Award, MapPin, Globe, Star, Sparkles, Menu, Heart, Home, Bell, User, Trophy, FileText, Bot } from 'lucide-react';
+import { TwitterIcon, Users, MessageSquare, MessageCircle, BarChart3, Calendar, Briefcase, Award, MapPin, Globe, Star, Sparkles, Menu, Heart, Home, Bell, User, Trophy, FileText, Bot, Shield } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -1888,6 +1888,19 @@ const ProfilePage = () => {
                   >
                     <Briefcase size={20} />
                     <span>Recruiter Dashboard</span>
+                  </button>
+                )}
+                {userRole === 'admin' && (
+                  <button
+                    onClick={() => router.push('/admin/dashboard')}
+                    className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-black font-bold"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(236, 72, 153, 0.8) 100%)',
+                      boxShadow: '0 5px 15px rgba(138, 43, 226, 0.3)'
+                    }}
+                  >
+                    <Shield size={20} />
+                    <span>Admin Dashboard</span>
                   </button>
                 )}
               </div>
