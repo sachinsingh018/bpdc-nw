@@ -921,9 +921,9 @@ export default function AdminDashboard() {
                             onClick={loadDashboardData}
                             variant="outline"
                             size="sm"
-                            className="text-black border-white/20 hover:bg-white/10"
+                            className="bg-transparent border-white/20 hover:bg-white/10"
                         >
-                            <RefreshCw className="size-4" />
+                            <RefreshCw className="size-4 text-white" />
                         </Button>
                         <Button
                             onClick={handleGeneratePdf}
