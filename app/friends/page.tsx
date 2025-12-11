@@ -39,6 +39,14 @@ export default function FriendsPage() {
     const [loadingRecommendations, setLoadingRecommendations] = useState(false);
     const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+    // Enable smooth scrolling globally
+    useEffect(() => {
+        document.documentElement.style.scrollBehavior = 'smooth';
+        return () => {
+            document.documentElement.style.scrollBehavior = 'auto';
+        };
+    }, []);
+
     // Helper function to get current user ID
     const getCurrentUserId = async (): Promise<string | null> => {
         const userEmail = getCookie('userEmail');
@@ -360,7 +368,14 @@ export default function FriendsPage() {
     }
 
     return (
-        <div className="min-h-screen relative overflow-hidden">
+        <div
+            className="min-h-screen relative overflow-hidden scroll-smooth"
+            style={{
+                scrollBehavior: 'smooth',
+                WebkitOverflowScrolling: 'touch',
+                overscrollBehavior: 'contain'
+            }}
+        >
             {/* Blurred Background */}
             <div
                 className="fixed inset-0 z-0"
@@ -378,7 +393,13 @@ export default function FriendsPage() {
             <CommonNavbar currentPage="/friends" />
 
             {/* Main Content */}
-            <div className="p-6 max-w-7xl mx-auto">
+            <div
+                className="p-6 max-w-7xl mx-auto"
+                style={{
+                    scrollBehavior: 'smooth',
+                    WebkitOverflowScrolling: 'touch'
+                }}
+            >
                 {/* Page Header */}
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold text-white mb-2">

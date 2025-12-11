@@ -187,6 +187,13 @@ const ProfilePage = () => {
     const [isConnectionCheckComplete, setIsConnectionCheckComplete] = useState(false);
     const streak = getCookie('userStreak');
 
+    // Enable smooth scrolling globally
+    useEffect(() => {
+        document.documentElement.style.scrollBehavior = 'smooth';
+        return () => {
+            document.documentElement.style.scrollBehavior = 'auto';
+        };
+    }, []);
 
     const [userBio, setUserBio] = useState<string>('');
     const shareMessage = `🚀 Check out Networkqy — a smarter way to connect with professionals, discover opportunities, and grow your network. Join now: https://networkqy.com`;
@@ -843,7 +850,14 @@ const ProfilePage = () => {
     //     );
     // }
     return (
-        <div className="min-h-screen relative overflow-hidden">
+        <div
+            className="min-h-screen relative overflow-hidden scroll-smooth"
+            style={{
+                scrollBehavior: 'smooth',
+                WebkitOverflowScrolling: 'touch',
+                overscrollBehavior: 'contain'
+            }}
+        >
             {/* Blurred Background */}
             <div
                 className="fixed inset-0 z-0"
@@ -860,7 +874,13 @@ const ProfilePage = () => {
             {/* Common Navbar */}
             <CommonNavbar currentPage="/friendprof" />
 
-            <div className="p-3 md:p-4 lg:p-6 max-w-7xl mx-auto relative z-10">
+            <div
+                className="p-3 md:p-4 lg:p-6 max-w-7xl mx-auto relative z-10"
+                style={{
+                    scrollBehavior: 'smooth',
+                    WebkitOverflowScrolling: 'touch'
+                }}
+            >
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {/* Left Column - Profile Sections */}
                     <div className="lg:col-span-2 space-y-6">

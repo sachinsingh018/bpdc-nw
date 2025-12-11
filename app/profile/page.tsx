@@ -215,7 +215,8 @@ const CustomDropdown = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className={`absolute top-full mt-2 inset-x-0 z-[9999] bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm rounded-lg border ${styles.content} shadow-xl max-h-60 overflow-y-auto`}
+            className={`absolute top-full mt-2 inset-x-0 z-[9999] bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm rounded-lg border ${styles.content} shadow-xl max-h-60 overflow-y-auto scroll-smooth`}
+            style={{ scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch' }}
           >
             {options.map((option) => (
               <button
@@ -244,7 +245,13 @@ const ProfilePage = () => {
     return field.trim() === '';
   };
 
-
+  // Enable smooth scrolling globally
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
+  }, []);
 
   useEffect(() => {
     const initialize = async () => {
@@ -696,7 +703,14 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div
+      className="min-h-screen relative overflow-hidden scroll-smooth"
+      style={{
+        scrollBehavior: 'smooth',
+        WebkitOverflowScrolling: 'touch',
+        overscrollBehavior: 'contain'
+      }}
+    >
       {/* Blurred Background */}
       <div
         className="fixed inset-0 z-0"
@@ -713,7 +727,13 @@ const ProfilePage = () => {
       {/* Common Navbar */}
       <CommonNavbar currentPage="/profile" showSignOut={true} />
 
-      <div className="p-3 md:p-4 lg:p-6 max-w-7xl mx-auto">
+      <div
+        className="p-3 md:p-4 lg:p-6 max-w-7xl mx-auto"
+        style={{
+          scrollBehavior: 'smooth',
+          WebkitOverflowScrolling: 'touch'
+        }}
+      >
         {/* Profile Completion Banner */}
         {isProfileIncomplete && (
           <motion.div

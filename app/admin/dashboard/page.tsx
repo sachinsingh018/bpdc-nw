@@ -32,13 +32,14 @@ import {
     UserPlus,
     Upload,
     Building2,
-
+    AlertTriangle,
 } from 'lucide-react';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import Chart from 'chart.js/auto';
 import html2canvas from 'html2canvas';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 interface ActivityLog {
     id: string;
@@ -91,6 +92,7 @@ interface Student {
 }
 
 export default function AdminDashboard() {
+    const router = useRouter();
     const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
     const [userEngagement, setUserEngagement] = useState<UserEngagement[]>([]);
     const [dailyTrends, setDailyTrends] = useState<DailyTrends[]>([]);
@@ -110,6 +112,9 @@ export default function AdminDashboard() {
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
     const [companyFiles, setCompanyFiles] = useState<Array<{ key: string; fileName: string; fileUrl: string; size: number; lastModified: string }>>([]);
     const [loadingFiles, setLoadingFiles] = useState(true);
+    const [userRole, setUserRole] = useState<string>('');
+    const [roleLoading, setRoleLoading] = useState(true);
+    const [accessDenied, setAccessDenied] = useState(false);
 
     // Pagination constants
     const USERS_PER_PAGE = 50;
@@ -126,9 +131,74 @@ export default function AdminDashboard() {
         auraBotApplications: 0,
     });
 
+    // Check user role and permissions
+    const checkUserRole = async () => {
+        setRoleLoading(true);
+        try {
+            console.log('=== ADMIN DASHBOARD ROLE CHECK DEBUG ===');
+            console.log('Fetching user profile...');
+
+            const response = await fetch('/api/user/profile');
+            console.log('Response status:', response.status);
+            console.log('Response ok:', response.ok);
+
+            if (response.ok) {
+                const userData = await response.json();
+                console.log('User data received:', userData);
+
+                const role = userData.role;
+                console.log('Extracted role:', role);
+                console.log('Role type:', typeof role);
+                console.log('Role is admin?', role === 'admin');
+
+                setUserRole(role);
+
+                // Check if user has admin role
+                if (!role || role !== 'admin') {
+                    console.log('Access denied - role is not admin. Role:', role);
+                    setAccessDenied(true);
+                    toast.error('Access denied. Admin role required.');
+                    // Redirect to home page after 2 seconds
+                    setTimeout(() => {
+                        router.push('/');
+                    }, 2000);
+                    return false;
+                }
+                console.log('Access granted - role is admin:', role);
+                return true;
+            } else {
+                const errorData = await response.json();
+                console.log('API Error:', errorData);
+                setAccessDenied(true);
+                toast.error('Unable to verify user permissions.');
+                return false;
+            }
+        } catch (error) {
+            console.error('Error checking user role:', error);
+            setAccessDenied(true);
+            toast.error('Error verifying user permissions.');
+            return false;
+        } finally {
+            setRoleLoading(false);
+        }
+    };
+
     useEffect(() => {
-        loadDashboardData();
-        loadCompanyFiles();
+        const initializeDashboard = async () => {
+            const hasAccess = await checkUserRole();
+            if (hasAccess) {
+                loadDashboardData();
+                loadCompanyFiles();
+            }
+        };
+        initializeDashboard();
+    }, []);
+
+    useEffect(() => {
+        if (!roleLoading && !accessDenied) {
+            loadDashboardData();
+            loadCompanyFiles();
+        }
     }, [dateRange]);
 
     const loadCompanyFiles = async () => {
@@ -628,6 +698,85 @@ export default function AdminDashboard() {
 
         doc.save('dashboard-report.pdf');
     };
+
+    // Show loading state while checking role
+    if (roleLoading) {
+        return (
+            <div className="min-h-screen relative overflow-hidden flex items-center justify-center" style={{
+                background: `
+                  radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
+                  radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
+                  radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
+                  radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
+                  radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
+                  radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
+                  linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
+                `
+            }}>
+                <div className="text-center">
+                    <div className="size-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
+                        borderColor: 'rgba(255, 215, 0, 0.8)',
+                        borderTopColor: 'transparent'
+                    }} />
+                    <h2 className="text-xl font-bold text-black mb-2">Verifying permissions...</h2>
+                    <p className="text-black font-medium">Checking user access</p>
+                </div>
+            </div>
+        );
+    }
+
+    // Show access denied if user doesn't have required role
+    if (accessDenied) {
+        return (
+            <div className="min-h-screen relative overflow-hidden flex items-center justify-center" style={{
+                background: `
+                  radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 60%, rgba(220, 20, 60, 0.6) 0%, transparent 50%),
+                  radial-gradient(circle at 60% 80%, rgba(47, 79, 79, 0.7) 0%, transparent 50%),
+                  radial-gradient(circle at 10% 80%, rgba(128, 128, 128, 0.5) 0%, transparent 50%),
+                  radial-gradient(circle at 90% 60%, rgba(70, 130, 180, 0.6) 0%, transparent 50%),
+                  radial-gradient(circle at 30% 40%, rgba(255, 223, 0, 0.8) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 40%, rgba(255, 0, 0, 0.7) 0%, transparent 50%),
+                  radial-gradient(circle at 50% 10%, rgba(138, 43, 226, 0.6) 0%, transparent 50%),
+                  linear-gradient(135deg, rgba(25, 25, 112, 0.3) 0%, rgba(47, 79, 79, 0.4) 50%, rgba(138, 43, 226, 0.3) 100%)
+                `
+            }}>
+                <Card className="w-full max-w-md backdrop-blur-sm border-2 shadow-xl" style={{
+                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 30%, rgba(138, 43, 226, 0.1) 70%, rgba(255, 255, 255, 0.95) 100%)',
+                    borderColor: 'rgba(255, 215, 0, 0.6)',
+                    boxShadow: '0 25px 50px rgba(25, 25, 112, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
+                }}>
+                    <CardHeader className="text-center">
+                        <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/20">
+                            <Shield className="size-6 text-red-600 dark:text-red-400" />
+                        </div>
+                        <CardTitle className="text-2xl">Access Denied</CardTitle>
+                        <CardDescription>
+                            You need admin privileges to access this dashboard.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="text-center">
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-center gap-2 text-sm text-black">
+                                <AlertTriangle className="size-4" />
+                                <span>Current role: {userRole || 'Unknown'}</span>
+                            </div>
+                            <Button
+                                onClick={() => router.push('/')}
+                                className="w-full"
+                            >
+                                Go to Homepage
+                            </Button>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
+        );
+    }
 
     if (loading) {
         return (
