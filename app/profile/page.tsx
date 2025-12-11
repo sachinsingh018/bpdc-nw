@@ -9,7 +9,6 @@ import { toast } from 'sonner';
 import Image from 'next/image';
 import { NotificationBell } from '@/components/notification-bell';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { ProfileCompletionWizard } from '@/components/profile-completion-wizard';
 import { CommonNavbar } from '@/components/common-navbar';
 import { Button } from '@/components/ui/button';
 import { signOut, useSession } from 'next-auth/react';
@@ -328,7 +327,6 @@ const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [showProfileWizard, setShowProfileWizard] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -757,6 +755,7 @@ const ProfilePage = () => {
           willChange: 'scroll-position'
         }}
       >
+
         {/* Profile Completion Banner */}
         {isProfileIncomplete && (
           <motion.div
@@ -784,14 +783,6 @@ const ProfilePage = () => {
                   </p>
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={() => setShowProfileWizard(true)}
-                className="bg-white text-black p-2 md:px-6 md:py-2 rounded-lg font-bold hover:bg-yellow-200 transition-colors flex items-center gap-2 shadow-lg"
-              >
-                <span className="hidden md:inline">Complete Profile</span>
-                <FaEdit className="size-4 md:hidden" />
-              </button>
             </div>
             <div className="mt-3 md:mt-4">
               <div className="flex items-center justify-between text-xs md:text-sm mb-2">
@@ -1561,7 +1552,9 @@ const ProfilePage = () => {
                       ) : (
                         <div>
                           <h3 className="font-bold text-black text-sm">{edu.school_name}</h3>
-                          <p className="text-black text-sm font-medium">{edu.degree} in {edu.field_of_study}</p>
+                          <p className="text-black text-sm font-medium">
+                            {edu.degree}{edu.field_of_study ? ` ${edu.field_of_study}` : ''}
+                          </p>
                           <p className="text-black text-xs font-medium">{edu.start_year} - {edu.end_year}</p>
                         </div>
                       )}
@@ -2033,10 +2026,10 @@ const ProfilePage = () => {
                       <FaEnvelope className="text-red-600" />
                       <input
                         type="email"
-                        value={socialLinks.email}
-                        onChange={(e) => setSocialLinks(prev => ({ ...prev, email: e.target.value }))}
+                        value={userEmail || socialLinks.email}
+                        readOnly
                         placeholder="Email address"
-                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black dark:text-black max-w-full"
+                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black dark:text-black max-w-full cursor-not-allowed opacity-70"
                       />
                     </div>
                   </>
@@ -2077,35 +2070,6 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-
-
-      {/* Profile Completion Wizard */}
-      <ProfileCompletionWizard
-        isOpen={showProfileWizard}
-        onClose={() => setShowProfileWizard(false)}
-        onComplete={() => {
-          // Refresh the page to show updated profile data
-          window.location.reload();
-        }}
-        initialData={{
-          firstName: userName,
-          lastName: "",
-          email: userEmail,
-          bio: userBio,
-          linkedin: socialLinks.linkedin,
-          profilePic: null,
-          goal: goals[0] || "",
-          strengths: skills,
-          interests,
-          experience: "",
-          location: "",
-          company: "",
-          title: "",
-          skills: [],
-          education: "",
-          certifications: [],
-        }}
-      />
     </div>
   );
 };
