@@ -2,7 +2,7 @@
 import React, { Suspense, useState, useEffect, useRef } from 'react';
 import { getCookie } from 'cookies-next';
 import { FaWhatsapp, FaLinkedin, FaRegCopy, FaFacebook, FaPhone, FaEnvelope, FaEdit, FaSave, FaPlus, FaTrash, FaChevronDown } from 'react-icons/fa';
-import { TwitterIcon, Users, MessageSquare, MessageCircle, BarChart3, Calendar, Briefcase, Award, MapPin, Globe, Star, Sparkles, Menu, Heart, Home, Bell, User, Trophy, FileText, Bot, Shield } from 'lucide-react';
+import { TwitterIcon, Users, MessageSquare, MessageCircle, BarChart3, Calendar, Briefcase, Award, MapPin, Globe, Star, Sparkles, Menu, Heart, Home, Bell, User, Trophy, FileText, Bot, Shield, Lock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -331,6 +331,11 @@ const ProfilePage = () => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [changingPassword, setChangingPassword] = useState(false);
   const [uploadedResumes, setUploadedResumes] = useState<Upload[]>([]);
   const [uploadedCoverLetters, setUploadedCoverLetters] = useState<Upload[]>([]);
 
@@ -612,6 +617,58 @@ const ProfilePage = () => {
       toast.error('Failed to save profile');
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  const handleChangePassword = async () => {
+    // Validate inputs
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      toast.error('Please fill in all fields');
+      return;
+    }
+
+    if (newPassword.length < 8) {
+      toast.error('New password must be at least 8 characters long');
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      toast.error('New passwords do not match');
+      return;
+    }
+
+    if (oldPassword === newPassword) {
+      toast.error('New password must be different from the old password');
+      return;
+    }
+
+    setChangingPassword(true);
+    try {
+      const response = await fetch('/api/auth/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          oldPassword,
+          newPassword,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success('Password changed successfully');
+        setShowChangePasswordModal(false);
+        setOldPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+      } else {
+        toast.error(data.error || 'Failed to change password');
+      }
+    } catch (error) {
+      console.error('Change password error:', error);
+      toast.error('An error occurred while changing password');
+    } finally {
+      setChangingPassword(false);
     }
   };
 
@@ -958,6 +1015,94 @@ const ProfilePage = () => {
                         {uploading ? 'Uploading...' : 'Upload'}
                       </Button>
                       <Button variant="outline" onClick={() => setShowUploadModal(false)} disabled={uploading}>
+                        Cancel
+                      </Button>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+
+                <AlertDialog open={showChangePasswordModal} onOpenChange={setShowChangePasswordModal}>
+                  <AlertDialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex items-center gap-1 md:gap-2 text-xs md:text-sm text-black bg-white hover:bg-white dark:bg-white dark:hover:bg-white"
+                    >
+                      <Lock size={12} className="md:size-4" />
+                      <span>Change Password</span>
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Change Password</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Enter your current password and choose a new password (at least 8 characters).
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+
+                    <div className="space-y-4">
+                      <div>
+                        <label className="text-sm font-medium text-black dark:text-gray-300 mb-1 block">
+                          Current Password
+                        </label>
+                        <input
+                          type="password"
+                          value={oldPassword}
+                          onChange={(e) => setOldPassword(e.target.value)}
+                          className="w-full border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-black dark:text-black"
+                          placeholder="Enter current password"
+                          disabled={changingPassword}
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-sm font-medium text-black dark:text-gray-300 mb-1 block">
+                          New Password
+                        </label>
+                        <input
+                          type="password"
+                          value={newPassword}
+                          onChange={(e) => setNewPassword(e.target.value)}
+                          className="w-full border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-black dark:text-black"
+                          placeholder="Enter new password (min 8 characters)"
+                          disabled={changingPassword}
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-sm font-medium text-black dark:text-gray-300 mb-1 block">
+                          Confirm New Password
+                        </label>
+                        <input
+                          type="password"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          className="w-full border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-black dark:text-black"
+                          placeholder="Confirm new password"
+                          disabled={changingPassword}
+                        />
+                      </div>
+                    </div>
+
+                    <AlertDialogFooter>
+                      <Button
+                        onClick={handleChangePassword}
+                        disabled={changingPassword || !oldPassword || !newPassword || !confirmPassword}
+                        className="bg-gray-800 hover:bg-gray-900 text-white dark:bg-gray-700 dark:hover:bg-gray-800"
+                      >
+                        {changingPassword ? 'Changing...' : 'Change Password'}
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setShowChangePasswordModal(false);
+                          setOldPassword('');
+                          setNewPassword('');
+                          setConfirmPassword('');
+                        }}
+                        disabled={changingPassword}
+                        className="bg-gray-700 hover:bg-gray-800 text-white border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700"
+                      >
                         Cancel
                       </Button>
                     </AlertDialogFooter>

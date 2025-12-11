@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
                 )!
             )
             : await baseQuery;
-        
+
         // Filter by batch year and profile from education JSONB
         let filteredUsers = allUsers.map(u => {
             let batch_year = '';
