@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,7 +35,9 @@ import {
     AlertTriangle,
 } from 'lucide-react';
 import jsPDF from 'jspdf';
+// eslint-disable-next-line import/no-named-as-default
 import autoTable from 'jspdf-autotable';
+// eslint-disable-next-line import/no-named-as-default
 import Chart from 'chart.js/auto';
 import html2canvas from 'html2canvas';
 import { toast } from 'sonner';
@@ -228,21 +230,24 @@ export default function AdminDashboard() {
             }
         };
         initializeDashboard();
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []); // Only run on mount
 
     useEffect(() => {
         if (!roleLoading && !accessDenied) {
             loadDashboardData();
             loadCompanyFiles();
         }
-    }, [dateRange]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dateRange]); // Only reload when dateRange changes
 
     // Reload users when filters or page changes
     useEffect(() => {
         if (!roleLoading && !accessDenied) {
             loadStudentData();
         }
-    }, [currentPage, userListSearchTerm, selectedBatchYear, selectedProfile]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentPage, userListSearchTerm, selectedBatchYear, selectedProfile]); // Only reload when filters change
 
     const loadCompanyFiles = async () => {
         setLoadingFiles(true);
@@ -1334,7 +1339,7 @@ export default function AdminDashboard() {
                                 <div className="flex flex-wrap gap-3 mb-6 pb-4 border-b border-white/10">
                                     <div className="flex-1 min-w-[280px]">
                                         <div className="relative">
-                                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 size-4 text-black/50" />
+                                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-black/50" />
                                             <Input
                                                 placeholder="Search by name or email..."
                                                 value={userListSearchTerm}
@@ -1808,7 +1813,7 @@ function CreateUserModal({ open, onClose, onSuccess }: { open: boolean; onClose:
                 <DialogHeader>
                     <DialogTitle className="text-2xl font-bold text-black">Create New User</DialogTitle>
                     <DialogDescription className="text-black/70">
-                        Create a new user account with role "user". Fill in the details below.
+                        Create a new user account with role &quot;user&quot;. Fill in the details below.
                     </DialogDescription>
                 </DialogHeader>
                 <Form action={handleSubmit} className="flex flex-col gap-4">
