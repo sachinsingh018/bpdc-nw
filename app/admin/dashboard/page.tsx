@@ -40,6 +40,11 @@ import Chart from 'chart.js/auto';
 import html2canvas from 'html2canvas';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { adminCreateUser, type AdminCreateUserActionState } from '@/app/(auth)/actions';
+import { useActionState } from 'react';
+import Form from 'next/form';
 
 interface ActivityLog {
     id: string;
@@ -121,6 +126,7 @@ export default function AdminDashboard() {
     const [accessDenied, setAccessDenied] = useState(false);
     const [totalUsers, setTotalUsers] = useState(0);
     const [totalPages, setTotalPages] = useState(1);
+    const [isCreateUserModalOpen, setIsCreateUserModalOpen] = useState(false);
 
     // Pagination constants
     const USERS_PER_PAGE = 50;
@@ -935,6 +941,15 @@ export default function AdminDashboard() {
                             Generate PDF Report
                         </Button>
                         <Button
+                            onClick={() => setIsCreateUserModalOpen(true)}
+                            variant="default"
+                            size="sm"
+                            className="text-black bg-gradient-to-r from-green-500 to-emerald-500 border-white/20 hover:from-emerald-500 hover:to-green-500 flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/25 disabled:opacity-60 font-semibold"
+                        >
+                            <UserPlus className="size-4 mr-1" />
+                            Create User
+                        </Button>
+                        <Button
                             onClick={async () => {
                                 const feedbackLink = 'https://networkqy.com/feedback-template';
                                 const recipients = [
@@ -1740,6 +1755,141 @@ export default function AdminDashboard() {
                     </TabsContent>
                 </Tabs>
             </div>
+
+            {/* Create User Modal */}
+            <CreateUserModal
+                open={isCreateUserModalOpen}
+                onClose={() => setIsCreateUserModalOpen(false)}
+                onSuccess={() => {
+                    setIsCreateUserModalOpen(false);
+                    loadStudentData(); // Refresh the user list
+                }}
+            />
         </div>
+    );
+}
+
+// Create User Modal Component
+function CreateUserModal({ open, onClose, onSuccess }: { open: boolean; onClose: () => void; onSuccess: () => void }) {
+    const [studentStatus, setStudentStatus] = useState<string>('');
+    const [state, formAction] = useActionState<AdminCreateUserActionState, FormData>(
+        adminCreateUser,
+        {
+            status: 'idle',
+        },
+    );
+
+    useEffect(() => {
+        if (state.status === 'failed') {
+            toast.error('Failed to create user. Please try again!');
+        } else if (state.status === 'invalid_data') {
+            toast.error('Failed validating your submission!');
+        } else if (state.status === 'user_exists') {
+            toast.error('An account with this email already exists!');
+        } else if (state.status === 'success') {
+            toast.success('User created successfully!');
+            setStudentStatus(''); // Reset form
+            onSuccess();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [state.status]); // Only depend on state.status, not onSuccess to avoid infinite loops
+
+    const handleSubmit = (formData: FormData) => {
+        // Add student_status to formData
+        if (studentStatus) {
+            formData.append('student_status', studentStatus);
+        }
+        formAction(formData);
+    };
+
+    return (
+        <Dialog open={open} onOpenChange={onClose}>
+            <DialogContent className="bg-white/95 backdrop-blur-md border-white/20 text-black max-w-md">
+                <DialogHeader>
+                    <DialogTitle className="text-2xl font-bold text-black">Create New User</DialogTitle>
+                    <DialogDescription className="text-black/70">
+                        Create a new user account with role "user". Fill in the details below.
+                    </DialogDescription>
+                </DialogHeader>
+                <Form action={handleSubmit} className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
+                        <Label htmlFor="name" className="text-black font-medium">
+                            Full Name
+                        </Label>
+                        <Input
+                            id="name"
+                            name="name"
+                            className="bg-white/50 text-black border-black/20"
+                            type="text"
+                            placeholder="John Doe"
+                            required
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                        <Label htmlFor="email" className="text-black font-medium">
+                            Email Address
+                        </Label>
+                        <Input
+                            id="email"
+                            name="email"
+                            className="bg-white/50 text-black border-black/20"
+                            type="email"
+                            placeholder="john@example.com"
+                            autoComplete="email"
+                            required
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                        <Label htmlFor="password" className="text-black font-medium">
+                            Password
+                        </Label>
+                        <Input
+                            id="password"
+                            name="password"
+                            className="bg-white/50 text-black border-black/20"
+                            type="password"
+                            placeholder="Minimum 6 characters"
+                            required
+                            minLength={6}
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                        <Label htmlFor="student_status" className="text-black font-medium">
+                            Student Status
+                        </Label>
+                        <Select value={studentStatus} onValueChange={setStudentStatus} required>
+                            <SelectTrigger className="bg-white/50 text-black border-black/20">
+                                <SelectValue placeholder="Select status" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white text-black">
+                                <SelectItem value="student">Student</SelectItem>
+                                <SelectItem value="alumni">Alumni</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <DialogFooter className="gap-2">
+                        <Button
+                            type="button"
+                            variant="outline"
+                            onClick={onClose}
+                            className="border-black/20 hover:bg-white/10"
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            type="submit"
+                            disabled={state.status === 'in_progress' || !studentStatus}
+                            className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-emerald-500 hover:to-green-500 text-white"
+                        >
+                            {state.status === 'in_progress' ? 'Creating...' : 'Create User'}
+                        </Button>
+                    </DialogFooter>
+                </Form>
+            </DialogContent>
+        </Dialog>
     );
 } 

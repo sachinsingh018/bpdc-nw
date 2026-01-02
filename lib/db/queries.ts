@@ -121,7 +121,8 @@ export async function createUser({
   phone,
   createdAt, // ✅ accept it here
   referral_code, // ✅ Add this line
-  role // ✅ Add role parameter
+  role, // ✅ Add role parameter
+  student_status, // ✅ Add student_status parameter
 
 }: {
   name: string;
@@ -138,6 +139,7 @@ export async function createUser({
   createdAt?: Date; // ✅ make it optional if you want
   referral_code?: string; // ✅ Add this line too
   role?: string; // ✅ Add role parameter
+  student_status?: string; // ✅ Add student_status parameter
 
 
 }) {//a
@@ -160,6 +162,7 @@ export async function createUser({
       referral_code,
       createdAt, // ✅ insert it
       role, // ✅ insert role
+      student_status, // ✅ insert student_status
     });
   } catch (error) {
     console.error('Failed to create user in database:', error);

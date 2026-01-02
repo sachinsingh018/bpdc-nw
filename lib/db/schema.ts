@@ -65,7 +65,10 @@ export const user = pgTable('User', {
   certifications: jsonb('certifications'),
 
   // Role field for user permissions
-  role: varchar('role', { length: 50 }).default('user') // 'user', 'recruiter', 'admin', etc.
+  role: varchar('role', { length: 50 }).default('user'), // 'user', 'recruiter', 'admin', etc.
+
+  // Student status field
+  student_status: varchar('student_status', { length: 20 }), // 'student' or 'alumni'
 });//a
 
 export type User = InferSelectModel<typeof user>;

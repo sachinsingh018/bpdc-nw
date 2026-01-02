@@ -259,3 +259,62 @@ export const recruiterSignUp = async (
     return { status: 'failed' };
   }
 };
+
+const adminCreateUserSchema = z.object({
+  name: z.string().min(1),
+  email: z.string().email(),
+  password: z.string().min(6),
+  student_status: z.enum(['student', 'alumni']).optional(),
+});
+
+export interface AdminCreateUserActionState {
+  status:
+  | 'idle'
+  | 'in_progress'
+  | 'success'
+  | 'failed'
+  | 'user_exists'
+  | 'invalid_data';
+  email?: string;
+}
+
+export const adminCreateUser = async (
+  _: AdminCreateUserActionState,
+  formData: FormData,
+): Promise<AdminCreateUserActionState> => {
+  try {
+    const validatedData = adminCreateUserSchema.parse({
+      name: formData.get('name'),
+      email: formData.get('email'),
+      password: formData.get('password'),
+      student_status: formData.get('student_status'),
+    });
+
+    const [user] = await getUser(validatedData.email);
+
+    if (user) {
+      return { status: 'user_exists' } as AdminCreateUserActionState;
+    }
+
+    // Create user with role "user" and optional student_status
+    await createUser({
+      name: validatedData.name,
+      email: validatedData.email,
+      password: validatedData.password,
+      role: 'user', // Set role to user
+      student_status: validatedData.student_status || undefined,
+      createdAt: new Date(),
+    });
+
+    console.log('User creation completed by admin.');
+
+    return { status: 'success', email: validatedData.email };
+
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return { status: 'invalid_data' };
+    }
+
+    return { status: 'failed' };
+  }
+};
