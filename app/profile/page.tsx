@@ -157,18 +157,18 @@ const CustomDropdown = ({
   const variantStyles = {
     bits: {
       trigger: "bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700",
-      content: "border-bits-golden-yellow/50 dark:border-bits-golden-yellow/30",
-      item: "hover:bg-bits-golden-yellow/10 dark:hover:bg-bits-golden-yellow/20"
+      content: "border-bits-golden-yellow/50",
+      item: "hover:bg-bits-golden-yellow/10"
     },
     blue: {
       trigger: "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700",
-      content: "border-blue-200/50 dark:border-blue-500/30",
-      item: "hover:bg-blue-50 dark:hover:bg-blue-900/20"
+      content: "border-blue-200/50",
+      item: "hover:bg-blue-50"
     },
     green: {
       trigger: "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700",
-      content: "border-green-200/50 dark:border-green-500/30",
-      item: "hover:bg-green-50 dark:hover:bg-green-900/20"
+      content: "border-green-200/50",
+      item: "hover:bg-green-50"
     }
   };
 
@@ -214,14 +214,14 @@ const CustomDropdown = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className={`absolute top-full mt-2 inset-x-0 z-[9999] bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm rounded-lg border ${styles.content} shadow-xl max-h-60 overflow-y-auto scroll-smooth`}
+            className={`absolute top-full mt-2 inset-x-0 z-[9999] bg-white/95 backdrop-blur-sm rounded-lg border ${styles.content} shadow-xl max-h-60 overflow-y-auto scroll-smooth`}
             style={{ scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch' }}
           >
             {options.map((option) => (
               <button
                 key={option}
                 onClick={() => handleSelect(option)}
-                className={`w-full text-left px-4 py-3 text-sm text-black dark:text-black transition-colors duration-200 ${styles.item} first:rounded-t-lg last:rounded-b-lg`}
+                className={`w-full text-left px-4 py-3 text-sm text-black transition-colors duration-200 ${styles.item} first:rounded-t-lg last:rounded-b-lg`}
               >
                 {option}
               </button>
@@ -763,7 +763,7 @@ const ProfilePage = () => {
         />
         <div className="text-center relative z-10">
           <div className="size-16 border-4 rounded-full animate-spin mx-auto mb-4" style={{
-            borderColor: 'rgba(255, 215, 0, 0.8)',
+            borderColor: 'rgba(180, 140, 0, 0.95)',
             borderTopColor: 'transparent'
           }} />
           <h2 className="text-xl font-bold text-black mb-2">Loading your profile...</h2>
@@ -818,10 +818,10 @@ const ProfilePage = () => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-2xl p-4 md:p-6 mb-6 shadow-lg backdrop-blur-sm border-2"
+            className="rounded-2xl p-4 md:p-6 mb-6 shadow-lg backdrop-blur-sm border-4"
             style={{
               background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(255, 255, 255, 0.8) 25%, rgba(25, 25, 112, 0.8) 50%, rgba(255, 255, 255, 0.7) 75%, rgba(220, 20, 60, 0.9) 100%)',
-              borderColor: 'rgba(255, 215, 0, 0.6)',
+              borderColor: 'rgba(180, 140, 0, 0.9)',
               boxShadow: '0 20px 40px rgba(25, 25, 112, 0.3), 0 0 20px rgba(255, 215, 0, 0.2)'
             }}
           >
@@ -860,10 +860,10 @@ const ProfilePage = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 mb-8 border-2 shadow-xl"
+          className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 mb-8 border-4 shadow-xl"
           style={{
             background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 30%, rgba(138, 43, 226, 0.1) 70%, rgba(255, 255, 255, 0.95) 100%)',
-            borderColor: 'rgba(255, 215, 0, 0.6)',
+            borderColor: 'rgba(180, 140, 0, 0.9)',
             boxShadow: '0 25px 50px rgba(25, 25, 112, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
           }}
         >
@@ -876,7 +876,7 @@ const ProfilePage = () => {
                 height={120}
                 className="size-20 md:size-[120px] rounded-full border-4 shadow-xl ring-4"
                 style={{
-                  borderColor: 'rgba(255, 215, 0, 0.8)',
+                  borderColor: 'rgba(180, 140, 0, 0.95)',
                   boxShadow: '0 10px 30px rgba(25, 25, 112, 0.3), 0 0 20px rgba(255, 215, 0, 0.4)'
                 }}
               />
@@ -897,7 +897,7 @@ const ProfilePage = () => {
                     type="text"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
-                    className="text-lg md:text-xl lg:text-3xl font-bold bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-black dark:text-black w-full max-w-full"
+                    className="text-lg md:text-xl lg:text-3xl font-bold bg-white/50  border border-gray-300  rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-black  w-full max-w-full"
                   />
                 ) : (
                   <div className="flex items-center gap-2 md:gap-3 flex-wrap">
@@ -944,7 +944,7 @@ const ProfilePage = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="flex items-center gap-1 md:gap-2 text-xs md:text-sm text-black bg-white hover:bg-white dark:bg-white dark:hover:bg-white"
+                      className="flex items-center gap-1 md:gap-2 text-xs md:text-sm text-black bg-white hover:bg-white  "
                       disabled={uploading}
                       onClick={() => setShowUploadModal(true)}
                     >
@@ -961,9 +961,9 @@ const ProfilePage = () => {
                     </AlertDialogHeader>
 
                     <div className="mb-3">
-                      <label className="text-sm font-medium text-black dark:text-gray-300 mr-2">File Type:</label>
+                      <label className="text-sm font-medium text-black  mr-2">File Type:</label>
                       <select
-                        className="border border-gray-300 dark:border-white/20 rounded px-2 py-1 text-sm bg-white dark:bg-slate-700 text-black dark:text-black"
+                        className="border border-gray-300  rounded px-2 py-1 text-sm bg-white text-black "
                         value={fileType}
                         onChange={(e) => setFileType(e.target.value as 'cv' | 'cover-letter')}
                       >
@@ -1026,7 +1026,7 @@ const ProfilePage = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="flex items-center gap-1 md:gap-2 text-xs md:text-sm text-black bg-white hover:bg-white dark:bg-white dark:hover:bg-white"
+                      className="flex items-center gap-1 md:gap-2 text-xs md:text-sm text-black bg-white hover:bg-white  "
                     >
                       <Lock size={12} className="md:size-4" />
                       <span>Change Password</span>
@@ -1042,42 +1042,42 @@ const ProfilePage = () => {
 
                     <div className="space-y-4">
                       <div>
-                        <label className="text-sm font-medium text-black dark:text-gray-300 mb-1 block">
+                        <label className="text-sm font-medium text-black  mb-1 block">
                           Current Password
                         </label>
                         <input
                           type="password"
                           value={oldPassword}
                           onChange={(e) => setOldPassword(e.target.value)}
-                          className="w-full border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-black dark:text-black"
+                          className="w-full border border-gray-300  rounded-lg px-3 py-2 text-sm bg-white text-black "
                           placeholder="Enter current password"
                           disabled={changingPassword}
                         />
                       </div>
 
                       <div>
-                        <label className="text-sm font-medium text-black dark:text-gray-300 mb-1 block">
+                        <label className="text-sm font-medium text-black  mb-1 block">
                           New Password
                         </label>
                         <input
                           type="password"
                           value={newPassword}
                           onChange={(e) => setNewPassword(e.target.value)}
-                          className="w-full border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-black dark:text-black"
+                          className="w-full border border-gray-300  rounded-lg px-3 py-2 text-sm bg-white text-black "
                           placeholder="Enter new password (min 8 characters)"
                           disabled={changingPassword}
                         />
                       </div>
 
                       <div>
-                        <label className="text-sm font-medium text-black dark:text-gray-300 mb-1 block">
+                        <label className="text-sm font-medium text-black  mb-1 block">
                           Confirm New Password
                         </label>
                         <input
                           type="password"
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
-                          className="w-full border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm bg-white dark:bg-slate-700 text-black dark:text-black"
+                          className="w-full border border-gray-300  rounded-lg px-3 py-2 text-sm bg-white text-black "
                           placeholder="Confirm new password"
                           disabled={changingPassword}
                         />
@@ -1088,7 +1088,7 @@ const ProfilePage = () => {
                       <Button
                         onClick={handleChangePassword}
                         disabled={changingPassword || !oldPassword || !newPassword || !confirmPassword}
-                        className="bg-gray-800 hover:bg-gray-900 text-white dark:bg-gray-700 dark:hover:bg-gray-800"
+                        className="bg-gray-800 hover:bg-gray-900 text-white  "
                       >
                         {changingPassword ? 'Changing...' : 'Change Password'}
                       </Button>
@@ -1101,7 +1101,7 @@ const ProfilePage = () => {
                           setConfirmPassword('');
                         }}
                         disabled={changingPassword}
-                        className="bg-gray-700 hover:bg-gray-800 text-white border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700"
+                        className="bg-gray-700 hover:bg-gray-800 text-white border-gray-600   "
                       >
                         Cancel
                       </Button>
@@ -1154,7 +1154,7 @@ const ProfilePage = () => {
                     defaultValue={userBio || ''} // Use defaultValue instead of value
                     onChange={(e) => setUserBio(e.target.value)}
                     placeholder="Tell us about yourself..."
-                    className="w-full bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-black dark:text-black placeholder:text-black dark:placeholder:text-black resize-none text-xs md:text-sm max-w-full"
+                    className="w-full bg-white/50  border border-gray-300  rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-black  placeholder:text-black  resize-none text-xs md:text-sm max-w-full"
                     rows={2}
                     onFocus={() => console.log('Textarea focused, userBio value:', userBio)}
                     onBlur={() => console.log('Textarea blurred, userBio value:', userBio)}
@@ -1179,10 +1179,10 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-4 shadow-xl relative"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(138, 43, 226, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                borderColor: 'rgba(138, 43, 226, 0.6)',
+                borderColor: 'rgba(100, 20, 150, 0.9)',
                 boxShadow: '0 25px 50px rgba(138, 43, 226, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
                 zIndex: 5
               }}
@@ -1228,10 +1228,10 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl"
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-4 shadow-xl"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(70, 130, 180, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                borderColor: 'rgba(70, 130, 180, 0.6)',
+                borderColor: 'rgba(40, 90, 130, 0.9)',
                 boxShadow: '0 25px 50px rgba(70, 130, 180, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
               }}
             >
@@ -1248,13 +1248,13 @@ const ProfilePage = () => {
                     const isResume = doc.fileType === 'cv';
                     const label = isResume ? 'Resume' : 'Cover Letter';
                     const badgeColor = isResume
-                      ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400'
-                      : 'bg-green-500/10 text-green-600 dark:text-green-400';
+                      ? 'bg-blue-500/10 text-blue-600 '
+                      : 'bg-green-500/10 text-green-600 ';
 
                     return (
                       <div
                         key={doc.id}
-                        className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 p-3 bg-white/50 dark:bg-slate-700/50 rounded-lg border border-purple-200/30 dark:border-white/10"
+                        className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 p-3 bg-white/50  rounded-lg border border-purple-200/30 "
                       >
                         <div className="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-center sm:gap-3">
                           <p
@@ -1274,7 +1274,7 @@ const ProfilePage = () => {
                             href={doc.fileUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-bits-golden-yellow dark:text-bits-golden-yellow hover:underline text-sm"
+                            className="text-bits-golden-yellow  hover:underline text-sm"
                           >
                             View
                           </a>
@@ -1319,10 +1319,10 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-4 shadow-xl relative"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(70, 130, 180, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                borderColor: 'rgba(70, 130, 180, 0.6)',
+                borderColor: 'rgba(40, 90, 130, 0.9)',
                 boxShadow: '0 25px 50px rgba(70, 130, 180, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
                 zIndex: 5
               }}
@@ -1370,10 +1370,10 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-4 shadow-xl relative"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(220, 20, 60, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                borderColor: 'rgba(220, 20, 60, 0.6)',
+                borderColor: 'rgba(180, 0, 40, 0.9)',
                 boxShadow: '0 25px 50px rgba(220, 20, 60, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
                 zIndex: 5
               }}
@@ -1422,10 +1422,10 @@ const ProfilePage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+                className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-4 shadow-xl relative"
                 style={{
                   background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                  borderColor: 'rgba(255, 215, 0, 0.6)',
+                  borderColor: 'rgba(180, 140, 0, 0.9)',
                   boxShadow: '0 25px 50px rgba(255, 215, 0, 0.2), 0 0 30px rgba(138, 43, 226, 0.1)',
                   zIndex: 1
                 }}
@@ -1452,7 +1452,7 @@ const ProfilePage = () => {
                   {skillBadges.map((badge, index) => (
                     <div
                       key={index}
-                      className={`relative p-4 rounded-xl border-2 transition-all duration-300 hover:scale-105 ${badge.percentage === 100
+                      className={`relative p-4 rounded-xl border-4 transition-all duration-300 hover:scale-105 ${badge.percentage === 100
                         ? 'bg-gradient-to-br from-yellow-400 to-yellow-500 border-yellow-300 shadow-lg shadow-yellow-500/30'
                         : badge.percentage >= 80
                           ? 'bg-gradient-to-br from-green-400 to-green-500 border-green-300 shadow-lg shadow-green-500/30'
@@ -1499,11 +1499,11 @@ const ProfilePage = () => {
                 </div>
                 {skillBadges.filter(badge => badge.percentage === 100).length === 0 && (
                   <div className="text-center py-4">
-                    <p className="text-black dark:text-black text-sm">
+                    <p className="text-black  text-sm">
                       Complete skill assessments to earn badges!
                       <button
                         onClick={() => router.push('/skill-assessment')}
-                        className="text-yellow-600 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-300 font-medium ml-1 underline"
+                        className="text-yellow-600  hover:text-yellow-700  font-medium ml-1 underline"
                       >
                         Start here
                       </button>
@@ -1519,10 +1519,10 @@ const ProfilePage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+                className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-4 shadow-xl relative"
                 style={{
                   background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                  borderColor: 'rgba(255, 215, 0, 0.6)',
+                  borderColor: 'rgba(180, 140, 0, 0.9)',
                   boxShadow: '0 25px 50px rgba(255, 215, 0, 0.2), 0 0 30px rgba(138, 43, 226, 0.1)',
                   zIndex: 1
                 }}
@@ -1574,10 +1574,10 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-4 shadow-xl relative"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(25, 25, 112, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                borderColor: 'rgba(25, 25, 112, 0.6)',
+                borderColor: 'rgba(15, 15, 80, 0.9)',
                 boxShadow: '0 25px 50px rgba(25, 25, 112, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
                 zIndex: 1
               }}
@@ -1594,7 +1594,7 @@ const ProfilePage = () => {
                   value={headline}
                   onChange={(e) => setHeadline(e.target.value)}
                   placeholder="e.g., Senior Software Engineer at Tech Corp"
-                  className="w-full bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-black dark:text-black placeholder:text-black dark:placeholder:text-black text-sm"
+                  className="w-full bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-black  placeholder:text-black  text-sm"
                 />
               ) : (
                 <p className="text-black text-sm font-medium">
@@ -1608,10 +1608,10 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-4 shadow-xl relative"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(70, 130, 180, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                borderColor: 'rgba(70, 130, 180, 0.6)',
+                borderColor: 'rgba(40, 90, 130, 0.9)',
                 boxShadow: '0 25px 50px rgba(70, 130, 180, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
                 zIndex: 1
               }}
@@ -1640,7 +1640,7 @@ const ProfilePage = () => {
                   </p>
                 ) : (
                   education.map((edu, index) => (
-                    <div key={index} className="bg-white/50 dark:bg-slate-700/50 rounded-lg p-4 border border-emerald-200/30 dark:border-emerald-500/30">
+                    <div key={index} className="bg-white/50  rounded-lg p-4 border border-emerald-200/30 ">
                       {isEditing ? (
                         <div className="space-y-3">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -1649,14 +1649,14 @@ const ProfilePage = () => {
                               value={edu.school_name}
                               onChange={(e) => updateEducation(index, 'school_name', e.target.value)}
                               placeholder="School/University"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
+                              className="bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm text-black "
                             />
                             <input
                               type="text"
                               value={edu.degree}
                               onChange={(e) => updateEducation(index, 'degree', e.target.value)}
                               placeholder="Degree (e.g., Bachelor's)"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
+                              className="bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm text-black "
                             />
                           </div>
                           <input
@@ -1664,7 +1664,7 @@ const ProfilePage = () => {
                             value={edu.field_of_study}
                             onChange={(e) => updateEducation(index, 'field_of_study', e.target.value)}
                             placeholder="Field of Study"
-                            className="w-full bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm"
+                            className="w-full bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm"
                           />
                           <div className="grid grid-cols-2 gap-3">
                             <input
@@ -1672,14 +1672,14 @@ const ProfilePage = () => {
                               value={edu.start_year}
                               onChange={(e) => updateEducation(index, 'start_year', e.target.value)}
                               placeholder="Start Year"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
+                              className="bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm text-black "
                             />
                             <input
                               type="text"
                               value={edu.end_year}
                               onChange={(e) => updateEducation(index, 'end_year', e.target.value)}
                               placeholder="End Year"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
+                              className="bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm text-black "
                             />
                           </div>
                           <div className="flex justify-end">
@@ -1714,10 +1714,10 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-4 shadow-xl relative"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(25, 25, 112, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                borderColor: 'rgba(25, 25, 112, 0.6)',
+                borderColor: 'rgba(15, 15, 80, 0.9)',
                 boxShadow: '0 25px 50px rgba(25, 25, 112, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
                 zIndex: 1
               }}
@@ -1746,7 +1746,7 @@ const ProfilePage = () => {
                   </p>
                 ) : (
                   experience.map((exp, index) => (
-                    <div key={index} className="bg-white/50 dark:bg-slate-700/50 rounded-lg p-4 border border-blue-200/30 dark:border-blue-500/30">
+                    <div key={index} className="bg-white/50  rounded-lg p-4 border border-blue-200/30 ">
                       {isEditing ? (
                         <div className="space-y-3">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -1755,14 +1755,14 @@ const ProfilePage = () => {
                               value={exp.company_name}
                               onChange={(e) => updateExperience(index, 'company_name', e.target.value)}
                               placeholder="Company Name"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
+                              className="bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm text-black "
                             />
                             <input
                               type="text"
                               value={exp.position_title}
                               onChange={(e) => updateExperience(index, 'position_title', e.target.value)}
                               placeholder="Position Title"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
+                              className="bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm text-black "
                             />
                           </div>
                           <div className="grid grid-cols-2 gap-3">
@@ -1771,14 +1771,14 @@ const ProfilePage = () => {
                               value={exp.start_date}
                               onChange={(e) => updateExperience(index, 'start_date', e.target.value)}
                               placeholder="Start Date"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
+                              className="bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm text-black "
                             />
                             <input
                               type="text"
                               value={exp.end_date}
                               onChange={(e) => updateExperience(index, 'end_date', e.target.value)}
                               placeholder="End Date (or Present)"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
+                              className="bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm text-black "
                             />
                           </div>
                           <textarea
@@ -1786,7 +1786,7 @@ const ProfilePage = () => {
                             onChange={(e) => updateExperience(index, 'description', e.target.value)}
                             placeholder="Job description and responsibilities"
                             rows={3}
-                            className="w-full bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black resize-none"
+                            className="w-full bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm text-black  resize-none"
                           />
                           <div className="flex justify-end">
                             <Button
@@ -1821,10 +1821,10 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-4 shadow-xl relative"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(138, 43, 226, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                borderColor: 'rgba(138, 43, 226, 0.6)',
+                borderColor: 'rgba(100, 20, 150, 0.9)',
                 boxShadow: '0 25px 50px rgba(138, 43, 226, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
                 zIndex: 5
               }}
@@ -1871,10 +1871,10 @@ const ProfilePage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-2 shadow-xl relative"
+              className="backdrop-blur-sm rounded-2xl p-3 md:p-4 lg:p-6 border-4 shadow-xl relative"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 0, 0, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                borderColor: 'rgba(255, 0, 0, 0.6)',
+                borderColor: 'rgba(200, 0, 0, 0.9)',
                 boxShadow: '0 25px 50px rgba(255, 0, 0, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)',
                 zIndex: 1
               }}
@@ -1903,7 +1903,7 @@ const ProfilePage = () => {
                   </p>
                 ) : (
                   certifications.map((cert, index) => (
-                    <div key={index} className="bg-white/50 dark:bg-slate-700/50 rounded-lg p-4 border border-orange-200/30 dark:border-orange-500/30">
+                    <div key={index} className="bg-white/50  rounded-lg p-4 border border-orange-200/30 ">
                       {isEditing ? (
                         <div className="space-y-3">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -1912,14 +1912,14 @@ const ProfilePage = () => {
                               value={cert.certification_name}
                               onChange={(e) => updateCertification(index, 'certification_name', e.target.value)}
                               placeholder="Certification Name"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
+                              className="bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm text-black "
                             />
                             <input
                               type="text"
                               value={cert.issuing_org}
                               onChange={(e) => updateCertification(index, 'issuing_org', e.target.value)}
                               placeholder="Issuing Organization"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
+                              className="bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm text-black "
                             />
                           </div>
                           <div className="grid grid-cols-2 gap-3">
@@ -1928,14 +1928,14 @@ const ProfilePage = () => {
                               value={cert.issue_date}
                               onChange={(e) => updateCertification(index, 'issue_date', e.target.value)}
                               placeholder="Issue Date"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
+                              className="bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm text-black "
                             />
                             <input
                               type="text"
                               value={cert.expiry_date}
                               onChange={(e) => updateCertification(index, 'expiry_date', e.target.value)}
                               placeholder="Expiry Date (if applicable)"
-                              className="bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-3 py-2 text-sm text-black dark:text-black"
+                              className="bg-white/50  border border-gray-300  rounded-lg px-3 py-2 text-sm text-black "
                             />
                           </div>
                           <div className="flex justify-end">
@@ -1974,10 +1974,10 @@ const ProfilePage = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
-              className="backdrop-blur-sm rounded-2xl p-6 border-2 shadow-xl"
+              className="backdrop-blur-sm rounded-2xl p-6 border-4 shadow-xl"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(138, 43, 226, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                borderColor: 'rgba(138, 43, 226, 0.6)',
+                borderColor: 'rgba(100, 20, 150, 0.9)',
                 boxShadow: '0 25px 50px rgba(138, 43, 226, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
               }}
             >
@@ -2016,48 +2016,32 @@ const ProfilePage = () => {
                   <BarChart3 size={20} />
                   <span>Go To Feed</span>
                 </button>
-                <button
-                  onClick={() => {
-                    if (userRole === 'recruiter' || userRole === 'admin') {
-                      toast.info('Feature only available for students');
-                      return;
-                    }
-                    router.push('/cv-curator');
-                  }}
-                  className={`w-full flex items-center gap-3 p-3 rounded-lg shadow-lg transition-all duration-200 text-black font-bold relative ${userRole === 'recruiter' || userRole === 'admin'
-                    ? 'blur-sm opacity-50 cursor-not-allowed'
-                    : 'hover:shadow-xl hover:scale-105'
-                    }`}
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
-                    boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
-                  }}
-                  disabled={userRole === 'recruiter' || userRole === 'admin'}
-                >
-                  <FileText size={20} />
-                  <span>CV Curator</span>
-                </button>
-                <button
-                  onClick={() => {
-                    if (userRole === 'recruiter' || userRole === 'admin') {
-                      toast.info('Feature only available for students');
-                      return;
-                    }
-                    router.push('/interview-agent');
-                  }}
-                  className={`w-full flex items-center gap-3 p-3 rounded-lg shadow-lg transition-all duration-200 text-black font-bold relative ${userRole === 'recruiter' || userRole === 'admin'
-                    ? 'blur-sm opacity-50 cursor-not-allowed'
-                    : 'hover:shadow-xl hover:scale-105'
-                    }`}
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
-                    boxShadow: '0 5px 15px rgba(138, 43, 226, 0.3)'
-                  }}
-                  disabled={userRole === 'recruiter' || userRole === 'admin'}
-                >
-                  <Bot size={20} />
-                  <span>Interview Agent</span>
-                </button>
+                {(userRole !== 'recruiter' && userRole !== 'admin') && (
+                  <button
+                    onClick={() => router.push('/cv-curator')}
+                    className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-black font-bold"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(220, 20, 60, 0.8) 100%)',
+                      boxShadow: '0 5px 15px rgba(255, 215, 0, 0.3)'
+                    }}
+                  >
+                    <FileText size={20} />
+                    <span>CV Curator</span>
+                  </button>
+                )}
+                {(userRole !== 'recruiter' && userRole !== 'admin') && (
+                  <button
+                    onClick={() => router.push('/interview-agent')}
+                    className="w-full flex items-center gap-3 p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-black font-bold"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)',
+                      boxShadow: '0 5px 15px rgba(138, 43, 226, 0.3)'
+                    }}
+                  >
+                    <Bot size={20} />
+                    <span>Interview Agent</span>
+                  </button>
+                )}
                 {(userRole === 'recruiter' || userRole === 'admin') && (
                   <button
                     onClick={() => router.push('/recruiter/dashboard')}
@@ -2092,19 +2076,19 @@ const ProfilePage = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
-              className="backdrop-blur-sm rounded-2xl p-6 border-2 shadow-xl"
+              className="backdrop-blur-sm rounded-2xl p-6 border-4 shadow-xl"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(70, 130, 180, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                borderColor: 'rgba(70, 130, 180, 0.6)',
+                borderColor: 'rgba(40, 90, 130, 0.9)',
                 boxShadow: '0 25px 50px rgba(70, 130, 180, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
               }}
             >
               <h2 className="text-xl font-bold text-black mb-4">Recent Activity</h2>
               <div className="space-y-3">
                 {recentActivity.map((activity) => (
-                  <div key={activity.id} className="flex items-center gap-3 p-3 rounded-lg border-2 hover:shadow-md transition-all duration-200" style={{
+                  <div key={activity.id} className="flex items-center gap-3 p-3 rounded-lg border-4 hover:shadow-md transition-all duration-200" style={{
                     background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(70, 130, 180, 0.1) 100%)',
-                    borderColor: 'rgba(70, 130, 180, 0.3)'
+                    borderColor: 'rgba(40, 90, 130, 0.7)'
                   }}>
                     <div className="p-2 rounded-full" style={{
                       background: 'linear-gradient(135deg, rgba(70, 130, 180, 0.9) 0%, rgba(25, 25, 112, 0.8) 100%)'
@@ -2125,10 +2109,10 @@ const ProfilePage = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6 }}
-              className="backdrop-blur-sm rounded-2xl p-6 border-2 shadow-lg relative"
+              className="backdrop-blur-sm rounded-2xl p-6 border-4 shadow-lg relative"
               style={{
                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
-                borderColor: 'rgba(255, 215, 0, 0.6)',
+                borderColor: 'rgba(180, 140, 0, 0.9)',
                 boxShadow: '0 25px 50px rgba(255, 215, 0, 0.2), 0 0 30px rgba(138, 43, 226, 0.1)'
               }}
             >
@@ -2144,7 +2128,7 @@ const ProfilePage = () => {
                         value={socialLinks.linkedin}
                         onChange={(e) => setSocialLinks(prev => ({ ...prev, linkedin: e.target.value }))}
                         placeholder="LinkedIn URL"
-                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black dark:text-black max-w-full"
+                        className="flex-1 bg-white/50  border border-gray-300  rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black  max-w-full"
                       />
                     </div>
                     <div className="flex items-center gap-3">
@@ -2154,7 +2138,7 @@ const ProfilePage = () => {
                         value={socialLinks.facebook}
                         onChange={(e) => setSocialLinks(prev => ({ ...prev, facebook: e.target.value }))}
                         placeholder="Facebook URL"
-                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black dark:text-black max-w-full"
+                        className="flex-1 bg-white/50  border border-gray-300  rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black  max-w-full"
                       />
                     </div>
                     <div className="flex items-center gap-3">
@@ -2164,7 +2148,7 @@ const ProfilePage = () => {
                         value={socialLinks.phone}
                         onChange={(e) => setSocialLinks(prev => ({ ...prev, phone: e.target.value }))}
                         placeholder="Phone number"
-                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black dark:text-black max-w-full"
+                        className="flex-1 bg-white/50  border border-gray-300  rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black  max-w-full"
                       />
                     </div>
                     <div className="flex items-center gap-3">
@@ -2174,7 +2158,7 @@ const ProfilePage = () => {
                         value={userEmail || socialLinks.email}
                         readOnly
                         placeholder="Email address"
-                        className="flex-1 bg-white/50 dark:bg-slate-700/80 border border-gray-300 dark:border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black dark:text-black max-w-full cursor-not-allowed opacity-70"
+                        className="flex-1 bg-white/50  border border-gray-300  rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-xs md:text-sm text-black  max-w-full cursor-not-allowed opacity-70"
                       />
                     </div>
                   </>
@@ -2183,7 +2167,7 @@ const ProfilePage = () => {
                     {socialLinks.linkedin && (
                       <div className="flex items-center gap-3 text-black">
                         <FaLinkedin className="text-blue-600" />
-                        <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-sm hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                        <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-sm hover:text-purple-600  transition-colors font-medium">
                           LinkedIn Profile
                         </a>
                       </div>
@@ -2203,7 +2187,7 @@ const ProfilePage = () => {
                     {socialLinks.email && (
                       <div className="flex items-center gap-3 text-black">
                         <FaEnvelope className="text-red-600" />
-                        <a href={`mailto:${socialLinks.email}`} className="text-sm hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium">
+                        <a href={`mailto:${socialLinks.email}`} className="text-sm hover:text-purple-600  transition-colors font-medium">
                           {socialLinks.email}
                         </a>
                       </div>

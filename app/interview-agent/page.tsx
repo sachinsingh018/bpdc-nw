@@ -1358,10 +1358,10 @@ export default function InterviewAgentPage() {
                             /* Category Selection Screen */
                             <div className="max-w-5xl w-full">
                                 <div className="text-center mb-8">
-                                    <h1 className="text-4xl font-bold text-black dark:text-black mb-4">
+                                    <h1 className="text-4xl font-bold text-black  mb-4">
                                         🎤 Choose Your Interview Category
                                     </h1>
-                                    <p className="text-lg text-black dark:text-black opacity-80">
+                                    <p className="text-lg text-black  opacity-80">
                                         Select a category to begin your practice interview
                                     </p>
                                 </div>
@@ -1402,12 +1402,12 @@ export default function InterviewAgentPage() {
                                 </div>
                             </div>
                         ) : currentQuestion ? (
-                            <div className="max-w-4xl w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-700/20 p-8">
+                            <div className="max-w-4xl w-full bg-white/80  backdrop-blur-md rounded-2xl shadow-xl border border-white/20  p-8">
                                 {/* Question Progress Tracker */}
-                                <div className="mb-6 pb-6 border-b border-gray-200/50 dark:border-gray-700/50">
+                                <div className="mb-6 pb-6 border-b border-gray-200/50 ">
                                     {/* Category Tag */}
                                     <div className="flex items-center justify-between mb-3">
-                                        <span className="text-sm font-medium text-black dark:text-black bg-purple-100 dark:bg-purple-900/20 px-3 py-1 rounded-full">
+                                        <span className="text-sm font-medium text-black  bg-purple-100  px-3 py-1 rounded-full">
                                             {currentQuestion.category}
                                         </span>
                                         {!eligibility.isInProgress && (
@@ -1421,7 +1421,7 @@ export default function InterviewAgentPage() {
                                                         setSelectedCategory(null);
                                                     }
                                                 }}
-                                                className="flex items-center space-x-1.5 text-xs font-medium text-black dark:text-black bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 px-3 py-1.5 rounded-lg transition-all duration-200 shadow-sm hover:shadow"
+                                                className="flex items-center space-x-1.5 text-xs font-medium text-black  bg-gray-100  hover:bg-gray-200  px-3 py-1.5 rounded-lg transition-all duration-200 shadow-sm hover:shadow"
                                                 title="Change interview category"
                                             >
                                                 <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1431,17 +1431,17 @@ export default function InterviewAgentPage() {
                                             </button>
                                         )}
                                         {eligibility.isInProgress && (
-                                            <div className="text-xs font-medium text-yellow-700 dark:text-yellow-300 bg-yellow-100 dark:bg-yellow-900/20 px-3 py-1.5 rounded-lg">
+                                            <div className="text-xs font-medium text-yellow-700  bg-yellow-100  px-3 py-1.5 rounded-lg">
                                                 Interview in progress - Category locked
                                             </div>
                                         )}
                                     </div>
                                     <div className="flex items-center justify-between mb-3">
                                         <div className="flex items-center space-x-3">
-                                            <span className="text-sm font-semibold text-black dark:text-black">
+                                            <span className="text-sm font-semibold text-black ">
                                                 Question {currentQuestionIndex + 1} of {currentQuestions.length}
                                             </span>
-                                            <div className="h-1 bg-gray-200 dark:bg-gray-700 rounded-full flex-1 max-w-xs" style={{ maxWidth: '200px' }}>
+                                            <div className="h-1 bg-gray-200  rounded-full flex-1 max-w-xs" style={{ maxWidth: '200px' }}>
                                                 <div
                                                     className="h-full bg-purple-600 rounded-full transition-all duration-300"
                                                     style={{ width: `${((currentQuestionIndex + 1) / currentQuestions.length) * 100}%` }}
@@ -1458,10 +1458,10 @@ export default function InterviewAgentPage() {
                                                 <div
                                                     key={index}
                                                     className={`transition-all duration-300 ${isCurrent
-                                                        ? 'size-3 bg-purple-600 ring-2 ring-purple-300 dark:ring-purple-500'
+                                                        ? 'size-3 bg-purple-600 ring-2 ring-purple-300 '
                                                         : isCompleted
-                                                            ? 'size-2.5 bg-purple-400 dark:bg-purple-500'
-                                                            : 'size-2 bg-gray-300 dark:bg-gray-600'
+                                                            ? 'size-2.5 bg-purple-400 '
+                                                            : 'size-2 bg-gray-300 '
                                                         } rounded-full`}
                                                     title={`Question ${index + 1}: ${isCompleted ? 'Completed' : isCurrent ? 'Current' : 'Pending'}`}
                                                 />
@@ -1472,15 +1472,15 @@ export default function InterviewAgentPage() {
 
                                 {/* Question */}
                                 <div className="mb-8">
-                                    <h2 className="text-2xl font-bold text-black dark:text-black mb-4">
+                                    <h2 className="text-2xl font-bold text-black  mb-4">
                                         {currentQuestion.question}
                                     </h2>
                                 </div>
 
                                 {/* Show warning if question already answered */}
                                 {currentAnswer && (
-                                    <div className="mb-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg p-3">
-                                        <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                                    <div className="mb-4 bg-yellow-50  border border-yellow-200  rounded-lg p-3">
+                                        <p className="text-sm text-yellow-800 ">
                                             ⚠️ This question has already been answered. You can record a new answer to update it.
                                         </p>
                                     </div>
@@ -1521,7 +1521,7 @@ export default function InterviewAgentPage() {
                                             <div className="size-4 bg-purple-500 rounded-full animate-bounce"></div>
                                             <div className="size-4 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                                             <div className="size-4 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                                            <span className="text-gray-600 dark:text-gray-400">Processing your response...</span>
+                                            <span className="text-gray-600 ">Processing your response...</span>
                                         </div>
                                     </div>
                                 )}
@@ -1529,11 +1529,11 @@ export default function InterviewAgentPage() {
                                 {/* Answer Display */}
                                 {currentAnswer && (
                                     <div className="mb-6">
-                                        <h3 className="text-lg font-semibold text-gray-900 dark:text-black mb-3">
+                                        <h3 className="text-lg font-semibold text-gray-900  mb-3">
                                             Your Answer:
                                         </h3>
-                                        <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
-                                            <p className="text-gray-800 dark:text-gray-200">
+                                        <div className="bg-gray-100  rounded-lg p-4">
+                                            <p className="text-gray-800 ">
                                                 {currentAnswer.answer}
                                             </p>
                                         </div>
@@ -1543,11 +1543,11 @@ export default function InterviewAgentPage() {
                                 {/* AI Feedback */}
                                 {showFeedback && aiFeedback && (
                                     <div className="mb-6">
-                                        <h3 className="text-lg font-semibold text-gray-900 dark:text-black mb-3">
+                                        <h3 className="text-lg font-semibold text-gray-900  mb-3">
                                             AI Feedback:
                                         </h3>
-                                        <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 border border-purple-200 dark:border-purple-700">
-                                            <p className="text-gray-800 dark:text-gray-200">
+                                        <div className="bg-purple-50  rounded-lg p-4 border border-purple-200 ">
+                                            <p className="text-gray-800 ">
                                                 {aiFeedback}
                                             </p>
                                         </div>
@@ -1559,12 +1559,12 @@ export default function InterviewAgentPage() {
                                     <button
                                         onClick={previousQuestion}
                                         disabled={currentQuestionIndex === 0}
-                                        className="px-4 py-2 text-black dark:text-black hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="px-4 py-2 text-black  hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         ← Previous
                                     </button>
 
-                                    <div className="text-sm text-black dark:text-black">
+                                    <div className="text-sm text-black ">
                                         {currentQuestionIndex + 1} of {currentQuestions.length}
                                     </div>
 
@@ -1578,8 +1578,8 @@ export default function InterviewAgentPage() {
                                 </div>
                             </div>
                         ) : (
-                            <div className="max-w-4xl w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 dark:border-gray-700/20 p-8 text-center">
-                                <p className="text-black dark:text-black">Loading questions...</p>
+                            <div className="max-w-4xl w-full bg-white/80  backdrop-blur-md rounded-2xl shadow-xl border border-white/20  p-8 text-center">
+                                <p className="text-black ">Loading questions...</p>
                             </div>
                         )}
                     </div>
@@ -1593,9 +1593,9 @@ export default function InterviewAgentPage() {
                 rel="noopener noreferrer"
                 className="fixed bottom-2 right-2 sm:bottom-4 sm:right-4 z-50"
             >
-                <div className="bg-white/80 dark:bg-gray-900/80 text-black dark:text-black text-xs sm:text-sm px-3 py-1 rounded-full shadow-md backdrop-blur hover:bg-white dark:hover:bg-gray-800 transition cursor-pointer">
+                <div className="bg-white/80  text-black  text-xs sm:text-sm px-3 py-1 rounded-full shadow-md backdrop-blur hover:bg-white  transition cursor-pointer">
                     Powered by{' '}
-                    <span className="font-semibold text-gray-900 dark:text-black">
+                    <span className="font-semibold text-gray-900 ">
                         Networkqy
                     </span>
                 </div>

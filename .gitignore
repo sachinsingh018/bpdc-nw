@@ -43,3 +43,12 @@ yarn-error.log*
 
 *Zone.Identifier
 .env.local.bak
+
+# Generated credentials (sensitive)
+lib/Student_Info_credentials.csv
+lib/Student_Info_email_password.csv
+lib/Excel_Student_credentials.csv
+
+# Student source files (contain PII)
+NQY_DataSheet (1) (1).xlsx
+lib/Student_Info.csv

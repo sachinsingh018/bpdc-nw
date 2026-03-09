@@ -15,10 +15,10 @@ export const Overview = () => {
       <div className="rounded-xl p-6 flex flex-col gap-8 leading-relaxed text-center max-w-xl">
         <div className="flex justify-center items-center py-4">
           <Image
-            src="/img.jpg"
+            src="/bpdc.png"
             alt="BITS Pilani Dubai Campus"
-            width={300}
-            height={60}
+            width={200}
+            height={40}
             className="hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 ease-in-out rounded-md"
           />
         </div>

@@ -134,7 +134,7 @@ export default function Home() {
                                 }}
                             >
                                 <img
-                                    src="/img.jpg"
+                                    src="/bpdc.png"
                                     alt="BITS Pilani Dubai Campus Logo"
                                     className="h-24 w-auto mx-auto object-contain"
                                 />
@@ -187,7 +187,7 @@ export default function Home() {
                             {/* Subtle backdrop container */}
                             <div className="relative bg-white/50 backdrop-blur-md border-2 border-white/60 rounded-lg p-2 sm:p-3 md:p-4 shadow-2xl group-hover:bg-white/60 group-hover:shadow-2xl transition-all duration-300">
                                 <img
-                                    src="/img.jpg"
+                                    src="/bpdc.png"
                                     alt="BITS Pilani Dubai Campus Logo"
                                     className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain filter drop-shadow-lg"
                                 />

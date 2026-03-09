@@ -317,7 +317,7 @@ const ConnectionsPage = () => {
                     minHeight: 'calc(100vh - 80px)'
                 }}
             >
-                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-1 bg-gradient-to-br from-white/90 via-bits-golden-yellow/10 to-white/90 dark:from-slate-800/90 dark:via-bits-deep-purple/20 dark:to-slate-800/90 rounded-lg p-1 mb-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20 relative z-10 pointer-events-auto">
+                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-1 bg-gradient-to-br from-white/90 via-bits-golden-yellow/10 to-white/90  rounded-lg p-1 mb-6 border border-bits-golden-yellow/50  shadow-xl shadow-bits-golden-yellow/10  relative z-10 pointer-events-auto">
                     <button
                         type="button"
                         onClick={() => setActiveTab('connections')}
@@ -329,7 +329,7 @@ const ConnectionsPage = () => {
                         <FaHandshake size={16} />
                         <span className="hidden sm:inline">Connections</span>
                         <span className="sm:hidden">Connections</span>
-                        <span className="bg-white/20 dark:bg-black/20 px-2 py-0.5 rounded-full text-xs">
+                        <span className="bg-white/20  px-2 py-0.5 rounded-full text-xs">
                             {connections.length}
                         </span>
                     </button>
@@ -344,7 +344,7 @@ const ConnectionsPage = () => {
                         <FaClock size={16} />
                         <span className="hidden sm:inline">Requests</span>
                         <span className="sm:hidden">Requests</span>
-                        <span className="bg-white/20 dark:bg-black/20 px-2 py-0.5 rounded-full text-xs">
+                        <span className="bg-white/20  px-2 py-0.5 rounded-full text-xs">
                             {pendingRequests.length}
                         </span>
                     </button>
@@ -367,7 +367,7 @@ const ConnectionsPage = () => {
                         <FaEnvelope size={16} />
                         <span className="hidden sm:inline">Notifications</span>
                         <span className="sm:hidden">Notifications</span>
-                        <span className="bg-white/20 dark:bg-black/20 px-2 py-0.5 rounded-full text-xs">
+                        <span className="bg-white/20  px-2 py-0.5 rounded-full text-xs">
                             {notifications.length}
                         </span>
                     </button>
@@ -384,13 +384,13 @@ const ConnectionsPage = () => {
                             <h2 className="text-xl font-bold text-white">Your Connections</h2>
                             {(!currentUserId) ? (
                                 <div className="flex justify-center items-center py-12">
-                                    <span className="text-gray-500 dark:text-gray-400">Loading...</span>
+                                    <span className="text-gray-500 ">Loading...</span>
                                 </div>
                             ) : connections.length === 0 ? (
                                 <div className="text-center py-12">
                                     <FaUserFriends size={48} className="text-gray-400 mx-auto mb-4" />
-                                    <h3 className="text-lg font-medium text-gray-900 dark:text-black mb-2">No connections yet</h3>
-                                    <p className="text-gray-600 dark:text-gray-400 mb-4">Start building your network by finding and connecting with other professionals.</p>
+                                    <h3 className="text-lg font-medium text-gray-900  mb-2">No connections yet</h3>
+                                    <p className="text-gray-600  mb-4">Start building your network by finding and connecting with other professionals.</p>
                                     <button
                                         onClick={() => router.push('/friends')}
                                         className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-black rounded-lg transition-colors"
@@ -405,7 +405,7 @@ const ConnectionsPage = () => {
                                             key={connection.id}
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200 dark:border-white/20 shadow-lg cursor-pointer hover:shadow-xl transition-shadow hover:ring-2 hover:ring-purple-400"
+                                            className="bg-white/80  backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200  shadow-lg cursor-pointer hover:shadow-xl transition-shadow hover:ring-2 hover:ring-purple-400"
                                             onClick={e => {
                                                 if ((e.target as HTMLElement).closest('button')) return;
                                                 const user = getConnectionUser(connection, currentUserId);
@@ -416,11 +416,11 @@ const ConnectionsPage = () => {
                                         >
                                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                                 <div className="flex items-center gap-4 min-w-0 flex-1">
-                                                    <div className="size-12 bg-purple-100 dark:bg-purple-600/20 rounded-full flex items-center justify-center shrink-0">
-                                                        <FaUser className="text-purple-600 dark:text-purple-400" size={20} />
+                                                    <div className="size-12 bg-purple-100  rounded-full flex items-center justify-center shrink-0">
+                                                        <FaUser className="text-purple-600 " size={20} />
                                                     </div>
                                                     <div className="min-w-0 flex-1">
-                                                        <h3 className="font-semibold text-gray-900 dark:text-black truncate">
+                                                        <h3 className="font-semibold text-gray-900  truncate">
                                                             {getConnectionUser(connection, currentUserId)?.name || 'Networkqy User'}
                                                         </h3>
                                                         <p className="text-sm text-black truncate">
@@ -475,19 +475,19 @@ const ConnectionsPage = () => {
                             animate={{ opacity: 1, y: 0 }}
                             className="space-y-4"
                         >
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-black">Pending Requests</h2>
+                            <h2 className="text-xl font-semibold text-gray-900 ">Pending Requests</h2>
                             {pendingRequests.length === 0 ? (
                                 <div className="text-center py-12">
                                     <FaClock size={48} className="text-gray-400 mx-auto mb-4" />
-                                    <h3 className="text-lg font-medium text-gray-900 dark:text-black mb-2">No pending requests</h3>
-                                    <p className="text-gray-600 dark:text-gray-400">You don&apos;t have any pending connection requests.</p>
+                                    <h3 className="text-lg font-medium text-gray-900  mb-2">No pending requests</h3>
+                                    <p className="text-gray-600 ">You don&apos;t have any pending connection requests.</p>
                                 </div>
                             ) : (
                                 <div className="space-y-6">
                                     {/* Received Requests */}
                                     {currentUserId && pendingRequests.filter(request => request.receiver_id === currentUserId).length > 0 && (
                                         <div>
-                                            <h3 className="text-lg font-medium text-gray-900 dark:text-black mb-3">Received Requests</h3>
+                                            <h3 className="text-lg font-medium text-gray-900  mb-3">Received Requests</h3>
                                             <div className="grid gap-4">
                                                 {pendingRequests
                                                     .filter(request => request.receiver_id === currentUserId)
@@ -496,7 +496,7 @@ const ConnectionsPage = () => {
                                                             key={request.id}
                                                             initial={{ opacity: 0, y: 20 }}
                                                             animate={{ opacity: 1, y: 0 }}
-                                                            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200 dark:border-white/20 shadow-lg cursor-pointer hover:shadow-xl transition-shadow hover:ring-2 hover:ring-purple-400"
+                                                            className="bg-white/80  backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200  shadow-lg cursor-pointer hover:shadow-xl transition-shadow hover:ring-2 hover:ring-purple-400"
                                                             onClick={e => {
                                                                 if ((e.target as HTMLElement).closest('button')) return;
                                                                 if (request.sender?.email) {
@@ -506,11 +506,11 @@ const ConnectionsPage = () => {
                                                         >
                                                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                                                 <div className="flex items-center gap-4 min-w-0 flex-1">
-                                                                    <div className="size-12 bg-blue-100 dark:bg-blue-600/20 rounded-full flex items-center justify-center shrink-0">
-                                                                        <FaUser className="text-blue-600 dark:text-blue-400" size={20} />
+                                                                    <div className="size-12 bg-blue-100  rounded-full flex items-center justify-center shrink-0">
+                                                                        <FaUser className="text-blue-600 " size={20} />
                                                                     </div>
                                                                     <div className="min-w-0 flex-1">
-                                                                        <h3 className="font-semibold text-gray-900 dark:text-black truncate">
+                                                                        <h3 className="font-semibold text-gray-900  truncate">
                                                                             {request.sender?.name || 'Networkqy User'}
                                                                         </h3>
                                                                         <p className="text-sm text-black truncate">
@@ -549,7 +549,7 @@ const ConnectionsPage = () => {
                                     {/* Sent Requests */}
                                     {currentUserId && pendingRequests.filter(request => request.sender_id === currentUserId).length > 0 && (
                                         <div>
-                                            <h3 className="text-lg font-medium text-gray-900 dark:text-black mb-3">Sent Requests</h3>
+                                            <h3 className="text-lg font-medium text-gray-900  mb-3">Sent Requests</h3>
                                             <div className="grid gap-4">
                                                 {pendingRequests
                                                     .filter(request => request.sender_id === currentUserId)
@@ -558,7 +558,7 @@ const ConnectionsPage = () => {
                                                             key={request.id}
                                                             initial={{ opacity: 0, y: 20 }}
                                                             animate={{ opacity: 1, y: 0 }}
-                                                            className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200 dark:border-white/20 shadow-lg cursor-pointer hover:shadow-xl transition-shadow hover:ring-2 hover:ring-purple-400"
+                                                            className="bg-white/80  backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200  shadow-lg cursor-pointer hover:shadow-xl transition-shadow hover:ring-2 hover:ring-purple-400"
                                                             onClick={e => {
                                                                 if ((e.target as HTMLElement).closest('button')) return;
                                                                 if (request.receiver?.email) {
@@ -568,11 +568,11 @@ const ConnectionsPage = () => {
                                                         >
                                                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                                                 <div className="flex items-center gap-4 min-w-0 flex-1">
-                                                                    <div className="size-12 bg-yellow-100 dark:bg-yellow-600/20 rounded-full flex items-center justify-center shrink-0">
-                                                                        <FaUser className="text-yellow-600 dark:text-yellow-400" size={20} />
+                                                                    <div className="size-12 bg-yellow-100  rounded-full flex items-center justify-center shrink-0">
+                                                                        <FaUser className="text-yellow-600 " size={20} />
                                                                     </div>
                                                                     <div className="min-w-0 flex-1">
-                                                                        <h3 className="font-semibold text-gray-900 dark:text-black truncate">
+                                                                        <h3 className="font-semibold text-gray-900  truncate">
                                                                             {request.receiver?.name || 'Networkqy User'}
                                                                         </h3>
                                                                         <p className="text-sm text-black truncate">
@@ -611,12 +611,12 @@ const ConnectionsPage = () => {
                             animate={{ opacity: 1, y: 0 }}
                             className="space-y-4"
                         >
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-black">Notifications</h2>
+                            <h2 className="text-xl font-semibold text-gray-900 ">Notifications</h2>
                             {notifications.length === 0 ? (
                                 <div className="text-center py-12">
                                     <FaEnvelope size={48} className="text-gray-400 mx-auto mb-4" />
-                                    <h3 className="text-lg font-medium text-gray-900 dark:text-black mb-2">No notifications</h3>
-                                    <p className="text-gray-600 dark:text-gray-400">You&apos;re all caught up!</p>
+                                    <h3 className="text-lg font-medium text-gray-900  mb-2">No notifications</h3>
+                                    <p className="text-gray-600 ">You&apos;re all caught up!</p>
                                 </div>
                             ) : (
                                 <div className="grid gap-4">
@@ -625,7 +625,7 @@ const ConnectionsPage = () => {
                                             key={notification.id}
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            className={`bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200 dark:border-white/20 shadow-lg cursor-pointer hover:shadow-xl transition-shadow ${!notification.is_read ? 'ring-2 ring-purple-500' : ''
+                                            className={`bg-white/80  backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200  shadow-lg cursor-pointer hover:shadow-xl transition-shadow ${!notification.is_read ? 'ring-2 ring-purple-500' : ''
                                                 }`}
                                             onClick={() => {
                                                 if (!notification.is_read) {
@@ -635,18 +635,18 @@ const ConnectionsPage = () => {
                                         >
                                             <div className="flex items-start justify-between gap-4">
                                                 <div className="flex items-start gap-4 min-w-0 flex-1">
-                                                    <div className={`size-12 rounded-full flex items-center justify-center shrink-0 ${notification.type === 'connection_request' ? 'bg-blue-100 dark:bg-blue-600/20' :
-                                                        notification.type === 'connection_accepted' ? 'bg-green-100 dark:bg-green-600/20' :
-                                                            'bg-red-100 dark:bg-red-600/20'
+                                                    <div className={`size-12 rounded-full flex items-center justify-center shrink-0 ${notification.type === 'connection_request' ? 'bg-blue-100 ' :
+                                                        notification.type === 'connection_accepted' ? 'bg-green-100 ' :
+                                                            'bg-red-100 '
                                                         }`}>
                                                         <FaEnvelope className={
-                                                            notification.type === 'connection_request' ? 'text-blue-600 dark:text-blue-400' :
-                                                                notification.type === 'connection_accepted' ? 'text-green-600 dark:text-green-400' :
-                                                                    'text-red-600 dark:text-red-400'
+                                                            notification.type === 'connection_request' ? 'text-blue-600 ' :
+                                                                notification.type === 'connection_accepted' ? 'text-green-600 ' :
+                                                                    'text-red-600 '
                                                         } size={20} />
                                                     </div>
                                                     <div className="min-w-0 flex-1">
-                                                        <h3 className="font-semibold text-gray-900 dark:text-black">
+                                                        <h3 className="font-semibold text-gray-900 ">
                                                             {notification.title}
                                                         </h3>
                                                         <p className="text-sm text-black mt-1 line-clamp-3">

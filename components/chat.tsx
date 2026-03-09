@@ -495,7 +495,7 @@ export function Chat({
 
       {/* Chat History Floating Widget */}
       {user && (
-        <div className="hidden lg:block fixed right-4 top-24 w-80 z-40 max-h-[70vh]">
+        <div className="hidden xl:block fixed right-4 top-24 w-72 xl:w-80 z-40 max-h-[70vh]">
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -506,7 +506,7 @@ export function Chat({
               boxShadow: '0 25px 50px rgba(0, 0, 0, 0.1), 0 0 30px rgba(255, 215, 0, 0.05)',
             }}
           >
-            <h2 className="text-lg font-bold text-black dark:text-white mb-4 flex items-center gap-2">
+            <h2 className="text-lg font-bold text-black mb-4 flex items-center gap-2">
               <MessageSquare className="size-5 text-blue-600" />
               Chat History
             </h2>
@@ -518,12 +518,12 @@ export function Chat({
                 <div className="space-y-2">
                   {[1, 2, 3].map((i) => (
                     <div key={i} className="animate-pulse">
-                      <div className="h-16 bg-gray-200 dark:bg-gray-700 rounded-lg" />
+                      <div className="h-16 bg-gray-200 rounded-lg" />
                     </div>
                   ))}
                 </div>
               ) : chatHistory.length === 0 ? (
-                <p className="text-sm text-gray-500 dark:text-gray-400 text-center py-4">
+                <p className="text-sm text-gray-500 text-center py-4">
                   No chat history yet
                 </p>
               ) : (
@@ -537,8 +537,8 @@ export function Chat({
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all duration-200 ${isSelected
-                        ? 'bg-blue-100 dark:bg-blue-900/30 border-blue-400 dark:border-blue-600'
-                        : 'bg-white/80 dark:bg-gray-800/80 border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-500'
+                        ? 'bg-blue-100 border-blue-400'
+                        : 'bg-white/80 border-gray-200 hover:border-blue-300'
                         }`}
                       style={{
                         background: isSelected
@@ -572,10 +572,10 @@ export function Chat({
                         <MessageSquare size={16} className="text-white" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-bold text-black dark:text-white truncate">
+                        <p className="text-sm font-bold text-black truncate">
                           {chat.title}
                         </p>
-                        <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">
+                        <p className="text-xs text-gray-600 mt-0.5">
                           {timeAgo}
                         </p>
                       </div>
@@ -585,10 +585,10 @@ export function Chat({
               )}
             </div>
             {onNewChat && (
-              <div className="mt-3 pt-3 border-t border-white/20 dark:border-white/10">
+              <div className="mt-3 pt-3 border-t border-white/20">
                 <Button
                   onClick={onNewChat}
-                  className="w-full bg-white/20 dark:bg-black/20 backdrop-blur-sm border border-white/20 dark:border-white/20 hover:bg-white/30 dark:hover:bg-black/30 text-black dark:text-white text-sm font-medium"
+                  className="w-full bg-white/20 backdrop-blur-sm border border-white/20 hover:bg-white/30 text-black text-sm font-medium"
                   variant="ghost"
                 >
                   <Plus className="size-4 mr-2" />

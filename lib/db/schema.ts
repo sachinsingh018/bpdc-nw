@@ -69,6 +69,9 @@ export const user = pgTable('User', {
 
   // Student status field
   student_status: varchar('student_status', { length: 20 }), // 'student' or 'alumni'
+
+  // Plain password stored for one-time distribution (e.g. bulk CSV import). Pull and share with users, then consider clearing.
+  initial_password_plain: varchar('initial_password_plain', { length: 255 }),
 });//a
 
 export type User = InferSelectModel<typeof user>;

@@ -111,6 +111,7 @@ export async function createUser({
   name,
   email,
   password,
+  initialPasswordPlain,
   linkedinInfo,
   goals,
   profilemetrics,
@@ -128,6 +129,8 @@ export async function createUser({
   name: string;
   email: string;
   password: string;
+  /** Plain password for one-time distribution (e.g. bulk import). Stored in initial_password_plain. */
+  initialPasswordPlain?: string | null;
   linkedinInfo?: string | null;
   goals?: string;
   profilemetrics?: string;
@@ -151,6 +154,7 @@ export async function createUser({
       name,
       email,
       password: hash,
+      initial_password_plain: initialPasswordPlain ?? undefined,
       linkedinInfo,
       goals,
       profilemetrics,
@@ -1370,6 +1374,35 @@ export async function updateUserPasswordById(userId: string, newPassword: string
       .where(eq(user.id, userId));
   } catch (error) {
     console.error('Failed to update user password:', error);
+    throw error;
+  }
+}
+
+/** Update existing user for student import: set password, plain copy, name, role, student_status, interviewCount, dailyMessageCount. */
+export async function updateUserForStudentImport(
+  email: string,
+  opts: {
+    newPassword: string;
+    initialPasswordPlain: string;
+    name: string;
+  }
+) {
+  try {
+    const hashedPassword = await hash(opts.newPassword, 10);
+    return await db
+      .update(user)
+      .set({
+        password: hashedPassword,
+        initial_password_plain: opts.initialPasswordPlain,
+        name: opts.name,
+        role: 'user',
+        student_status: 'student',
+        interviewCount: 0,
+        dailyMessageCount: 0,
+      })
+      .where(eq(user.email, email));
+  } catch (error) {
+    console.error('Failed to update user for student import:', error);
     throw error;
   }
 }

@@ -107,13 +107,13 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                         {/* Logo Image */}
                         <div className="flex-shrink-0">
                             <img
-                                src="/img.jpg"
+                                src="/bpdc.png"
                                 alt="BITS Pilani Dubai Campus Logo"
                                 className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 object-contain rounded-lg group-hover:scale-105 transition-transform"
                             />
                         </div>
                         {/* Brand Text - Hidden on very small screens, shown on md and up, truncated on smaller screens */}
-                        <span className="hidden md:inline text-xs md:text-sm lg:text-base xl:text-lg font-semibold md:font-bold bg-gradient-to-r from-red-800 via-yellow-700 to-blue-900 bg-clip-text text-transparent whitespace-nowrap drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] truncate max-w-[200px] lg:max-w-none">
+                        <span className="hidden md:inline text-xs md:text-sm lg:text-base xl:text-lg font-semibold md:font-bold text-blue-900 whitespace-nowrap drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] truncate max-w-[200px] lg:max-w-none">
                             BITS Pilani Dubai Campus
                         </span>
                     </button>

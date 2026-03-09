@@ -238,12 +238,12 @@ export default function SkillAssessmentPage() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="max-w-md mx-auto mb-8"
                 >
-                    <Card className="backdrop-blur-sm rounded-2xl border-2 shadow-xl" style={{
+                    <Card className="backdrop-blur-sm rounded-2xl border-2 shadow-xl bg-white" style={{
                         background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 30%, rgba(138, 43, 226, 0.1) 70%, rgba(255, 255, 255, 0.95) 100%)',
                         borderColor: 'rgba(255, 215, 0, 0.6)',
                         boxShadow: '0 25px 50px rgba(25, 25, 112, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
                     }}>
-                        <CardHeader>
+                        <CardHeader className="bg-transparent">
                             <CardTitle className="text-black flex items-center gap-2 font-bold">
                                 <Target className="size-5 text-yellow-600" />
                                 Choose a Skill
@@ -252,12 +252,12 @@ export default function SkillAssessmentPage() {
                                 Select a skill to begin your assessment
                             </CardDescription>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="bg-transparent">
                             <Select value={selectedSkill} onValueChange={handleSkillChange}>
                                 <SelectTrigger className="bg-white/80 border-gray-300 text-black">
                                     <SelectValue placeholder="Select a skill..." />
                                 </SelectTrigger>
-                                <SelectContent className="bg-white border-gray-200">
+                                <SelectContent className="bg-white border-gray-200 max-h-[200px] overflow-y-auto">
                                     {skills.map((skill) => (
                                         <SelectItem
                                             key={skill.id}
@@ -301,14 +301,14 @@ export default function SkillAssessmentPage() {
                             {questions.map((question, questionIndex) => (
                                 <Card
                                     key={question.id}
-                                    className="backdrop-blur-sm rounded-2xl border-2 shadow-xl"
+                                    className="backdrop-blur-sm rounded-2xl border-2 shadow-xl bg-white"
                                     style={{
                                         background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(70, 130, 180, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
                                         borderColor: 'rgba(70, 130, 180, 0.6)',
                                         boxShadow: '0 25px 50px rgba(70, 130, 180, 0.2), 0 0 30px rgba(255, 215, 0, 0.1)'
                                     }}
                                 >
-                                    <CardHeader>
+                                    <CardHeader className="bg-transparent">
                                         <CardTitle className="text-black font-bold">
                                             Question {questionIndex + 1}
                                         </CardTitle>
@@ -316,7 +316,7 @@ export default function SkillAssessmentPage() {
                                             {question.question}
                                         </CardDescription>
                                     </CardHeader>
-                                    <CardContent>
+                                    <CardContent className="bg-transparent">
                                         <RadioGroup
                                             value={answers[questionIndex]?.toString() || ''}
                                             onValueChange={(value: string) => handleAnswerChange(questionIndex, parseInt(value))}
@@ -415,12 +415,12 @@ export default function SkillAssessmentPage() {
                             transition={{ duration: 0.5 }}
                             className="max-w-4xl mx-auto"
                         >
-                            <Card className="backdrop-blur-sm rounded-2xl border-2 shadow-xl" style={{
+                            <Card className="backdrop-blur-sm rounded-2xl border-2 shadow-xl bg-white" style={{
                                 background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 215, 0, 0.1) 50%, rgba(255, 255, 255, 0.95) 100%)',
                                 borderColor: 'rgba(255, 215, 0, 0.6)',
                                 boxShadow: '0 25px 50px rgba(255, 215, 0, 0.2), 0 0 30px rgba(138, 43, 226, 0.1)'
                             }}>
-                                <CardHeader className="text-center">
+                                <CardHeader className="text-center bg-transparent">
                                     <CardTitle className="text-2xl text-black flex items-center justify-center gap-2 font-bold">
                                         <Trophy className="size-6 text-yellow-600" />
                                         Assessment Complete!
@@ -429,12 +429,12 @@ export default function SkillAssessmentPage() {
                                         You got {score} out of {total} correct
                                     </CardDescription>
                                 </CardHeader>
-                                <CardContent className="space-y-6">
+                                <CardContent className="space-y-6 bg-transparent">
                                     {/* Score Display */}
                                     <div className="text-center">
                                         <Badge
                                             variant="secondary"
-                                            className={`text-lg px-4 py-2 font-bold ${score === total
+                                            className={`text-lg px-4 py-2 font-bold bg-gray-100 border-gray-300 ${score === total
                                                 ? 'bg-green-500/30 text-green-800 border-green-500/50'
                                                 : score >= total / 2
                                                     ? 'bg-yellow-500/30 text-yellow-800 border-yellow-500/50'
@@ -455,12 +455,12 @@ export default function SkillAssessmentPage() {
                                             return (
                                                 <Card
                                                     key={question.id}
-                                                    className={`border-2 ${isCorrect
+                                                    className={`border-2 bg-white ${isCorrect
                                                         ? 'border-green-500/50 bg-green-500/20'
                                                         : 'border-red-500/50 bg-red-500/20'
                                                         }`}
                                                 >
-                                                    <CardContent className="pt-6">
+                                                    <CardContent className="pt-6 bg-transparent">
                                                         <div className="flex items-start gap-3 mb-3">
                                                             {isCorrect ? (
                                                                 <CheckCircle className="size-5 text-green-600 mt-1 shrink-0" />
@@ -511,7 +511,7 @@ export default function SkillAssessmentPage() {
                                                 setAnswers(new Array(questions.length).fill(-1));
                                             }}
                                             variant="outline"
-                                            className="border-purple-600 text-black hover:bg-purple-100 font-bold"
+                                            className="border-purple-600 text-black bg-white hover:bg-purple-100 font-bold"
                                         >
                                             Retry Assessment
                                         </Button>

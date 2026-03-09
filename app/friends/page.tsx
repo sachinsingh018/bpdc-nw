@@ -385,14 +385,7 @@ export default function FriendsPage() {
 
     return (
         <div
-            className="min-h-screen relative overflow-x-hidden"
-            style={{
-                scrollBehavior: 'smooth',
-                WebkitOverflowScrolling: 'touch',
-                overscrollBehavior: 'auto',
-                touchAction: 'pan-y',
-                willChange: 'scroll-position'
-            }}
+            className="min-h-screen relative"
         >
             {/* Blurred Background */}
             <div
@@ -416,10 +409,6 @@ export default function FriendsPage() {
             <div
                 className="p-6 max-w-7xl mx-auto pb-20"
                 style={{
-                    scrollBehavior: 'smooth',
-                    WebkitOverflowScrolling: 'touch',
-                    touchAction: 'pan-y',
-                    willChange: 'scroll-position',
                     minHeight: 'calc(100vh - 80px)'
                 }}
             >
@@ -434,7 +423,7 @@ export default function FriendsPage() {
                 </div>
 
                 {/* Search and Filters */}
-                <div className="bg-gradient-to-br from-gray-200/95 via-gray-300/90 to-gray-200/95 dark:from-gray-700/95 dark:via-gray-600/90 dark:to-gray-700/95 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-gray-400/50 dark:border-gray-500/50 shadow-xl">
+                <div className="bg-gradient-to-br from-gray-200/95 via-gray-300/90 to-gray-200/95 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-gray-400/50 shadow-xl">
                     <form className="flex flex-col md:flex-row gap-4" onSubmit={handleSearch}>
                         <div className="flex-1">
                             <div className="relative">
@@ -442,7 +431,7 @@ export default function FriendsPage() {
                                 <input
                                     type="text"
                                     placeholder="Search by name, company, or skills..."
-                                    className="w-full pl-10 pr-4 py-3 bg-white/90 dark:bg-gray-800/90 border-2 border-gray-400 dark:border-gray-500 rounded-lg text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 shadow-md"
+                                    className="w-full pl-10 pr-4 py-3 bg-white/90 border-2 border-gray-400 rounded-lg text-gray-900 placeholder:text-gray-500 shadow-md"
                                     value={searchQuery}
                                     onChange={e => setSearchQuery(e.target.value)}
                                 />
@@ -450,15 +439,15 @@ export default function FriendsPage() {
                         </div>
                         <Button type="submit" variant="default" className="h-full px-6 bg-gradient-to-r from-bits-golden-yellow to-bits-golden-yellow-600 hover:from-bits-golden-yellow-600 hover:to-bits-golden-yellow-700 shadow-lg hover:shadow-xl transition-all duration-200 text-black font-semibold">{isSearching ? 'Searching...' : 'Search'}</Button>
                         <div className="flex gap-2">
-                            <Button variant="outline" size="sm" className="flex items-center gap-2 text-black bg-white/90 dark:bg-gray-800/90 border-2 border-gray-400 dark:border-gray-500 shadow-md font-semibold">
+                            <Button variant="outline" size="sm" className="flex items-center gap-2 text-black bg-white/90 border-2 border-gray-400 shadow-md font-semibold">
                                 <MapPin className="size-4" />
                                 <span>Dubai</span>
                             </Button>
-                            <Button variant="outline" size="sm" className="flex items-center gap-2 text-black bg-white/90 dark:bg-gray-800/90 border-2 border-gray-400 dark:border-gray-500 shadow-md font-semibold">
+                            <Button variant="outline" size="sm" className="flex items-center gap-2 text-black bg-white/90 border-2 border-gray-400 shadow-md font-semibold">
                                 <Briefcase className="size-4" />
                                 <span>Industry</span>
                             </Button>
-                            <Button variant="outline" size="sm" className="flex items-center gap-2 text-black bg-white/90 dark:bg-gray-800/90 border-2 border-gray-400 dark:border-gray-500 shadow-md font-semibold">
+                            <Button variant="outline" size="sm" className="flex items-center gap-2 text-black bg-white/90 border-2 border-gray-400 shadow-md font-semibold">
                                 <Filter className="size-4" />
                                 <span>Filters</span>
                             </Button>
@@ -478,7 +467,7 @@ export default function FriendsPage() {
                                 size="sm"
                                 onClick={fetchRecommendations}
                                 disabled={loadingRecommendations}
-                                className="text-black border-bits-golden-yellow/20 hover:bg-bits-golden-yellow/10 dark:text-black dark:border-bits-golden-yellow/30 dark:hover:bg-bits-golden-yellow/20"
+                                className="text-black border-bits-golden-yellow/20 hover:bg-bits-golden-yellow/10"
                             >
                                 {loadingRecommendations ? 'Refreshing...' : 'Refresh'}
                             </Button>
@@ -487,17 +476,17 @@ export default function FriendsPage() {
                         {loadingRecommendations ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                 {[1, 2, 3, 4].map((i) => (
-                                    <div key={i} className="bg-gradient-to-br from-white/90 via-purple-50/20 to-white/90 dark:from-slate-800/90 dark:via-purple-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20 animate-pulse">
+                                    <div key={i} className="bg-gradient-to-br from-white/90 via-purple-50/20 to-white/90 backdrop-blur-sm rounded-2xl p-6 border border-bits-golden-yellow/50 shadow-xl shadow-bits-golden-yellow/10 animate-pulse">
                                         <div className="flex items-center gap-3 mb-4">
-                                            <div className="size-12 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+                                            <div className="size-12 bg-gray-300 rounded-full"></div>
                                             <div className="flex-1">
-                                                <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-2"></div>
-                                                <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-2/3"></div>
+                                                <div className="h-4 bg-gray-300 rounded mb-2"></div>
+                                                <div className="h-3 bg-gray-300 rounded w-2/3"></div>
                                             </div>
                                         </div>
-                                        <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded mb-2"></div>
-                                        <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
-                                        <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded"></div>
+                                        <div className="h-3 bg-gray-300 rounded mb-2"></div>
+                                        <div className="h-3 bg-gray-300 rounded mb-4"></div>
+                                        <div className="h-8 bg-gray-300 rounded"></div>
                                     </div>
                                 ))}
                             </div>
@@ -511,7 +500,7 @@ export default function FriendsPage() {
                                     return (
                                         <div
                                             key={user.id}
-                                            className="bg-gradient-to-br from-white/90 via-purple-50/20 to-white/90 dark:from-slate-800/90 dark:via-purple-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20 hover:shadow-2xl hover:shadow-bits-golden-yellow/20 dark:hover:shadow-bits-golden-yellow/30 transition-all duration-300 flex flex-col cursor-pointer hover:ring-2 hover:ring-bits-golden-yellow hover:scale-105"
+                                            className="bg-gradient-to-br from-white/90 via-purple-50/20 to-white/90 backdrop-blur-sm rounded-2xl p-6 border border-bits-golden-yellow/50 shadow-xl shadow-bits-golden-yellow/10 hover:shadow-2xl hover:shadow-bits-golden-yellow/20 transition-all duration-300 flex flex-col cursor-pointer hover:ring-2 hover:ring-bits-golden-yellow hover:scale-105"
                                             onClick={() => {
                                                 if (user.email) {
                                                     // Track profile view
@@ -528,16 +517,16 @@ export default function FriendsPage() {
                                         >
                                             <div className="flex items-start justify-between mb-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="size-12 bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue rounded-full flex items-center justify-center shadow-lg ring-2 ring-bits-golden-yellow/20 dark:ring-bits-golden-yellow/30">
-                                                        <span className="text-bits-royal-blue dark:text-black font-semibold">
+                                                    <div className="size-12 bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue rounded-full flex items-center justify-center shadow-lg ring-2 ring-bits-golden-yellow/20">
+                                                        <span className="text-bits-royal-blue font-semibold">
                                                             {user.name?.charAt(0) || 'U'}
                                                         </span>
                                                     </div>
                                                     <div>
-                                                        <h3 className="font-semibold text-gray-900 dark:text-bits-royal-blue dark:text-black">
+                                                        <h3 className="font-semibold text-gray-900">
                                                             {user.name || 'Professional'}
                                                         </h3>
-                                                        <p className="text-sm text-gray-600 dark:text-gray-300">
+                                                        <p className="text-sm text-gray-600">
                                                             {user.profilemetrics || user.headline || 'Technology Professional'}
                                                         </p>
                                                     </div>
@@ -547,13 +536,13 @@ export default function FriendsPage() {
                                                 </Button>
                                             </div>
 
-                                            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+                                            <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                                                 {user.linkedinInfo || user.goals || 'Experienced professional looking to connect and collaborate.'}
                                             </p>
 
                                             <div className="flex flex-wrap gap-2 mb-4">
                                                 {(user.strengths || '').split(',').slice(0, 2).map((skill: string, index: number) => (
-                                                    <span key={`${user.id}-${skill}-${index}`} className="px-3 py-1 bg-gradient-to-r from-purple-500 to-purple-600 text-bits-royal-blue dark:text-black text-xs rounded-full shadow-md font-medium">
+                                                    <span key={`${user.id}-${skill}-${index}`} className="px-3 py-1 bg-gradient-to-r from-purple-500 to-purple-600 text-bits-royal-blue text-xs rounded-full shadow-md font-medium">
                                                         {skill.trim()}
                                                     </span>
                                                 ))}
@@ -616,17 +605,17 @@ export default function FriendsPage() {
                             <div className="col-span-full">
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     {[1, 2, 3].map((i) => (
-                                        <div key={i} className="bg-gradient-to-br from-white/90 via-purple-50/20 to-white/90 dark:from-slate-800/90 dark:via-purple-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl animate-pulse">
+                                        <div key={i} className="bg-gradient-to-br from-white/90 via-purple-50/20 to-white/90 backdrop-blur-sm rounded-2xl p-6 border border-bits-golden-yellow/50 shadow-xl animate-pulse">
                                             <div className="flex items-center gap-3 mb-4">
-                                                <div className="size-12 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+                                                <div className="size-12 bg-gray-300 rounded-full"></div>
                                                 <div className="flex-1">
-                                                    <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded mb-2"></div>
-                                                    <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-2/3"></div>
+                                                    <div className="h-4 bg-gray-300 rounded mb-2"></div>
+                                                    <div className="h-3 bg-gray-300 rounded w-2/3"></div>
                                                 </div>
                                             </div>
-                                            <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded mb-2"></div>
-                                            <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded mb-4"></div>
-                                            <div className="h-8 bg-gray-300 dark:bg-gray-600 rounded"></div>
+                                            <div className="h-3 bg-gray-300 rounded mb-2"></div>
+                                            <div className="h-3 bg-gray-300 rounded mb-4"></div>
+                                            <div className="h-8 bg-gray-300 rounded"></div>
                                         </div>
                                     ))}
                                 </div>
@@ -641,7 +630,7 @@ export default function FriendsPage() {
                                 return (
                                     <div
                                         key={userObj.id || rec.userId}
-                                        className="bg-gradient-to-br from-white/90 via-purple-50/20 to-white/90 dark:from-slate-800/90 dark:via-purple-900/20 dark:to-slate-800/90 backdrop-blur-sm rounded-2xl p-6 border border-bits-golden-yellow/50 dark:border-white/20 shadow-xl shadow-bits-golden-yellow/10 dark:shadow-bits-golden-yellow/20 hover:shadow-2xl hover:shadow-bits-golden-yellow/20 dark:hover:shadow-bits-golden-yellow/30 transition-all duration-300 flex flex-col cursor-pointer hover:ring-2 hover:ring-bits-golden-yellow hover:scale-105"
+                                        className="bg-gradient-to-br from-white/90 via-purple-50/20 to-white/90 backdrop-blur-sm rounded-2xl p-6 border border-bits-golden-yellow/50 shadow-xl shadow-bits-golden-yellow/10 hover:shadow-2xl hover:shadow-bits-golden-yellow/20 transition-all duration-300 flex flex-col cursor-pointer hover:ring-2 hover:ring-bits-golden-yellow hover:scale-105"
                                         onClick={e => {
                                             if ((e.target as HTMLElement).closest('button')) return;
                                             if (userObj.email) {
@@ -659,16 +648,16 @@ export default function FriendsPage() {
                                     >
                                         <div className="flex items-start justify-between mb-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="size-12 bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue rounded-full flex items-center justify-center shadow-lg ring-2 ring-bits-golden-yellow/20 dark:ring-bits-golden-yellow/30">
-                                                    <span className="text-bits-royal-blue dark:text-black font-semibold">
+                                                <div className="size-12 bg-gradient-to-br from-bits-golden-yellow to-bits-royal-blue rounded-full flex items-center justify-center shadow-lg ring-2 ring-bits-golden-yellow/20">
+                                                    <span className="text-bits-royal-blue font-semibold">
                                                         {userObj.name?.charAt(0) || 'U'}
                                                     </span>
                                                 </div>
                                                 <div>
-                                                    <h3 className="font-semibold text-gray-900 dark:text-bits-royal-blue dark:text-black">
+                                                    <h3 className="font-semibold text-gray-900">
                                                         {userObj.name || 'Professional'}
                                                     </h3>
-                                                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                                                    <p className="text-sm text-gray-600">
                                                         {userObj.profilemetrics || userObj.industry || 'Technology'}
                                                     </p>
                                                 </div>
@@ -677,12 +666,12 @@ export default function FriendsPage() {
                                                 <Heart className="size-4" />
                                             </Button>
                                         </div>
-                                        <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+                                        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                                             {userObj.linkedinInfo || userObj.bio || 'Experienced professional looking to connect and collaborate.'}
                                         </p>
                                         <div className="flex flex-wrap gap-2 mb-4">
                                             {(userObj.strengths || userObj.skills || '').split(',').slice(0, 3).map((skill: string) => (
-                                                <span key={`${userObj.id}-${skill}`} className="px-3 py-1 bg-gradient-to-r from-purple-500 to-purple-600 text-bits-royal-blue dark:text-black text-xs rounded-full shadow-md font-medium">
+                                                <span key={`${userObj.id}-${skill}`} className="px-3 py-1 bg-gradient-to-r from-purple-500 to-purple-600 text-bits-royal-blue text-xs rounded-full shadow-md font-medium">
                                                     {skill}
                                                 </span>
                                             ))}

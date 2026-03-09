@@ -182,13 +182,13 @@ const OptimizedConnectionsPage = () => {
     // Show error state
     if (error) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 flex items-center justify-center">
+            <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100  flex items-center justify-center">
                 <div className="text-center">
                     <div className="size-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-                    <h2 className="text-xl font-semibold text-gray-900 dark:text-black mb-2">
+                    <h2 className="text-xl font-semibold text-gray-900  mb-2">
                         Error Loading Connections
                     </h2>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    <p className="text-gray-600  mb-4">
                         {error}
                     </p>
                     <Button onClick={refetch} className="bg-purple-600 hover:bg-purple-700">
@@ -205,7 +205,7 @@ const OptimizedConnectionsPage = () => {
         <>
             <NavigationLoading isVisible={isNavigating} />
 
-            <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900">
+            <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-100 ">
                 <OptimizedNavbar currentPage="connections" />
 
                 {/* Main Content */}
@@ -214,7 +214,7 @@ const OptimizedConnectionsPage = () => {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-2 border border-gray-200 dark:border-white/20 shadow-lg mb-8 relative z-10 pointer-events-auto"
+                        className="bg-white/80  backdrop-blur-sm rounded-2xl p-2 border border-gray-200  shadow-lg mb-8 relative z-10 pointer-events-auto"
                     >
                         <div className="flex space-x-1">
                             {[
@@ -228,7 +228,7 @@ const OptimizedConnectionsPage = () => {
                                     onClick={() => setActiveTab(tab.key as any)}
                                     className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer relative z-10 ${activeTab === tab.key
                                         ? 'bg-purple-600 text-black shadow-lg'
-                                        : 'text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20'
+                                        : 'text-gray-600  hover:text-purple-600  hover:bg-purple-50 '
                                         }`}
                                 >
                                     <tab.icon className="size-4" />
@@ -236,7 +236,7 @@ const OptimizedConnectionsPage = () => {
                                     {tab.count > 0 && (
                                         <span className={`px-2 py-1 rounded-full text-xs ${activeTab === tab.key
                                             ? 'bg-white/20 text-black'
-                                            : 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400'
+                                            : 'bg-purple-100  text-purple-600 '
                                             }`}>
                                             {tab.count}
                                         </span>
@@ -258,7 +258,7 @@ const OptimizedConnectionsPage = () => {
                                 <motion.h2
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="text-2xl font-bold text-gray-900 dark:text-black"
+                                    className="text-2xl font-bold text-gray-900 "
                                 >
                                     Your Connections ({connections.length})
                                 </motion.h2>
@@ -270,10 +270,10 @@ const OptimizedConnectionsPage = () => {
                                         className="text-center py-12"
                                     >
                                         <FaUserFriends className="size-16 text-gray-400 mx-auto mb-4" />
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-black mb-2">
+                                        <h3 className="text-xl font-semibold text-gray-900  mb-2">
                                             No Connections Yet
                                         </h3>
-                                        <p className="text-gray-600 dark:text-gray-400 mb-6">
+                                        <p className="text-gray-600  mb-6">
                                             Start building your network by connecting with other professionals
                                         </p>
                                         <Button
@@ -293,7 +293,7 @@ const OptimizedConnectionsPage = () => {
                                                 initial={{ opacity: 0, y: 20 }}
                                                 animate={{ opacity: 1, y: 0 }}
                                                 transition={{ delay: index * 0.1 }}
-                                                className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200 dark:border-white/20 shadow-lg cursor-pointer hover:shadow-xl transition-shadow hover:ring-2 hover:ring-purple-400"
+                                                className="bg-white/80  backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200  shadow-lg cursor-pointer hover:shadow-xl transition-shadow hover:ring-2 hover:ring-purple-400"
                                                 onClick={e => {
                                                     if ((e.target as HTMLElement).closest('button')) return;
                                                     const user = getConnectionUser(connection, currentUserId || '');
@@ -308,13 +308,13 @@ const OptimizedConnectionsPage = () => {
                                                             {getConnectionUser(connection, currentUserId || '')?.name?.charAt(0) || 'U'}
                                                         </div>
                                                         <div className="flex-1 min-w-0">
-                                                            <h3 className="text-lg font-semibold text-gray-900 dark:text-black mb-1">
+                                                            <h3 className="text-lg font-semibold text-gray-900  mb-1">
                                                                 {getConnectionUser(connection, currentUserId || '')?.name || 'Unknown User'}
                                                             </h3>
-                                                            <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">
+                                                            <p className="text-gray-600  text-sm mb-2">
                                                                 {getConnectionUser(connection, currentUserId || '')?.email || 'No email'}
                                                             </p>
-                                                            <p className="text-gray-500 dark:text-gray-400 text-sm">
+                                                            <p className="text-gray-500  text-sm">
                                                                 Connected {new Date(connection.created_at).toLocaleDateString()}
                                                             </p>
                                                         </div>
@@ -352,7 +352,7 @@ const OptimizedConnectionsPage = () => {
                                 <motion.h2
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="text-2xl font-bold text-gray-900 dark:text-black"
+                                    className="text-2xl font-bold text-gray-900 "
                                 >
                                     Pending Requests ({requests.length})
                                 </motion.h2>
@@ -364,10 +364,10 @@ const OptimizedConnectionsPage = () => {
                                         className="text-center py-12"
                                     >
                                         <FaHandshake className="size-16 text-gray-400 mx-auto mb-4" />
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-black mb-2">
+                                        <h3 className="text-xl font-semibold text-gray-900  mb-2">
                                             No Pending Requests
                                         </h3>
-                                        <p className="text-gray-600 dark:text-gray-400">
+                                        <p className="text-gray-600 ">
                                             You don&apos;t have any pending connection requests
                                         </p>
                                     </motion.div>
@@ -381,7 +381,7 @@ const OptimizedConnectionsPage = () => {
                                                     animate={{ opacity: 1, y: 0 }}
                                                     exit={{ opacity: 0, x: -100, scale: 0.8 }}
                                                     transition={{ delay: index * 0.1, duration: 0.3 }}
-                                                    className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200 dark:border-white/20 shadow-lg cursor-pointer hover:shadow-xl transition-shadow hover:ring-2 hover:ring-purple-400"
+                                                    className="bg-white/80  backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200  shadow-lg cursor-pointer hover:shadow-xl transition-shadow hover:ring-2 hover:ring-purple-400"
                                                     onClick={e => {
                                                         if ((e.target as HTMLElement).closest('button')) return;
                                                         if (request.receiver?.email) {
@@ -395,13 +395,13 @@ const OptimizedConnectionsPage = () => {
                                                                 {request.receiver?.name?.charAt(0) || 'U'}
                                                             </div>
                                                             <div className="flex-1 min-w-0">
-                                                                <h3 className="text-lg font-semibold text-gray-900 dark:text-black mb-1">
+                                                                <h3 className="text-lg font-semibold text-gray-900  mb-1">
                                                                     {request.receiver?.name || 'Unknown User'}
                                                                 </h3>
-                                                                <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">
+                                                                <p className="text-gray-600  text-sm mb-2">
                                                                     {request.receiver?.email || 'No email'}
                                                                 </p>
-                                                                <p className="text-gray-500 dark:text-gray-400 text-sm">
+                                                                <p className="text-gray-500  text-sm">
                                                                     Requested {new Date(request.created_at).toLocaleDateString()}
                                                                 </p>
                                                             </div>
@@ -443,7 +443,7 @@ const OptimizedConnectionsPage = () => {
                                 <motion.h2
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="text-2xl font-bold text-gray-900 dark:text-black"
+                                    className="text-2xl font-bold text-gray-900 "
                                 >
                                     Notifications ({notifications.length})
                                 </motion.h2>
@@ -455,10 +455,10 @@ const OptimizedConnectionsPage = () => {
                                         className="text-center py-12"
                                     >
                                         <Bell className="size-16 text-gray-400 mx-auto mb-4" />
-                                        <h3 className="text-xl font-semibold text-gray-900 dark:text-black mb-2">
+                                        <h3 className="text-xl font-semibold text-gray-900  mb-2">
                                             No Notifications
                                         </h3>
-                                        <p className="text-gray-600 dark:text-gray-400">
+                                        <p className="text-gray-600 ">
                                             You&apos;re all caught up!
                                         </p>
                                     </motion.div>
@@ -470,20 +470,20 @@ const OptimizedConnectionsPage = () => {
                                                 initial={{ opacity: 0, y: 20 }}
                                                 animate={{ opacity: 1, y: 0 }}
                                                 transition={{ delay: index * 0.1 }}
-                                                className={`bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl p-4 border border-gray-200 dark:border-white/20 shadow-lg ${!notification.is_read ? 'ring-2 ring-purple-400' : ''
+                                                className={`bg-white/80  backdrop-blur-sm rounded-xl p-4 border border-gray-200  shadow-lg ${!notification.is_read ? 'ring-2 ring-purple-400' : ''
                                                     }`}
                                             >
                                                 <div className="flex items-start gap-3">
-                                                    <div className={`size-3 rounded-full mt-2 ${notification.is_read ? 'bg-gray-300 dark:bg-gray-600' : 'bg-purple-500'
+                                                    <div className={`size-3 rounded-full mt-2 ${notification.is_read ? 'bg-gray-300 ' : 'bg-purple-500'
                                                         }`} />
                                                     <div className="flex-1">
-                                                        <h4 className="font-semibold text-gray-900 dark:text-black mb-1">
+                                                        <h4 className="font-semibold text-gray-900  mb-1">
                                                             {notification.title}
                                                         </h4>
-                                                        <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">
+                                                        <p className="text-gray-600  text-sm mb-2">
                                                             {notification.message}
                                                         </p>
-                                                        <p className="text-gray-500 dark:text-gray-400 text-xs">
+                                                        <p className="text-gray-500  text-xs">
                                                             {new Date(notification.created_at).toLocaleString()}
                                                         </p>
                                                     </div>

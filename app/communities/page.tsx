@@ -42,7 +42,7 @@ interface UserMembership {
 
 function ShimmerCard() {
     return (
-        <div className="animate-pulse bg-white/60 dark:bg-slate-800/60 rounded-xl shadow-md p-6 flex flex-col items-center gap-4 h-80">
+        <div className="animate-pulse bg-white/60  rounded-xl shadow-md p-6 flex flex-col items-center gap-4 h-80">
             <div className="size-16 bg-bits-golden-yellow/20 rounded-full" />
             <div className="h-4 w-24 bg-bits-golden-yellow/10 rounded" />
             <div className="size-32 bg-bits-golden-yellow/5 rounded flex-1" />
@@ -484,7 +484,7 @@ export default function CommunitiesPage() {
                         return (
                             <div
                                 key={community.id}
-                                className="bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 flex flex-col items-center gap-4 border border-bits-golden-yellow/20 dark:border-slate-700 cursor-pointer h-80"
+                                className="bg-white  rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 flex flex-col items-center gap-4 border border-bits-golden-yellow/20  cursor-pointer h-80"
                                 onClick={() => {
                                     // Track community view activity
                                     trackActivity('community_viewed', 'communities', {
@@ -501,16 +501,16 @@ export default function CommunitiesPage() {
                                         <Sparkles className="size-6 text-bits-golden-yellow" />
                                     </AvatarFallback>
                                 </Avatar>
-                                <h2 className="text-xl font-bold text-black dark:text-black text-center">
+                                <h2 className="text-xl font-bold text-black  text-center">
                                     {community.name}
                                 </h2>
-                                <p className="text-black dark:text-black text-center text-sm mb-2 flex-1">
+                                <p className="text-black  text-center text-sm mb-2 flex-1">
                                     {community.description || 'No description available'}
                                 </p>
                                 <div className="flex gap-2 w-full mt-auto relative z-10">
                                     <Button
                                         type="button"
-                                        className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black dark:text-black font-semibold shadow-md hover:from-bits-golden-yellow-600 hover:to-bits-royal-blue-600 rounded-lg flex items-center justify-center h-10 relative z-10 pointer-events-auto"
+                                        className="flex-1 bg-gradient-to-r from-bits-golden-yellow to-bits-royal-blue text-black  font-semibold shadow-md hover:from-bits-golden-yellow-600 hover:to-bits-royal-blue-600 rounded-lg flex items-center justify-center h-10 relative z-10 pointer-events-auto"
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             // Track community view activity
@@ -527,7 +527,7 @@ export default function CommunitiesPage() {
                                     {!membershipStatus ? (
                                         <Button
                                             type="button"
-                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue dark:text-black font-semibold shadow-md hover:from-green-700 hover:to-green-800 rounded-lg flex items-center justify-center h-10 relative z-10 pointer-events-auto"
+                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue  font-semibold shadow-md hover:from-green-700 hover:to-green-800 rounded-lg flex items-center justify-center h-10 relative z-10 pointer-events-auto"
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 handleJoinCommunity(community.id);
@@ -538,7 +538,7 @@ export default function CommunitiesPage() {
                                     ) : membershipStatus === 'approved' ? (
                                         <Button
                                             type="button"
-                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue dark:text-black font-semibold shadow-md rounded-lg flex items-center justify-center h-10 relative z-10"
+                                            className="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-bits-royal-blue  font-semibold shadow-md rounded-lg flex items-center justify-center h-10 relative z-10"
                                             disabled
                                         >
                                             Member
@@ -546,7 +546,7 @@ export default function CommunitiesPage() {
                                     ) : (
                                         <Button
                                             type="button"
-                                            className="flex-1 bg-gradient-to-r from-yellow-600 to-yellow-700 text-bits-royal-blue dark:text-black font-semibold shadow-md rounded-lg flex items-center justify-center h-10 relative z-10"
+                                            className="flex-1 bg-gradient-to-r from-yellow-600 to-yellow-700 text-bits-royal-blue  font-semibold shadow-md rounded-lg flex items-center justify-center h-10 relative z-10"
                                             disabled
                                         >
                                             Pending
@@ -560,18 +560,18 @@ export default function CommunitiesPage() {
 
             {/* Create Community Modal */}
             <Dialog open={showCreateModal} onOpenChange={setShowCreateModal}>
-                <DialogContent className="sm:max-w-[500px] bg-white dark:bg-slate-800">
+                <DialogContent className="sm:max-w-[500px] bg-white ">
                     <DialogHeader>
-                        <DialogTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+                        <DialogTitle className="text-2xl font-bold text-gray-900 ">
                             Create New Community
                         </DialogTitle>
-                        <DialogDescription className="text-gray-600 dark:text-gray-400">
+                        <DialogDescription className="text-gray-600 ">
                             Fill in the details to create a new community for your network.
                         </DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4 py-4">
                         <div className="space-y-2">
-                            <Label htmlFor="name" className="text-gray-900 dark:text-white font-semibold">
+                            <Label htmlFor="name" className="text-gray-900  font-semibold">
                                 Community Name <span className="text-red-500">*</span>
                             </Label>
                             <Input
@@ -579,11 +579,11 @@ export default function CommunitiesPage() {
                                 placeholder="e.g., BITS Dubai Alumni Network"
                                 value={newCommunityName}
                                 onChange={(e) => setNewCommunityName(e.target.value)}
-                                className="bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                className="bg-white  text-gray-900 "
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="description" className="text-gray-900 dark:text-white font-semibold">
+                            <Label htmlFor="description" className="text-gray-900  font-semibold">
                                 Description
                             </Label>
                             <Textarea
@@ -592,25 +592,25 @@ export default function CommunitiesPage() {
                                 value={newCommunityDescription}
                                 onChange={(e) => setNewCommunityDescription(e.target.value)}
                                 rows={4}
-                                className="bg-white dark:bg-slate-700 text-gray-900 dark:text-white"
+                                className="bg-white  text-gray-900 "
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="bannerImage" className="text-gray-900 dark:text-white font-semibold">
+                            <Label htmlFor="bannerImage" className="text-gray-900  font-semibold">
                                 Banner Image (Optional)
                             </Label>
                             {!imagePreview ? (
                                 <div className="flex items-center gap-4">
                                     <label
                                         htmlFor="image-upload"
-                                        className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+                                        className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300  border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100  transition-colors"
                                     >
                                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                             <Upload className="size-8 text-gray-400 mb-2" />
-                                            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                            <p className="mb-2 text-sm text-gray-500 ">
                                                 <span className="font-semibold">Click to upload</span> or drag and drop
                                             </p>
-                                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                                            <p className="text-xs text-gray-500 ">
                                                 PNG, JPG, GIF, WEBP (MAX. 5MB)
                                             </p>
                                         </div>
@@ -626,7 +626,7 @@ export default function CommunitiesPage() {
                                 </div>
                             ) : (
                                 <div className="relative">
-                                    <div className="relative w-full h-48 rounded-lg overflow-hidden border border-gray-300 dark:border-gray-600">
+                                    <div className="relative w-full h-48 rounded-lg overflow-hidden border border-gray-300 ">
                                         <img
                                             src={imagePreview}
                                             alt="Preview"
@@ -642,7 +642,7 @@ export default function CommunitiesPage() {
                                         </button>
                                     </div>
                                     {uploadingImage && (
-                                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                                        <p className="text-sm text-gray-500  mt-2">
                                             Uploading image...
                                         </p>
                                     )}
@@ -650,7 +650,7 @@ export default function CommunitiesPage() {
                             )}
                             {!imagePreview && (
                                 <div className="mt-2">
-                                    <Label htmlFor="bannerImageUrl" className="text-gray-900 dark:text-white font-semibold text-sm">
+                                    <Label htmlFor="bannerImageUrl" className="text-gray-900  font-semibold text-sm">
                                         Or enter image URL:
                                     </Label>
                                     <Input
@@ -658,7 +658,7 @@ export default function CommunitiesPage() {
                                         placeholder="https://example.com/image.jpg"
                                         value={newCommunityBannerImage}
                                         onChange={(e) => setNewCommunityBannerImage(e.target.value)}
-                                        className="bg-white dark:bg-slate-700 text-gray-900 dark:text-white mt-1"
+                                        className="bg-white  text-gray-900  mt-1"
                                     />
                                 </div>
                             )}

@@ -44,7 +44,7 @@ export function PageLoading({
                 transition={{ duration: 0.5 }}
             >
                 <Image
-                    src="/img.jpg"
+                    src="/bpdc.png"
                     alt="Networkqy Logo"
                     width={240}
                     height={120}

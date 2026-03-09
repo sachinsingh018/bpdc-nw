@@ -64,7 +64,7 @@ export default function LoginTry() {
         }}
       />
       {/* Form Card */}
-      <div className="relative z-10 backdrop-blur-xl bg-white/80 dark:bg-white/10 border border-zinc-300 dark:border-white/20 shadow-2xl rounded-3xl p-10 w-full max-w-xl text-black dark:text-white animate-fade-in">
+      <div className="relative z-10 backdrop-blur-xl bg-white/80 border border-zinc-300 shadow-2xl rounded-3xl p-10 w-full max-w-xl text-black animate-fade-in">
         <h1 className="text-3xl font-bold mb-8 text-center tracking-wide">Welcome Back</h1>
         <AuthForm action={handleSubmit} defaultEmail={email}>
           <SubmitButton isSuccessful={isSuccessful} isLoading={state.status === 'in_progress'}>Sign in</SubmitButton>

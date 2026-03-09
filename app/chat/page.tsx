@@ -147,8 +147,8 @@ export default function ChatPage() {
 
     if (isLoading) {
         return (
-            <div 
-                className="min-h-screen relative overflow-x-hidden flex items-center justify-center" 
+            <div
+                className="min-h-screen relative overflow-x-hidden flex items-center justify-center"
                 style={{
                     background: `
                       radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
@@ -249,7 +249,7 @@ export default function ChatPage() {
                         <div className="flex-1 flex items-center justify-center">
                             <div className="text-center">
                                 <div className="size-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-                                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                                <h2 className="text-xl font-semibold text-gray-900 mb-2">
                                     Loading Chat...
                                 </h2>
                             </div>
