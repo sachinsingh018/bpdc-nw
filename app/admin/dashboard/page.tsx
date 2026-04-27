@@ -345,6 +345,54 @@ export default function AdminDashboard() {
         }
     };
 
+    const handleDownloadCSV = async () => {
+        try {
+            const params = new URLSearchParams({ page: '1', limit: '10000' });
+            if (userListSearchTerm) params.append('search', userListSearchTerm);
+            if (selectedBatchYear && selectedBatchYear !== 'all') params.append('batchYear', selectedBatchYear);
+            if (selectedProfile && selectedProfile !== 'all') params.append('profile', selectedProfile);
+
+            const response = await fetch(`/api/admin/users?${params.toString()}`);
+            if (!response.ok) throw new Error('Failed to fetch users');
+            const data = await response.json();
+            const allUsers: Student[] = (data.users || []).map((u: any) => ({
+                id: u.id,
+                email: u.email || '',
+                name: u.name || '',
+                batch_year: u.batch_year || '',
+                profile: u.profile || 'student',
+                headline: u.headline || '',
+                createdAt: u.createdAt || '',
+            }));
+
+            const headers = ['Name', 'Email', 'Profile', 'Batch Year', 'Headline', 'Joined'];
+            const rows = allUsers.map(s => [
+                s.name,
+                s.email,
+                s.profile,
+                s.batch_year,
+                s.headline || '',
+                s.createdAt ? new Date(s.createdAt).toLocaleDateString() : '',
+            ]);
+
+            const csv = [headers, ...rows]
+                .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+                .join('\n');
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `users_${new Date().toISOString().slice(0, 10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+            toast.success(`Downloaded ${allUsers.length} users`);
+        } catch (error) {
+            console.error('Error downloading CSV:', error);
+            toast.error('Failed to download user list');
+        }
+    };
+
     const filteredActivityLogs = activityLogs.filter(log => {
         const matchesUser = !selectedUser || log.user_id === selectedUser;
         const matchesCategory = selectedCategory === 'all' || !selectedCategory || log.action_category === selectedCategory;
@@ -1329,9 +1377,20 @@ export default function AdminDashboard() {
                                         </CardTitle>
                                         <CardDescription className="text-black/80 mt-1">Complete list of all registered users</CardDescription>
                                     </div>
-                                    <Badge variant="outline" className="bg-white/10 border-white/20 text-black">
-                                        {filteredStudents.length} {filteredStudents.length === 1 ? 'user' : 'users'}
-                                    </Badge>
+                                    <div className="flex items-center gap-2">
+                                        <Badge variant="outline" className="bg-white/10 border-white/20 text-black">
+                                            {filteredStudents.length} {filteredStudents.length === 1 ? 'user' : 'users'}
+                                        </Badge>
+                                        <Button
+                                            onClick={handleDownloadCSV}
+                                            variant="outline"
+                                            size="sm"
+                                            className="bg-white/10 border-white/20 text-black hover:bg-white/20 transition-colors"
+                                        >
+                                            <Download className="size-3 mr-1" />
+                                            CSV
+                                        </Button>
+                                    </div>
                                 </div>
                             </CardHeader>
                             <CardContent>

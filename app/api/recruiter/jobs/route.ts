@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { getUser } from '@/lib/db/queries';
 import { db } from '@/lib/db/queries';
-import { job } from '@/lib/db/schema';
-import { eq, or, desc } from 'drizzle-orm';
+import { job, jobApplication, user } from '@/lib/db/schema';
+import { eq, desc, sql, inArray } from 'drizzle-orm';
 
 export async function GET(request: NextRequest) {
     try {
@@ -21,35 +21,45 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
-        const user = users[0];
-        const userId = user.id;
-        const userRole = user.role; // ✅ Role field is now available
+        const currentUser = users[0];
+        const userId = currentUser.id;
+        const userRole = currentUser.role;
 
-        console.log('User role:', userRole); // Debug log to see the role
+        console.log('User role:', userRole);
 
         // Role-based access control
         if (!userRole || !['recruiter', 'admin'].includes(userRole)) {
             return NextResponse.json({ error: 'Access denied - Recruiter role required' }, { status: 403 });
         }
 
-        // Get jobs posted by this recruiter or career team
-        const recruiterJobs = await db
-            .select()
+        // Get all internally posted jobs (by any recruiter)
+        const jobRows = await db
+            .select({ job, posterName: user.name, posterEmail: user.email })
             .from(job)
-            .where(
-                or(
-                    eq(job.posted_by_user_id, userId), // Jobs posted by this user
-                    eq(job.posted_by, 'career_team')   // All career team jobs
-                )
-            )
-            .orderBy(desc(job.job_posted_at_datetime_utc)); // Use the field that's actually set
+            .leftJoin(user, eq(job.posted_by_user_id, user.id))
+            .where(eq(job.posted_by, 'career_team'))
+            .orderBy(desc(job.job_posted_at_datetime_utc));
 
-        console.log('Recruiter jobs query result:', {
-            userId,
-            postedBy: 'career_team',
-            totalJobs: recruiterJobs.length,
-            jobs: recruiterJobs.map(j => ({ id: j.job_id, title: j.job_title, postedBy: j.posted_by }))
-        });
+        const jobIds = jobRows.map(j => j.job.job_id);
+        const appCounts = jobIds.length > 0
+            ? await db
+                .select({ jobId: jobApplication.jobId, count: sql<number>`count(*)::int` })
+                .from(jobApplication)
+                .where(inArray(jobApplication.jobId, jobIds))
+                .groupBy(jobApplication.jobId)
+            : [];
+
+        const countMap: Record<string, number> = {};
+        appCounts.forEach(r => { countMap[r.jobId] = r.count; });
+
+        const recruiterJobs = jobRows.map(r => ({
+            ...r.job,
+            posted_by_user_name: r.posterName ?? null,
+            posted_by_user_email: r.posterEmail ?? null,
+            application_count: countMap[r.job.job_id] ?? 0,
+        }));
+
+        console.log('Recruiter jobs query result:', recruiterJobs.length, 'jobs');
 
         return NextResponse.json({ jobs: recruiterJobs });
     } catch (error) {

@@ -238,46 +238,7 @@ export default function Home() {
                                     </motion.div>
                                 </Link>
                             </>
-                        ) : (
-                            <Link href="/signup">
-                                <motion.div
-                                    className="relative"
-                                    whileHover={{ scale: 1.05 }}
-                                >
-                                    {/* Glow effect */}
-                                    <motion.div
-                                        className="absolute inset-0 bg-gradient-to-r from-bits-golden-yellow via-bits-golden-yellow to-bits-royal-blue rounded-full blur-lg opacity-60"
-                                        animate={{
-                                            opacity: [0.5, 0.8, 0.5],
-                                        }}
-                                        transition={{
-                                            duration: 2,
-                                            repeat: Infinity,
-                                            ease: "easeInOut"
-                                        }}
-                                    />
-                                    <motion.button
-                                        type="button"
-                                        className="relative px-6 py-3 md:px-8 text-base md:text-lg bg-white text-black font-bold rounded-full shadow-[0_0_20px_rgba(255,215,0,0.7),0_0_40px_rgba(25,25,112,0.5)] border-2 border-bits-golden-yellow hover:border-bits-royal-blue transition-all duration-300 overflow-hidden group z-10"
-                                        whileHover={{
-                                            scale: 1.05,
-                                            boxShadow: "0 0 30px rgba(255,215,0,0.9), 0 0 60px rgba(25,25,112,0.7)",
-                                        }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        <span className="relative z-10 text-black font-bold drop-shadow-[0_2px_4px_rgba(255,215,0,0.5)] whitespace-nowrap">
-                                            Recruiter Sign Up
-                                        </span>
-                                        <motion.div
-                                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                                            initial={{ x: '-100%' }}
-                                            whileHover={{ x: '200%' }}
-                                            transition={{ duration: 0.6 }}
-                                        />
-                                    </motion.button>
-                                </motion.div>
-                            </Link>
-                        )}
+                        ) : null}
                     </div>
 
                     {/* Mobile Hamburger Menu Button */}
@@ -330,19 +291,7 @@ export default function Home() {
                                                 </motion.button>
                                             </Link>
                                         </>
-                                    ) : (
-                                        <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
-                                            <motion.button
-                                                type="button"
-                                                className="w-full px-6 py-4 text-base bg-white text-black font-bold rounded-full shadow-[0_0_20px_rgba(255,215,0,0.7),0_0_40px_rgba(25,25,112,0.5)] border-2 border-bits-golden-yellow transition-all duration-300 min-h-[48px]"
-                                                whileTap={{ scale: 0.98 }}
-                                            >
-                                                <span className="text-black font-bold drop-shadow-[0_2px_4px_rgba(255,215,0,0.5)]">
-                                                    Recruiter Sign Up
-                                                </span>
-                                            </motion.button>
-                                        </Link>
-                                    )}
+                                    ) : null}
                                 </div>
                             </motion.div>
                         </>

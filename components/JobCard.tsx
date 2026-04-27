@@ -67,6 +67,8 @@ interface Job {
     job_max_salary?: string | number | null;
     job_salary_period?: string | null;
     posted_by?: string | null;
+    posted_by_user_name?: string | null;
+    posted_by_user_email?: string | null;
 }
 
 interface JobCardProps {
@@ -75,9 +77,10 @@ interface JobCardProps {
     onApplicationSubmitted?: () => void;
     isHighlighted?: boolean;
     currentFilter?: string;
+    applicationCount?: number;
 }
 
-export default function JobCard({ job, isApplied = false, onApplicationSubmitted, isHighlighted = false, currentFilter = '' }: JobCardProps) {
+export default function JobCard({ job, isApplied = false, onApplicationSubmitted, isHighlighted = false, currentFilter = '', applicationCount }: JobCardProps) {
     const [showModal, setShowModal] = useState(false);
     const [cvFile, setCvFile] = useState<File | null>(null);
     const [cvName, setCvName] = useState('');
@@ -91,8 +94,8 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
     const [errorDetails, setErrorDetails] = useState<string | null>(null);
     const [copied, setCopied] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
-    // Add a random number of applicants per card render (placeholder)
-    const [applicants] = useState(() => Math.floor(Math.random() * 23) + 2); // 2-24
+    const [applicants] = useState(() => Math.floor(Math.random() * 23) + 2); // fallback placeholder
+    const displayApplicants = applicationCount !== undefined ? applicationCount : applicants;
 
     // Handle highlight animation with expand/contract effect
     useEffect(() => {
@@ -277,12 +280,14 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
         }
     };
 
+    const forceLightPartnerRecruiterPopup = job.posted_by === 'career_team' || currentFilter === 'career_team';
+
     return (
         <div
             data-job-id={job.id}
-            className={`relative bg-white/95 dark:bg-slate-900/95 rounded-xl p-5 flex flex-col gap-3 border shadow-md hover:shadow-xl hover:scale-[1.025] transition-all duration-300 min-h-[15rem] h-full max-w-md w-full mx-auto font-sans ${isHighlighted
-                ? 'border-yellow-400 dark:border-yellow-500 shadow-yellow-200 dark:shadow-yellow-800'
-                : 'border-black dark:border-white'
+            className={`relative bg-white rounded-xl p-5 flex flex-col gap-3 border shadow-md hover:shadow-xl hover:scale-[1.025] transition-all duration-300 min-h-[15rem] h-full max-w-md w-full mx-auto font-sans ${isHighlighted
+                ? 'border-yellow-400 shadow-yellow-200'
+                : 'border-black'
                 }`}
             style={{
                 transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
@@ -304,16 +309,16 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                     }}
                 />
                 <div className="flex flex-col min-w-0">
-                    <span className="text-base font-semibold text-purple-700 dark:text-purple-300 truncate">{job.company}</span>
-                    {job.job_country && <span className="text-xs text-black dark:text-black font-normal">{job.job_country}</span>}
+                    <span className="text-base font-semibold text-purple-700 truncate">{job.company}</span>
+                    {job.job_country && <span className="text-xs text-black font-normal">{job.job_country}</span>}
                 </div>
             </div>
             {/* Job Title below company info */}
-            <div className="text-lg md:text-xl font-bold text-slate-900 dark:text-black leading-tight whitespace-normal break-words tracking-tight mb-1">
+            <div className="text-lg md:text-xl font-bold text-slate-900 leading-tight whitespace-normal break-words tracking-tight mb-1">
                 {job.title}
             </div>
             {/* Location and posted date */}
-            <div className="flex flex-wrap gap-2 mb-1 text-sm text-black dark:text-black font-normal">
+            <div className="flex flex-wrap gap-2 mb-1 text-sm text-black font-normal">
                 {(job.job_city || job.job_state) && (
                     <span>
                         {job.job_city ? job.job_city : ''}
@@ -322,27 +327,32 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                     </span>
                 )}
                 {job.job_posted_at_datetime_utc && (
-                    <span className="text-black dark:text-black font-normal">Posted: {new Date(job.job_posted_at_datetime_utc).toLocaleDateString()}</span>
+                    <span className="text-black font-normal">Posted: {new Date(job.job_posted_at_datetime_utc).toLocaleDateString()}</span>
+                )}
+                {(job.posted_by_user_name || job.posted_by_user_email) && (
+                    <span className="text-black font-normal">
+                        By: {job.posted_by_user_name || job.posted_by_user_email}
+                    </span>
                 )}
             </div>
             {/* Professional tags: Employment Type, Remote, and Posted By */}
             <div className="flex gap-2 mb-1 flex-wrap">
                 {job.job_employment_type && (
-                    <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-purple-50 dark:bg-purple-900/40 text-purple-700 dark:text-purple-200 border border-purple-100 dark:border-purple-700 shadow-sm tracking-wide">
+                    <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-purple-50 text-purple-700 border border-purple-100 shadow-sm tracking-wide">
                         {job.job_employment_type}
                     </span>
                 )}
                 {job.job_is_remote && (String(job.job_is_remote) === 'true' || job.job_is_remote === true) && (
-                    <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-50 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-200 border border-yellow-100 dark:border-yellow-700 shadow-sm tracking-wide">
+                    <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-50 text-yellow-700 border border-yellow-100 shadow-sm tracking-wide">
                         Remote
                     </span>
                 )}
                 {job.posted_by && (
                     <span className={`px-2 py-0.5 rounded-full text-xs font-medium border shadow-sm tracking-wide ${job.posted_by === 'alumni'
-                        ? 'bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-200 border-blue-100 dark:border-blue-700'
+                        ? 'bg-blue-50 text-blue-700 border-blue-100'
                         : job.posted_by === 'career_team'
-                            ? 'bg-green-50 dark:bg-green-900/40 text-green-700 dark:text-green-200 border-green-100 dark:border-green-700'
-                            : 'bg-gray-50 dark:bg-gray-900/40 text-black dark:text-gray-200 border-gray-100 dark:border-gray-700'
+                            ? 'bg-green-50 text-green-700 border-green-100'
+                            : 'bg-gray-50 text-black border-gray-100'
                         }`}>
                         {job.posted_by === 'alumni' ? 'Alumni' :
                             job.posted_by === 'career_team' ? 'Career Team' :
@@ -352,7 +362,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
             </div>
             {/* Salary info */}
             {(job.job_min_salary || job.job_max_salary) && (
-                <div className="mb-1 text-sm text-green-700 dark:text-green-200 font-semibold">
+                <div className="mb-1 text-sm text-green-700 font-semibold">
                     Salary: {job.job_min_salary && job.job_max_salary && job.job_min_salary !== job.job_max_salary
                         ? `$${job.job_min_salary} - $${job.job_max_salary}`
                         : job.job_min_salary
@@ -364,19 +374,19 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                 </div>
             )}
             {/* Applicants info */}
-            <div className="mb-1 text-xs text-black dark:text-black font-light italic">
-                {applicants} people have also applied for this job
+            <div className="mb-1 text-xs text-black font-light italic">
+                {displayApplicants} {displayApplicants === 1 ? 'person has' : 'people have'} also applied for this job
             </div>
             {/* Job apply link - Removed from card, now in modal */}
             {/* Action Buttons - Share and Apply */}
-            <div className="flex flex-col gap-2 pt-2 border-t border-purple-100 dark:border-purple-800 w-full mt-auto">
+            <div className="flex flex-col gap-2 pt-2 border-t border-purple-100 w-full mt-auto">
                 {/* Share Button */}
                 <div className="flex justify-end w-full">
                     <button
                         onClick={handleShare}
                         className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium
-                            bg-gray-100 dark:bg-gray-700 text-black dark:text-gray-300 border border-gray-200 dark:border-gray-600
-                            hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-150
+                            bg-gray-100 text-black border border-gray-200
+                            hover:bg-gray-200 transition-colors duration-150
                             focus:outline-none focus:ring-2 focus:ring-gray-400"
                         title="Share this job"
                     >
@@ -413,7 +423,10 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
             {showModal && typeof window !== 'undefined' && ReactDOM.createPortal(
                 <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm min-h-screen">
                     <div
-                        className="relative w-full max-w-xl sm:max-w-2xl mx-2 sm:mx-0 bg-white/95 dark:bg-slate-900/95 rounded-2xl shadow-2xl border-4 border-purple-300 dark:border-purple-800 p-6 sm:p-10 flex flex-col gap-6 animate-fade-in-up"
+                        className={`relative w-full max-w-xl sm:max-w-2xl mx-2 sm:mx-0 rounded-2xl shadow-2xl border-4 p-6 sm:p-10 flex flex-col gap-6 animate-fade-in-up ${forceLightPartnerRecruiterPopup
+                            ? 'bg-white text-black border-purple-300'
+                            : 'bg-white/95 dark:bg-slate-900/95 text-black dark:text-white border-purple-300 dark:border-purple-800'
+                            }`}
                         style={{
                             maxHeight: '92vh',
                             overflowY: 'auto',
@@ -421,7 +434,10 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                         }}
                     >
                         <button
-                            className="absolute top-2 right-2 sm:top-4 sm:right-4 text-black hover:text-red-500 text-2xl sm:text-3xl font-bold focus:outline-none rounded-full bg-white/70 dark:bg-slate-800/70 size-12 flex items-center justify-center shadow-md"
+                            className={`absolute top-2 right-2 sm:top-4 sm:right-4 text-black hover:text-red-500 text-2xl sm:text-3xl font-bold focus:outline-none rounded-full size-12 flex items-center justify-center shadow-md ${forceLightPartnerRecruiterPopup
+                                ? 'bg-white'
+                                : 'bg-white/70 dark:bg-slate-800/70'
+                                }`}
                             onClick={() => {
                                 setShowModal(false);
                                 setSubmitted(false);
@@ -449,10 +465,10 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                                 }}
                             />
                             <div className="flex-1">
-                                <div className="font-mono font-bold text-2xl text-slate-900 dark:text-black flex items-center gap-1">
+                                <div className={`font-mono font-bold text-2xl flex items-center gap-1 ${forceLightPartnerRecruiterPopup ? 'text-slate-900' : 'text-slate-900 dark:text-black'}`}>
                                     {job.title}
                                 </div>
-                                <div className="text-sm text-slate-700 dark:text-gray-300 font-mono font-bold">
+                                <div className={`text-sm font-mono font-bold ${forceLightPartnerRecruiterPopup ? 'text-slate-700' : 'text-slate-700 dark:text-gray-300'}`}>
                                     {job.company}
                                 </div>
                                 {/* View Job Posting Link - Optimally placed in modal */}
@@ -461,7 +477,10 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                                         href={job.job_apply_link}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium mt-1 transition-colors duration-200"
+                                        className={`inline-flex items-center gap-1 text-sm font-medium mt-1 transition-colors duration-200 ${forceLightPartnerRecruiterPopup
+                                            ? 'text-blue-600 hover:text-blue-800'
+                                            : 'text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300'
+                                            }`}
                                     >
                                         <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -471,70 +490,86 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                                 )}
                             </div>
                         </div>
-                        <div className="text-slate-800 dark:text-slate-200 text-base font-mono mb-2" style={{ whiteSpace: 'pre-line' }}>
+                        <div className={`text-base font-mono mb-2 ${forceLightPartnerRecruiterPopup ? 'text-slate-800' : 'text-slate-800 dark:text-slate-200'}`} style={{ whiteSpace: 'pre-line' }}>
                             {displayDescription}
                             {shouldShowViewMore && (
                                 <button
                                     onClick={() => setShowFullDescription(!showFullDescription)}
-                                    className="ml-2 text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-200 font-semibold underline focus:outline-none focus:ring-2 focus:ring-purple-500 rounded"
+                                    className={`ml-2 font-semibold underline focus:outline-none focus:ring-2 focus:ring-purple-500 rounded ${forceLightPartnerRecruiterPopup
+                                        ? 'text-purple-600 hover:text-purple-800'
+                                        : 'text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-200'
+                                        }`}
                                 >
                                     {showFullDescription ? 'View Less' : 'View More'}
                                 </button>
                             )}
                         </div>
                         <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-2">
-                            <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1">Name:</label>
+                            <label className={`block text-sm font-bold mb-1 ${forceLightPartnerRecruiterPopup ? 'text-slate-700' : 'text-slate-700 dark:text-slate-200'}`}>Name:</label>
                             <input
                                 type="text"
                                 value={name}
                                 onChange={e => setName(e.target.value)}
                                 required
-                                className="block w-full rounded border border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 px-3 py-2 text-sm text-black dark:text-black focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                className={`block w-full rounded border px-3 py-2 text-sm text-black focus:outline-none focus:ring-2 focus:ring-purple-500 ${forceLightPartnerRecruiterPopup
+                                    ? 'border-purple-300 bg-white'
+                                    : 'border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 dark:text-black'
+                                    }`}
                                 placeholder="Your full name"
                             />
-                            <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1">Email:</label>
+                            <label className={`block text-sm font-bold mb-1 ${forceLightPartnerRecruiterPopup ? 'text-slate-700' : 'text-slate-700 dark:text-slate-200'}`}>Email:</label>
                             <input
                                 type="email"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 required
-                                className="block w-full rounded border border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 px-3 py-2 text-sm text-black dark:text-black focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                className={`block w-full rounded border px-3 py-2 text-sm text-black focus:outline-none focus:ring-2 focus:ring-purple-500 ${forceLightPartnerRecruiterPopup
+                                    ? 'border-purple-300 bg-white'
+                                    : 'border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 dark:text-black'
+                                    }`}
                                 placeholder="you@email.com"
                             />
-                            <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1">Cover Letter:</label>
+                            <label className={`block text-sm font-bold mb-1 ${forceLightPartnerRecruiterPopup ? 'text-slate-700' : 'text-slate-700 dark:text-slate-200'}`}>Cover Letter:</label>
                             <textarea
                                 value={coverLetter}
                                 onChange={e => setCoverLetter(e.target.value)}
                                 required
                                 rows={4}
-                                className="block w-full rounded border border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 px-3 py-2 text-sm text-black dark:text-black focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+                                className={`block w-full rounded border px-3 py-2 text-sm text-black focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none ${forceLightPartnerRecruiterPopup
+                                    ? 'border-purple-300 bg-white'
+                                    : 'border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 dark:text-black'
+                                    }`}
                                 placeholder="Write a short cover letter..."
                             />
-                            <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-1">Attach your CV (PDF, DOCX):</label>
+                            <label className={`block text-sm font-bold mb-1 ${forceLightPartnerRecruiterPopup ? 'text-slate-700' : 'text-slate-700 dark:text-slate-200'}`}>Attach your CV (PDF, DOCX):</label>
                             <input
                                 type="file"
                                 accept=".pdf,.doc,.docx"
                                 onChange={handleFileChange}
-                                className="block w-full text-sm text-black dark:text-gray-200 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 dark:file:bg-purple-900/40 dark:file:text-purple-200 dark:hover:file:bg-purple-900/60"
+                                className={`block w-full text-sm text-black file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 ${forceLightPartnerRecruiterPopup ? '' : 'dark:text-gray-200 dark:file:bg-purple-900/40 dark:file:text-purple-200 dark:hover:file:bg-purple-900/60'}`}
                             />
-                            {cvName && <span className="text-sm text-green-600 dark:text-green-400">Selected: {cvName}</span>}
+                            {cvName && (
+                                <span className={`text-sm ${forceLightPartnerRecruiterPopup ? 'text-green-600' : 'text-green-600 dark:text-green-400'}`}>
+                                    Selected: {cvName}
+                                </span>
+                            )}
 
                             {/* Error Display */}
                             {error && (
-                                <div className="mt-2 p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+                                <div className={`mt-2 p-4 rounded-lg border ${forceLightPartnerRecruiterPopup ? 'bg-red-50 border-red-200' : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800'}`}>
                                     <div className="flex items-start gap-2">
                                         <div className="shrink-0">
-                                            <svg className="size-5 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                                            <svg className={`size-5 ${forceLightPartnerRecruiterPopup ? 'text-red-600' : 'text-red-600 dark:text-red-400'}`} fill="currentColor" viewBox="0 0 20 20">
                                                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                                             </svg>
                                         </div>
                                         <div className="flex-1">
-                                            <h3 className="text-sm font-semibold text-red-800 dark:text-red-200">
+                                            <h3 className={`text-sm font-semibold ${forceLightPartnerRecruiterPopup ? 'text-red-800' : 'text-red-800 dark:text-red-200'}`}>
                                                 {error}
                                             </h3>
                                             {errorDetails && (
                                                 <div className="mt-1">
-                                                    <p className="text-xs text-red-700 dark:text-red-300 font-mono bg-red-100 dark:bg-red-900/30 p-2 rounded border">
+                                                    <p className={`text-xs font-mono p-2 rounded border ${forceLightPartnerRecruiterPopup ? 'text-red-700 bg-red-100' : 'text-red-700 dark:text-red-300 bg-red-100 dark:bg-red-900/30'}`}>
                                                         <strong>Details:</strong> {errorDetails}
                                                     </p>
                                                 </div>
@@ -546,7 +581,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                                                         setError(null);
                                                         setErrorDetails(null);
                                                     }}
-                                                    className="text-xs text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-200 underline"
+                                                    className={`text-xs underline ${forceLightPartnerRecruiterPopup ? 'text-red-600 hover:text-red-800' : 'text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-200'}`}
                                                 >
                                                     Dismiss
                                                 </button>
@@ -563,7 +598,11 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                             >
                                 {submitting ? 'Submitting...' : submitted ? 'Submitted!' : 'Submit Application'}
                             </button>
-                            {submitted && <span className="text-sm text-green-600 dark:text-green-400">Application submitted successfully!</span>}
+                            {submitted && (
+                                <span className={`text-sm ${forceLightPartnerRecruiterPopup ? 'text-green-600' : 'text-green-600 dark:text-green-400'}`}>
+                                    Application submitted successfully!
+                                </span>
+                            )}
                         </form>
                     </div>
                 </div>,

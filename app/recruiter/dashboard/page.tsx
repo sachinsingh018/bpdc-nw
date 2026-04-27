@@ -32,10 +32,12 @@ import {
     X,
     Download,
     Shield,
-    AlertTriangle
+    AlertTriangle,
+    User
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { PostJobModal } from '@/components/post-job-modal';
 
 interface JobApplication {
     id: string;
@@ -81,7 +83,10 @@ interface Job {
     job_salary_period: string;
     posted_by: string;
     posted_by_user_id: string;
+    posted_by_user_name?: string | null;
+    posted_by_user_email?: string | null;
     created_at: string;
+    application_count?: number;
 }
 
 // Utility functions
@@ -135,6 +140,7 @@ const formatDate = (dateString: string) => {
 
 export default function RecruiterDashboard() {
     const router = useRouter();
+    const searchParams = useSearchParams();
     const [applications, setApplications] = useState<JobApplication[]>([]);
     const [jobs, setJobs] = useState<Job[]>([]);
     const [loading, setLoading] = useState(true);
@@ -142,10 +148,13 @@ export default function RecruiterDashboard() {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedJob, setSelectedJob] = useState('');
     const [showPostJobModal, setShowPostJobModal] = useState(false);
+    const [openedPostJobFromParam, setOpenedPostJobFromParam] = useState(false);
     const [postingJob, setPostingJob] = useState(false);
     const [selectedApplication, setSelectedApplication] = useState<JobApplication | null>(null);
     const [showApplicationModal, setShowApplicationModal] = useState(false);
     const [feedback, setFeedback] = useState('');
+    const [downloadingResumesForJobId, setDownloadingResumesForJobId] = useState<string | null>(null);
+    const [selectedJobForView, setSelectedJobForView] = useState<Job | null>(null);
     const [userRole, setUserRole] = useState<string>('');
     const [roleLoading, setRoleLoading] = useState(true);
     const [accessDenied, setAccessDenied] = useState(false);
@@ -167,6 +176,14 @@ export default function RecruiterDashboard() {
         rejectedApplications: 0,
         totalJobs: 0,
     });
+
+    useEffect(() => {
+        if (openedPostJobFromParam) return;
+        if (searchParams?.get('postJob') === '1') {
+            setShowPostJobModal(true);
+            setOpenedPostJobFromParam(true);
+        }
+    }, [searchParams, openedPostJobFromParam]);
 
     // Filtered jobs based on search and filters
     const filteredJobs = useMemo(() => {
@@ -411,6 +428,32 @@ export default function RecruiterDashboard() {
         } catch (error) {
             console.error(`Error ${action}ing application:`, error);
             toast.error(`Failed to ${action} application`);
+        }
+    };
+
+    const downloadAllResumesPdf = async (jobId: string) => {
+        setDownloadingResumesForJobId(jobId);
+        try {
+            const res = await fetch(`/api/recruiter/jobs/${encodeURIComponent(jobId)}/resumes/pdf`);
+            if (!res.ok) {
+                const err = await res.json().catch(() => ({}));
+                toast.error(err?.error || 'Failed to download resumes');
+                return;
+            }
+            const blob = await res.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `resumes_${jobId}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        } catch (e) {
+            console.error('Failed downloading resumes PDF', e);
+            toast.error('Failed to download resumes');
+        } finally {
+            setDownloadingResumesForJobId(null);
         }
     };
 
@@ -994,13 +1037,23 @@ export default function RecruiterDashboard() {
                                             </div>
                                             <div className="flex items-center gap-2">
                                                 <Button
-                                                    onClick={() => window.open(job.job_apply_link, '_blank')}
+                                                    onClick={() => setSelectedJobForView(job)}
                                                     variant="outline"
                                                     size="sm"
                                                     className="text-black border-white/20 hover:bg-white/10"
                                                 >
-                                                    <ExternalLink className="size-4 mr-1" />
+                                                    <Eye className="size-4 mr-1" />
                                                     View
+                                                </Button>
+                                                <Button
+                                                    onClick={() => downloadAllResumesPdf(job.job_id)}
+                                                    variant="outline"
+                                                    size="sm"
+                                                    disabled={downloadingResumesForJobId === job.job_id}
+                                                    className="text-black border-white/20 hover:bg-white/10"
+                                                >
+                                                    <Download className="size-4 mr-1" />
+                                                    {downloadingResumesForJobId === job.job_id ? 'Preparing…' : 'Download resumes'}
                                                 </Button>
                                             </div>
                                         </div>
@@ -1018,6 +1071,15 @@ export default function RecruiterDashboard() {
                     </TabsContent>
                 </Tabs>
             </div>
+
+            {/* Job Detail Modal */}
+            {selectedJobForView && (
+                <JobDetailModal
+                    job={selectedJobForView}
+                    applicationCount={applications.filter(a => a.jobId === selectedJobForView.job_id).length}
+                    onClose={() => setSelectedJobForView(null)}
+                />
+            )}
 
             {/* Post Job Modal */}
             {showPostJobModal && (
@@ -1046,197 +1108,73 @@ export default function RecruiterDashboard() {
     );
 }
 
-// Post Job Modal Component
-function PostJobModal({ onClose, onSubmit, loading }: {
-    onClose: () => void;
-    onSubmit: (jobData: any) => void;
-    loading: boolean;
-}) {
-    const [formData, setFormData] = useState({
-        job_title: '',
-        employer_name: '',
-        job_description: '',
-        job_city: '',
-        job_state: '',
-        job_country: '',
-        job_employment_type: 'full-time',
-        job_min_salary: '',
-        job_max_salary: '',
-        job_salary_period: 'yearly',
-        job_is_remote: false,
-        job_apply_link: '',
-    });
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-
-        // Basic validation
-        if (!formData.job_title || !formData.employer_name || !formData.job_description) {
-            toast.error('Please fill in all required fields');
-            return;
-        }
-
-        // Validate salary fields if provided
-        if (formData.job_min_salary && isNaN(Number(formData.job_min_salary))) {
-            toast.error('Minimum salary must be a valid number');
-            return;
-        }
-
-        if (formData.job_max_salary && isNaN(Number(formData.job_max_salary))) {
-            toast.error('Maximum salary must be a valid number');
-            return;
-        }
-
-        // Validate salary range
-        if (formData.job_min_salary && formData.job_max_salary) {
-            if (Number(formData.job_min_salary) > Number(formData.job_max_salary)) {
-                toast.error('Minimum salary cannot be greater than maximum salary');
-                return;
-            }
-        }
-
-        onSubmit(formData);
-    };
-
+// Job Detail Modal Component
+function JobDetailModal({ job, applicationCount, onClose }: { job: Job; applicationCount: number; onClose: () => void }) {
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-            <div className="bg-white dark:bg-slate-800 rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-                <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold">Post New Job</h2>
+            <div className="bg-white text-black rounded-lg w-full max-w-2xl max-h-[90vh] flex flex-col">
+                <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                    <h2 className="text-2xl font-bold text-black">{job.job_title}</h2>
                     <Button onClick={onClose} variant="ghost" size="sm">
                         <X className="size-4" />
                     </Button>
                 </div>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-sm font-medium mb-2">Job Title *</label>
-                            <Input
-                                value={formData.job_title}
-                                onChange={(e) => setFormData({ ...formData, job_title: e.target.value })}
-                                required
-                            />
+
+                <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                    <div className="bg-gray-50 p-4 rounded-lg space-y-2">
+                        <div className="flex items-center gap-2 text-sm">
+                            <Building className="size-4 text-gray-500" />
+                            <span className="font-medium">{job.employer_name}</span>
                         </div>
-                        <div>
-                            <label className="block text-sm font-medium mb-2">Company Name *</label>
-                            <Input
-                                value={formData.employer_name}
-                                onChange={(e) => setFormData({ ...formData, employer_name: e.target.value })}
-                                required
-                            />
+                        <div className="flex items-center gap-2 text-sm">
+                            <MapPin className="size-4 text-gray-500" />
+                            <span>{job.job_city}, {job.job_state}, {job.job_country}</span>
+                            {job.job_is_remote && <Badge className="bg-green-100 text-green-800 text-xs">Remote</Badge>}
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                            <Briefcase className="size-4 text-gray-500" />
+                            <Badge variant="outline" className="text-xs">{job.job_employment_type}</Badge>
+                        </div>
+                        {job.job_min_salary && job.job_max_salary && (
+                            <div className="flex items-center gap-2 text-sm">
+                                <DollarSign className="size-4 text-gray-500" />
+                                <span>${job.job_min_salary} – ${job.job_max_salary} {job.job_salary_period}</span>
+                            </div>
+                        )}
+                        <div className="flex items-center gap-2 text-sm">
+                            <Calendar className="size-4 text-gray-500" />
+                            <span>Posted {formatDate(job.job_posted_at_datetime_utc || job.created_at)}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                            <Users className="size-4 text-gray-500" />
+                            <span className="font-medium">{applicationCount} {applicationCount === 1 ? 'applicant' : 'applicants'}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                            <User className="size-4 text-gray-500" />
+                            <span>Posted by <span className="font-medium">Recruitment Admin</span></span>
                         </div>
                     </div>
+
                     <div>
-                        <label className="block text-sm font-medium mb-2">Job Description *</label>
-                        <Textarea
-                            value={formData.job_description}
-                            onChange={(e) => setFormData({ ...formData, job_description: e.target.value })}
-                            rows={4}
-                            required
-                        />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                            <label className="block text-sm font-medium mb-2">City</label>
-                            <Input
-                                value={formData.job_city}
-                                onChange={(e) => setFormData({ ...formData, job_city: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium mb-2">State</label>
-                            <Input
-                                value={formData.job_state}
-                                onChange={(e) => setFormData({ ...formData, job_state: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium mb-2">Country</label>
-                            <Input
-                                value={formData.job_country}
-                                onChange={(e) => setFormData({ ...formData, job_country: e.target.value })}
-                            />
+                        <h3 className="font-semibold mb-2 text-black">Job Description</h3>
+                        <div className="bg-gray-50 p-4 rounded-lg max-h-64 overflow-y-auto">
+                            <p className="text-sm whitespace-pre-wrap text-black">{job.job_description}</p>
                         </div>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-sm font-medium mb-2">Employment Type</label>
-                            <Select value={formData.job_employment_type} onValueChange={(value) => setFormData({ ...formData, job_employment_type: value })}>
-                                <SelectTrigger>
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="full-time">Full-time</SelectItem>
-                                    <SelectItem value="part-time">Part-time</SelectItem>
-                                    <SelectItem value="contract">Contract</SelectItem>
-                                    <SelectItem value="internship">Internship</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium mb-2">Salary Period</label>
-                            <Select value={formData.job_salary_period} onValueChange={(value) => setFormData({ ...formData, job_salary_period: value })}>
-                                <SelectTrigger>
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="yearly">Yearly</SelectItem>
-                                    <SelectItem value="monthly">Monthly</SelectItem>
-                                    <SelectItem value="hourly">Hourly</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-sm font-medium mb-2">Min Salary</label>
-                            <Input
-                                type="number"
-                                value={formData.job_min_salary}
-                                onChange={(e) => setFormData({ ...formData, job_min_salary: e.target.value })}
-                                placeholder="50000"
-                                min="0"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium mb-2">Max Salary</label>
-                            <Input
-                                type="number"
-                                value={formData.job_max_salary}
-                                onChange={(e) => setFormData({ ...formData, job_max_salary: e.target.value })}
-                                placeholder="80000"
-                                min="0"
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium mb-2">Application Link (Optional)</label>
-                        <Input
-                            type="url"
-                            value={formData.job_apply_link}
-                            onChange={(e) => setFormData({ ...formData, job_apply_link: e.target.value })}
-                            placeholder="https://... (optional)"
-                        />
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <input
-                            type="checkbox"
-                            id="remote"
-                            checked={formData.job_is_remote}
-                            onChange={(e) => setFormData({ ...formData, job_is_remote: e.target.checked })}
-                            className="rounded"
-                        />
-                        <label htmlFor="remote" className="text-sm font-medium">Remote position</label>
-                    </div>
-                    <div className="flex justify-end gap-2">
-                        <Button type="button" onClick={onClose} variant="outline">
-                            Cancel
+                </div>
+
+                <div className="border-t border-gray-200 p-6 flex justify-end gap-2">
+                    <Button onClick={onClose} variant="outline">Close</Button>
+                    {job.job_apply_link && (
+                        <Button
+                            onClick={() => window.open(job.job_apply_link, '_blank')}
+                            className="bg-blue-600 hover:bg-blue-700 text-white"
+                        >
+                            <ExternalLink className="size-4 mr-2" />
+                            Open Apply Link
                         </Button>
-                        <Button type="submit" disabled={loading}>
-                            {loading ? 'Posting...' : 'Post Job'}
-                        </Button>
-                    </div>
-                </form>
+                    )}
+                </div>
             </div>
         </div>
     );
@@ -1307,10 +1245,10 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
 
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-            <div className="bg-white dark:bg-slate-800 rounded-lg w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div className="bg-white text-black rounded-lg w-full max-w-2xl max-h-[90vh] flex flex-col">
                 {/* Header - Fixed */}
-                <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-                    <h2 className="text-2xl font-bold">Review Application</h2>
+                <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                    <h2 className="text-2xl font-bold text-black">Review Application</h2>
                     <Button onClick={onClose} variant="ghost" size="sm">
                         <X className="size-4" />
                     </Button>
@@ -1319,20 +1257,20 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                 {/* Content - Scrollable */}
                 <div className="flex-1 overflow-y-auto p-6">
                     <div className="space-y-4">
-                        <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                            <h3 className="font-semibold mb-2">Candidate Information</h3>
+                        <div className="bg-gray-50 p-4 rounded-lg">
+                            <h3 className="font-semibold mb-2 text-black">Candidate Information</h3>
                             <div className="grid grid-cols-2 gap-4 text-sm">
                                 <div>
-                                    <span className="font-medium">Name:</span> {application.name}
+                                    <span className="font-medium text-black">Name:</span> {application.name}
                                 </div>
                                 <div>
-                                    <span className="font-medium">Email:</span> {application.email}
+                                    <span className="font-medium text-black">Email:</span> {application.email}
                                 </div>
                                 <div>
-                                    <span className="font-medium">Applied:</span> {formatDate(application.createdAt)}
+                                    <span className="font-medium text-black">Applied:</span> {formatDate(application.createdAt)}
                                 </div>
                                 <div>
-                                    <span className="font-medium">Status:</span>
+                                    <span className="font-medium text-black">Status:</span>
                                     <Badge className={`ml-2 ${getStatusColor(application.status)}`}>
                                         {getStatusLabel(application.status)}
                                     </Badge>
@@ -1344,24 +1282,24 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                         </div>
 
                         <div>
-                            <h3 className="font-semibold mb-2">Job Details</h3>
-                            <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                                <div className="font-medium">{application.job?.job_title}</div>
+                            <h3 className="font-semibold mb-2 text-black">Job Details</h3>
+                            <div className="bg-gray-50 p-4 rounded-lg">
+                                <div className="font-medium text-black">{application.job?.job_title}</div>
                                 <div className="text-sm text-black">{application.job?.employer_name}</div>
                             </div>
                         </div>
 
                         <div>
-                            <h3 className="font-semibold mb-2">Cover Letter</h3>
-                            <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg max-h-40 overflow-y-auto">
-                                <p className="text-sm whitespace-pre-wrap">{application.coverLetter}</p>
+                            <h3 className="font-semibold mb-2 text-black">Cover Letter</h3>
+                            <div className="bg-gray-50 p-4 rounded-lg max-h-40 overflow-y-auto">
+                                <p className="text-sm whitespace-pre-wrap text-black">{application.coverLetter}</p>
                             </div>
                         </div>
 
                         <div>
-                            <h3 className="font-semibold mb-2">Resume/CV</h3>
+                            <h3 className="font-semibold mb-2 text-black">Resume/CV</h3>
                             {application.cvFileUrl ? (
-                                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <div className="bg-gray-50 p-4 rounded-lg">
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2">
                                             <Briefcase className="size-4 text-blue-600" />
@@ -1373,7 +1311,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                             <Button
                                                 variant="outline"
                                                 size="sm"
-                                                className="text-xs bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/40"
+                                                className="text-xs bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100"
                                                 onClick={() => window.open(application.cvFileUrl, '_blank')}
                                             >
                                                 <ExternalLink className="size-3 mr-1" />
@@ -1382,7 +1320,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                             <Button
                                                 variant="outline"
                                                 size="sm"
-                                                className="text-xs bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700 text-green-700 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/40"
+                                                className="text-xs bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
                                                 onClick={() => {
                                                     const link = document.createElement('a');
                                                     link.href = application.cvFileUrl!;
@@ -1397,7 +1335,7 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                                     </div>
                                 </div>
                             ) : (
-                                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <div className="bg-gray-50 p-4 rounded-lg">
                                     <div className="flex items-center gap-2">
                                         <Briefcase className="size-4 text-gray-400" />
                                         <span className="text-sm text-black">
@@ -1409,22 +1347,23 @@ function ApplicationReviewModal({ application, onClose, onAccept, onReject, onAc
                         </div>
 
                         <div>
-                            <h3 className="font-semibold mb-2">Feedback (Optional)</h3>
+                            <h3 className="font-semibold mb-2 text-black">Feedback (Optional)</h3>
                             <Textarea
                                 value={feedback}
                                 onChange={(e) => setFeedback(e.target.value)}
                                 placeholder="Provide feedback to the candidate..."
                                 rows={3}
+                                className="text-black placeholder:text-black/50"
                             />
                         </div>
                     </div>
                 </div>
 
                 {/* Footer - Fixed */}
-                <div className="border-t border-gray-200 dark:border-gray-700 p-6">
+                <div className="border-t border-gray-200 p-6">
                     {action ? (
-                        <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
-                            <p className="text-sm text-yellow-800 dark:text-yellow-200 mb-3">
+                        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                            <p className="text-sm text-yellow-800 mb-3">
                                 Are you sure you want to {action === 'accept' ? 'accept' : action === 'reject' ? 'reject' : `move to ${getStatusLabel(action)}`} this application?
                             </p>
                             <div className="flex justify-end gap-2">

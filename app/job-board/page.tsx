@@ -270,7 +270,11 @@ function JobBoardContent() {
             job_city: job.job_city && job.job_city.trim() ? job.job_city : '',
             job_state: job.job_state && job.job_state.trim() ? job.job_state : '',
             job_country: job.job_country && job.job_country.trim() ? job.job_country : '',
-            job_posted_at_datetime_utc: job.job_posted_at_datetime_utc && job.job_posted_at_datetime_utc.trim() ? job.job_posted_at_datetime_utc : '',
+            job_posted_at_datetime_utc: job.job_posted_at_datetime_utc
+                ? (typeof job.job_posted_at_datetime_utc === 'string'
+                    ? job.job_posted_at_datetime_utc
+                    : new Date(job.job_posted_at_datetime_utc).toISOString())
+                : '',
             job_apply_link: job.job_apply_link && job.job_apply_link.trim() ? job.job_apply_link : '',
             job_employment_type: job.job_employment_type || '',
             job_is_remote: job.job_is_remote,
@@ -278,6 +282,9 @@ function JobBoardContent() {
             job_max_salary: job.job_max_salary,
             job_salary_period: job.job_salary_period,
             posted_by: job.posted_by || 'external',
+            posted_by_user_name: job.posted_by_user_name || '',
+            posted_by_user_email: job.posted_by_user_email || '',
+            application_count: job.application_count ?? undefined,
             searchedAt: job.searchedat || job.searchedAt || '',
         };
     }
@@ -789,6 +796,7 @@ function JobBoardContent() {
                                         onApplicationSubmitted={fetchUserApplications}
                                         isHighlighted={highlightedJobId === job.id}
                                         currentFilter={categoryFilter}
+                                        applicationCount={job.posted_by === 'career_team' ? (job.application_count ?? 0) : undefined}
                                     />
                                 ))
                             )}
