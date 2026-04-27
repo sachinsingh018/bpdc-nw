@@ -93,7 +93,7 @@ export function ViewCalendarReadonly({ userEmail, userName, timezone, workingHou
                     >
                         <ChevronLeft className="size-4" />
                     </button>
-                    <h3 className="text-base font-semibold text-black dark:text-black">
+                    <h3 className="text-base font-semibold text-black dark:text-white">
                         {format(currentWeek, 'MMM d')} - {format(addDays(currentWeek, 6), 'MMM d, yyyy')}
                     </h3>
                     <button

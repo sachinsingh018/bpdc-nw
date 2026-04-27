@@ -146,7 +146,7 @@ export default function FAQPage() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white relative overflow-hidden">
+        <div className="min-h-screen bg-black text-white relative overflow-x-hidden overflow-y-auto">
             {/* Gradient Background */}
             <div className="fixed inset-0 bg-gradient-to-br from-black via-violet-950/20 to-purple-950/30" />
             <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-black to-black" />

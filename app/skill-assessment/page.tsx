@@ -172,7 +172,7 @@ export default function SkillAssessmentPage() {
     // Show loading state while checking authentication
     if (status === 'loading') {
         return (
-            <div className="relative min-h-screen overflow-hidden flex items-center justify-center">
+            <div className="relative min-h-screen overflow-x-hidden overflow-y-auto flex items-center justify-center">
                 <div
                     className="fixed inset-0 z-0"
                     style={{
@@ -193,7 +193,7 @@ export default function SkillAssessmentPage() {
     }
 
     return (
-        <div className="relative min-h-screen overflow-hidden">
+        <div className="relative min-h-screen overflow-x-hidden overflow-y-auto">
             {/* Blurred Background */}
             <div
                 className="fixed inset-0 z-0"

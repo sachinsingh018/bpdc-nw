@@ -37,7 +37,7 @@ export function AuthForm({
           <Input
             id="name"
             name="name"
-            className="bg-[hsl(0,0%,95%)] text-black border-[hsl(0,0%,90%)] placeholder:text-[hsl(0,0%,45%)] focus-visible:ring-[hsl(0,0%,98%)] text-md md:text-sm dark:bg-[hsl(0,0%,95%)] dark:text-black dark:border-[hsl(0,0%,90%)] dark:placeholder:text-[hsl(0,0%,45%)]"
+            className="bg-[hsl(0,0%,95%)] text-black border-[hsl(0,0%,90%)] placeholder:text-[hsl(0,0%,45%)] focus-visible:ring-[hsl(0,0%,98%)] text-md md:text-sm dark:bg-[hsl(0,0%,95%)] dark:text-white dark:border-[hsl(0,0%,90%)] dark:placeholder:text-[hsl(0,0%,45%)]"
             type="text"
             placeholder="Jerry Seinfeld"
             required
@@ -59,7 +59,7 @@ export function AuthForm({
         <Input
           id="email"
           name="email"
-          className="bg-[hsl(0,0%,95%)] text-black border-[hsl(0,0%,90%)] placeholder:text-[hsl(0,0%,45%)] focus-visible:ring-[hsl(0,0%,98%)] text-md md:text-sm dark:bg-[hsl(0,0%,95%)] dark:text-black dark:border-[hsl(0,0%,90%)] dark:placeholder:text-[hsl(0,0%,45%)]"
+          className="bg-[hsl(0,0%,95%)] text-black border-[hsl(0,0%,90%)] placeholder:text-[hsl(0,0%,45%)] focus-visible:ring-[hsl(0,0%,98%)] text-md md:text-sm dark:bg-[hsl(0,0%,95%)] dark:text-white dark:border-[hsl(0,0%,90%)] dark:placeholder:text-[hsl(0,0%,45%)]"
           type="email"
           placeholder="jerry@networkqy.com"
           autoComplete="email"
@@ -80,7 +80,7 @@ export function AuthForm({
         <Input
           id="password"
           name="password"
-          className="bg-[hsl(0,0%,95%)] text-black border-[hsl(0,0%,90%)] placeholder:text-[hsl(0,0%,45%)] focus-visible:ring-[hsl(0,0%,98%)] text-md md:text-sm dark:bg-[hsl(0,0%,95%)] dark:text-black dark:border-[hsl(0,0%,90%)] dark:placeholder:text-[hsl(0,0%,45%)]"
+          className="bg-[hsl(0,0%,95%)] text-black border-[hsl(0,0%,90%)] placeholder:text-[hsl(0,0%,45%)] focus-visible:ring-[hsl(0,0%,98%)] text-md md:text-sm dark:bg-[hsl(0,0%,95%)] dark:text-white dark:border-[hsl(0,0%,90%)] dark:placeholder:text-[hsl(0,0%,45%)]"
           type="password"
           required
         />
@@ -100,7 +100,7 @@ export function AuthForm({
           <Input
             id="linkedin-info"
             name="linkedin-info"
-            className="bg-[hsl(0,0%,95%)] text-black border-[hsl(0,0%,90%)] placeholder:text-[hsl(0,0%,45%)] focus-visible:ring-[hsl(0,0%,98%)] text-md md:text-sm dark:bg-[hsl(0,0%,95%)] dark:text-black dark:border-[hsl(0,0%,90%)] dark:placeholder:text-[hsl(0,0%,45%)]"
+            className="bg-[hsl(0,0%,95%)] text-black border-[hsl(0,0%,90%)] placeholder:text-[hsl(0,0%,45%)] focus-visible:ring-[hsl(0,0%,98%)] text-md md:text-sm dark:bg-[hsl(0,0%,95%)] dark:text-white dark:border-[hsl(0,0%,90%)] dark:placeholder:text-[hsl(0,0%,45%)]"
             type="text"
             placeholder="Enter your information manually or import from LinkedIn"
           />

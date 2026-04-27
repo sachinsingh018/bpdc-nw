@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useMemo, useCallback, Suspense } from 'react';
+import React, { useEffect, useState, useMemo, useCallback, useRef, Suspense } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -33,9 +33,20 @@ import {
     Download,
     Shield,
     AlertTriangle,
-    User
+    User,
+    Trash2
 } from 'lucide-react';
 import { toast } from 'sonner';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { PostJobModal } from '@/components/post-job-modal';
 
@@ -167,6 +178,14 @@ function RecruiterDashboardContent() {
     const [roleLoading, setRoleLoading] = useState(true);
     const [accessDenied, setAccessDenied] = useState(false);
 
+    // Tab and scroll refs
+    const [activeTab, setActiveTab] = useState('applications');
+    const tabsSectionRef = useRef<HTMLDivElement>(null);
+
+    // Delete job state
+    const [jobToDelete, setJobToDelete] = useState<string | null>(null);
+    const [deletingJobId, setDeletingJobId] = useState<string | null>(null);
+
     // Job filtering states
     const [jobSearchTerm, setJobSearchTerm] = useState('');
     const [jobStatusFilter, setJobStatusFilter] = useState('all');
@@ -184,6 +203,39 @@ function RecruiterDashboardContent() {
         rejectedApplications: 0,
         totalJobs: 0,
     });
+
+    const handleDeleteJob = async (jobId: string) => {
+        setDeletingJobId(jobId);
+        try {
+            const response = await fetch('/api/recruiter/jobs', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ jobId }),
+            });
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.error || 'Failed to delete job');
+            }
+
+            toast.success('Job deleted successfully');
+            setJobToDelete(null);
+            loadDashboardData();
+        } catch (error) {
+            console.error('Error deleting job:', error);
+            toast.error(error instanceof Error ? error.message : 'Failed to delete job');
+        } finally {
+            setDeletingJobId(null);
+        }
+    };
+
+    const handleStatCardClick = (statusFilter: string, tab: string = 'applications') => {
+        setSelectedStatus(statusFilter);
+        setActiveTab(tab);
+        setTimeout(() => {
+            tabsSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+    };
 
     useEffect(() => {
         if (openedPostJobFromParam) return;
@@ -705,7 +757,10 @@ function RecruiterDashboardContent() {
 
                 {/* Summary Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8">
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
+                    <Card
+                        className="bg-white/10 backdrop-blur-md border-white/20 text-black cursor-pointer hover:bg-white/20 hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300"
+                        onClick={() => handleStatCardClick('all')}
+                    >
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-black">Total Applications</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
@@ -714,11 +769,14 @@ function RecruiterDashboardContent() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.totalApplications}</div>
-                            <p className="text-xs text-black">All time</p>
+                            <p className="text-xs text-black flex items-center gap-1">All time <ExternalLink className="size-3" /></p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
+                    <Card
+                        className="bg-white/10 backdrop-blur-md border-white/20 text-black cursor-pointer hover:bg-white/20 hover:scale-[1.02] hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300"
+                        onClick={() => handleStatCardClick('pending')}
+                    >
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-black">Pending</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg">
@@ -727,11 +785,14 @@ function RecruiterDashboardContent() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.pendingApplications}</div>
-                            <p className="text-xs text-black">Awaiting review</p>
+                            <p className="text-xs text-black flex items-center gap-1">Awaiting review <ExternalLink className="size-3" /></p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
+                    <Card
+                        className="bg-white/10 backdrop-blur-md border-white/20 text-black cursor-pointer hover:bg-white/20 hover:scale-[1.02] hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300"
+                        onClick={() => handleStatCardClick('accepted')}
+                    >
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-black">Accepted</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg">
@@ -740,11 +801,14 @@ function RecruiterDashboardContent() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.acceptedApplications}</div>
-                            <p className="text-xs text-black">Successful candidates</p>
+                            <p className="text-xs text-black flex items-center gap-1">Successful candidates <ExternalLink className="size-3" /></p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
+                    <Card
+                        className="bg-white/10 backdrop-blur-md border-white/20 text-black cursor-pointer hover:bg-white/20 hover:scale-[1.02] hover:shadow-lg hover:shadow-red-500/20 transition-all duration-300"
+                        onClick={() => handleStatCardClick('rejected')}
+                    >
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-black">Rejected</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-red-500 to-pink-500 rounded-lg">
@@ -753,11 +817,14 @@ function RecruiterDashboardContent() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.rejectedApplications}</div>
-                            <p className="text-xs text-black">Not selected</p>
+                            <p className="text-xs text-black flex items-center gap-1">Not selected <ExternalLink className="size-3" /></p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
+                    <Card
+                        className="bg-white/10 backdrop-blur-md border-white/20 text-black cursor-pointer hover:bg-white/20 hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300"
+                        onClick={() => handleStatCardClick('phone_screening')}
+                    >
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-black">Phone Screening</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg">
@@ -766,11 +833,14 @@ function RecruiterDashboardContent() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.phoneScreeningApplications}</div>
-                            <p className="text-xs text-black">Initial screening</p>
+                            <p className="text-xs text-black flex items-center gap-1">Initial screening <ExternalLink className="size-3" /></p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
+                    <Card
+                        className="bg-white/10 backdrop-blur-md border-white/20 text-black cursor-pointer hover:bg-white/20 hover:scale-[1.02] hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
+                        onClick={() => handleStatCardClick('job_assessment')}
+                    >
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-black">Job Assessment</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
@@ -779,11 +849,14 @@ function RecruiterDashboardContent() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.jobAssessmentApplications}</div>
-                            <p className="text-xs text-black">Skills & fit assessment</p>
+                            <p className="text-xs text-black flex items-center gap-1">Skills & fit assessment <ExternalLink className="size-3" /></p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
+                    <Card
+                        className="bg-white/10 backdrop-blur-md border-white/20 text-black cursor-pointer hover:bg-white/20 hover:scale-[1.02] hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300"
+                        onClick={() => handleStatCardClick('hr_interview')}
+                    >
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-black">HR Interview</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg">
@@ -792,11 +865,14 @@ function RecruiterDashboardContent() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.hrInterviewApplications}</div>
-                            <p className="text-xs text-black">HR evaluation</p>
+                            <p className="text-xs text-black flex items-center gap-1">HR evaluation <ExternalLink className="size-3" /></p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
+                    <Card
+                        className="bg-white/10 backdrop-blur-md border-white/20 text-black cursor-pointer hover:bg-white/20 hover:scale-[1.02] hover:shadow-lg hover:shadow-orange-500/20 transition-all duration-300"
+                        onClick={() => handleStatCardClick('final_interview')}
+                    >
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-black">Final Interview</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg">
@@ -805,11 +881,14 @@ function RecruiterDashboardContent() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.finalInterviewApplications}</div>
-                            <p className="text-xs text-black">Final round</p>
+                            <p className="text-xs text-black flex items-center gap-1">Final round <ExternalLink className="size-3" /></p>
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/10 backdrop-blur-md border-white/20 text-black">
+                    <Card
+                        className="bg-white/10 backdrop-blur-md border-white/20 text-black cursor-pointer hover:bg-white/20 hover:scale-[1.02] hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
+                        onClick={() => handleStatCardClick('all', 'jobs')}
+                    >
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-medium text-black">Active Jobs</CardTitle>
                             <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
@@ -818,13 +897,14 @@ function RecruiterDashboardContent() {
                         </CardHeader>
                         <CardContent>
                             <div className="text-2xl font-bold text-black">{summaryStats.totalJobs}</div>
-                            <p className="text-xs text-black">Currently posted</p>
+                            <p className="text-xs text-black flex items-center gap-1">Currently posted <ExternalLink className="size-3" /></p>
                         </CardContent>
                     </Card>
                 </div>
 
                 {/* Main Content Tabs */}
-                <Tabs defaultValue="applications" className="space-y-6">
+                <div ref={tabsSectionRef} />
+                <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
                     <TabsList className="grid w-full grid-cols-2 bg-white/10 backdrop-blur-md border-white/20">
                         <TabsTrigger value="applications" className="text-black data-[state=active]:bg-white/20 data-[state=active]:text-black">
                             <Users className="size-4 mr-2" />
@@ -1063,6 +1143,16 @@ function RecruiterDashboardContent() {
                                                     <Download className="size-4 mr-1" />
                                                     {downloadingResumesForJobId === job.job_id ? 'Preparing…' : 'Download resumes'}
                                                 </Button>
+                                                <Button
+                                                    onClick={() => setJobToDelete(job.job_id)}
+                                                    variant="outline"
+                                                    size="sm"
+                                                    disabled={deletingJobId === job.job_id}
+                                                    className="text-red-400 border-red-400/30 hover:bg-red-500/20 hover:text-red-300 hover:border-red-400/50"
+                                                >
+                                                    <Trash2 className="size-4 mr-1" />
+                                                    {deletingJobId === job.job_id ? 'Deleting…' : 'Remove'}
+                                                </Button>
                                             </div>
                                         </div>
                                     )) : (
@@ -1112,6 +1202,29 @@ function RecruiterDashboardContent() {
                     onAction={(action, feedback) => handleApplicationAction(selectedApplication.id, action, feedback)}
                 />
             )}
+
+            {/* Delete Job Confirmation Dialog */}
+            <AlertDialog open={!!jobToDelete} onOpenChange={(open) => !open && setJobToDelete(null)}>
+                <AlertDialogContent className="bg-white dark:bg-slate-900">
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Are you sure you want to remove this job?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            This will permanently delete the job posting and all associated applications.
+                            This action cannot be undone.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel disabled={!!deletingJobId}>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                            onClick={() => jobToDelete && handleDeleteJob(jobToDelete)}
+                            disabled={!!deletingJobId}
+                            className="bg-red-600 hover:bg-red-700 text-white"
+                        >
+                            {deletingJobId ? 'Deleting…' : 'Yes, Remove Job'}
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </div>
     );
 }

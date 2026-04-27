@@ -173,37 +173,8 @@ CRITICAL FORMATTING RULES:
 }
 }
 
-// TODO: Implement PDF to text conversion
-async function convertPdfToText(file: File): Promise<string> {
-    // This would use a library like pdf-parse or pdf2pic
-    // For now, return dummy text
-    return `John Doe
-Software Engineer
-john.doe@email.com | (555) 123-4567 | linkedin.com/in/johndoe
-
-SUMMARY
-Experienced software engineer with 5+ years developing scalable web applications using React, Node.js, and Python. Passionate about clean code, user experience, and continuous learning.
-
-EXPERIENCE
-Senior Software Engineer | TechCorp Inc. | 2021 - Present
-• Led development of microservices architecture serving 1M+ users
-• Mentored 3 junior developers and conducted code reviews
-• Implemented CI/CD pipelines reducing deployment time by 60%
-
-Software Engineer | StartupXYZ | 2019 - 2021
-• Built full-stack web applications using React and Node.js
-• Collaborated with cross-functional teams to deliver features on time
-• Optimized database queries improving performance by 40%
-
-EDUCATION
-Bachelor of Science in Computer Science | University of Technology | 2019
-
-SKILLS
-Programming: JavaScript, TypeScript, Python, Java, SQL
-Frameworks: React, Node.js, Express, Django, Spring Boot
-Tools: Git, Docker, AWS, Jenkins, Jira
-Cloud: AWS, Google Cloud Platform, Azure`;
-}
+// PDF text extraction is handled client-side using pdfjs-dist.
+// The API receives the extracted text directly in the request body.
 
 export async function POST(request: NextRequest) {
     try {

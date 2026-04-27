@@ -351,7 +351,7 @@ export default function About() {
       <main>
         {/* Hero Section with Parallax */}
         <motion.section
-          className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 text-white overflow-hidden"
+          className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 text-white overflow-x-hidden"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}

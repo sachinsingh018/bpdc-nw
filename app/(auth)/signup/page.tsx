@@ -62,7 +62,7 @@ export default function RecruiterSignUp() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden flex items-center justify-center px-4">
+    <div className="relative min-h-screen overflow-x-hidden overflow-y-auto flex items-center justify-center px-4">
       {/* Blurred Background */}
       <div
         className="fixed inset-0 z-0"

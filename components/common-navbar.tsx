@@ -102,7 +102,7 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                     <button
                         type="button"
                         onClick={() => router.push('/profile')}
-                        className="flex items-center gap-1 sm:gap-1.5 md:gap-2 text-black dark:text-black hover:opacity-80 transition-opacity group min-w-0"
+                        className="flex items-center gap-1 sm:gap-1.5 md:gap-2 text-black dark:text-white hover:opacity-80 transition-opacity group min-w-0"
                     >
                         {/* Logo Image */}
                         <div className="flex-shrink-0">
@@ -130,10 +130,10 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => handleNavigation(item.path)}
-                                className={`flex items-center gap-1 2xl:gap-1.5 text-black dark:text-black font-semibold 2xl:font-bold hover:opacity-80 transition-opacity whitespace-nowrap flex-shrink-0 px-2 ${isActive ? 'opacity-90' : 'opacity-100'
+                                className={`flex items-center gap-1 2xl:gap-1.5 text-black dark:text-white font-semibold 2xl:font-bold hover:opacity-80 transition-opacity whitespace-nowrap flex-shrink-0 px-2 ${isActive ? 'opacity-90' : 'opacity-100'
                                     }`}
                             >
-                                <Icon className="size-3.5 2xl:size-4 text-black dark:text-black flex-shrink-0" />
+                                <Icon className="size-3.5 2xl:size-4 text-black dark:text-white flex-shrink-0" />
                                 <span className="text-xs 2xl:text-sm">{item.label}</span>
                             </Button>
                         );
@@ -151,10 +151,10 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => handleNavigation(item.path)}
-                                className={`flex items-center gap-0.5 text-black dark:text-black font-semibold hover:opacity-80 transition-opacity whitespace-nowrap flex-shrink-0 px-1.5 ${isActive ? 'opacity-90' : 'opacity-100'
+                                className={`flex items-center gap-0.5 text-black dark:text-white font-semibold hover:opacity-80 transition-opacity whitespace-nowrap flex-shrink-0 px-1.5 ${isActive ? 'opacity-90' : 'opacity-100'
                                     }`}
                             >
-                                <Icon className="size-3.5 text-black dark:text-black flex-shrink-0" />
+                                <Icon className="size-3.5 text-black dark:text-white flex-shrink-0" />
                                 <span className="text-xs">{item.label}</span>
                             </Button>
                         );
@@ -163,10 +163,10 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                         variant="ghost"
                         size="sm"
                         onClick={() => setShowMobileMenu(!showMobileMenu)}
-                        className="flex items-center gap-0.5 text-black dark:text-black font-semibold hover:opacity-80 transition-opacity whitespace-nowrap flex-shrink-0 px-1.5"
+                        className="flex items-center gap-0.5 text-black dark:text-white font-semibold hover:opacity-80 transition-opacity whitespace-nowrap flex-shrink-0 px-1.5"
                         aria-label="Open menu"
                     >
-                        <Menu className="size-3.5 text-black dark:text-black" />
+                        <Menu className="size-3.5 text-black dark:text-white" />
                         <span className="text-xs">More</span>
                     </Button>
                 </div>
@@ -182,10 +182,10 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => handleNavigation(item.path)}
-                                className={`flex items-center gap-0.5 text-black dark:text-black font-semibold hover:opacity-80 transition-opacity whitespace-nowrap flex-shrink-0 px-1 ${isActive ? 'opacity-90' : 'opacity-100'
+                                className={`flex items-center gap-0.5 text-black dark:text-white font-semibold hover:opacity-80 transition-opacity whitespace-nowrap flex-shrink-0 px-1 ${isActive ? 'opacity-90' : 'opacity-100'
                                     }`}
                             >
-                                <Icon className="size-3 text-black dark:text-black flex-shrink-0" />
+                                <Icon className="size-3 text-black dark:text-white flex-shrink-0" />
                                 <span className="text-xs">{item.label}</span>
                             </Button>
                         );
@@ -194,10 +194,10 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                         variant="ghost"
                         size="sm"
                         onClick={() => setShowMobileMenu(!showMobileMenu)}
-                        className="flex items-center gap-0.5 text-black dark:text-black font-semibold hover:opacity-80 transition-opacity whitespace-nowrap flex-shrink-0 px-1"
+                        className="flex items-center gap-0.5 text-black dark:text-white font-semibold hover:opacity-80 transition-opacity whitespace-nowrap flex-shrink-0 px-1"
                         aria-label="Open menu"
                     >
-                        <Menu className="size-3 text-black dark:text-black" />
+                        <Menu className="size-3 text-black dark:text-white" />
                         <span className="text-xs">Menu</span>
                     </Button>
                 </div>
@@ -217,10 +217,10 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                                 });
                                 router.push('/');
                             }}
-                            className="hidden xl:flex p-1.5 2xl:p-2 rounded-full bg-red-50 dark:bg-red-900/20 text-black dark:text-black font-bold hover:opacity-80 transition-opacity items-center justify-center flex-shrink-0"
+                            className="hidden xl:flex p-1.5 2xl:p-2 rounded-full bg-red-50 dark:bg-red-900/20 text-black dark:text-white font-bold hover:opacity-80 transition-opacity items-center justify-center flex-shrink-0"
                             title="Sign Out"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 2xl:size-5 text-black dark:text-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 2xl:size-5 text-black dark:text-white">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M18 12h-9m0 0l3-3m-3 3l3 3" />
                             </svg>
                         </button>
@@ -231,10 +231,10 @@ export function CommonNavbar({ currentPage, showThemeToggle = true, showSignOut 
                         variant="ghost"
                         size="sm"
                         onClick={() => setShowMobileMenu(!showMobileMenu)}
-                        className="xl:hidden text-black dark:text-black font-bold hover:opacity-80 transition-opacity p-1 sm:p-1.5 flex-shrink-0"
+                        className="xl:hidden text-black dark:text-white font-bold hover:opacity-80 transition-opacity p-1 sm:p-1.5 flex-shrink-0"
                         aria-label="Open menu"
                     >
-                        <Menu className="size-4 sm:size-5 text-black dark:text-black" />
+                        <Menu className="size-4 sm:size-5 text-black dark:text-white" />
                     </Button>
                 </div>
             </div>

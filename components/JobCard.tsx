@@ -465,7 +465,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                                 }}
                             />
                             <div className="flex-1">
-                                <div className={`font-mono font-bold text-2xl flex items-center gap-1 ${forceLightPartnerRecruiterPopup ? 'text-slate-900' : 'text-slate-900 dark:text-black'}`}>
+                                <div className={`font-mono font-bold text-2xl flex items-center gap-1 ${forceLightPartnerRecruiterPopup ? 'text-slate-900' : 'text-slate-900 dark:text-white'}`}>
                                     {job.title}
                                 </div>
                                 <div className={`text-sm font-mono font-bold ${forceLightPartnerRecruiterPopup ? 'text-slate-700' : 'text-slate-700 dark:text-gray-300'}`}>
@@ -513,7 +513,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                                 required
                                 className={`block w-full rounded border px-3 py-2 text-sm text-black focus:outline-none focus:ring-2 focus:ring-purple-500 ${forceLightPartnerRecruiterPopup
                                     ? 'border-purple-300 bg-white'
-                                    : 'border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 dark:text-black'
+                                    : 'border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 dark:text-white'
                                     }`}
                                 placeholder="Your full name"
                             />
@@ -525,7 +525,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                                 required
                                 className={`block w-full rounded border px-3 py-2 text-sm text-black focus:outline-none focus:ring-2 focus:ring-purple-500 ${forceLightPartnerRecruiterPopup
                                     ? 'border-purple-300 bg-white'
-                                    : 'border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 dark:text-black'
+                                    : 'border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 dark:text-white'
                                     }`}
                                 placeholder="you@email.com"
                             />
@@ -537,7 +537,7 @@ export default function JobCard({ job, isApplied = false, onApplicationSubmitted
                                 rows={4}
                                 className={`block w-full rounded border px-3 py-2 text-sm text-black focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none ${forceLightPartnerRecruiterPopup
                                     ? 'border-purple-300 bg-white'
-                                    : 'border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 dark:text-black'
+                                    : 'border-purple-300 dark:border-purple-800 bg-white/80 dark:bg-slate-900/80 dark:text-white'
                                     }`}
                                 placeholder="Write a short cover letter..."
                             />

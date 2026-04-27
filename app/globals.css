@@ -95,11 +95,20 @@
 
 @layer base {
 
-    html,
+    html {
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+    }
+
     body {
         height: 100%;
-        overflow: auto;
-        /* ✅ Prevent outer scrollbars */
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: none;
     }
 
     :root {
@@ -373,4 +382,106 @@
 
 .suggestion-highlight {
     @apply bg-blue-200 hover:bg-blue-300 dark:hover:bg-blue-400/50 dark:text-blue-50 dark:bg-blue-500/40;
+}
+
+/* ========== Global UX Enhancements ========== */
+
+/* Custom scrollbar - sleek & modern */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.3);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.5);
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128, 128, 128, 0.3) transparent;
+}
+
+/* Smooth focus styles for accessibility */
+*:focus-visible {
+    outline: 2px solid rgba(139, 92, 246, 0.6);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Better touch targets for mobile */
+@media (max-width: 768px) {
+    button,
+    a,
+    [role="button"],
+    input,
+    select,
+    textarea {
+        min-height: 44px;
+    }
+
+    /* Prevent iOS zoom on input focus */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="search"],
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+}
+
+/* Smooth page transitions */
+main,
+[role="main"] {
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Prevent content shift from scrollbar appearance */
+html {
+    overflow-y: scroll;
+}
+
+/* Better image rendering */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Selection color matching brand */
+::selection {
+    background: rgba(139, 92, 246, 0.3);
+    color: inherit;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

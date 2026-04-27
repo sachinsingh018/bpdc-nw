@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import { getUser } from '@/lib/db/queries';
 import { db } from '@/lib/db/queries';
 import { job, jobApplication, user } from '@/lib/db/schema';
-import { eq, desc, sql, inArray } from 'drizzle-orm';
+import { eq, desc, sql, inArray, and } from 'drizzle-orm';
 
 export async function GET(request: NextRequest) {
     try {
@@ -64,6 +64,59 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ jobs: recruiterJobs });
     } catch (error) {
         console.error('Error fetching recruiter jobs:', error);
+        return NextResponse.json(
+            { error: 'Internal server error' },
+            { status: 500 }
+        );
+    }
+}
+
+export async function DELETE(request: NextRequest) {
+    try {
+        const cookieStore = await cookies();
+        const userEmail = cookieStore.get('userEmail')?.value;
+
+        if (!userEmail) {
+            return NextResponse.json({ error: 'Unauthorized - Please log in' }, { status: 401 });
+        }
+
+        const users = await getUser(userEmail);
+        if (!users.length) {
+            return NextResponse.json({ error: 'User not found' }, { status: 404 });
+        }
+
+        const currentUser = users[0];
+        const userRole = currentUser.role;
+
+        if (!userRole || !['recruiter', 'admin'].includes(userRole)) {
+            return NextResponse.json({ error: 'Access denied - Recruiter role required' }, { status: 403 });
+        }
+
+        const { jobId } = await request.json();
+
+        if (!jobId) {
+            return NextResponse.json({ error: 'Job ID is required' }, { status: 400 });
+        }
+
+        // Verify the job exists and was posted internally
+        const existingJob = await db
+            .select()
+            .from(job)
+            .where(and(eq(job.job_id, jobId), eq(job.posted_by, 'career_team')));
+
+        if (!existingJob.length) {
+            return NextResponse.json({ error: 'Job not found or cannot be deleted' }, { status: 404 });
+        }
+
+        // Delete associated applications first
+        await db.delete(jobApplication).where(eq(jobApplication.jobId, jobId));
+
+        // Delete the job
+        await db.delete(job).where(eq(job.job_id, jobId));
+
+        return NextResponse.json({ success: true, message: 'Job and associated applications deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting job:', error);
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }

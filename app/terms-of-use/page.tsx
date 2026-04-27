@@ -10,7 +10,7 @@ const TermsOfUse = () => {
         <meta name="description" content="Terms of Use for Networkqy services" />
       </Head>
 
-      <div className="relative min-h-screen overflow-hidden">
+      <div className="relative min-h-screen overflow-x-hidden overflow-y-auto">
         {/* Blurred Background - matching landing page */}
         <div
           className="fixed inset-0 z-0"

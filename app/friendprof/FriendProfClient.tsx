@@ -810,7 +810,7 @@ const ProfilePage = () => {
     const [requestSent, setRequestSent] = useState(false);
     if (isLoading || !isConnectionCheckComplete) {
         return (
-            <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
+            <div className="min-h-screen relative overflow-x-hidden flex items-center justify-center">
                 {/* Blurred Background */}
                 <div
                     className="fixed inset-0 z-0"

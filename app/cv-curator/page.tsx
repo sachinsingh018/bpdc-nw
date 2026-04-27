@@ -201,34 +201,33 @@ export default function CVCuratorPage() {
     };
 
     const convertPdfToText = async (file: File): Promise<string> => {
-        // TODO: Implement actual PDF to text conversion
-        // For now, return dummy text
-        return `John Doe
-Software Engineer
-john.doe@email.com | (555) 123-4567 | linkedin.com/in/johndoe
+        try {
+            const arrayBuffer = await file.arrayBuffer();
+            const pdfjsLib = await import('pdfjs-dist');
+            pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
 
-SUMMARY
-Experienced software engineer with 5+ years developing scalable web applications using React, Node.js, and Python. Passionate about clean code, user experience, and continuous learning.
+            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+            const textParts: string[] = [];
 
-EXPERIENCE
-Senior Software Engineer | TechCorp Inc. | 2021 - Present
-• Led development of microservices architecture serving 1M+ users
-• Mentored 3 junior developers and conducted code reviews
-• Implemented CI/CD pipelines reducing deployment time by 60%
+            for (let i = 1; i <= pdf.numPages; i++) {
+                const page = await pdf.getPage(i);
+                const content = await page.getTextContent();
+                const pageText = content.items
+                    .map((item: any) => ('str' in item ? item.str : ''))
+                    .join(' ');
+                textParts.push(pageText);
+            }
 
-Software Engineer | StartupXYZ | 2019 - 2021
-• Built full-stack web applications using React and Node.js
-• Collaborated with cross-functional teams to deliver features on time
-• Optimized database queries improving performance by 40%
-
-EDUCATION
-Bachelor of Science in Computer Science | University of Technology | 2019
-
-SKILLS
-Programming: JavaScript, TypeScript, Python, Java, SQL
-Frameworks: React, Node.js, Express, Django, Spring Boot
-Tools: Git, Docker, AWS, Jenkins, Jira
-Cloud: AWS, Google Cloud Platform, Azure`;
+            const extractedText = textParts.join('\n\n').trim();
+            if (!extractedText) {
+                throw new Error('No text could be extracted from the PDF');
+            }
+            return extractedText;
+        } catch (error) {
+            console.error('PDF extraction error:', error);
+            toast.error('Could not extract text from PDF. Please try a different file.');
+            throw error;
+        }
     };
 
     const handlePromptCount = () => {
@@ -355,11 +354,11 @@ Cloud: AWS, Google Cloud Platform, Azure`;
                                     <div className="size-11 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center shadow-md flex-shrink-0">
                                         <span className="text-2xl">📄</span>
                                     </div>
-                                    <h1 className="text-4xl sm:text-5xl font-extrabold text-black dark:text-black tracking-tight leading-tight">
+                                    <h1 className="text-4xl sm:text-5xl font-extrabold text-black dark:text-white tracking-tight leading-tight">
                                         CV Curator
                                     </h1>
                                 </div>
-                                <p className="text-base sm:text-lg text-black dark:text-black/90 font-medium leading-relaxed ml-[56px] sm:ml-[56px] max-w-2xl">
+                                <p className="text-base sm:text-lg text-black dark:text-white/90 font-medium leading-relaxed ml-[56px] sm:ml-[56px] max-w-2xl">
                                     Transform your resume with AI-powered optimization and personalized feedback
                                 </p>
                             </div>
@@ -374,7 +373,7 @@ Cloud: AWS, Google Cloud Platform, Azure`;
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                     <div>
-                                        <div className="text-sm font-semibold text-black dark:text-black">
+                                        <div className="text-sm font-semibold text-black dark:text-white">
                                             Daily Prompts Used
                                         </div>
                                         <div className="flex items-center gap-2 mt-0.5">
@@ -417,7 +416,7 @@ Cloud: AWS, Google Cloud Platform, Azure`;
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                         </svg>
                                     </div>
-                                    <h2 className="text-2xl font-bold text-gray-900 dark:text-black mb-2">
+                                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
                                         Upload Your Resume
                                     </h2>
                                     <p className="text-gray-600 dark:text-gray-400 mb-6">
@@ -473,9 +472,9 @@ Cloud: AWS, Google Cloud Platform, Azure`;
                 rel="noopener noreferrer"
                 className="fixed bottom-2 right-2 sm:bottom-4 sm:right-4 z-50"
             >
-                <div className="bg-white/80 dark:bg-gray-900/80 text-black dark:text-black text-xs sm:text-sm px-3 py-1 rounded-full shadow-md backdrop-blur hover:bg-white dark:hover:bg-gray-800 transition cursor-pointer">
+                <div className="bg-white/80 dark:bg-gray-900/80 text-black dark:text-white text-xs sm:text-sm px-3 py-1 rounded-full shadow-md backdrop-blur hover:bg-white dark:hover:bg-gray-800 transition cursor-pointer">
                     Powered by{' '}
-                    <span className="font-semibold text-gray-900 dark:text-black">
+                    <span className="font-semibold text-gray-900 dark:text-white">
                         Networkqy
                     </span>
                 </div>

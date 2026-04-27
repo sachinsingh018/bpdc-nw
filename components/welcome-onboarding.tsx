@@ -301,7 +301,7 @@ export function WelcomeOnboarding({ isOpen, onClose, onComplete }: WelcomeOnboar
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+                className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
             >
                 {/* Header */}
                 <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6">

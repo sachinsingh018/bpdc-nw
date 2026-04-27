@@ -11,8 +11,10 @@ interface ExtendedSession extends Session {
   user: User;
 }
 
-// Fallback secret for development/testing
-const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET || 'dev-secret-key-change-in-production';
+const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET;
+if (!NEXTAUTH_SECRET && process.env.NODE_ENV === 'production') {
+  throw new Error('NEXTAUTH_SECRET environment variable is required in production');
+}
 
 export const {
   handlers: { GET, POST },

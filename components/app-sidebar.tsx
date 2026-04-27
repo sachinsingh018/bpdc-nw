@@ -74,7 +74,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
   const [isRedirectingToForm, setIsRedirectingToForm] = useState(false);
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-x-hidden overflow-y-auto">
       {/* Bubble Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute size-72 bg-purple-500 rounded-full opacity-20 blur-2xl animate-pulse top-10 left-1/2 -translate-x-1/2" />

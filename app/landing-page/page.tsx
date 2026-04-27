@@ -162,7 +162,7 @@ export default function Home() {
             </AnimatePresence>
 
             {/* Main Content */}
-            <div className="relative overflow-hidden font-sans antialiased transition-colors duration-300 min-h-screen bg-white" data-landing-page>
+            <div className="relative overflow-x-hidden overflow-y-auto font-sans antialiased transition-colors duration-300 min-h-screen bg-white" data-landing-page>
                 {/* Blurred Background */}
                 <div
                     className="fixed inset-0 z-0 bg-white"
@@ -301,7 +301,7 @@ export default function Home() {
                 <main className="relative z-10">
                     {/* Hero Section */}
                     <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-2 sm:pt-4 lg:pt-6
- pb-20 overflow-hidden">
+ pb-20 overflow-x-hidden">
                         <motion.div
                             className="max-w-6xl mx-auto space-y-6 sm:space-y-8"
                             variants={containerVariants}
@@ -492,7 +492,7 @@ export default function Home() {
 
                 <button
                     onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                    className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-zinc-200 dark:bg-zinc-800 text-black dark:text-black rounded-full shadow-md hover:scale-105 transition-all"
+                    className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-zinc-200 dark:bg-zinc-800 text-black dark:text-white rounded-full shadow-md hover:scale-105 transition-all"
                 >
                     {theme === 'dark' ? (
                         <>

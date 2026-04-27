@@ -398,14 +398,14 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                         >
                             &times;
                         </button>
-                        <h2 className="text-lg font-semibold mb-4 text-black dark:text-black">Schedule Meeting with {name}</h2>
+                        <h2 className="text-lg font-semibold mb-4 text-black dark:text-white">Schedule Meeting with {name}</h2>
                         <form onSubmit={handleFindSlots} className="space-y-4">
                             <div>
                                 <label htmlFor="meeting-date" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Meeting Date</label>
                                 <input
                                     id="meeting-date"
                                     type="date"
-                                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-slate-700 text-black dark:text-black"
+                                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-slate-700 text-black dark:text-white"
                                     value={selectedDate}
                                     onChange={e => setSelectedDate(e.target.value)}
                                     required
@@ -415,7 +415,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                                 <label htmlFor="timezone" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Your Time Zone</label>
                                 <select
                                     id="timezone"
-                                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-slate-700 text-black dark:text-black"
+                                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-slate-700 text-black dark:text-white"
                                     value={timezone}
                                     onChange={e => setTimezone(e.target.value)}
                                     required
@@ -432,7 +432,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                                     <input
                                         id="start-time"
                                         type="time"
-                                        className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-slate-700 text-black dark:text-black"
+                                        className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-slate-700 text-black dark:text-white"
                                         value={startTime}
                                         onChange={e => setStartTime(e.target.value)}
                                         required
@@ -443,7 +443,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                                     <input
                                         id="end-time"
                                         type="time"
-                                        className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-slate-700 text-black dark:text-black"
+                                        className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-slate-700 text-black dark:text-white"
                                         value={endTime}
                                         onChange={e => setEndTime(e.target.value)}
                                         required
@@ -475,7 +475,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                         >
                             &times;
                         </button>
-                        <h2 className="text-lg font-semibold mb-2 text-black dark:text-black">
+                        <h2 className="text-lg font-semibold mb-2 text-black dark:text-white">
                             Select a Time Slot ({availableSlots.length} available)
                         </h2>
                         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
@@ -488,7 +488,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                                     placeholder="Filter slots by date or time..."
                                     value={slotFilter}
                                     onChange={(e) => setSlotFilter(e.target.value)}
-                                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-black dark:text-black placeholder:text-gray-500 dark:placeholder:text-black focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-black focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                                 />
                             </div>
                         )}
@@ -502,7 +502,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
 
                                 if (filteredSlots.length === 0) {
                                     return (
-                                        <div className="text-center py-8 text-gray-500 dark:text-black">
+                                        <div className="text-center py-8 text-gray-500 dark:text-white">
                                             <p>{availableSlots.length === 0 ? 'No available slots found' : 'No slots match your filter'}</p>
                                         </div>
                                     );
@@ -527,8 +527,8 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                                                 className="form-radio text-purple-600 focus:ring-purple-500 focus:ring-2"
                                             />
                                             <div className="flex-1">
-                                                <span className="text-black dark:text-black font-medium">{formatted}</span>
-                                                <div className="text-sm text-gray-500 dark:text-black">
+                                                <span className="text-black dark:text-white font-medium">{formatted}</span>
+                                                <div className="text-sm text-gray-500 dark:text-white">
                                                     {formatInTimeZone(parseISO(slot.end), timezone, 'h:mm aaaa')} - 1 hour meeting
                                                 </div>
                                             </div>
@@ -610,8 +610,8 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                                 </svg>
                             </div>
-                            <h2 className="text-lg font-semibold mb-2 text-black dark:text-black">No Overlapping Time Found</h2>
-                            <p className="text-black dark:text-black mb-6">
+                            <h2 className="text-lg font-semibold mb-2 text-black dark:text-white">No Overlapping Time Found</h2>
+                            <p className="text-black dark:text-white mb-6">
                                 We couldn&apos;t find a time that works for both of you. Would you like to schedule a meeting manually for tomorrow at 10:00 AM in your timezone?
                             </p>
                             <div className="flex gap-3 justify-center">
@@ -655,7 +655,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                                     <Calendar className="size-6 text-white" />
                                 </div>
                                 <div>
-                                    <h2 className="text-2xl font-semibold text-black dark:text-black">
+                                    <h2 className="text-2xl font-semibold text-black dark:text-white">
                                         {name}&apos;s Calendar
                                     </h2>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -680,7 +680,7 @@ function ScheduleMeetingButton({ name, email, sendMessage }: ScheduleMeetingButt
                                     <div className="size-16 bg-yellow-100 dark:bg-yellow-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                         <Calendar className="size-8 text-yellow-600 dark:text-yellow-400" />
                                     </div>
-                                    <h3 className="text-lg font-semibold text-black dark:text-black mb-2">
+                                    <h3 className="text-lg font-semibold text-black dark:text-white mb-2">
                                         Calendar Not Available
                                     </h3>
                                     <p className="text-gray-600 dark:text-gray-400 mb-4">
@@ -1222,7 +1222,7 @@ function MessagesContent() {
 
     if (loading) {
         return (
-            <div className="min-h-screen relative overflow-hidden flex items-center justify-center" style={{
+            <div className="min-h-screen relative overflow-x-hidden flex items-center justify-center" style={{
                 background: `
                   radial-gradient(circle at 20% 20%, rgba(25, 25, 112, 0.8) 0%, transparent 50%),
                   radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.7) 0%, transparent 50%),
@@ -1289,7 +1289,7 @@ function MessagesContent() {
     // Show loading state while checking authentication
     if (status === 'loading') {
         return (
-            <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
+            <div className="min-h-screen relative overflow-x-hidden flex items-center justify-center">
                 <div
                     className="fixed inset-0 z-0"
                     style={{
@@ -1310,7 +1310,7 @@ function MessagesContent() {
     }
 
     return (
-        <div className="min-h-screen relative overflow-hidden">
+        <div className="min-h-screen relative overflow-x-hidden overflow-y-auto">
             {/* Blurred Background */}
             <div
                 className="fixed inset-0 z-0"
@@ -1367,9 +1367,9 @@ function MessagesContent() {
 
             <div className="max-w-7xl mx-auto p-3 md:p-6 h-[calc(100vh-180px)] md:h-[calc(100vh-200px)]">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 md:gap-6 h-full">
-                    <div className={`${selectedConversation ? 'hidden lg:block lg:col-span-1' : 'lg:col-span-1'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-white/20 shadow-lg overflow-hidden flex flex-col h-full`}>
+                    <div className={`${selectedConversation ? 'hidden lg:block lg:col-span-1' : 'lg:col-span-1'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-white/20 shadow-lg overflow-y-auto flex flex-col h-full`}>
                         <div className="p-3 md:p-4 border-b border-gray-200 dark:border-white/20 shrink-0 flex items-center justify-between">
-                            <h2 className="text-lg md:text-xl font-semibold text-black dark:text-black">Messages</h2>
+                            <h2 className="text-lg md:text-xl font-semibold text-black dark:text-white">Messages</h2>
                             <Button
                                 type="button"
                                 onClick={fetchConversations}
@@ -1385,10 +1385,10 @@ function MessagesContent() {
                             {conversations.length === 0 ? (
                                 <div className="p-4 md:p-6 text-center">
                                     <span className="md:size-12 text-black mx-auto mb-3 md:mb-4 flex items-center justify-center"><FaEnvelope size={32} /></span>
-                                    <h3 className="text-base md:text-lg font-medium text-black dark:text-black mb-2">
+                                    <h3 className="text-base md:text-lg font-medium text-black dark:text-white mb-2">
                                         {loading ? 'Loading conversations...' : 'No conversations yet'}
                                     </h3>
-                                    <p className="text-black dark:text-black mb-3 md:mb-4 text-sm md:text-base">
+                                    <p className="text-black dark:text-white mb-3 md:mb-4 text-sm md:text-base">
                                         {loading
                                             ? 'Please wait while we fetch your conversations...'
                                             : 'Start messaging your connections to begin conversations.'
@@ -1429,17 +1429,17 @@ function MessagesContent() {
                                                 </div>
                                                 <div className="flex-1 min-w-0">
                                                     <div className="flex items-center justify-between mb-1">
-                                                        <h3 className="font-semibold text-black dark:text-black truncate text-sm md:text-base">
+                                                        <h3 className="font-semibold text-black dark:text-white truncate text-sm md:text-base">
                                                             {conversation.otherUser?.name || 'Unknown User'}
                                                         </h3>
-                                                        <span className="text-xs text-gray-500 dark:text-black">
+                                                        <span className="text-xs text-gray-500 dark:text-white">
                                                             {new Date(conversation.last_message_time).toLocaleDateString() === new Date().toLocaleDateString()
                                                                 ? new Date(conversation.last_message_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
                                                                 : new Date(conversation.last_message_time).toLocaleDateString()
                                                             }
                                                         </span>
                                                     </div>
-                                                    <p className="text-xs md:text-sm text-black dark:text-black truncate leading-relaxed">
+                                                    <p className="text-xs md:text-sm text-black dark:text-white truncate leading-relaxed">
                                                         {conversation.last_message || 'No messages yet'}
                                                     </p>
                                                     {conversation.unread_count > 0 && (
@@ -1463,7 +1463,7 @@ function MessagesContent() {
                         </div>
                     </div>
 
-                    <div className={`${selectedConversation ? 'lg:col-span-2' : 'hidden lg:block lg:col-span-2'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-white/20 shadow-lg overflow-hidden flex flex-col h-full`}>
+                    <div className={`${selectedConversation ? 'lg:col-span-2' : 'hidden lg:block lg:col-span-2'} bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-white/20 shadow-lg overflow-y-auto flex flex-col h-full`}>
                         {selectedConversation ? (
                             <>
                                 <div className="p-3 md:p-4 border-b border-gray-200 dark:border-white/20 flex items-center gap-2 md:gap-3 shrink-0 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/10 dark:to-blue-900/10">
@@ -1478,7 +1478,7 @@ function MessagesContent() {
                                         <span className="text-black md:size-[18px] flex items-center justify-center"><FaUser size={16} /></span>
                                     </div>
                                     <div className="flex-1 flex items-center">
-                                        <h3 className="font-semibold text-black dark:text-black text-base md:text-lg">
+                                        <h3 className="font-semibold text-black dark:text-white text-base md:text-lg">
                                             {selectedConversation.otherUser?.name || 'Unknown User'}
                                         </h3>
                                         <ScheduleMeetingButton
@@ -1493,7 +1493,7 @@ function MessagesContent() {
                                     </div>
                                     <div className="flex items-center gap-1 md:gap-2 ml-4">
                                         <div className={`size-1.5 md:size-2 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
-                                        <p className="text-xs md:text-sm text-black dark:text-black">
+                                        <p className="text-xs md:text-sm text-black dark:text-white">
                                             {selectedConversation.otherUser?.email}
                                         </p>
                                         <span className={`text-xs px-1.5 md:px-2 py-0.5 md:py-1 rounded-full ${isConnected ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400' : 'bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400'}`}>
@@ -1505,7 +1505,7 @@ function MessagesContent() {
                                 <div className="flex-1 overflow-y-auto p-3 md:p-4 space-y-3 md:space-y-4">
                                     {messages.length === 0 ? (
                                         <div className="text-center py-8">
-                                            <p className="text-gray-500 dark:text-black">No messages yet. Start the conversation!</p>
+                                            <p className="text-gray-500 dark:text-white">No messages yet. Start the conversation!</p>
                                         </div>
                                     ) : (
                                         <>
@@ -1522,13 +1522,13 @@ function MessagesContent() {
                                                             <div
                                                                 className={`relative px-4 py-3 rounded-2xl shadow-sm ${isPlainMessage(message) && message.sender_id === currentUserId
                                                                     ? 'bg-gradient-to-br from-purple-500 to-purple-600 text-black rounded-br-md'
-                                                                    : 'bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 text-black dark:text-black rounded-bl-md'
+                                                                    : 'bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 text-black dark:text-white rounded-bl-md'
                                                                     } ${isPlainMessage(message) && message.id.startsWith('temp_') ? 'opacity-80 animate-pulse' : ''}`}
                                                             >
                                                                 <ChatMessage message={message} />
                                                                 <div className={`flex items-center justify-end gap-1 mt-2 ${isPlainMessage(message) && message.sender_id === currentUserId
                                                                     ? 'text-purple-100'
-                                                                    : 'text-gray-500 dark:text-black'
+                                                                    : 'text-gray-500 dark:text-white'
                                                                     }`}>
                                                                     <span className="text-xs">
                                                                         {isPlainMessage(message) ? new Date(message.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}
@@ -1554,7 +1554,7 @@ function MessagesContent() {
                                                                 (isPlainMessage(message) && isPlainMessage(messages[index - 1]) && new Date(message.created_at).toDateString() !==
                                                                     new Date((messages[index - 1] as Message).created_at).toDateString()) ? (
                                                                 <div className="flex justify-center my-4">
-                                                                    <span className="text-xs text-gray-500 dark:text-black bg-white dark:bg-slate-800 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">
+                                                                    <span className="text-xs text-gray-500 dark:text-white bg-white dark:bg-slate-800 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">
                                                                         {isPlainMessage(message)
                                                                             ? new Date(message.created_at).toLocaleDateString('en-US', {
                                                                                 weekday: 'long',
@@ -1578,14 +1578,14 @@ function MessagesContent() {
                                                     className="flex justify-start"
                                                 >
                                                     <div className="flex flex-col max-w-xs lg:max-w-md">
-                                                        <div className="relative px-4 py-3 rounded-2xl shadow-sm bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 text-black dark:text-black rounded-bl-md">
+                                                        <div className="relative px-4 py-3 rounded-2xl shadow-sm bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 text-black dark:text-white rounded-bl-md">
                                                             <div className="flex items-center gap-1">
                                                                 <div className="flex space-x-1">
                                                                     <div className="size-2 bg-gray-500 rounded-full animate-bounce" />
                                                                     <div className="size-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
                                                                     <div className="size-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
                                                                 </div>
-                                                                <span className="text-xs text-gray-500 dark:text-black ml-2">typing...</span>
+                                                                <span className="text-xs text-gray-500 dark:text-white ml-2">typing...</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1605,7 +1605,7 @@ function MessagesContent() {
                                                 onChange={handleTyping}
                                                 onKeyPress={handleKeyPress}
                                                 placeholder="Type your message..."
-                                                className="w-full p-3 md:p-4 pr-12 border border-gray-300 dark:border-gray-600 rounded-xl md:rounded-2xl bg-white dark:bg-slate-700 text-black dark:text-black placeholder:text-gray-500 dark:placeholder:text-black resize-none focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 shadow-sm text-sm"
+                                                className="w-full p-3 md:p-4 pr-12 border border-gray-300 dark:border-gray-600 rounded-xl md:rounded-2xl bg-white dark:bg-slate-700 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-black resize-none focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 shadow-sm text-sm"
                                                 rows={1}
                                                 style={{ minHeight: '40px', maxHeight: '100px' }}
                                             />
@@ -1642,11 +1642,11 @@ function MessagesContent() {
                                     <div className="size-16 md:size-24 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg">
                                         <span className="md:size-8 text-black flex items-center justify-center"><FaEnvelope size={24} /></span>
                                     </div>
-                                    <h3 className="text-xl md:text-2xl font-bold text-black dark:text-black mb-2 md:mb-3">Select a conversation</h3>
-                                    <p className="text-black dark:text-black mb-4 md:mb-6 leading-relaxed text-sm md:text-base">
+                                    <h3 className="text-xl md:text-2xl font-bold text-black dark:text-white mb-2 md:mb-3">Select a conversation</h3>
+                                    <p className="text-black dark:text-white mb-4 md:mb-6 leading-relaxed text-sm md:text-base">
                                         Choose a conversation from the list to start messaging with your connections.
                                     </p>
-                                    <div className="flex items-center justify-center gap-2 text-xs md:text-sm text-gray-500 dark:text-black">
+                                    <div className="flex items-center justify-center gap-2 text-xs md:text-sm text-gray-500 dark:text-white">
                                         <div className="size-1.5 md:size-2 bg-purple-500 rounded-full animate-pulse" />
                                         <span>Messages are end-to-end encrypted</span>
                                     </div>
@@ -1675,7 +1675,7 @@ function MessagesContent() {
                                     <Calendar className="size-6 text-white" />
                                 </div>
                                 <div>
-                                    <h2 className="text-2xl font-semibold text-black dark:text-black">
+                                    <h2 className="text-2xl font-semibold text-black dark:text-white">
                                         Your Calendar
                                     </h2>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">

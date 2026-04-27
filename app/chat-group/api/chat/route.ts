@@ -60,10 +60,11 @@ export async function POST(request: Request) {
     let questioned = ''; // Default empty string
     let linkedindata = '';
     const emailiCookie = getCookie('userEmail');
-    const emaili = (typeof emailiCookie === 'string' ? emailiCookie : 'ss@d.com') || 'ss@d.com';
+    const emaili = typeof emailiCookie === 'string' ? emailiCookie : '';
 
     try {
-      const res = await fetch('http://localhost:3000/profile/api', {
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || '';
+      const res = await fetch(`${baseUrl}/profile/api`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: emaili }),

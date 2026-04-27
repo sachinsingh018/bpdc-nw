@@ -166,7 +166,7 @@ export function WeeklyCalendar({ timezone, workingHours, onSave, onClose }: Week
                     >
                         <ChevronLeft className="size-5" />
                     </button>
-                    <h3 className="text-lg font-semibold text-black dark:text-black">
+                    <h3 className="text-lg font-semibold text-black dark:text-white">
                         {format(currentWeek, 'MMM d')} - {format(addDays(currentWeek, 6), 'MMM d, yyyy')}
                     </h3>
                     <button
@@ -186,7 +186,7 @@ export function WeeklyCalendar({ timezone, workingHours, onSave, onClose }: Week
                     <select
                         value={selectedTimezone}
                         onChange={(e) => setSelectedTimezone(e.target.value)}
-                        className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-black dark:text-black text-sm"
+                        className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-black dark:text-white text-sm"
                     >
                         {[
                             'America/New_York',
@@ -219,7 +219,7 @@ export function WeeklyCalendar({ timezone, workingHours, onSave, onClose }: Week
                             const [start] = selectedWorkingHours.split('-');
                             setSelectedWorkingHours(`${e.target.value}-${selectedWorkingHours.split('-')[1]}`);
                         }}
-                        className="px-2 py-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-slate-700 text-black dark:text-black text-sm"
+                        className="px-2 py-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-slate-700 text-black dark:text-white text-sm"
                     />
                     <span className="text-gray-500">to</span>
                     <input
@@ -229,7 +229,7 @@ export function WeeklyCalendar({ timezone, workingHours, onSave, onClose }: Week
                             const [start] = selectedWorkingHours.split('-');
                             setSelectedWorkingHours(`${start}-${e.target.value}`);
                         }}
-                        className="px-2 py-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-slate-700 text-black dark:text-black text-sm"
+                        className="px-2 py-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-slate-700 text-black dark:text-white text-sm"
                     />
                 </div>
             </div>

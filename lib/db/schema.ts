@@ -717,3 +717,15 @@ export const interviewProgress = pgTable('interview_progress', {
 
 export type InterviewProgress = InferSelectModel<typeof interviewProgress>;
 
+// Newsletter Subscribers
+export const newsletterSubscriber = pgTable('newsletter_subscribers', {
+  id: uuid('id').primaryKey().notNull().defaultRandom(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  source: varchar('source', { length: 50 }).default('landing-page'),
+  subscribedAt: timestamp('subscribed_at').notNull().defaultNow(),
+  unsubscribedAt: timestamp('unsubscribed_at'),
+  isActive: boolean('is_active').notNull().default(true),
+});
+
+export type NewsletterSubscriber = InferSelectModel<typeof newsletterSubscriber>;
+
